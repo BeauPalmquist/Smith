@@ -1,0 +1,210 @@
+﻿body {
+    margin-top: 50px;
+}
+
+.navbar{
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+@mixin centerInlineBlock {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+@mixin center {    
+    text-align: center;
+    vertical-align: middle;
+}
+
+@mixin headerFont {
+    font-size: 36px;
+    color: #cccccc;
+    font-family: Helvetica;
+}
+
+@mixin boldFont {
+    font-weight: bold;
+}
+
+@media (min-width: 1200px){
+        .container {
+            width: 100%;
+    }
+}
+
+@media (min-width: 992px){
+        .container {
+          width: 100%;
+    }
+}
+
+@media (min-width: 768px){
+        .container {
+          width: 100%;
+    }
+}
+
+.page-header{
+    margin: 0;
+}
+
+.center {
+    @include center;
+}
+
+.bold {
+    @include boldFont;
+}
+
+.loginForm {    
+    max-width:700px;
+    margin: 15px auto;
+    margin-top: 150px;
+}
+
+.loginForm.noLoginImage{
+    max-width: 350px;
+}
+
+.loginForm .noError {
+    display: none;
+}
+
+.login .watermark{
+    color: #AAAAAA;
+}
+
+.loginFont {
+    @include headerFont;
+}
+
+.loginForm .loginImg {
+    display: inline-block;
+    text-align: center;
+}
+
+.loginImg img {
+    width: 300px;
+    height: 300px;
+}
+
+.headerImg{
+    width: 25px;
+    height: 25px;
+}
+
+.wrapper {
+  padding-left: 75px;
+  transition: all 0.4s ease 0s;
+}
+
+.sidebar-wrapper {
+  margin-left: -80px;
+  width: 80px;
+  background: #AAAAAA;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+.navCell {
+    width: 80px;
+    min-height: 60px;
+    margin: 0;
+    @include center;
+}
+
+.navCell>.navCellBorder {
+    border: 2px solid #777777;
+    border-top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.navCell>.navCellBorder.active {
+    border-right: 2px solid white;
+}
+
+.navCell img {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    overflow-x: visible;
+}
+
+.navCell.active {
+    background-color: white;
+}
+
+.navCell:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.page-content {
+    padding: 10px;
+}
+
+.page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 80px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search {
+    background-color: #777777;  
+    border-bottom: 1px solid black;        
+}
+
+.search.inactive{
+    display: none;
+}
+
+.search .form-group{
+    margin: 7px 0;
+}
+
+.searchButton {    
+    max-width: 125px;
+    min-width: 100px;
+    margin: 7px -18px;
+}
+
+.navbarDropdown {
+    margin: 5px 0;
+}
+
+@media (max-width:600px) {
+
+    .wrapper {
+      padding-left: 0;
+    }
+
+    .sidebar-wrapper {
+      left: 0;
+    }
+
+    .wrapper.active {
+      position: relative;
+      left: 80px;
+    }
+
+    .wrapper.active .sidebar-wrapper {
+      left: 80px;
+      width: 80px;
+      transition: all 0.4s ease 0s;
+    }
+
+}

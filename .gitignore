@@ -1,0 +1,46 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+log.txt
+*.dbmdl
+project.lock.json
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.nupkg
+
+# Folders #
+###########
+artifacts/
+publish/
+**/bin
+**/obj
+**/packages
+.vs/
+**/node_modules
+**/bower_components
+launchSettings.json
+HomeDepot.Platform.TestHost/Properties/launchSettings.json
+Forge.UI.ProjectTemplate/wwwroot/src/
+HomeDepot.Platform.TestHost/wwwroot/src/js
+HomeDepot.Platform.TestHost/wwwroot/src/css
+HomeDepot.Platform.TestHost/wwwroot/src/lib
+HomeDepot.Platform.UI.Armory/wwwroot/src/
+HomeDepot.Platform.UI.Smith/wwwroot/src/
+HomeDepot.Platform.UIFramework/wwwroot/src/
+HomeDepot.Platform.UI.Smith/dist/
+HomeDepot.Platform.UI.Armory/dist/

@@ -1,0 +1,10 @@
+{
+    "name": "HomeDepot.Platform.UI.Smith",
+    "private": true,
+    "dependencies": {
+        "signalr": "*",
+        "jquery": "*",
+        "bootstrap": "*",
+        "fontawesome": "*"
+    }
+}
