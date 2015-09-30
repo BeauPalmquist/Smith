@@ -12,16 +12,13 @@
     "postinstall": "npm run dist"
   },
   "private": true,
-  "dependencies"{ 
-    "webpack": "^1.9.10",
-    "babel-loader": "^5.2.2"
-  }
   "devDependencies": {
     "flux": "^2.0.3",
     "react": "^0.13.3",
     "react-bootstrap": "^0.25.2",
     "react-router": "^0.13.3",
     "react-document-title": "^1.0.2",
+    "babel-loader": "^5.2.2",
     "event-stream": "^3.3.1",
     "gulp": "^3.9.0",
     "gulp-cached": "^1.1.0",
@@ -35,6 +32,7 @@
     "require-dir": "^0.3.0",
     "rimraf": "^2.3.4",
     "lodash": "^3.10.0",
+    "webpack": "^1.9.10",
     "gulp-eslint": "^0.15.0",
     "babel-eslint": "^3.1.23",
     "eslint-plugin-react": "^2.7.1"
