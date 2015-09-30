@@ -7,10 +7,6 @@
     "Beau Palmquist",
     "Jonathan Oropeza"
   ],
-   "scripts": {
-    "dist": "webpack --config src/webpack.config.js -v",
-    "postinstall": "npm run dist"
-  },
   "private": true,
   "devDependencies": {
     "flux": "^2.0.3",
