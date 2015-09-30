@@ -12,10 +12,10 @@
     "postinstall": "npm run dist"
   },
   "private": true,
-  "dependencies": { 
+  "dependencies"{ 
     "webpack": "^1.9.10",
     "babel-loader": "^5.2.2"
-  },
+  }
   "devDependencies": {
     "flux": "^2.0.3",
     "react": "^0.13.3",
