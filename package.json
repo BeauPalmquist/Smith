@@ -9,9 +9,13 @@
   ],
    "scripts": {
     "dist": "webpack --config src/webpack.config.js -v",
-    "build": "npm run dist"
+    "postinstall": "npm run dist"
   },
   "private": true,
+  "dependencies": { 
+    "webpack": "^1.9.10",
+    "babel-loader": "^5.2.2"
+  },
   "devDependencies": {
     "flux": "^2.0.3",
     "react": "^0.13.3",
@@ -33,8 +37,6 @@
     "lodash": "^3.10.0",
     "gulp-eslint": "^0.15.0",
     "babel-eslint": "^3.1.23",
-    "eslint-plugin-react": "^2.7.1",
-    "webpack": "^1.9.10",
-    "babel-loader": "^5.2.2"
+    "eslint-plugin-react": "^2.7.1"
   }
 }
