@@ -1,0 +1,15 @@
+﻿{
+    "MicroserviceHosting": {
+        "HostName": "localhost",
+        "Port": 80
+    },
+
+    "Data": {
+        "Configuration": {
+            "ConnectionString": "Server=prodsql.quotecenter.net;Database=HomeDepot.Platform.Configuration;User ID=Forge-User;Password=hammer!;Persist Security Info=True;"
+        },
+        "MicroserviceHosts": {
+            "ConnectionString": "Server=localhost;Database=HomeDepot.Platform.Routing;Trusted_Connection=True;"
+        }
+    }
+}

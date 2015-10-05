@@ -1,0 +1,57 @@
+﻿{
+    "Redis": {
+        "ConnectionString": "localhost"
+    },
+
+    "RabbitMQ": {
+        "HostName": "localhost",
+        "Port": 5672
+    },
+
+    "Routing": {
+        "RabbitMQ": {
+            "HostName": "localhost",
+            "Port": 5672
+        }
+    },
+
+    "Neo4J": {
+        "Endpoint": "neo4j:neo4jX123!@localhost:7474/db/data"
+    },
+
+    "Data": {
+        "IdentityConnection": {
+            "ConnectionString": "Server=localhost;Database=HomeDepot.Platform.Identity;Trusted_Connection=True;"
+        },
+        "AnalyticsConnection": {
+            "ConnectionString": "Server=localhost;Database=HomeDepot.Platform.Analytics;Trusted_Connection=True;"
+        },
+        "MicroserviceHosts": {
+		    "MasterConnectionString": "Server=localhost;Database=HomeDepot.Platform.Routing.Master;Trusted_Connection=True;"
+        },
+        "MessageDirectoryConnection": {
+            "ConnectionString": "Server=localhost;Database=HomeDepot.Platform.MessageDirectory;Trusted_Connection=True;"
+        },
+        "Notifications": {
+            "ConnectionString": "Server=localhost;Database=HomeDepot.Platform.Notifications;Trusted_Connection=True;"
+        },
+        "Workflow": {
+            "ConnectionString": "Server=localhost;Database=HomeDepot.Platform.Workflow;integrated security=True;"
+        }
+    },
+
+    "Identity": {
+        "OAuth": {
+            "SigningKey": "<RSAKeyValue><Modulus>yGwE+V1WoLRQG2JW89su5vbDyf6dTLAfcnIjm1UPqe9vxFoV6DfkxEoHKLnm713fvicFY7G/mscnNNnUNUaJifmgo3U7gIwtoWXrnkIaomzz1i2WpneQQLjlsvhkse0fQA31smd+AvxLsEEYb4YtaRZnzB+DuDnQNFk2zVqGR9bodiTG/gZw8Ws/CRTox6b6R1g6v123UwbLDQzDaGYE7bSyFHId1OkfVQxSh2XbwGqGBGXCF8NUTkFCtG8rZSDtum66Wneci2ujHevk33qYY59JY3wqune8bwbbegC/9rbDEKV9MaONx8eOtilfx8nwMuzjgYqhdt8ue7ZtHVWMCw==</Modulus><Exponent>AQAB</Exponent><P>66gf6ztCsrP2arSZPzlHjpgx0CGgUR/dTFHJAMnos0mYvbixr63Q/YpdUlA9UeXFRQveFaBPPW2fQ6dygHCSJnsnMwmMNEfCEx/tXHVN5+5uO69FFbi1eBvvLooTJKE6fEKE7vgiXdWNaeMniQK3HlwKRdTYe5m4Q492Y+gGYy0=</P><Q>2bk6CHyGM+kKNOY2U9QINbE7hfDEK0qzq1Nnp10Xe8cerKzIM4KdxV7aIp9x3Y3BA64oWz1ciU7VucYJpIOUPVEB/9kneQ9PQJecrhYzKouWIsL6oK1hpcyixV3xMx78eMdPd/dpxRW2VhFhqqxaukhp+ZnBzlqzbUXWL/yfDxc=</Q><DP>2rAwvslFwjTDjo5+UG/Fegy+3Vj3P5GEeljDYZn9+rNnrViCfHefJEqNA+A2p5PFF6hFtmgIYQcj71KrLYpJ9q/+1pwbokCdV8YfLdgmLf/UCEtEnz3EGexCcDvuO+XrMnlAh8t5iP6utv74J2t/qArd9aPqKfmjR/8QbPJbSxk=</DP><DQ>kJwXcJWM6aOqVNJnWSxmu4rZNzBgi0SVq4C9Qwtw0pTByf0FCDmEIxjKF98BWR+TCKe/REKwWL7U9AwWUX/XkRZiFpYcQqspf4Rz26kBGQwXj0UkBF7EkcQmhKLN1p+JH4t6O/tH9FBkiCwJS7wokrwQL2mxsSbLMBQHnF3VI8c=</DQ><InverseQ>Tq3lINMbRRB3w/MPeFoxQVmzHGEz4At66qFKgcloFWFNhJ5A+CeBc96wu1vS9gb7PGYd5Q6o7vfgyi5cI/M6cQCw6D76N34u6Nj00mWTuY54gXhZMm7NJUTamduimFJIJ56SYKi3EpdUHVQY2zlth1Ry32tdka4hoImPaSUlt10=</InverseQ><D>Pl1metXxg9Y36x2BoyX8BUCaEfvZpKhVUL51l/szAZUQ+U9y66yg0febHLAkTS2v1rK7uZbw4U/BQm/Z2a4WVEnKE7MCDfEQrd1SIQ++y/YNNgM/kpM33vvp9fPXGYqIo9z0LEyJ6JHrV3AaE3H0JXQkXl8cFLJguDlelS3rBOUsomausXeq2LPI4n5Ou8oxcc6q06xGCVnIq9PQ41u13asuqCJz1QSCR8eYIIJmQRLwg3j/hI0Zr1mZ4Qb0ZSmAzBT0n27nuymy9U/TqTfG1LcxDlnadPsPuRUdjc61+udwC6z6ORyiUvXs21FlB1gZdGrT21TQVjZrzeG4Byy9CQ==</D></RSAKeyValue>"
+        }
+    },
+
+    "Passport": {
+        "THDPassport": {
+            "BaseUri": "https://webapps.homedepot.com/MYTHDPassport/rs/identity/",
+            "CorporateStoreNumber": "9100",
+            "ApiVersion": "1",
+            "CallingProgram":  "HDQC"
+        }
+    }
+}
