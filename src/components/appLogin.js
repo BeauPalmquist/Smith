@@ -90,14 +90,10 @@ class Login extends React.Component{
                                  <Input type="text" label="Username" onKeyDown={this.handleKeyPress}  onChange={this.usernameChanged} value={this.state.username} placeholder="Username" />
                                  <Input type="password" label="Password" onKeyDown={this.handleKeyPress} onChange={this.passwordChanged} value={this.state.password} placeholder="Password"/>
                                  <Row>
-                 {/* <Col xs={8} md={8}>
-                                        <Input type="checkbox" label="Keep me signed in" />
-                                     </Col> */}
                                      <Col xs={6} md={6} mdOffset={6} xsOffset={6} >
                                         <Button disabled={buttonDisabled} block bsStyle="primary" onClick={this.login} >{buttonText}</Button>
                                      </Col>
                                  </Row>
-                                 <a>Forgot your password?</a>
                              </Col>
                          </Row>
                      </Grid>                 

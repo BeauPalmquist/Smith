@@ -1,28 +1,28 @@
-﻿module.exports = {
-    entry: {
-        'smith': './src/root.jsx'
-    },
+﻿var webpack = require('webpack');
+
+module.exports = {
+    devtool: 'cheap-module-eval-source-map',
+    entry: [
+        'webpack-hot-middleware/client',
+        './index'
+    ],
     output: {
         filename: 'index.js',
         path: './dist',
-        library: 'smith',
-        libraryTarget: 'umd'
     },
+    plugins: [
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ],
     module: {
         loaders: [
             {
-                test: /\.js$|.jsx$/,
+                test: /\.js$/,
+                loaders: ['babel'],
                 exclude: /node_modules/,
-                loaders: ['babel']
+                include: __dirname
             }
         ]
-    },
-    externals: [
-        'react',
-        'react-bootstrap',
-        'react-router'
-    ],
-    resolve: {
-        extensions: ['', '.js', '.jsx']
     }
 };

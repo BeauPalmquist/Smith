@@ -1,11 +1,8 @@
 ﻿import React from 'react';
-import Router from 'react-router';
-import {Route, RouteHandler, DefaultRoute, Redirect} from 'react-router';
-import App from './components/app';
-import Login from './components/appLogin';
-import Unknown from './components/appUnknown';
-import AppUserStore from './stores/appUserStore';
-import AppUserActions from './actions/appUserActions';
+import { Route, IndexRoute } from 'react-router';
+import App from './containers/app';
+import Login from './containers/login';
+import Unknown from './containers/unknown';
 
 // Recursively builds a set of react routes
 function forgeChildRoutes(routes, routeComponents){
@@ -20,7 +17,8 @@ function forgeChildRoutes(routes, routeComponents){
             if(route.routes && route.routes.length > 0){
                 var childRoutes = forgeChildRoutes(route.routes, routeComponents);
                 reactRoutes.push(<Route key={routeKey} path={route.path} name={route.name} handler={handler}>{childRoutes}</Route>);
-            } else {
+            } 
+            else {
                 reactRoutes.push(<Route key={routeKey} path={route.path} name={route.name} handler={handler} />);
             }
 
@@ -60,7 +58,7 @@ function forgeChildRoutes(routes, routeComponents){
     return reactRoutes;
 }
 
-function forgeRoutes(config, routeComponents, root){
+export default function(config, routeComponents, root){
     let reactRoutes = forgeChildRoutes(config.routes, routeComponents);
 
     let routes = (
@@ -75,59 +73,4 @@ function forgeRoutes(config, routeComponents, root){
     );
 
     return routes;
-}
-
-function getRootAppState(){
-    return {
-        user:{
-            isUnknown: AppUserStore.getUserIsUnknown(),
-            isAuthenticated: AppUserStore.getUserAuthenticationStatus(),
-            profile: AppUserStore.getUserProfile()
-        },
-        login:{
-            errorMessage: AppUserStore.getLoginErrorMessage(),
-            returnUrl: AppUserStore.getRedirectRoute()
-        }
-    };
-}
-
-export function forgeApp(config, routeComponents, root){
-    class ForgeApp extends React.Component {
-        constructor(props){
-            super(props);
-            this.state = getRootAppState();
-            this.onChange = this.onChange.bind(this);
-        }
-        componentWillMount(){
-            var activeRouteName = '';
-            if(this.context.router.getCurrentPathname()) { activeRouteName = this.context.router.getCurrentPathname();}
-            if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === null) {activeRouteName = 'home';}
-            AppUserActions.setRedirectRoute(activeRouteName);
-        }
-        componentDidMount(){
-            AppUserStore.addChangeListener(this.onChange);
-            AppUserActions.setUserAuthenticationStatus();
-        }
-        componentWillUnmount(){
-            AppUserStore.removeChangeListener(this.onChange);
-        }
-        onChange(){
-            this.setState(getRootAppState());
-        }
-        render(){
-            return (
-                <RouteHandler config={config} user={this.state.user} login={this.state.login} {...this.props} />
-            );
-            }
-    }
-
-    ForgeApp.contextTypes = {
-        router: React.PropTypes.func.isRequired
-    };
-
-    var routes = forgeRoutes(config, routeComponents, ForgeApp);
-
-    Router.run(routes, function (Handler) {
-        React.render(<Handler />, document.getElementById(root));
-    });
 }

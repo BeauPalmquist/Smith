@@ -7,13 +7,21 @@
     "Beau Palmquist",
     "Jonathan Oropeza"
   ],
-  "private": true,
+  "dependencies": {
+    "history": "^1.9.0",    
+    "lodash": "^3.10.1",
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
+    "react-redux": "^2.1.2",
+    "react-router": "^1.0.0-rc1",
+    "redux": "^3.0.0",
+    "redux-logger": "0.0.1",
+    "redux-router": "^1.0.0-beta3",
+    "redux-thunk": "^0.1.0"
+  },
   "devDependencies": {
-    "flux": "^2.0.3",
-    "react": "^0.13.3",
-    "react-bootstrap": "^0.25.2",
-    "react-router": "^0.13.3",
-    "react-document-title": "^1.0.2",
+    "redux-devtools": "^2.1.5",
+    "babel-core": "^5.8.25",
     "babel-loader": "^5.2.2",
     "event-stream": "^3.3.1",
     "gulp": "^3.9.0",
@@ -27,10 +35,12 @@
     "jsx-loader": "^0.13.2",
     "require-dir": "^0.3.0",
     "rimraf": "^2.3.4",
-    "lodash": "^3.10.0",
     "webpack": "^1.9.10",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0",
     "gulp-eslint": "^0.15.0",
     "babel-eslint": "^3.1.23",
+    "babel-plugin-react-transform": "^1.1.1",
     "eslint-plugin-react": "^2.7.1"
   }
 }
