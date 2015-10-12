@@ -1,4 +1,4 @@
-﻿import {forgeApp} from '../src/root';
+﻿import forgeApp from '../src/index';
 import config from './config.jsx';
 import Forge from './routes/forge/components/forge';
 import Hammer from './routes/hammer/components/hammer';

@@ -3,16 +3,19 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ReduxRouter } from 'redux-router';
-import configureStore from './redux/create';
+import { Route, IndexRoute, Redirect } from 'react-router';
+import configureStore from './stores/configureStore';
+import Root from './containers/root'
+import Login from './containers/login';
 
-default export function ForgeApp(config, routeComponents, root){
-    const store = configureStore();
+export default function forgeApp(config, routeComponents, root){
+    const store = configureStore(config.routes, routeComponents);    
 
     render(
         <Provider store={store}>
-           <ReduxRouter />
+            <ReduxRouter />
         </Provider>,
-        document.getElementById('root')
+        document.getElementById(root)
     );
-    require('./createDevToolsWindow')(store);
+    require('./utils/createDevToolsWindow')(store);
 }

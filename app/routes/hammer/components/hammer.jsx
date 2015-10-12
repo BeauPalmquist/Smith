@@ -1,10 +1,7 @@
-﻿import React from 'react';
+﻿import React, { Component } from 'react';
 import {Panel} from 'react-bootstrap';
 
-class Hammer extends React.Component{
-    constructor(props){
-        super(props);
-    }
+export default class Hammer extends Component{
     render(){
         return (
             <Panel header="Hammer!" >
@@ -13,5 +10,3 @@ class Hammer extends React.Component{
         );
     }
 }
-
-export default Hammer;

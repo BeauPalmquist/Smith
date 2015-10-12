@@ -1,60 +1,100 @@
 ﻿import React, { Component } from 'react';
-import { ReduxRouter } from 'redux-router';
-import { Provider } from 'react-redux';
-import { render } from 'react-dom';
-import { createRoutes } from "./routes";
+import { connect } from 'react-redux';
+import AppHeader from '../components/appHeader';
+import AppNav from '../components/appNav';
+//import AppContent from '../components/appContent';
+//import AppSearch from '../components/appSearch';
+//import AppSearchStore from '../stores/appSearchStore';
+//import AppContentStore from '../stores/appContentStore';
+//import AppContentActions from '../actions/appContentActions';
+import {Row, Col} from 'react-bootstrap';    
 
-function getRootAppState(){
-    return {
-        user:{
-            isUnknown: AppUserStore.getUserIsUnknown(),
-            isAuthenticated: AppUserStore.getUserAuthenticationStatus(),
-            profile: AppUserStore.getUserProfile()
-        },
-        login:{
-            errorMessage: AppUserStore.getLoginErrorMessage(),
-            returnUrl: AppUserStore.getRedirectRoute()
-        }
-    };
-}
-
-export function forgeApp(config, routeComponents, root){
-    class ForgeApp extends Component {
+    //function getAppState(){
+    //    return {
+    //        search:{
+    //            index: AppSearchStore.getSearchIndex(),
+    //            selectedCategory: AppSearchStore.getSelectedCategory(),
+    //            categories: AppSearchStore.getSearchCategories(),
+    //            visible: AppSearchStore.getSearchVisibility(),
+    //            inProgress: AppSearchStore.getSearchInProgress()
+    //        }
+    //    };
+    //}
+    
+   class App extends Component{    
         constructor(props){
             super(props);
-            this.state = getRootAppState();
-            this.onChange = this.onChange.bind(this);
+            //this.state = getAppState();
+            //this.onChange = this.onChange.bind(this);
         }
-        componentWillMount(){
-            var activeRouteName = '';
-            if(this.context.router.getCurrentPathname()) { activeRouteName = this.context.router.getCurrentPathname();}
-            if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === null) {activeRouteName = 'home';}
-            AppUserActions.setRedirectRoute(activeRouteName);
+        componentWillMount(){     
+            //AppContentActions.loadAppContentRoutes();
         }
         componentDidMount(){
-            AppUserStore.addChangeListener(this.onChange);
-            AppUserActions.setUserAuthenticationStatus();
+            //if(this.props.user.isUnknown){
+            //this.context.router.transitionTo('unknown');
+            //} else if(!this.props.user.isAuthenticated){
+            //    this.context.router.transitionTo('login');
+            //}
+            // AppSearchStore.addChangeListener(this.onChange);
+            // AppContentStore.addChangeListener(this.onChange);
         }
         componentWillUnmount(){
-            AppUserStore.removeChangeListener(this.onChange);
+           // AppSearchStore.removeChangeListener(this.onChange);
+            // AppContentStore.removeChangeListener(this.onChange);
+
+            // RENDER REFERENCE
+            /*<div>
+                <AppHeader user={this.props.user} config={this.props.config} />
+                 <AppSearch search={this.state.search} />   
+                 <div className="wrapper">
+                     <div className="sidebar-wrapper">
+                         <AppNav user={this.props.user} config={this.props.config} ></AppNav>                            
+                     </div>
+                     <div className="page-content-wrapper">
+                         <div className="page-content">
+                             <div className="container">
+                                 <Row>
+                                     <Col md={12} >
+                                         <AppContent {...this.props} appContentTitle={this.state.appContentTitle} />                     
+                                     </Col>
+                                 </Row>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>*/
         }
-        onChange(){
-            this.setState(getRootAppState());
-        }
-        render(){
+        render() {   
+            const {children} = this.props;
             return (
-                <RouteHandler config={config} user={this.state.user} login={this.state.login} {...this.props} />
-            );
-            }
-    }
-
-    ForgeApp.contextTypes = {
-        router: React.PropTypes.func.isRequired
-    };
-
-    var routes = forgeRoutes(config, routeComponents, ForgeApp);
-
-    Router.run(routes, function (Handler) {
-        React.render(<Handler />, document.getElementById(root));
-    });
+                <div>
+                     <AppHeader />
+                      <div className="wrapper">
+                          <div className="sidebar-wrapper">
+                              <AppNav />
+                          </div>
+                          <div className="page-content-wrapper">
+                              <div className="page-content">
+                                  <div className="container">
+                                      <Row>
+                                          <Col md={12} >
+                                              {children}              
+                                          </Col>
+                                      </Row>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                 </div>
+             );
+        }
 }
+
+   function select(state){
+       return {
+           router: state.router
+       }
+   }
+
+export default connect(select)(App);

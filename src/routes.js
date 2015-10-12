@@ -1,5 +1,6 @@
 ﻿import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
+import Root from './containers/root'
 import App from './containers/app';
 import Login from './containers/login';
 import Unknown from './containers/unknown';
@@ -11,27 +12,28 @@ function forgeChildRoutes(routes, routeComponents){
         let defaultRouteSet = false;
         for(var i=0; i < routes.length; i++){
             let route = routes[i];
-            let handler = routeComponents[route.handler];
-            let routeKey = "Route_" + route.handler + "_" + i;
+            let component = routeComponents[route.component];
+            let routeKey = "Route_" + route.component + "_" + i;
 
+            
             if(route.routes && route.routes.length > 0){
                 var childRoutes = forgeChildRoutes(route.routes, routeComponents);
-                reactRoutes.push(<Route key={routeKey} path={route.path} name={route.name} handler={handler}>{childRoutes}</Route>);
+                reactRoutes.push(<Route key={routeKey} path={route.path} component={component}>{childRoutes}</Route>);
             } 
             else {
-                reactRoutes.push(<Route key={routeKey} path={route.path} name={route.name} handler={handler} />);
+                reactRoutes.push(<Route key={routeKey} path={route.path} component={component} />);
             }
 
             // Add paramRoutes for this component
             if(route.paramRoutes){
                 let paramRoutes = route.paramRoutes;
                 for (let j=0; j < paramRoutes.length; j++) {
-                    let paramRouteKey = "ParamRoute_" + route.handler + "_" + j;
+                    let paramRouteKey = "ParamRoute_" + route.component + "_" + j;
                     let paramRoute = paramRoutes[j];
                     if(paramRoute){
-                        var paramRouteHandler = paramRoute.handler ? paramRoute.handler : handler;   
-                        var paramHandler = routeComponents[paramRouteHandler];
-                        reactRoutes.push(<Route key={paramRouteKey} path={paramRoute.path} name={paramRoute.name} handler={paramHandler} />);
+                        var paramRouteComponent = paramRoute.component ? paramRoute.component : route.component;   
+                        var paramComponent = routeComponents[paramRouteComponent];
+                        reactRoutes.push(<Route key={paramRouteKey} path={paramRoute.path} component={paramComponent} />);
                     }
                 }
             }
@@ -40,7 +42,7 @@ function forgeChildRoutes(routes, routeComponents){
             if(route.redirects){
                 let redirects = route.redirects;
                 for(let j=0; j < redirects.length; j++){
-                    let redirectRouteKey = "RedirectRoute_" + route.handler + "_" + j;
+                    let redirectRouteKey = "RedirectRoute_" + route.component + "_" + j;
                     let redirectRoute = redirects[j];
                     reactRoutes.push(<Redirect key={redirectRouteKey} from={redirectRoute.from} to={redirectRoute.to} />);
                 }
@@ -48,8 +50,8 @@ function forgeChildRoutes(routes, routeComponents){
 
             // Add default route if necessary
             if((route.default === "true" || routes.length === (i+1)) && !defaultRouteSet){
-                let defaultRouteKey = "DefaultRoute_" + route.handler + "_" + i;
-                reactRoutes.push(<DefaultRoute key={defaultRouteKey} path={route.path} handler={handler} />);
+                let defaultRouteKey = "DefaultRoute_" + route.component + "_" + i;
+                reactRoutes.push(<IndexRoute key={defaultRouteKey} component={component} />);
                 route.default = 'true';
                 defaultRouteSet = true;
             }
@@ -58,19 +60,19 @@ function forgeChildRoutes(routes, routeComponents){
     return reactRoutes;
 }
 
-export default function(config, routeComponents, root){
-    let reactRoutes = forgeChildRoutes(config.routes, routeComponents);
+export default function(routes, routeComponents){
+    let reactRoutes = forgeChildRoutes(routes, routeComponents);
 
-    let routes = (
-        <Route path="/" handler={root}>
-            <Route name="unknown" handler={Unknown} />
-            <Route name="login" handler={Login} />
-            <Route name="home" path="/" handler={App}>
+    let navRoutes = (
+        <Route path="/" component={Root}>
+            <Route path="unknown" component={Unknown} />
+            <Route path="login" component={Login} />
+            <Route component={App}>
                 {reactRoutes}
             </Route>
-            <DefaultRoute handler={App} />
+            <IndexRoute component={App} />
         </Route>
     );
 
-    return routes;
+    return navRoutes;
 }

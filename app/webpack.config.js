@@ -15,11 +15,6 @@
             }
         ]
     },
-    externals: {
-        'react': 'React',
-        'react-bootstrap': 'ReactBootstrap',
-        'react-router': 'ReactRouter'
-    },
     resolve: {
         extensions: ['', '.js', '.jsx']
     }

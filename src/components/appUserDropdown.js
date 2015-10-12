@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import AppUserActions from '../actions/appUserActions';
+//import AppUserActions from '../actions/appUserActions';
 import {NavDropdown, MenuItem} from 'react-bootstrap';
     
 class UserDropdown extends React.Component{
@@ -8,10 +8,10 @@ class UserDropdown extends React.Component{
         this.logout = this.logout.bind(this);
     }
     componentWillMount(){
-        AppUserActions.loadUserProfile(this.props.config.appName);
+        //AppUserActions.loadUserProfile(this.props.config.appName);
     }
     logout(){
-        AppUserActions.logout(this.context.router);
+       // AppUserActions.logout(this.context.router);
     }
     render(){
         var username = this.props.userProfile ? this.props.userProfile.FullName : "";
@@ -22,9 +22,5 @@ class UserDropdown extends React.Component{
         );
     }
 }
-
-    UserDropdown.contextTypes = {
-        router: React.PropTypes.func.isRequired
-    };
 
 export default UserDropdown;
