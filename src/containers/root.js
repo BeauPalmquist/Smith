@@ -1,55 +1,45 @@
 ﻿import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { isAuthenticated, setRedirectRoute } from '../reducers/auth';
 
-//function getRootAppState(){
-//    return {
-//        user:{
-//            isUnknown: AppUserStore.getUserIsUnknown(),
-//            isAuthenticated: AppUserStore.getUserAuthenticationStatus(),
-//            profile: AppUserStore.getUserProfile()
-//        },
-//        login:{
-//            errorMessage: AppUserStore.getLoginErrorMessage(),
-//            returnUrl: AppUserStore.getRedirectRoute()
-//        }
-//    };
-//}
 class Root extends Component {
     constructor(props){
         super(props);
-        //this.state = getRootAppState();
     }
     componentWillMount(){
-        //var activeRouteName = '';
-        //if(this.context.router.getCurrentPathname()) { activeRouteName = this.context.router.getCurrentPathname();}
-        //if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === null) {activeRouteName = 'home';}
-        //AppUserActions.setRedirectRoute(activeRouteName);
+        var activeRouteName = location.pathname;        
+        if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === null) {activeRouteName = '/';}
+
+        let {dispatch} = this.props;
+        dispatch(setRedirectRoute(activeRouteName));
     }
     componentDidMount(){
-        //AppUserStore.addChangeListener(this.onChange);
-        //AppUserActions.setUserAuthenticationStatus();
+        let {dispatch} = this.props;
+        dispatch(isAuthenticated("SmithClient"));
     }
-    componentWillUnmount(){
-        //AppUserStore.removeChangeListener(this.onChange);
-    }
-    //onChange(){
-    //    this.setState(getRootAppState());
-    //}
     render(){
-        const { children } = this.props;
+        const { children, auth, router, config, dispatch } = this.props;
         return (
             <div>
-                {children}
+                {children && React.cloneElement(children, {auth: auth, router: router, config: config, dispatch: dispatch})}
             </div>
         );
     }
 }
 
-function select(state){
+function mapStateToProps(state){    
+    var clientProp = {};
+    for(var prop in state){
+        if(prop != "smith" && prop != "router"){
+            clientProp = state[prop];
+        }
+    }
     return {
-        router: state.router
+        auth: state.smith.auth,
+        router: state.router,
+        config: clientProp.config
     }
 }
 
-export default connect(select)(Root);
+export default connect(mapStateToProps)(Root);

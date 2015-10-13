@@ -8,7 +8,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
  */
 export default function createDevToolsWindow(store) {
     // Window name.
-    const name = 'Redux DevTools';
+    const name = 'Smith Redux DevTools';
 
     // Give it a name so it reuses the same window.
     const win = window.open(

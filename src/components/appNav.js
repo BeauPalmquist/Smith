@@ -1,42 +1,40 @@
 ﻿import React from 'react';    
-//import AppContentActions from '../actions/appContentActions';        
 import {Grid, Row} from 'react-bootstrap';
 import _ from 'lodash';
+import {Link} from 'react-router';
+import {setRedirectRoute} from '../reducers/auth';
 
 class AppNavButton extends React.Component{
     constructor(props){
         super(props);
-        this.navTo = this.navTo.bind(this);
-    }
-    navTo(){
-        var route = this.props.route.name;
-        //AppContentActions.setActiveRoute(route, this.context.router);
     }
     render(){
-            var navCellActive = "navCell";
-            var navCellBorderActive = "navCellBorder";
+        let {currentLocation} = this.props;
+        var navCellActive = "navCell";
+        var navCellBorderActive = "navCellBorder";
 
-            var currentPath = this.context.router.getCurrentPath();
-            var handler = currentPath;
-            let propHandler = "/" +  this.props.route.handler.toLowerCase();
-            let displayImage = this.props.unselectedImage;
-            let hideNavTitle = (this.props.route.navTitle === undefined || this.props.route.navTitle === '') ? 'hidden' : '';
-            if(handler.toLowerCase() === propHandler.toLowerCase() || (handler === '/' && (this.props.route.default === 'true' ))) {
-                navCellActive += " active";
-                navCellBorderActive += " active";
-                displayImage = this.props.selectedImage;
-            }
-            return (
-                <Row>
-                    <div className={navCellActive} onClick={this.navTo}>
+        var handler = currentLocation.pathname;
+        let propHandler = "/" +  this.props.route.component.toLowerCase();
+        let displayImage = this.props.unselectedImage;
+        let hideNavTitle = (this.props.route.navTitle === undefined || this.props.route.navTitle === '') ? 'hidden' : '';
+        if(handler.toLowerCase() === propHandler.toLowerCase() || (handler === '/' && (this.props.route.default === 'true' ))) {
+            navCellActive += " active";
+            navCellBorderActive += " active";
+            displayImage = this.props.selectedImage;
+        }
+        return (
+            <Row>
+                <Link to={propHandler}>
+                    <div className={navCellActive}>
                         <p className={navCellBorderActive}>
                             <img src={displayImage} />
                             <span className="bold" hidden={hideNavTitle}>{this.props.title}</span>
                         </p>                          
                     </div>
-                </Row>
-            );
-                    }
+                </Link>
+            </Row>
+        );
+    }
 }
     
 class AppNav extends React.Component{   
@@ -45,40 +43,41 @@ class AppNav extends React.Component{
     }
     render(){
         var navs = [];
-        //if(this.props.config.routes){
-        //    var keyCount = 0;
-        //    let me = this;
-        //    _.forEach((this.props.config.routes), function(route) {
+        let {user, config, currentLocation} = this.props;
+        if(this.props.config.routes){
+            var keyCount = 0;
+            
+            _.forEach((config.routes), function(route) {
 
-        //        var userHasNavPermissions = true;
-        //        if(me.props.user.profile){
-        //            var userRoutePermissions = me.props.user.profile.RoutePermissions;
-        //            var clientRoutePermissions = _.filter(me.props.config.routePermissions, function(routePermission){
-        //                return routePermission.routeName === route.name;
-        //            });
+                var userHasNavPermissions = true;
+                if(user){
+                    var userRoutePermissions = user.RoutePermissions;
+                    var clientRoutePermissions = _.filter(config.routePermissions, function(routePermission){
+                        return routePermission.routeName === route.path;
+                    });
                     
-        //            _.forEach(clientRoutePermissions, function(clientRoutePermission){
-        //                var requiredPermissions = clientRoutePermission.requiredPermissions;
-        //                if(requiredPermissions){
-        //                    var permissionCount = 0;
-        //                    _.forEach(requiredPermissions, function(requiredPermission){
-        //                        if(_.includes(userRoutePermissions, requiredPermission)){
-        //                            permissionCount++;
-        //                        }
-        //                    });
+                    _.forEach(clientRoutePermissions, function(clientRoutePermission){
+                        var requiredPermissions = clientRoutePermission.requiredPermissions;
+                        if(requiredPermissions){
+                            var permissionCount = 0;
+                            _.forEach(requiredPermissions, function(requiredPermission){
+                                if(_.includes(userRoutePermissions, requiredPermission)){
+                                    permissionCount++;
+                                }
+                            });
                             
-        //                    userHasNavPermissions = permissionCount === requiredPermissions.length;
-        //                }                        
-        //            });
+                            userHasNavPermissions = permissionCount === requiredPermissions.length;
+                        }                        
+                    });
 
-        //            if(((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "")) && userHasNavPermissions === true){
-        //                var navKey = "sample" + (keyCount+1);
-        //                keyCount++;
-        //                navs.push(<AppNavButton key={navKey} route={route} title={route.navTitle} unselectedImage={route.unselectedImage} selectedImage={route.selectedImage}  />);
-        //            }                              
-        //        }
-        // });
-        //}
+                    if(((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "")) && userHasNavPermissions === true){
+                        var navKey = "sample" + (keyCount+1);
+                        keyCount++;
+                        navs.push(<AppNavButton key={navKey} route={route} title={route.navTitle} unselectedImage={route.unselectedImage} currentLocation={currentLocation} selectedImage={route.selectedImage}  />);
+                    }                              
+                }
+         });
+        }
 
     return (
             <Grid>

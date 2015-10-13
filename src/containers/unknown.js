@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+    import DocumentTitle from 'react-document-title';
     import {Well, Grid, Row} from 'react-bootstrap';
     import _ from 'lodash';
 
@@ -6,19 +7,27 @@
         constructor(props) {
             super(props);
         }
+        componentDidMount(){
+            let {auth} = this.props;
+            if (!auth.userIsUnknown && !auth.userAuthenticated) {
+                this.props.history.pushState(null, '/login');
+            } else if (auth.userAuthenticated) {
+                this.props.history.pushState(null, auth.redirectRoute);
+            }
+        }
+        componentWillReceiveProps(nextProps){
+            let {auth} = nextProps ? nextProps : this.props;
+            if (!auth.userIsUnknown && !auth.userAuthenticated) {
+                this.props.history.pushState(null, '/login');
+            } else if (auth.userAuthenticated) {
+                this.props.history.pushState(null, auth.redirectRoute);
+            }
+        }
         render() {
-            //var router = this.context.router;
-            //var destination = this.props.login.returnUrl;
-            //if (!this.props.user.isUnknown && !this.props.user.isAuthenticated) {
-            //    _.delay(function(){router.transitionTo('login');}, 500);
-            //} else if (this.props.user.isAuthenticated) {
-            //    _.delay(function(){router.transitionTo(destination);}, 500);
-            //}
-
             var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "";
             var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
             return (
-              <DocumentTitle title="Loading">
+              <DocumentTitle title="Loading...">
                  <div>
                      <p className="center">
                          <span className="loginFont" >

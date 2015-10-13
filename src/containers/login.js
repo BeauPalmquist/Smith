@@ -1,30 +1,34 @@
 ﻿import React, { Component } from 'react';
 //import AppUserActions from '../actions/appUserActions';    
 import {Well, Input, Grid, Row, Col, Button, Alert} from 'react-bootstrap';
+import { login } from '../reducers/auth';
      
 export default class Login extends Component{
     constructor(props){
         super(props);
         this.state = {username: "", password: "", pendingLogin: false};
         this.handleKeyPress = this.handleKeyPress.bind(this);
-       // this.login = this.login.bind(this);
+        this.login = this.login.bind(this);
         this.passwordChanged = this.passwordChanged.bind(this);
         this.usernameChanged = this.usernameChanged.bind(this);
     }
     handleKeyPress(e){
         var ENTER = 13;
-        if(e.keyCode === ENTER && !this.state.pendingLogin){
+        let {auth} = this.props;
+        if(e.keyCode === ENTER && !auth.pendingLogin){
             this.login();
         }
     }
-    componentDidMount(){             
-        //if(this.props.user.isAuthenticated){             
-        //    this.context.router.transitionTo(this.props.login.returnUrl);
-        //}   
+    componentDidMount(){
+        let {auth} = this.props;
+        if(auth.userAuthenticated){
+            this.props.history.pushState(null, auth.redirectRoute);
+        }
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps.login.errorMessage !== ""){
-            this.setState({pendingLogin: false});
+    componentWillReceiveProps(nextProps){   
+        let {auth} = nextProps ? nextProps : this.props;
+        if(auth.userAuthenticated){
+            this.props.history.pushState(null, auth.redirectRoute);
         }
     }
     usernameChanged(event){
@@ -33,37 +37,35 @@ export default class Login extends Component{
     passwordChanged(event){
         this.setState({password: event.target.value});
     }
-    login(){         
-        //if(this.state.username && this.state.username !== "" && this.state.password && this.state.password !== ""){                   
-        //    //AppUserActions.login(this.state.username, this.state.password, "home", this.props.config.appName);   
-        //    this.setState({pendingLogin: true});
-        //}
+    login(){        
+        let { auth, dispatch } = this.props;
+        if(this.state.username && this.state.username !== "" && this.state.password && this.state.password !== ""){                   
+            dispatch(login(this.state.username, this.state.password, auth.redirectRoute, "SmithClient"))
+        }
     }
     render(){
-        //if(this.props.user.isAuthenticated){
-        //    this.context.router.transitionTo(this.props.login.returnUrl);
-        //}
+        let {auth} = this.props;
         var showErrorMessage = "noError";
-        //if(this.props.login.errorMessage !== "") {
-        //    showErrorMessage = "";
-        //}
+        if(auth.loginErrorMessage !== "") {
+            showErrorMessage = "";
+        }
         var showLoginImage = "";
         var loginFormWidth= 12;
         var buttonText = "Sign In";
         var buttonDisabled = false;
 
-        //if(this.state.pendingLogin === true){
-        //    buttonText = "Signing in...";
-        //    buttonDisabled = true;
-        //}
+        if(auth.pendingLogin === true){
+            buttonText = "Signing in...";
+            buttonDisabled = true;
+        }
         var loginFormClass = "loginForm noLoginImage";
-        //if(this.props.config && this.props.config.loginImage){
-        //    showLoginImage =   (<Col className="loginImg" md={6}>                             
-        //                           <img src={this.props.config.loginImage} />
-        //                       </Col>);
-        //    loginFormWidth = 6;
-        //    loginFormClass = "loginForm";
-        //}
+        if(this.props.config && this.props.config.loginImage){
+            showLoginImage =   (<Col className="loginImg" md={6}>                             
+                                   <img src={this.props.config.loginImage} />
+                               </Col>);
+            loginFormWidth = 6;
+            loginFormClass = "loginForm";
+        }
 
         var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "" ;
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "" ;
@@ -86,7 +88,7 @@ export default class Login extends Component{
                  {showLoginImage}
                              <Col md={loginFormWidth}>
                                  <h3>Sign In</h3>
-                                 <Alert bsStyle="danger" className={showErrorMessage} ></Alert>   
+                                 <Alert bsStyle="danger" className={showErrorMessage} >{auth.loginErrorMessage}</Alert>   
                                  <Input type="text" label="Username" onKeyDown={this.handleKeyPress}  onChange={this.usernameChanged} value={this.state.username} placeholder="Username" />
                                  <Input type="password" label="Password" onKeyDown={this.handleKeyPress} onChange={this.passwordChanged} value={this.state.password} placeholder="Password"/>
                                  <Row>

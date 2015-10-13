@@ -1,6 +1,8 @@
-﻿module.exports = {
+﻿var webpack = require('webpack');
+
+module.exports = {
     entry: {
-        'smith': './app/index.jsx'
+        'smith': './app/index'
     },
     output: {
         filename: 'index.js',

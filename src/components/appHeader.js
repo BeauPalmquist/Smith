@@ -46,7 +46,7 @@ class AppHeader extends React.Component{
                 </NavBrand>
                 <Nav eventkey={0} right>
                     <AppNotifications />
-                    <UserDropdown />
+                    <UserDropdown user={this.props.user} dispatch={this.props.dispatch}/>
                 </Nav>
             </Navbar>
         );

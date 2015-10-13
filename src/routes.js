@@ -67,7 +67,7 @@ export default function(routes, routeComponents){
         <Route path="/" component={Root}>
             <Route path="unknown" component={Unknown} />
             <Route path="login" component={Login} />
-            <Route component={App}>
+            <Route path="/" component={App}>
                 {reactRoutes}
             </Route>
             <IndexRoute component={App} />

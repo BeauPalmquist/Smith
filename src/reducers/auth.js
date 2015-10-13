@@ -1,18 +1,19 @@
 ﻿// Auth Action Types
-const LOGIN = 'LOGIN';
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGIN_FAILED = 'CONST_FAILED';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_AUTHENTICATION_STATUS = 'SET_AUTHENTICATION_STATUS';
-const LOGOUT = 'LOGOUT';
+const LOGIN_REQUEST = 'SMITH/LOGIN_REQUEST';
+const LOGIN_SUCCESS = 'SMITH/LOGIN_SUCCESS';
+const LOGIN_FAILED = 'SMITH/LOGIN_FAILED';
+const SET_USER_PROFILE = 'SMITH/SET_USER_PROFILE';
+const SET_AUTHENTICATION_STATUS = 'SMITH/SET_AUTHENTICATION_STATUS';
+const SET_REDIRECT_ROUTE = 'SMITH/SET_REDIRECT_ROUTE';
+const LOGOUT = 'SMITH/LOGOUT';
 
 const initialState = {
-    userProfile: {}, userAuthenticated: false, redirectRoute: 'home', loginErrorMessage: '', userIsUnknown: true, pendingLogin: false
+    userProfile: {}, userAuthenticated: false, redirectRoute: '/', loginErrorMessage: '', userIsUnknown: true, pendingLogin: false
 }
 
-export default function user(state = initialState, action){
+export default function auth(state = initialState, action){
     switch (action.type){
-        case LOGIN: 
+        case LOGIN_REQUEST: 
             return {
                 ...state,
                 pendingLogin: true
@@ -30,30 +31,42 @@ export default function user(state = initialState, action){
                 ...state,
                 userProfile: action.profile,
                 userAuthenticated: true,
-                returnUrl: action.returnUrl,
+                redirectRoute: action.returnUrl,
                 pendingLogin: false
-            }
+            };
         case SET_USER_PROFILE:
             return{
                 ...state,
-                userUnknown: false,
+                userIsUnknown: false,
                 userProfile: action.profile,
                 pendingLogin: false
             };
         case SET_AUTHENTICATION_STATUS:
             return {
                 ...state,
-                userAuthenticated: action.status
+                userAuthenticated: action.status,
+                userIsUnknown: false,
             }
+        case SET_REDIRECT_ROUTE:
+            return {
+                ...state, 
+                redirectRoute: action.route
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                userProfile: {},
+                userAuthenticated: false,
+                redirectRoute: "/",
+                pendingLogin: false,
+                userIsUnknown: false,
+                loginErrorMessage: ''
+            }
+
+        default:
+            return state;
     }
 }
-
-    function loginFailed(){
-        return {
-            type: LOGIN_FAILED
-        }
-    }
-
     function setUserProfile(profile){
         return {
             type: SET_USER_PROFILE,
@@ -66,13 +79,26 @@ export default function user(state = initialState, action){
             type: LOGIN_SUCCESS,
             profile, 
             returnUrl
-        }
+        };
     }
 
     function setAuthenticationStatus(status){
         return {
             type: SET_AUTHENTICATION_STATUS,
             status
+        };
+    }
+
+    function setRedirect(route){
+        return {
+            type: SET_REDIRECT_ROUTE,
+            route
+        }
+    }
+
+    function logoutComplete(){
+        return {
+            type: LOGOUT
         }
     }
 
@@ -88,9 +114,16 @@ export function isAuthenticated(appName){
     }
 }
 
+export function setRedirectRoute(route){
+    return dispatch => {
+        dispatch(setRedirect(route));
+    }
+}
+
 export function login(username, password, returnUrl, appName){
     ClientAction.log("User attempting to login", "Authentication", {username: username});
     return function(dispatch){
+        dispatch({type: LOGIN_REQUEST});
         return User.login(username, password).then(
             () => {
                 ClientAction.log("User logged in", "Authentication", { username: username });
@@ -98,7 +131,15 @@ export function login(username, password, returnUrl, appName){
             },
             () => {
                 ClientAction.log("User login failed", "Authentication", { username: username });
-                dispatch(LOGIN_FAILED);
+                dispatch({ type: LOGIN_FAILED});
             });
+    }
+}
+
+export function logout(){
+    return function(dispatch){
+        User.logOut().done(() => {
+            dispatch(logoutComplete());
+        });
     }
 }
