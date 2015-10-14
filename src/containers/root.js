@@ -19,10 +19,11 @@ class Root extends Component {
         dispatch(isAuthenticated("SmithClient"));
     }
     render(){
-        const { children, auth, router, config, dispatch } = this.props;
+        const { children, auth, router, notify, config, dispatch } = this.props;
+        //        {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}
         return (
             <div>
-                {children && React.cloneElement(children, {auth: auth, router: router, config: config, dispatch: dispatch})}
+                    {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}
             </div>
         );
     }
@@ -37,6 +38,7 @@ function mapStateToProps(state){
     }
     return {
         auth: state.smith.auth,
+        notify: state.smith.notify,
         router: state.router,
         config: clientProp.config
     }

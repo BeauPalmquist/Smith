@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AppHeader from '../components/appHeader';
-import AppNav from '../components/appNav';
+import AppHeader from '../components/header';
+import AppNav from '../components/nav';
 import {Row, Col} from 'react-bootstrap';    
     
 class App extends Component{    
@@ -23,10 +23,10 @@ class App extends Component{
         }
     }
     render() {   
-        const {children, auth, config, dispatch, router} = this.props;
+        const {children, auth, config, dispatch, notify, router} = this.props;
         return (
             <div>
-                <AppHeader user={auth.userProfile} config={config} dispatch={dispatch} />
+                <AppHeader user={auth.userProfile} userNotifications={notify} config={config} dispatch={dispatch} />
                 <div className="wrapper">
                     <div className="sidebar-wrapper">
                         <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
