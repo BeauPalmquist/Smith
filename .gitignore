@@ -44,3 +44,7 @@ HomeDepot.Platform.UI.Smith/wwwroot/src/
 HomeDepot.Platform.UIFramework/wwwroot/src/
 HomeDepot.Platform.UI.Smith/dist/
 HomeDepot.Platform.UI.Armory/dist/
+app/
+wwwroot/src/lib/
+wwwroot/src/js/
+wwwroot/src/css/
