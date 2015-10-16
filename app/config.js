@@ -1,4 +1,8 @@
-﻿const LOAD_CONFIG = "CLIENT/LOAD_CONFIG";
+﻿// IMPORT ROUTE COMPONENTS
+import Forge from './containers/forge';
+import Hammer from './containers/hammer';
+
+const LOAD_CONFIG = "CLIENT/LOAD_CONFIG";
 
 const initialState = {
     appName: "SmithClient",
@@ -11,13 +15,12 @@ const initialState = {
             "default": "true",
             navTitle: "Forge",
             selectedImage: "src/img/forge_anvil.png",
-            unselectedImage: "http://www.stockhoffsonline.com/acatalog/Flatland%20forge%20rounding.jpg",
-            component: "forge",
+            component: Forge,
             paramRoutes: [
                 {
                     name: 'forgeId',
                     path: '/forge/:id',
-                    component: 'forge'
+                    component: Forge
                 }
             ],
             redirects: [
@@ -32,15 +35,15 @@ const initialState = {
             selectedImage: "http://vignette3.wikia.nocookie.net/videogames-fanon/images/5/57/Batman_symbol.png/revision/latest?cb=20140106234647",            
             unselectedImage: "http://www.clipartbest.com/cliparts/aiq/zbL/aiqzbLgyT.gif",
             path: 'hammer',
-            component: "hammer"
+            component: Hammer
         }
     ],
-    //routePermissions:[
-    //    {
-    //        routeName: 'hammer',
-    //        requiredPermissions: ["Forge", "Apprentice"]
-    //    }
-    //],
+    routePermissions:[
+        {
+            routeName: 'hammer',
+            requiredPermissions: ["Forge", "Apprentice"]
+        }
+    ],
     loginImage: "src/img/forge_logo_orange.jpg" 
 }
 

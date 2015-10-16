@@ -6,14 +6,14 @@ import Login from './containers/login';
 import Unknown from './containers/unknown';
 
 // Recursively builds a set of react routes
-function forgeChildRoutes(routes, routeComponents){
+function forgeChildRoutes(routes){
     let reactRoutes = [];
     if(routes){
         let defaultRouteSet = false;
         for(var i=0; i < routes.length; i++){
             let route = routes[i];
-            let component = routeComponents[route.component];
-            let routeKey = "Route_" + route.component + "_" + i;
+            let component = route.component;
+            let routeKey = "Route_" + route.path + "_" + i;
 
             
             if(route.routes && route.routes.length > 0){
@@ -28,11 +28,10 @@ function forgeChildRoutes(routes, routeComponents){
             if(route.paramRoutes){
                 let paramRoutes = route.paramRoutes;
                 for (let j=0; j < paramRoutes.length; j++) {
-                    let paramRouteKey = "ParamRoute_" + route.component + "_" + j;
+                    let paramRouteKey = "ParamRoute_" + paramRoutes[j].path + "_" + j;
                     let paramRoute = paramRoutes[j];
-                    if(paramRoute){
-                        var paramRouteComponent = paramRoute.component ? paramRoute.component : route.component;   
-                        var paramComponent = routeComponents[paramRouteComponent];
+                    if(paramRoute){                        
+                        var paramComponent = paramRoute.component ? paramRoute.component : route.component;
                         reactRoutes.push(<Route key={paramRouteKey} path={paramRoute.path} component={paramComponent} />);
                     }
                 }
@@ -42,7 +41,7 @@ function forgeChildRoutes(routes, routeComponents){
             if(route.redirects){
                 let redirects = route.redirects;
                 for(let j=0; j < redirects.length; j++){
-                    let redirectRouteKey = "RedirectRoute_" + route.component + "_" + j;
+                    let redirectRouteKey = "RedirectRoute_" + route.path + "_" + j;
                     let redirectRoute = redirects[j];
                     reactRoutes.push(<Redirect key={redirectRouteKey} from={redirectRoute.from} to={redirectRoute.to} />);
                 }
@@ -50,7 +49,7 @@ function forgeChildRoutes(routes, routeComponents){
 
             // Add default route if necessary
             if((route.default === "true" || routes.length === (i+1)) && !defaultRouteSet){
-                let defaultRouteKey = "DefaultRoute_" + route.component + "_" + i;
+                let defaultRouteKey = "DefaultRoute_" + route.path + "_" + i;
                 reactRoutes.push(<IndexRoute key={defaultRouteKey} component={component} />);
                 route.default = 'true';
                 defaultRouteSet = true;

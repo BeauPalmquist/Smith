@@ -8,8 +8,8 @@ import configureStore from './stores/configureStore';
 import Root from './containers/root'
 import Login from './containers/login';
 
-export default function forgeApp(clientReducers, clientComponents, root){    
-    const store = configureStore(clientReducers, clientComponents);    
+export default function forgeApp(clientReducers, root, includeDevTools = false){    
+    const store = configureStore(clientReducers, includeDevTools);    
 
     render(
         <Provider store={store}>
@@ -17,6 +17,8 @@ export default function forgeApp(clientReducers, clientComponents, root){
         </Provider>,
         document.getElementById(root)
     );
-        
-    require('./utils/createDevToolsWindow')(store);    
+
+    if(includeDevTools){
+        require('./utils/createDevToolsWindow')(store);    
+    }
 }

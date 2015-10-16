@@ -8,6 +8,38 @@ class App extends Component{
     constructor(props){
         super(props);
     }
+    checkPermission(){
+        let { auth, router, config } = this.props;
+        let userHasNavPermissions = true;
+        const currentPath = router.location.pathname.startsWith('/') ? router.location.pathname.replace('/', '') : router.location.pathname;
+        if(auth && auth.userProfile){
+            let user = auth.userProfile;
+            let userRoutePermissions = user.RoutePermissions;
+            let clientRoutePermissions = _.filter(config.routePermissions, function(routePermission){
+                return routePermission.routeName === currentPath;
+            });
+                    
+            _.forEach(clientRoutePermissions, function(clientRoutePermission){
+                let requiredPermissions = clientRoutePermission.requiredPermissions;
+                if(requiredPermissions){
+                    let permissionCount = 0;
+                    _.forEach(requiredPermissions, function(requiredPermission){
+                        if(_.includes(userRoutePermissions, requiredPermission)){
+                            permissionCount++;
+                        }
+                    });
+                            
+                    userHasNavPermissions = permissionCount === requiredPermissions.length;
+                }                        
+            });
+            if(!userHasNavPermissions){
+                this.props.history.goBack();
+            }
+        }
+    }
+    componentWillMount(){
+        this.checkPermission();
+    }
     componentDidMount(){
         let {auth} = this.props;
         if(auth.userIsUnknown){
@@ -17,6 +49,7 @@ class App extends Component{
         }
     }
     componentWillReceiveProps(nextProps){
+        this.checkPermission();
         let {auth} = nextProps ? nextProps : this.props;
         if(!auth.userAuthenticated){
             this.props.history.pushState(null, '/login');

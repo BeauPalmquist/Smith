@@ -8,16 +8,25 @@ import thunkMiddleware from 'redux-thunk';
 import smithReducers from '../reducers/reducer';
 import { routerStateReducer as router } from 'redux-router';
 
-export default function configureStore(clientReducers, clientComponents) {    
+export default function configureStore(clientReducers, includeDevTools) {    
     let configReducer = clientReducers(undefined, "CLIENT/LOAD_CONFIG");
     let config = configReducer.config;
 
-    const createStoreWithMiddleware = compose(
+    let createStoreWithMiddleware;
+    if(includeDevTools){ 
+        createStoreWithMiddleware = compose(
                applyMiddleware(thunkMiddleware),
-               reduxReactRouter({ routes: createRoutes(config.routes, clientComponents), createHistory }),
+               reduxReactRouter({ routes: createRoutes(config.routes), createHistory }),
                applyMiddleware(createLogger()),
                devTools()
         )(createStore);
+    }
+    else{
+        createStoreWithMiddleware = compose(
+               applyMiddleware(thunkMiddleware),
+               reduxReactRouter({ routes: createRoutes(config.routes), createHistory })
+        )(createStore);
+    }
 
     let reducers = { smith: smithReducers, router};
     reducers[ config.appName] = clientReducers;

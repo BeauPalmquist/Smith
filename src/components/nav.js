@@ -14,8 +14,8 @@ class AppNavButton extends React.Component{
         var navCellBorderActive = "navCellBorder";
 
         var handler = currentLocation.pathname;
-        let propHandler = "/" +  this.props.route.component.toLowerCase();
-        let displayImage = this.props.unselectedImage;
+        let propHandler = this.props.route.path.toLowerCase().startsWith("/") ? this.props.route.path.toLowerCase() : "/" +  this.props.route.path.toLowerCase();
+        let displayImage = this.props.unselectedImage ? this.props.unselectedImage : this.props.selectedImage;
         let hideNavTitle = (this.props.route.navTitle === undefined || this.props.route.navTitle === '') ? 'hidden' : '';
         if(handler.toLowerCase() === propHandler.toLowerCase() || (handler === '/' && (this.props.route.default === 'true' ))) {
             navCellActive += " active";
