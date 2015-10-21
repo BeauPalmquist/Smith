@@ -43,16 +43,16 @@ class App extends Component{
     componentDidMount(){
         let {auth} = this.props;
         if(auth.userIsUnknown){
-            this.props.history.pushState(null, '/unknown');
+            this.props.history.replaceState(null, '/unknown');
         } else if(!auth.userAuthenticated){
-            this.props.history.pushState(null, '/login');
+            this.props.history.replaceState(null, '/login');
         }
     }
     componentWillReceiveProps(nextProps){
         this.checkPermission();
         let {auth} = nextProps ? nextProps : this.props;
         if(!auth.userAuthenticated){
-            this.props.history.pushState(null, '/login');
+            this.props.history.replaceState(null, '/login');
         }
     }
     render() {   

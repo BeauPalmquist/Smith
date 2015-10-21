@@ -70,7 +70,7 @@ class AppNav extends React.Component{
                         }                        
                     });
 
-                    if(((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "")) && userHasNavPermissions === true){
+                    if((route.noNavDisplay || !route.noNavDisplay) && ((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "") || (route.selectedImage && route.selectedImage !== "")) && userHasNavPermissions === true){
                         var navKey = "sample" + (keyCount+1);
                         keyCount++;
                         navs.push(<AppNavButton key={navKey} route={route} title={route.navTitle} unselectedImage={route.unselectedImage} currentLocation={currentLocation} selectedImage={route.selectedImage}  />);

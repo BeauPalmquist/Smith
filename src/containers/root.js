@@ -2,28 +2,37 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { isAuthenticated, setRedirectRoute } from '../reducers/auth';
+import _ from 'lodash';
 
 class Root extends Component {
     constructor(props){
         super(props);
     }
     componentWillMount(){
-        var activeRouteName = location.pathname;        
-        if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === null) {activeRouteName = '/';}
+        let {dispatch, config, auth} = this.props;
+        let activeRouteName = location.pathname; 
+        
+        let defaultRoutePath = _.result(_.find(config.routes, function(route){
+            return route.default === 'true';
+        }), 'path');
 
-        let {dispatch} = this.props;
+        defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;        
+        
+        if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null) {
+            activeRouteName = defaultRoutePath;
+        }
+        
         dispatch(setRedirectRoute(activeRouteName));
     }
     componentDidMount(){
-        let {dispatch} = this.props;
-        dispatch(isAuthenticated("SmithClient"));
+        let {dispatch, config} = this.props;
+        dispatch(isAuthenticated(config.appName));
     }
     render(){
         const { children, auth, router, notify, config, dispatch } = this.props;
-        //        {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}
         return (
             <div>
-                    {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}
+                {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}
             </div>
         );
     }

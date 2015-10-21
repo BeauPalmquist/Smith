@@ -29,7 +29,7 @@ export default function configureStore(clientReducers, includeDevTools) {
     }
 
     let reducers = { smith: smithReducers, router};
-    reducers[ config.appName] = clientReducers;
+    reducers[config.appName] = clientReducers;
     let allReducers = combineReducers(reducers);
     
     return createStoreWithMiddleware(allReducers);

@@ -22,13 +22,13 @@ export default class Login extends Component{
     componentDidMount(){
         let {auth} = this.props;
         if(auth.userAuthenticated){
-            this.props.history.pushState(null, auth.redirectRoute);
+            this.props.history.replaceState(null, auth.redirectRoute);
         }
     }
     componentWillReceiveProps(nextProps){   
         let {auth} = nextProps ? nextProps : this.props;
         if(auth.userAuthenticated){
-            this.props.history.pushState(null, auth.redirectRoute);
+            this.props.history.replaceState(null, auth.redirectRoute);
         }
     }
     usernameChanged(event){
@@ -38,9 +38,9 @@ export default class Login extends Component{
         this.setState({password: event.target.value});
     }
     login(){        
-        let { auth, dispatch } = this.props;
+        let { auth, dispatch, config } = this.props;
         if(this.state.username && this.state.username !== "" && this.state.password && this.state.password !== ""){                   
-            dispatch(login(this.state.username, this.state.password, auth.redirectRoute, "SmithClient"))
+            dispatch(login(this.state.username, this.state.password, auth.redirectRoute, config.appName))
         }
     }
     render(){

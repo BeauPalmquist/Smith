@@ -10,17 +10,17 @@
         componentDidMount(){
             let {auth} = this.props;
             if (!auth.userIsUnknown && !auth.userAuthenticated) {
-                this.props.history.pushState(null, '/login');
+                this.props.history.replaceState(null, '/login');
             } else if (auth.userAuthenticated) {
-                this.props.history.pushState(null, auth.redirectRoute);
+                this.props.history.replaceState(null, auth.redirectRoute);
             }
         }
         componentWillReceiveProps(nextProps){
             let {auth} = nextProps ? nextProps : this.props;
             if (!auth.userIsUnknown && !auth.userAuthenticated) {
-                this.props.history.pushState(null, '/login');
+                this.props.history.replaceState(null, '/login');
             } else if (auth.userAuthenticated) {
-                this.props.history.pushState(null, auth.redirectRoute);
+                this.props.history.replaceState(null, auth.redirectRoute);
             }
         }
         render() {

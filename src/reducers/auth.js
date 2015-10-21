@@ -8,7 +8,7 @@ const SET_REDIRECT_ROUTE = 'SMITH/SET_REDIRECT_ROUTE';
 const LOGOUT = 'SMITH/LOGOUT';
 
 const initialState = {
-    userProfile: {}, userAuthenticated: false, redirectRoute: '/', loginErrorMessage: '', userIsUnknown: true, pendingLogin: false
+    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, loginErrorMessage: '', userIsUnknown: true, pendingLogin: false
 }
 
 export default function auth(state = initialState, action){

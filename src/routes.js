@@ -69,7 +69,7 @@ export default function(routes, routeComponents){
             <Route path="/" component={App}>
                 {reactRoutes}
             </Route>
-            <IndexRoute component={App} />
+            <IndexRoute component={App}/>
         </Route>
     );
 
