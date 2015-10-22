@@ -16,6 +16,7 @@ export default function auth(state = initialState, action){
         case LOGIN_REQUEST: 
             return {
                 ...state,
+                userIsUnknown: false,
                 pendingLogin: true
             };
         case LOGIN_FAILED: 
@@ -29,6 +30,7 @@ export default function auth(state = initialState, action){
         case LOGIN_SUCCESS:
             return{
                 ...state,
+                userIsUnknown: false,
                 userProfile: action.profile,
                 userAuthenticated: true,
                 redirectRoute: action.returnUrl,

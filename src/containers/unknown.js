@@ -8,19 +8,20 @@
             super(props);
         }
         componentDidMount(){
-            let {auth} = this.props;
+            let {auth, config} = this.props;
             if (!auth.userIsUnknown && !auth.userAuthenticated) {
                 this.props.history.replaceState(null, '/login');
             } else if (auth.userAuthenticated) {
-                this.props.history.replaceState(null, auth.redirectRoute);
-            }
-        }
-        componentWillReceiveProps(nextProps){
-            let {auth} = nextProps ? nextProps : this.props;
-            if (!auth.userIsUnknown && !auth.userAuthenticated) {
-                this.props.history.replaceState(null, '/login');
-            } else if (auth.userAuthenticated) {
-                this.props.history.replaceState(null, auth.redirectRoute);
+                let defaultRoutePath = _.result(_.find(config.routes, function(route){
+                    return route.default === 'true';
+                }), 'path');
+                let activeRouteName = auth.redirectRoute;
+                defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;        
+        
+                if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null || activeRouteName === undefined) {
+                    activeRouteName = defaultRoutePath;
+                }
+                this.props.history.replaceState(null, activeRouteName);
             }
         }
         render() {
