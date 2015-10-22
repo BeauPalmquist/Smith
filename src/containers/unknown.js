@@ -9,7 +9,7 @@
         }
         componentDidMount(){
             let {auth, config} = this.props;
-            if (!auth.userIsUnknown && !auth.userAuthenticated) {
+            if (auth === undefined || (!auth.userIsUnknown && !auth.userAuthenticated)) {
                 this.props.history.replaceState(null, '/login');
             } else if (auth.userAuthenticated) {
                 let defaultRoutePath = _.result(_.find(config.routes, function(route){

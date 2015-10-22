@@ -24,7 +24,7 @@ export default function auth(state = initialState, action){
                 ...state,
                 userProfile: {},
                 userAuthenticated: false, 
-                loginErrorMessage: "The username or password you entered is incorrect.",
+                loginErrorMessage: action.msg,
                 pendingLogin: false
             };
         case LOGIN_SUCCESS:
@@ -112,7 +112,7 @@ export function isAuthenticated(appName){
                 User.getCurrentUserProfile(appName).done(profile => dispatch(setUserProfile(profile)));
             }
             dispatch(setAuthenticationStatus(result));
-        });
+        });        
     }
 }
 
@@ -123,17 +123,23 @@ export function setRedirectRoute(route){
 }
 
 export function login(username, password, returnUrl, appName){
-    ClientAction.log("User attempting to login", "Authentication", {username: username});
+    if(ClientAction !== undefined){
+        ClientAction.log("User attempting to login", "Authentication", {username: username});
+    }
     return function(dispatch){
         dispatch({type: LOGIN_REQUEST});
         return User.login(username, password).then(
             () => {
-                ClientAction.log("User logged in", "Authentication", { username: username });
+                if(ClientAction !== undefined){
+                    ClientAction.log("User logged in", "Authentication", { username: username });
+                }
                 User.getCurrentUserProfile(appName).done(profile => dispatch(loginSuccess(profile, returnUrl)));
             },
             () => {
-                ClientAction.log("User login failed", "Authentication", { username: username });
-                dispatch({ type: LOGIN_FAILED});
+                if(ClientAction !== undefined){
+                    ClientAction.log("User login failed", "Authentication", { username: username });
+                }
+                dispatch({ type: LOGIN_FAILED, msg: "The username or password you entered is incorrect."});
             });
     }
 }

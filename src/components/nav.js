@@ -9,15 +9,15 @@ class AppNavButton extends React.Component{
         super(props);
     }
     render(){
-        let {currentLocation} = this.props;
+        let {currentLocation, route} = this.props;
         var navCellActive = "navCell";
         var navCellBorderActive = "navCellBorder";
 
         var handler = currentLocation.pathname;
-        let propHandler = this.props.route.path.toLowerCase().startsWith("/") ? this.props.route.path.toLowerCase() : "/" +  this.props.route.path.toLowerCase();
+        let propHandler = route.path.toLowerCase().startsWith("/") ? route.path.toLowerCase() : "/" +  route.path.toLowerCase();
         let displayImage = this.props.unselectedImage ? this.props.unselectedImage : this.props.selectedImage;
-        let hideNavTitle = (this.props.route.navTitle === undefined || this.props.route.navTitle === '') ? 'hidden' : '';
-        if(handler.toLowerCase() === propHandler.toLowerCase() || (handler === '/' && (this.props.route.default === 'true' ))) {
+        let hideNavTitle = (route.navTitle === undefined || route.navTitle === '') ? 'hidden' : '';
+        if( handler.toLowerCase() === propHandler.toLowerCase() || (handler === '/' && (route.default === 'true' ))) {
             navCellActive += " active";
             navCellBorderActive += " active";
             displayImage = this.props.selectedImage;
@@ -70,7 +70,9 @@ class AppNav extends React.Component{
                         }                        
                     });
 
-                    if((route.noNavDisplay || !route.noNavDisplay) && ((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "") || (route.selectedImage && route.selectedImage !== "")) && userHasNavPermissions === true){
+                    let displayNav = (route.displayInNav === undefined || route.displayInNav === null || route.displayInNav === true);
+
+                    if((displayNav) && ((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "") || (route.selectedImage && route.selectedImage !== "")) && userHasNavPermissions === true){
                         var navKey = "sample" + (keyCount+1);
                         keyCount++;
                         navs.push(<AppNavButton key={navKey} route={route} title={route.navTitle} unselectedImage={route.unselectedImage} currentLocation={currentLocation} selectedImage={route.selectedImage}  />);
