@@ -73,9 +73,9 @@ class App extends Component{
                 </div>
                 <div className="page-content-wrapper">
                     <div className="page-content" style={contentStyle}>
-                        <div className="container" >
+                        <div className="container"  >
                             <Row>
-                                <Col md={12} style={containerStyle}>
+                                <Col md={12} xs={12} s={12} lg={12} style={containerStyle} >
             {children && React.cloneElement(children, {user: auth.userProfile, config: config, dispatch: dispatch})}       
                                     </Col>
                                 </Row>
