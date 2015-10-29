@@ -57,19 +57,26 @@ class App extends Component{
     }
     render() {   
         const {children, auth, config, dispatch, notify, router} = this.props;
-        return (
-            <div>
-                <AppHeader user={auth.userProfile} userNotifications={notify} config={config} dispatch={dispatch} />
-                <div className="wrapper">
-                    <div className="sidebar-wrapper">
-                        <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
-                    </div>
-                    <div className="page-content-wrapper">
-                        <div className="page-content">
-                            <div className="container">
-                                <Row>
-                                    <Col md={12} >
-                {children && React.cloneElement(children, {user: auth.userProfile, config: config, dispatch: dispatch})}       
+        let contentStyle = {
+            padding: 0
+        };
+        let containerStyle = {
+            paddingLeft: 0,
+            paddingRight: 0
+        };
+    return (
+        <div>
+            <AppHeader user={auth.userProfile} userNotifications={notify} config={config} dispatch={dispatch} />
+            <div className="wrapper">
+                <div className="sidebar-wrapper">
+                    <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
+                </div>
+                <div className="page-content-wrapper">
+                    <div className="page-content" style={contentStyle}>
+                        <div className="container" >
+                            <Row>
+                                <Col md={12} style={containerStyle}>
+            {children && React.cloneElement(children, {user: auth.userProfile, config: config, dispatch: dispatch})}       
                                     </Col>
                                 </Row>
                             </div>

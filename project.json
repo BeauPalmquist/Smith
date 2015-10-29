@@ -3,6 +3,7 @@
     "version": "1.0.0-*",
 
     "dependencies": {
+        "HomeDepot.Platform.Analytics.Microservice": "1.0.0-rc02",
         "HomeDepot.Platform.Identity.Microservice": "1.0.0-rc02",
         "HomeDepot.Platform.Web": "1.0.0-*",
         "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
