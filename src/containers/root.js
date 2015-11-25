@@ -1,7 +1,7 @@
 ﻿import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { isAuthenticated, setRedirectRoute } from '../reducers/auth';
+import { isAuthenticated, setRedirectRoute, setDefaultRoute } from '../reducers/auth';
 import _ from 'lodash';
 
 class Root extends Component {
@@ -9,27 +9,26 @@ class Root extends Component {
         super(props);
     }
     componentWillMount(){
-        let {dispatch, config, auth} = this.props;
-        let activeRouteName = location.pathname; 
+        let {dispatch, config, auth, location} = this.props;
+        let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
         
         let defaultRoutePath = _.result(_.find(config.routes, function(route){
             return route.default === 'true';
         }), 'path');
 
-        defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;        
+        defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;  
+        dispatch(setDefaultRoute(defaultRoutePath));
         
-        if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null) {
+        if (activeRouteName === '/login' ||  activeRouteName === '/' || activeRouteName === null) {
             activeRouteName = defaultRoutePath;
         }
         
         dispatch(setRedirectRoute(activeRouteName));
-    }
-    componentDidMount(){
-        let {dispatch, config} = this.props;
         dispatch(isAuthenticated(config.appName));
     }
     render(){
         const { children, auth, router, notify, config, dispatch } = this.props;
+        
         return (
             <div>
                 {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}

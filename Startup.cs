@@ -12,9 +12,10 @@ namespace HomeDepot.Platform.UI.Smith
         {
             this.environment = environment;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            var config = new ConfigurationBuilder(environment.ApplicationBasePath).AddJsonFile("config.json");
+            var config = new ConfigurationBuilder().SetBasePath(environment.ApplicationBasePath).AddJsonFile("config.json");
 
             services.AddPlatformMicroservices(environment, config);
         }
@@ -22,7 +23,6 @@ namespace HomeDepot.Platform.UI.Smith
         public void Configure(IApplicationBuilder app)
         {
             app.UsePlatformMicroservices();
-
         }
 
         private IApplicationEnvironment environment;

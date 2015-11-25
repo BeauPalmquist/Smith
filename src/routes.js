@@ -3,7 +3,7 @@ import { Route, IndexRoute, Redirect } from 'react-router';
 import Root from './containers/root'
 import App from './containers/app';
 import Login from './containers/login';
-import Unknown from './containers/unknown';
+import NotFound from './components/notFound';
 
 // Recursively builds a set of react routes
 function forgeChildRoutes(routes){
@@ -64,12 +64,12 @@ export default function(routes, routeComponents){
 
     let navRoutes = (
         <Route path="/" component={Root}>
-            <Route path="unknown" component={Unknown} />
             <Route path="login" component={Login} />
             <Route path="/" component={App}>
                 {reactRoutes}
             </Route>
             <IndexRoute component={App}/>
+            <Route path="*" component={NotFound}/>
         </Route>
     );
 

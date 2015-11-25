@@ -7,20 +7,13 @@
         constructor(props) {
             super(props);
         }
-        componentDidMount(){
-            let {auth, config} = this.props;
-            if (auth === undefined || (!auth.userIsUnknown && !auth.userAuthenticated)) {
+        componentWillReceiveProps(nextProps){
+            let {auth} = nextProps ? nextProps : this.props;
+            if (auth === undefined || (!auth.userAuthenticated)) {
                 this.props.history.replaceState(null, '/login');
             } else if (auth.userAuthenticated) {
-                let defaultRoutePath = _.result(_.find(config.routes, function(route){
-                    return route.default === 'true';
-                }), 'path');
                 let activeRouteName = auth.redirectRoute;
-                defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;        
-        
-                if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null || activeRouteName === undefined) {
-                    activeRouteName = defaultRoutePath;
-                }
+
                 this.props.history.replaceState(null, activeRouteName);
             }
         }

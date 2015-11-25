@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import UserDropdown from './userDropdown';
 import AppNotifications from './notifications';
-import {Navbar, Nav, NavBrand} from 'react-bootstrap';
+import {Navbar, Nav, NavbarBrand} from 'react-bootstrap';
     
 class AppHeader extends React.Component{     
     constructor(props){
@@ -13,8 +13,8 @@ class AppHeader extends React.Component{
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
         var headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : "";
         return (
-            <Navbar toggleNavKey={0} fixedTop> 
-                <NavBrand>
+            <Navbar fixedTop> 
+                <NavbarBrand>
                      <a href="/">
                         <div>
                             <img className="headerImg" src={headerImage} />&nbsp;
@@ -24,8 +24,8 @@ class AppHeader extends React.Component{
                                 </span>
                         </div>
                     </a>
-                </NavBrand>
-                <Nav eventkey={0} right>
+                </NavbarBrand>
+                <Nav pullRight>
                     <AppNotifications user={user} userNotifications={userNotifications} dispatch={dispatch}/>
                     <UserDropdown user={user} dispatch={this.props.dispatch}/>
                 </Nav>

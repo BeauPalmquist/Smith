@@ -38,18 +38,10 @@ export default class Login extends Component{
         this.setState({password: event.target.value});
     }
     login(){        
-        let { auth, dispatch, config } = this.props;
+        let { auth, dispatch , config} = this.props;
         if(this.state.username && this.state.username !== "" && this.state.password && this.state.password !== ""){                
-            let defaultRoutePath = _.result(_.find(config.routes, function(route){
-                return route.default === 'true';
-            }), 'path');
+           
             let activeRouteName = auth.redirectRoute;
-            defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;        
-        
-            if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null || activeRouteName === undefined) {
-                activeRouteName = defaultRoutePath;
-            }
-
             dispatch(login(this.state.username, this.state.password, activeRouteName, config.appName))
         }
     }

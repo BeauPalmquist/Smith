@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-//import AppUserActions from '../actions/appUserActions';
 import {NavDropdown, MenuItem} from 'react-bootstrap';
+import { Link } from "react-router";
 import { logout } from '../reducers/auth';
     
 class UserDropdown extends React.Component{
@@ -16,8 +16,8 @@ class UserDropdown extends React.Component{
         let { user } = this.props;
         var username = user ? user.FullName : "";
         return (
-            <NavDropdown eventKey={2} title={<span><i className="fa fa-user fa-lg" />&nbsp;{username}</span>} >
-                <MenuItem eventKey="2.1" onSelect={this.logout}><i className="fa fa-sign-out"></i>&nbsp;Log Out</MenuItem>
+            <NavDropdown id="forge_user_dropdown" title={<span><i className="fa fa-user fa-lg" />&nbsp;{username}</span>} >
+                <MenuItem onSelect={this.logout}><Link to={'/login'}><i className="fa fa-sign-out"></i>&nbsp;&nbsp;Log Out</Link></MenuItem>
             </NavDropdown>
         );
     }

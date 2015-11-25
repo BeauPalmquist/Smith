@@ -38,7 +38,7 @@ class AppNotifications extends React.Component{
     var badgeStyle = userNotifications.notificationCount > 0 ? "primary" : "default";
 
     return (
-            <NavDropdown onClick={this.loadNotifications} eventyKey={1} noCaret title={<Label bsStyle={badgeStyle}><i className="fa fa-bell-o"></i>&nbsp;{userNotifications.notificationCount}</Label>} >
+            <NavDropdown id="forge_notifications_dropdown" onClick={this.loadNotifications} eventyKey={1} noCaret title={<Label bsStyle={badgeStyle}><i className="fa fa-bell-o"></i>&nbsp;{userNotifications.notificationCount}</Label>} >
     {notifications}          
             </NavDropdown>
         );

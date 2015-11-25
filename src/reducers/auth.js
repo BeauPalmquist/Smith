@@ -5,10 +5,11 @@ const LOGIN_FAILED = 'SMITH/LOGIN_FAILED';
 const SET_USER_PROFILE = 'SMITH/SET_USER_PROFILE';
 const SET_AUTHENTICATION_STATUS = 'SMITH/SET_AUTHENTICATION_STATUS';
 const SET_REDIRECT_ROUTE = 'SMITH/SET_REDIRECT_ROUTE';
+const SET_DEFAULT_ROUTE = 'SMITH/SET_DEFAULT_ROUTE';
 const LOGOUT = 'SMITH/LOGOUT';
 
 const initialState = {
-    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, loginErrorMessage: '', userIsUnknown: true, pendingLogin: false
+    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, loginErrorMessage: '', pendingLogin: false
 }
 
 export default function auth(state = initialState, action){
@@ -16,7 +17,6 @@ export default function auth(state = initialState, action){
         case LOGIN_REQUEST: 
             return {
                 ...state,
-                userIsUnknown: false,
                 pendingLogin: true
             };
         case LOGIN_FAILED: 
@@ -30,8 +30,6 @@ export default function auth(state = initialState, action){
         case LOGIN_SUCCESS:
             return{
                 ...state,
-                userIsUnknown: false,
-                userProfile: action.profile,
                 userAuthenticated: true,
                 redirectRoute: action.returnUrl,
                 pendingLogin: false
@@ -39,29 +37,31 @@ export default function auth(state = initialState, action){
         case SET_USER_PROFILE:
             return{
                 ...state,
-                userIsUnknown: false,
                 userProfile: action.profile,
                 pendingLogin: false
             };
         case SET_AUTHENTICATION_STATUS:
             return {
                 ...state,
-                userAuthenticated: action.status,
-                userIsUnknown: false,
+                userAuthenticated: action.status
             }
         case SET_REDIRECT_ROUTE:
             return {
                 ...state, 
                 redirectRoute: action.route
             }
+        case SET_DEFAULT_ROUTE:
+            return {
+                ...state, 
+                defaultRoute: action.data
+            }
         case LOGOUT:
             return {
                 ...state,
                 userProfile: {},
                 userAuthenticated: false,
-                redirectRoute: "/",
+                redirectRoute: undefined,
                 pendingLogin: false,
-                userIsUnknown: false,
                 loginErrorMessage: ''
             }
 
@@ -76,10 +76,9 @@ export default function auth(state = initialState, action){
         };
     }
 
-    function loginSuccess(profile, returnUrl){
+    function loginSuccess(returnUrl){
         return {
             type: LOGIN_SUCCESS,
-            profile, 
             returnUrl
         };
     }
@@ -105,14 +104,19 @@ export default function auth(state = initialState, action){
     }
 
 // Auth Actions
-export function isAuthenticated(appName){
+export function isAuthenticated(){
     return function(dispatch){
         return User.isLoggedIn().done(result => {
             if(result){
-                User.getCurrentUserProfile(appName).done(profile => dispatch(setUserProfile(profile)));
+                dispatch(setAuthenticationStatus(result));
             }
-            dispatch(setAuthenticationStatus(result));
         });        
+    }
+}
+
+export function loadUserProfile(appName){
+    return function(dispatch){        
+        User.getCurrentUserProfile(appName).done(profile => dispatch(setUserProfile(profile)));
     }
 }
 
@@ -133,7 +137,7 @@ export function login(username, password, returnUrl, appName){
                 if(ClientAction !== undefined){
                     ClientAction.log("User logged in", "Authentication", { username: username });
                 }
-                User.getCurrentUserProfile(appName).done(profile => dispatch(loginSuccess(profile, returnUrl)));
+                dispatch(loginSuccess(returnUrl));                
             },
             () => {
                 if(ClientAction !== undefined){
@@ -149,5 +153,11 @@ export function logout(){
         User.logOut().done(() => {
             dispatch(logoutComplete());
         });
+    }
+}
+
+export function setDefaultRoute(route){
+    return function(dispatch){
+        dispatch({type: SET_DEFAULT_ROUTE, data: route});
     }
 }
