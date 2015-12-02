@@ -3,8 +3,7 @@
     "version": "1.0.0-*",
 
     "dependencies": {
-        "HomeDepot.Platform.Web": "1.0.0-rc04",
-        "Microsoft.Framework.Configuration.Json": "1.0.0-beta8"
+        "HomeDepot.Platform.Web":  "1.0.0-rc05"
     },    
     "commands": {
         "web": "HomeDepot.Platform.UI.Smith"
@@ -17,6 +16,7 @@
     "publishExclude": [
         "node_modules",
         "bower_components",
+        "lib",
         "**.xproj",
         "**.user",
         "**.vspscc"
@@ -24,6 +24,7 @@
     "exclude": [
         "wwwroot",
         "node_modules",
+        "lib",
         "bower_components"
     ]
 }

@@ -1,8 +1,8 @@
 ﻿using HomeDepot.Platform.Web;
 using Microsoft.AspNet.Builder;
-using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HomeDepot.Platform.UI.Smith
 {
