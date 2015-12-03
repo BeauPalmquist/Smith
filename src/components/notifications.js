@@ -32,15 +32,22 @@ class AppNotifications extends React.Component{
             var keyValue = "notification_" + i;            
             var notification = userNotifications.notifications[i];
             var message = notification.Message !== undefined ? notification.Message : notification;
-            notifications.push(<MenuItem disabled={true} key={keyValue} >{message}</MenuItem>);
+            notifications.push(<li key={"notification_" + i}><a className="clearfix">{message}</a></li>);
         }
 
     var badgeStyle = userNotifications.notificationCount > 0 ? "primary" : "default";
 
     return (
-            <NavDropdown id="forge_notifications_dropdown" onClick={this.loadNotifications} eventyKey={1} noCaret title={<Label bsStyle={badgeStyle}><i className="fa fa-bell-o"></i>&nbsp;{userNotifications.notificationCount}</Label>} >
-    {notifications}          
-            </NavDropdown>
+        <li className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
+            <a href="#" className="btn-notification dropdown-toggle" data-toggle="dropdown"><span className="noty-bubble">{userNotifications.notificationCount}</span><i className="fa fa-bell"></i></a>
+            <div className="dropdown-menu notifications-tabs">
+                <div className="notification-wrap">
+                    <ul>
+                        {notifications}
+                    </ul>
+                </div>
+            </div>
+        </li>
         );
     }
 }

@@ -1,12 +1,9 @@
-﻿body {
-    margin-top: 50px;
-}
+﻿@import 'colors.scss';
+@import 'deployments.scss';
 
-.navbar{
-    border-radius: 0;
-    margin-bottom: 0;
-}
-
+////////////////////////////////////////////////////////////////////////////////////////////////
+// MIXINS
+////////////////////////////////////////////////////////////////////////////////////////////////
 @mixin centerInlineBlock {
     display: inline-block;
     text-align: center;
@@ -18,10 +15,24 @@
     vertical-align: middle;
 }
 
+@mixin rowHandle{
+    font-weight: 500;
+    padding: 4px 7px;
+    border-radius: 0 0 7px 0;
+}
+
 @mixin headerFont {
     font-size: 36px;
     color: #cccccc;
     font-family: Helvetica;
+}
+
+@mixin cursorPointer {
+    cursor: pointer;
+}
+
+@mixin noPadding {
+    padding: 0 !important;
 }
 
 @mixin boldFont {
@@ -45,6 +56,18 @@
           width: 100%;
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////
+// GENERAL STYLES
+////////////////////////////////////////////////////////////////////////////////////////////////
+body {
+    background-color: $mewtwo;
+}
+
+.centerImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .page-header{
     margin: 0;
@@ -58,6 +81,25 @@
     @include boldFont;
 }
 
+ul>li>a.pageButton{
+    @include cursorPointer;
+}
+.nav-image{
+    height: 45px;
+    width: 45px;
+    top: 7px;
+    left: 5px;
+    position: absolute;
+}
+.header-image{
+    height: 45px;
+    width: 45px;
+    margin-left: -4px;
+    margin-top: -3px;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 .loginForm {    
     max-width:700px;
     margin: 15px auto;
@@ -94,7 +136,9 @@
     width: 25px;
     height: 25px;
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// WRAPPER STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 .wrapper {
   padding-left: 75px;
   transition: all 0.4s ease 0s;
@@ -110,82 +154,497 @@
   z-index: 1000;
   transition: all 0.4s ease 0s;
 }
-
-.navCell {
-    width: 80px;
-    min-height: 60px;
-    margin: 0;
-    @include center;
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// BORDER STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.top-border-info{
+    border-top: 3px solid $squirtle;
 }
 
-.navCell>.navCellBorder {
-    border: 2px solid #777777;
-    border-top: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
+.top-border-warning{
+    border-top: 3px solid $pikachu;
 }
 
-.navCell>.navCellBorder.active {
-    border-right: 2px solid white;
+.top-border-danger{
+    border-top: 3px solid $charmander;
 }
 
-.navCell img {
-    width: 60px;
-    height: 60px;
-    margin: 5px;
-    overflow-x: visible;
+.top-border-success{
+    border-top: 3px solid $bulbasaur;
 }
 
-.navCell.active {
-    background-color: white;
+.top-border-shadow{
+    border-top: 3px solid $gengar;
 }
 
-.navCell:hover {
-    background-color: white;
-    cursor: pointer;
+.top-border-light-shadow{
+    border-top: 3px solid $haunter;
 }
-
-.page-content {
-    padding: 10px;
+.top-border-white{
+    border-top: 3px solid $mewtwo;
+    margin-top: 3px;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// PAGE STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.page-content>.container>.row>.col-md-12 {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .page-content-wrapper {
   width: 100%;
 }
-
-.sidebar-nav {
-  position: absolute;
-  top: 0;
-  width: 80px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// TABLE STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.table > thead > tr > td.negative,
+.table > tbody > tr > td.negative,
+.table > tfoot > tr > td.negative,
+.table > thead > tr > th.negative,
+.table > tbody > tr > th.negative,
+.table > tfoot > tr > th.negative,
+.table > thead > tr.negative > td,
+.table > tbody > tr.negative > td,
+.table > tfoot > tr.negative > td,
+.table > thead > tr.negative > th,
+.table > tbody > tr.negative > th,
+.table > tfoot > tr.negative > th {
+    color:whitesmoke;
+    background-color: $gengar;
 }
 
-.search {
-    background-color: #777777;  
-    border-bottom: 1px solid black;        
+.table > thead > tr.negative > td > textarea,
+.table > tbody > tr.negative > td > textarea{
+    color: black;
 }
 
-.search.inactive{
-    display: none;
+td.no-padding{
+    @include noPadding;
 }
 
-.search .form-group{
-    margin: 7px 0;
+td>span.stripe-info{
+    background-color: $squirtle;
+    @include rowHandle;
 }
 
-.searchButton {    
-    max-width: 125px;
-    min-width: 100px;
-    margin: 7px -18px;
+td>span.stripe-warning{
+    background-color: $pikachu;
+    @include rowHandle;
 }
 
-.navbarDropdown {
-    margin: 5px 0;
+td>span.stripe-danger{
+    background-color: $charmander;    
+    @include rowHandle;
 }
 
+div.row-details>button {
+    color: black;
+}
+
+th.no-filter{
+    vertical-align: middle !important;
+    padding-bottom: 6px !important;
+}
+
+td>textarea.negative:disabled{
+    resize:none;
+    background-color: $gengar;
+    border-color: $gengar;
+    color: whitesmoke !important;
+}
+
+td>textarea.negative{
+    width: 100%;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// TEXT STYLE OVERRIDES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.text-purple{
+    color:$ghastly;
+}
+.text-success{
+    color: $bulbasaur;
+}
+.text-info{
+    color: $squirtle;
+}
+.text-warning,
+.text-gold{
+    color: $pikachu;
+}
+.text-danger{
+    color: $charmander;
+}
+.text-shadow{
+    color: $gengar;
+}
+.text-light-shadow{
+    color: $haunter;
+}
+.text-white{
+    color: $mewtwo;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// BACKGROUND STYLE OVERRIDES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.bg-success{
+    background-color: $bulbasaur;
+}
+.bg-info{
+    background-color: $squirtle;
+}
+.bg-warning{
+    background-color: $pikachu;
+}
+.bg-danger{
+    background-color: $charmander;
+}
+.bg-shadow{
+    background-color: $gengar;
+}
+.bg-light-shadow{
+    background-color: $haunter;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// PAGINATION STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.pagination{
+    margin: 0;
+}
+.pagination-light-shadow {
+  display: inline-block;
+  padding-left: 0;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+.pagination-light-shadow > li {
+  display: inline;
+}
+.pagination-light-shadow > li > a,
+.pagination-light-shadow > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: $haunter;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid whitesmoke;
+}
+.pagination-light-shadow > li:first-child > a,
+.pagination-light-shadow > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination-light-shadow > li:last-child > a,
+.pagination-light-shadow > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination-light-shadow > li > a:hover,
+.pagination-light-shadow > li > span:hover,
+.pagination-light-shadow > li > a:focus,
+.pagination-light-shadow > li > span:focus {
+  z-index: 3;
+  color: $haunter;
+  background-color: #eee;
+  border-color: whitesmoke;
+}
+.pagination-light-shadow > .active > a,
+.pagination-light-shadow > .active > span,
+.pagination-light-shadow > .active > a:hover,
+.pagination-light-shadow > .active > span:hover,
+.pagination-light-shadow > .active > a:focus,
+.pagination-light-shadow > .active > span:focus {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: $haunter;
+  border-color: whitesmoke;
+}
+.pagination-light-shadow > .disabled > span,
+.pagination-light-shadow > .disabled > span:hover,
+.pagination-light-shadow > .disabled > span:focus,
+.pagination-light-shadow > .disabled > a,
+.pagination-light-shadow > .disabled > a:hover,
+.pagination-light-shadow > .disabled > a:focus {
+  color: $haunter;
+  cursor: not-allowed;
+  background-color: whitesmoke;
+}
+.pagination-light-shadow-lg > li > a,
+.pagination-light-shadow-lg > li > span {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+}
+.pagination-light-shadow-lg > li:first-child > a,
+.pagination-light-shadow-lg > li:first-child > span {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.pagination-light-shadow-lg > li:last-child > a,
+.pagination-light-shadow-lg > li:last-child > span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.pagination-light-shadow-sm > li > a,
+.pagination-light-shadow-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pagination-light-shadow-sm > li:first-child > a,
+.pagination-light-shadow-sm > li:first-child > span {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.pagination-light-shadow-sm > li:last-child > a,
+.pagination-light-shadow-sm > li:last-child > span {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANEL STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.panel{
+    margin-bottom: 0;
+}
+.panel-body{
+    padding: 5px;
+}
+.panel-light-shadow {
+  border: 0;
+}
+.panel-light-shadow > .panel-heading-light-shadow {
+  color: whitesmoke;
+  background-color: $haunter;
+  border-color: $haunter;
+}
+
+.panel-light-shadow > .panel-footer-light-shadow {
+  color: whitesmoke;
+  background-color: $haunter;
+  border-color:$haunter;
+}
+.panel-light-shadow > .panel-heading-light-shadow + .panel-collapse > .panel-body {
+  border-top-color: whitesmoke;
+}
+.panel-light-shadow > .panel-heading .badge {
+  color: $haunter;
+  background-color: whitesmoke;
+}
+.panel-light-shadow > .panel-footer-light-shadow + .panel-collapse > .panel-body {
+  border-bottom-color: $haunter;
+}
+
+.panel-heading-light-shadow {
+  padding: 5px 5px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.panel-footer-light-shadow {
+  padding: 5px 5px;
+  background-color: #f5f5f5;
+  border-top: 1px solid whitesmoke;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-light-shadow > .panel-heading-light-shadow > h2{
+    margin: 10px 0 10px 25px;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// BRAND STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.brand-text{
+    position:relative;
+    top:-12%;
+    margin-left: 10px;
+    font-size: x-large;
+    color: $mewtwo;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// CARD STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.microservice-card {
+    background-color: $haunter;
+    margin-top: 10px;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+        
+.microservice-card > i {
+    padding-top: 75px;
+    padding-bottom: 50px;
+    width: 100%;
+    text-align: center;
+}
+        
+.microservice-card .microservice-card-details,
+.microservice-card .microservice-card-details .microservice-card-header {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: -100%;
+    left: 0;
+    background: $haunter;
+    text-align: center;
+}
+        
+.microservice-card .microservice-card-details .microservice-card-header {
+    height: auto;
+    bottom: 100%;
+}
+        
+.microservice-card:hover .microservice-card-details {
+    bottom: 0;
+    overflow: auto;
+    padding-bottom: 15px;
+    color: rgb(255, 255, 255)
+}
+        
+.microservice-card:hover .microservice-card-details .microservice-card-header {
+    position: relative;
+    bottom: 0;
+    padding-top: 45px;
+}
+        
+.microservice-card .microservice-card-details .microservice-card-header h1 {
+    font-size: 1.5em;
+    font-weight: 900;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgb(255, 255, 255)
+}
+        
+.microservice-card .microservice-card-details .microservice-card-header h3,
+.microservice-card .microservice-card-details .microservice-card-detail h3 {
+    font-size: 1.25em;
+    font-weight: 400;
+    margin-top: 5px;
+}
+.info-card {
+    background-color: $haunter;
+    margin-top: 5px;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+        
+.info-card > i {
+    padding-top: 25px;
+    padding-bottom: 50px;
+    width: 100%;
+    text-align: center;
+}
+        
+.info-card .info-card-details,
+.info-card .info-card-details .info-card-header {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: -100%;
+    left: 0;
+    background: $haunter;
+    text-align: center;
+}
+        
+.info-card .info-card-details .info-card-header {
+    height: auto;
+    bottom: 100%;
+    padding: 10px 5px;
+}
+        
+.info-card:hover .info-card-details {
+    bottom: 0;
+    overflow: auto;
+    padding-bottom: 15px;
+    color: rgb(255, 255, 255)
+}
+        
+.info-card:hover .info-card-details .info-card-header {
+    position: relative;
+    bottom: 0;
+    padding-top: 45px;
+    padding-bottom: 15px;
+}
+        
+.info-card .info-card-details .info-card-header h1 {
+    font-size: 1.5em;
+    font-weight: 900;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgb(255, 255, 255)
+}
+        
+.info-card .info-card-details .info-card-header h3,
+.info-card .info-card-details .info-card-detail h3 {
+    font-size: 1.25em;
+    font-weight: 400;
+    margin-top: 5px;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// ANIMIATIONS
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.animate {
+            -webkit-transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+            -o-transition: all 0.4s ease-in-out;
+            -ms-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+        }
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// GRID STYLES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// MEDIA DEFINITIONS
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 @media (max-width:600px) {
 
     .wrapper {
@@ -206,5 +665,4 @@
       width: 80px;
       transition: all 0.4s ease 0s;
     }
-
 }

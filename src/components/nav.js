@@ -1,41 +1,7 @@
 ﻿import React from 'react';    
-import {Grid, Row} from 'react-bootstrap';
 import _ from 'lodash';
 import {Link} from 'react-router';
 import {setRedirectRoute} from '../reducers/auth';
-
-class AppNavButton extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        let {currentLocation, route} = this.props;
-        var navCellActive = "navCell";
-        var navCellBorderActive = "navCellBorder";
-
-        var handler = currentLocation.pathname;
-        let propHandler = route.path.toLowerCase().startsWith("/") ? route.path.toLowerCase() : "/" +  route.path.toLowerCase();
-        let displayImage = this.props.unselectedImage ? this.props.unselectedImage : this.props.selectedImage;
-        let hideNavTitle = (route.navTitle === undefined || route.navTitle === '') ? 'hidden' : '';
-        if( handler.toLowerCase() === propHandler.toLowerCase() || (handler === '/' && (route.default === 'true' ))) {
-            navCellActive += " active";
-            navCellBorderActive += " active";
-            displayImage = this.props.selectedImage;
-        }
-        return (
-            <Row>
-                <Link to={propHandler}>
-                    <div className={navCellActive}>
-                        <p className={navCellBorderActive}>
-                            <img src={displayImage} />
-                            <span className="bold" hidden={hideNavTitle}>{this.props.title}</span>
-                        </p>                          
-                    </div>
-                </Link>
-            </Row>
-        );
-    }
-}
     
 class AppNav extends React.Component{   
     constructor(props){
@@ -43,12 +9,14 @@ class AppNav extends React.Component{
     }
     render(){
         var navs = [];
-        let {user, config, currentLocation} = this.props;
+        let {user, config, currentLocation} = this.props;        
+        var username = user ? user.FullName : "Unknown User";
         if(this.props.config.routes){
             var keyCount = 0;
             
             _.forEach((config.routes), function(route) {
-
+                
+                let propHandler = route.path.toLowerCase().startsWith("/") ? route.path.toLowerCase() : "/" +  route.path.toLowerCase();
                 var userHasNavPermissions = true;
                 if(user){
                     var userRoutePermissions = user.RoutePermissions;
@@ -73,18 +41,28 @@ class AppNav extends React.Component{
                     let displayNav = (route.displayInNav === undefined || route.displayInNav === null || route.displayInNav === true);
 
                     if((displayNav) && ((route.navTitle && route.navTitle !== "") || (route.unselectedImage && route.unselectedImage !== "") || (route.selectedImage && route.selectedImage !== "")) && userHasNavPermissions === true){
-                        var navKey = "sample" + (keyCount+1);
+                        var navKey = "nav_" + (keyCount+1);
                         keyCount++;
-                        navs.push(<AppNavButton key={navKey} route={route} title={route.navTitle} unselectedImage={route.unselectedImage} currentLocation={currentLocation} selectedImage={route.selectedImage}  />);
+                        navs.push(<li key={navKey} className="list-title">{route.navTitle}</li>);
+                        if(route.image.type === "image"){
+                            navs.push(<li key={"Menu_" + navKey}><Link to={propHandler}><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link></li>);
+                        }
+                        else{
+                            navs.push(<li key={"Menu_" + navKey}><Link to={propHandler}><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></Link></li>);
+                        }
                     }                              
                 }
          });
         }
 
     return (
-            <Grid>
-                {navs}
-            </Grid>
+            <aside className="iconic-leftbar">
+                <div className="iconic-aside-container">
+                    <ul className="list-accordion">
+                        {navs}
+                    </ul>
+                </div>
+            </aside>
         );
     }
 }

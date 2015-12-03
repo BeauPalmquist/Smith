@@ -103,16 +103,7 @@ export default class Login extends Component{
                          </Row>
                      </Grid>                 
                 </Well>
-                 {/*<p className="center">
-                    <a href='/'>Home Depot QuoteCenter</a>
-                    <br/>
-                    <span>Phone: (800) 910-7028</span>
-                    <br/>
-                    <span>Fax: (360) 604-7475</span>
-                    <br/>
-                    <span>Email: <a href="mailto:quotecenter@homedepot.com">quotecenter@homedepot.com</a></span>
-                </p>*/}
             </div>
         );
-                 }
+    }
 }

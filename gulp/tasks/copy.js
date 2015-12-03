@@ -17,6 +17,6 @@ gulp.task("lib_copy", ['clean_lib'], function () {
 
     // Add third party Westilo css, js and fonts
     gulp.src(config.paths.westilo)
-        .pipe(gulp.dest(config.paths.lib + "Westilo"));
+        .pipe(gulp.dest(config.paths.lib + "westilo"));
     
 });

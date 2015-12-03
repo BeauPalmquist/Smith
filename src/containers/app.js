@@ -2,7 +2,6 @@
 import { connect } from 'react-redux';
 import AppHeader from '../components/header';
 import AppNav from '../components/nav';
-import {Row, Col} from 'react-bootstrap';  
 import { loadUserProfile, setRedirectRoute } from '../reducers/auth';
     
 class App extends Component{    
@@ -66,39 +65,28 @@ class App extends Component{
     }
     render() {   
         const {children, auth, config, dispatch, notify, router} = this.props;
-        let contentStyle = {
-            padding: 0
-        };
-        let containerStyle = {
-            paddingLeft: 0,
-            paddingRight: 0
-        };
-        if(auth.userAuthenticated){
+        
+        if(auth && auth.userAuthenticated){
             return (
                 <div>
                     <AppHeader user={auth.userProfile} userNotifications={notify} config={config} dispatch={dispatch} />
-                    <div className="wrapper">
-                        <div className="sidebar-wrapper">
-                            <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
-                        </div>
-                        <div className="page-content-wrapper">
-                            <div className="page-content" style={contentStyle}>
-                                <div className="container"  >
-                                    <Row>
-                                        <Col md={12} xs={12} s={12} lg={12} style={containerStyle} >
-                    {children && React.cloneElement(children, {user: auth.userProfile, config: config, dispatch: dispatch})}       
-                                            </Col>
-                                        </Row>
-                                    </div>
+                    <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
+                   
+                    <section className="main-container">
+                        <div className="container-fluid">
+                            <div className="row" >
+                                <div className="col-md-12 col-xs-12 col-s-12 col-lg-12">
+                                        {children && React.cloneElement(children, {user: auth.userProfile, config: config, dispatch: dispatch})}       
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>    
+                    </section>
+                </div>
             );
-    }
-    else{
-        return (
-            <div></div>
+        }
+        else{
+            return (
+                <div></div>
             )
         }
     }

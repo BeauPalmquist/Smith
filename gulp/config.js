@@ -13,7 +13,7 @@ var paths = {
     lib: "./" + project.webroot + "/src/lib/",
     npm: "./node_modules/",
     dist: "./dist/**/*.js",
-    westilo: "./lib/westilo/**/*.{js,css,ttf,svg,woff,eot}"
+    westilo: "./src/lib/**/*.{js,css,ttf,svg,woff,eot}"
 };
 
 module.exports = {
