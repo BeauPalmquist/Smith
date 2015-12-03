@@ -1467,13 +1467,6 @@ Author: Kamarujaman Shohel
 .iconic-view.isMobile .left-bar-switch {
   display: none !important;
 }
-.iconic-view.isMobile .top-right-icons {
-  float: none !important;
-  text-align: center;
-}
-.iconic-view.isMobile .top-right-icons > li {
-  float: none !important;
-}
 .iconic-view .left-toggle-switch,
 .iconic-view .left-bar-switch {
   display: none !important;

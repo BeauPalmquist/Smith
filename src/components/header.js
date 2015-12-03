@@ -20,18 +20,6 @@ class AppHeader extends React.Component{
         }
         return (
             <header className="topbar clearfix">                 
-                <div className="top-search-bar">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-md-6 col-md-offset-3">
-                                <div className="search-input-addon">
-                                    <span className="addon-icon"><i className="fa fa-search"></i></span>
-                                    <input type="text" className="form-control top-search-input" placeholder="Search" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="topbar-left pull-left">
                     <div className="clearfix">
                         <ul className="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
@@ -46,7 +34,6 @@ class AppHeader extends React.Component{
                             </li>
                         </ul>
                         <ul className="branding-right pull-right">
-                            <li><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></li>
                             <li><a href="#" className="btn-mobile-bar"><i className="fa fa-bars"></i></a></li>
                         </ul>
                     </div>
@@ -57,7 +44,6 @@ class AppHeader extends React.Component{
                             <li><span className="left-toggle-switch"><i className="fa fa-bars"></i></span></li>
                         </ul>
                         <ul className="pull-right top-right-icons">
-                            <li><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></li>
                             <AppNotifications user={user} userNotifications={userNotifications} dispatch={dispatch}/>
                             <UserDropdown user={user} dispatch={this.props.dispatch}/>
                         </ul>
