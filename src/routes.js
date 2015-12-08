@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
 import Root from './containers/root'
-import App from './containers/app';
-import Login from './containers/login';
+import App from './components/app';
+import Login from './components/login';
 import NotFound from './components/notFound';
 
 // Recursively builds a set of react routes
@@ -10,19 +10,15 @@ function forgeChildRoutes(routes){
     let reactRoutes = [];
     if(routes){
         let defaultRouteSet = false;
-        for(var i=0; i < routes.length; i++){
+        for(let i=0; i < routes.length; i++){
             let route = routes[i];
             let component = route.component;
             let routeKey = "Route_" + route.path + "_" + i;
 
             
-            if(route.routes && route.routes.length > 0){
-                var childRoutes = forgeChildRoutes(route.routes, routeComponents);
-                reactRoutes.push(<Route key={routeKey} path={route.path} component={component}>{childRoutes}</Route>);
-            } 
-            else {
-                reactRoutes.push(<Route key={routeKey} path={route.path} component={component} />);
-            }
+            
+            
+            reactRoutes.push(<Route key={routeKey} path={route.path} component={component} />);            
 
             // Add paramRoutes for this component
             if(route.paramRoutes){
@@ -54,13 +50,21 @@ function forgeChildRoutes(routes){
                 route.default = 'true';
                 defaultRouteSet = true;
             }
+            
+            // Add child routes
+            if(route.routes && route.routes.length > 0){
+                var childRoutes = forgeChildRoutes(route.routes);
+                for(let j=0; j < childRoutes.length; j++){                    
+                    reactRoutes.push(childRoutes[j]);
+                }                
+            } 
         }
     }
     return reactRoutes;
 }
 
-export default function(routes, routeComponents){
-    let reactRoutes = forgeChildRoutes(routes, routeComponents);
+export default function(routes){
+    let reactRoutes = forgeChildRoutes(routes);
 
     let navRoutes = (
         <Route path="/" component={Root}>

@@ -1,7 +1,8 @@
 ﻿import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { isAuthenticated, setRedirectRoute, setDefaultRoute } from '../reducers/auth';
+import * as authActionCreators from '../actions/auth';
+import * as notificationActionCreators from '../actions/notifications';
 import _ from 'lodash';
 
 class Root extends Component {
@@ -17,21 +18,23 @@ class Root extends Component {
         }), 'path');
 
         defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;  
-        dispatch(setDefaultRoute(defaultRoutePath));
+        dispatch(authActionCreators.setDefaultRoute(defaultRoutePath));
         
         if (activeRouteName === '/login' ||  activeRouteName === '/' || activeRouteName === null) {
             activeRouteName = defaultRoutePath;
         }
         
-        dispatch(setRedirectRoute(activeRouteName));
-        dispatch(isAuthenticated(config.appName));
+        dispatch(authActionCreators.setRedirectRoute(activeRouteName));
+        dispatch(authActionCreators.isAuthenticated(config.appName));
     }
     render(){
         const { children, auth, router, notify, config, dispatch } = this.props;
+        let authActions = bindActionCreators(authActionCreators, dispatch);
+        let notificationActions = bindActionCreators(notificationActionCreators, dispatch);
         
         return (
             <div>
-                {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, dispatch: dispatch})}
+                {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, authActions: authActions, notificationActions: notificationActions})}
             </div>
         );
     }

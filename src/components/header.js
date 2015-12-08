@@ -7,7 +7,7 @@ class AppHeader extends React.Component{
         super(props);
     }
     render(){
-        let {user, userNotifications, dispatch} = this.props;
+        let {user, userNotifications, authActions, notificationActions} = this.props;
         var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "";
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
         var headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : "";
@@ -26,7 +26,7 @@ class AppHeader extends React.Component{
                             <li><span className="left-toggle-switch"><i className="fa fa-bars"></i></span></li>
                             <li>
                                 <div className="logo">
-                                    {headerContent}
+        {headerContent}
                                     <span className="brand-text">
                                         <span><strong>{boldTitle}</strong>{regTitle}</span>
                                     </span>
@@ -44,8 +44,8 @@ class AppHeader extends React.Component{
                             <li><span className="left-toggle-switch"><i className="fa fa-bars"></i></span></li>
                         </ul>
                         <ul className="pull-right top-right-icons">
-                            <AppNotifications user={user} userNotifications={userNotifications} dispatch={dispatch}/>
-                            <UserDropdown user={user} dispatch={this.props.dispatch}/>
+                            <AppNotifications user={user} userNotifications={userNotifications} notificationActions={notificationActions} />
+                            <UserDropdown user={user} authActions={authActions}/>
                         </ul>
                     </div>
                 </div>

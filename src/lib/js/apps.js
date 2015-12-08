@@ -292,11 +292,11 @@ jQuery(document).ready(function($) {
     if ($.fn.navAccordion) {
         $('.list-accordion').each(function() {
             $(this).navAccordion({
-                eventType: 'click',
+                eventType: 'hover',
                 hoverDelay: 100,
                 autoClose: true,
                 saveState: false,
-                disableLink: true,
+                disableLink: false,
                 speed: 'fast',
                 showCount: false,
                 autoExpand: true,

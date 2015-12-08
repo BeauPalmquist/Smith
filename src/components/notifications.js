@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { notificationReceived, resetNotificationCount, loadRecentNotifications } from '../reducers/notify';
 import {NavDropdown, MenuItem, Label} from 'react-bootstrap';
 
 class AppNotifications extends React.Component{
@@ -8,19 +7,19 @@ class AppNotifications extends React.Component{
         this.loadNotifications = this.loadNotifications.bind(this);
     }
     componentWillMount(){
-        let {dispatch, user} = this.props;
+        let {notificationActions, user} = this.props;
         if(user.userAuthenticated){
             Notifications.connect(this.receivedNotification);
-            dispatch(loadRecentNotifications());
+            notificationActions.loadRecentNotifications();
         }
     }
     receivedNotification(data){        
-        dispatch(notificationReceived(data));
+        notificationActions.notificationReceived(data);
     }
     loadNotifications(){
-        let {dispatch} = this.props;       
-        dispatch(loadRecentNotifications());        
-        dispatch(resetNotificationCount());
+        let {notificationActions} = this.props;       
+        notificationActions.loadRecentNotifications();
+        notificationActions.resetNotificationCount();
     }
     componentWillUnmount(){
         Notifications.disconnect(this.notificationReceived);

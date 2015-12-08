@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import {NavDropdown, MenuItem} from 'react-bootstrap';
 import { Link } from "react-router";
-import { logout } from '../reducers/auth';
     
 class UserDropdown extends React.Component{
     constructor(props){
@@ -9,8 +8,8 @@ class UserDropdown extends React.Component{
         this.logout = this.logout.bind(this);
     }
     logout(){
-        let {dispatch} = this.props;
-        dispatch(logout());
+        let {authActions} = this.props;
+        authActions.logout();
     }
     render(){
         let { user } = this.props;
