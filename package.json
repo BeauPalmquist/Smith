@@ -1,8 +1,8 @@
 {
-  "version": "0.4.3",
+  "version": "0.4.4",
   "name": "forge-smith",
   "description": "Forge bootstrapping framework",
-  "main": "dist/index.js",
+  "main": "dist/smith.js",
   "authors": [
     "Beau Palmquist",
     "Jonathan Oropeza"
@@ -17,7 +17,7 @@
         "react-router": "^1.0.0",
         "redux": "^3.0.4",
         "redux-logger": "^2.0.4",
-        "redux-router": "^1.0.0-beta4",
+        "redux-router": "^1.0.0-beta5",
         "redux-thunk": "^1.0.0",
         "react-bootstrap": "^0.28.1",
         "react-document-title": "^2.0.1"
@@ -31,6 +31,9 @@
     "babel-preset-stage-0": "^6.0.15",
     "event-stream": "^3.3.2",
     "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
     "gulp-cached": "^1.1.0",
     "gulp-react": "^3.0.1",
     "gulp-sass": "^2.1.0",

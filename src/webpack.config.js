@@ -2,11 +2,11 @@
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
-    entry: [
-        './src/index'
-    ],
+    entry: {
+        index: "./src/index"
+    },
     output: {
-        filename: 'index.js',
+        filename: 'smith.js',
         path: './dist',
         libraryTarget: 'umd',
         publicPath: '/static/'
@@ -19,5 +19,12 @@ module.exports = {
                 loaders: ['babel'],
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    ]
 };

@@ -10,7 +10,7 @@ gulp.task("sass", ['clean_css'], function () {
     .pipe(gulp.dest(config.paths.css));
 });
 
-gulp.task('default', ["lib_copy", "pack_framework", "pack_bundle", "sass"], function () {
+gulp.task('default', ["pack_framework", "pack_bundle", "sass"], function () {
     
 });
 

@@ -54,7 +54,7 @@ class AppNav extends React.Component{
                     }
 
                     if(route.image.type === "image"){
-                        if(childCount > 0){
+                        if(childRoutes.length > 0){
                             navs.push(<li key={"Menu_" + navKey}><Link to={route.path}><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link><ul>{childRoutes}</ul></li>);
                         }
                         else{
@@ -62,7 +62,7 @@ class AppNav extends React.Component{
                         }
                     }
                     else{
-                        if(childCount > 0){
+                        if(childRoutes.length > 0){
                             navs.push(<li key={"Menu_" + navKey}><Link to={route.path}><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></Link><ul>{childRoutes}</ul></li>);
                         }
                         else{
