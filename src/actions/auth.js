@@ -45,9 +45,7 @@ function logoutComplete(){
 export function isAuthenticated(){
     return function(dispatch){
         return User.isLoggedIn().done(result => {
-            if(result){
-                dispatch(setAuthenticationStatus(result));
-            }
+            dispatch(setAuthenticationStatus(result));
         });        
     }
 }
