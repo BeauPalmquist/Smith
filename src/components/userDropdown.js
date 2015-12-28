@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import {NavDropdown, MenuItem} from 'react-bootstrap';
 import { Link } from "react-router";
     
 class UserDropdown extends React.Component{

@@ -1,6 +1,4 @@
 ﻿import React, { Component } from 'react';
-//import AppUserActions from '../actions/appUserActions';    
-import {Well, Input, Grid, Row, Col, Button, Alert} from 'react-bootstrap';
      
 export default class Login extends Component{
     constructor(props){
@@ -49,10 +47,10 @@ export default class Login extends Component{
         
         var showErrorMessage = "noError";
         if(auth.loginErrorMessage !== "") {
-            showErrorMessage = "";
+            showErrorMessage = "alert alert-danger";
         }
         var showLoginImage = "";
-        var loginFormWidth= 12;
+        var loginFormWidth= 'col-md-12';
         var buttonText = "Sign In";
         var buttonDisabled = false;
 
@@ -62,10 +60,10 @@ export default class Login extends Component{
         }
         var loginFormClass = "loginForm noLoginImage";
         if(this.props.config && this.props.config.loginImage){
-            showLoginImage =   (<Col className="loginImg" md={6}>                             
+            showLoginImage =   (<div className="loginImg col-md-6">                             
                                    <img src={this.props.config.loginImage} />
-                               </Col>);
-            loginFormWidth = 6;
+                               </div>);
+            loginFormWidth = 'col-md-6';
             loginFormClass = "loginForm";
         }
 
@@ -84,24 +82,36 @@ export default class Login extends Component{
                          </span>
                      </span>
                  </p>
-                 <Well >
-                     <Grid>
-                         <Row>
-                 {showLoginImage}
-                             <Col md={loginFormWidth}>
+                 <div className="well" >
+                     <div className="container-fluid">
+                         <div className="row">
+                            {showLoginImage}
+                             <div className={loginFormWidth}>
                                  <h3>Sign In</h3>
-                                 <Alert bsStyle="danger" className={showErrorMessage} >{auth.loginErrorMessage}</Alert>   
-                                 <Input type="text" label="Username" onKeyDown={this.handleKeyPress}  onChange={this.usernameChanged} value={this.state.username} placeholder="Username" />
-                                 <Input type="password" label="Password" onKeyDown={this.handleKeyPress} onChange={this.passwordChanged} value={this.state.password} placeholder="Password"/>
-                                 <Row>
-                                     <Col xs={6} md={6} mdOffset={6} xsOffset={6} >
-                                        <Button disabled={buttonDisabled} block bsStyle="primary" onClick={this.login} >{buttonText}</Button>
-                                     </Col>
-                                 </Row>
-                             </Col>
-                         </Row>
-                     </Grid>                 
-                </Well>
+                                 <div className={showErrorMessage}>{auth.loginErrorMessage}</div>   
+                                 <div className='form-horizontal'>
+                                    <div className='form-group'>
+                                        <label className='col-md-3 control-label' htmlFor="username">Username: </label>
+                                        <div className='col-md-9'>
+                                            <input id="username" type="text" className='form-control' onKeyDown={this.handleKeyPress}  onChange={this.usernameChanged} value={this.state.username} placeholder="Username" />
+                                        </div>
+                                    </div>
+                                    <div className='form-group'>
+                                        <label className='col-md-3 control-label' htmlFor="password">Password: </label>
+                                        <div className='col-md-9'>
+                                            <input id="password" type="password" className='form-control' onKeyDown={this.handleKeyPress} onChange={this.passwordChanged} value={this.state.password} placeholder="Password"/>
+                                        </div>
+                                    </div>
+                                    <div className='form-group'>
+                                        <div className='col-md-offset-3 col-md-9'>
+                                            <button disabled={buttonDisabled} className="btn btn-primary pull-right" onClick={this.login} >{buttonText}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                         </div>
+                     </div>                 
+                </div>
             </div>
         );
     }

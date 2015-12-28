@@ -2,11 +2,13 @@
     webpack = require('webpack'),
     config = require('../config'),
     gutil = require('gulp-util'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    minifyCss = require('gulp-minify-css');
 
 gulp.task("sass", ['clean_css'], function () {
     gulp.src(config.paths.sass)
     .pipe(sass().on('error', sass.logError))
+    .pipe(minifyCss())
     .pipe(gulp.dest(config.paths.css));
 });
 

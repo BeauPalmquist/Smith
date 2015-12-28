@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import {NavDropdown, MenuItem, Label} from 'react-bootstrap';
 
 class AppNotifications extends React.Component{
     constructor(props){

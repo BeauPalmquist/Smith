@@ -12,12 +12,13 @@ gulp.task('compress', function () {
         'src/lib/js/lib/hammerjs.js',
         'src/lib/js/lib/jquery.hammer.js',
         'src/lib/js/lib/jquery.fitvids.js',
-        'src/lib/js/lib/scrollup-min.js',
+        'src/lib/js/lib/scrollup.js',
         'src/lib/js/lib/smoothscroll.js',
         'src/lib/js/lib/jquery.slimscroll.js',
         'src/lib/js/lib/velocity.js',
         'src/lib/js/lib/smart-resize.js',
-        'src/lib/js/lib/jquery.loadmask.js'])
+        'src/lib/js/lib/jquery.loadmask.js',
+        'src/lib/js/app.js'])
         .pipe(concat('smith_concat.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('smith-libs.js'))
