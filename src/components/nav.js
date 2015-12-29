@@ -6,6 +6,23 @@ class AppNav extends React.Component{
     constructor(props){
         super(props);
     }
+    componentDidMount(){
+        if ($.fn.navAccordion) {
+            $('.list-accordion').each(function() {
+                $(this).navAccordion({
+                    eventType: 'hover',
+                    hoverDelay: 100,
+                    autoClose: true,
+                    saveState: false,
+                    disableLink: true,
+                    speed: 'fast',
+                    showCount: false,
+                    autoExpand: true,
+                    classExpand: 'acc-current-parent'
+                });
+            });
+        }
+    }
     render(){
     var navs = [];
     let {user, config, currentLocation} = this.props;        
@@ -55,7 +72,7 @@ class AppNav extends React.Component{
 
                     if(route.image.type === "image"){
                         if(childRoutes.length > 0){
-                            navs.push(<li key={"Menu_" + navKey}><Link to={route.path}><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link><ul>{childRoutes}</ul></li>);
+                            navs.push(<li key={"Menu_" + navKey}><a href="#"><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></a><ul>{childRoutes}</ul></li>);
                         }
                         else{
                             navs.push(<li key={"Menu_" + navKey}><Link to={route.path}><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link>{childRoutes}</li>);
@@ -63,7 +80,7 @@ class AppNav extends React.Component{
                     }
                     else{
                         if(childRoutes.length > 0){
-                            navs.push(<li key={"Menu_" + navKey}><Link to={route.path}><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></Link><ul>{childRoutes}</ul></li>);
+                            navs.push(<li key={"Menu_" + navKey}><a href="#"><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></a><ul>{childRoutes}</ul></li>);
                         }
                         else{
                             navs.push(<li key={"Menu_" + navKey}><Link to={route.path}><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></Link>{childRoutes}</li>);

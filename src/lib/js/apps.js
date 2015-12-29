@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$(document).ready(function() {
     "use strict";
     var plugin_exists = true;
 //    **----------
@@ -292,7 +292,7 @@ jQuery(document).ready(function($) {
     if ($.fn.navAccordion) {
         $('.list-accordion').each(function() {
             $(this).navAccordion({
-                eventType: 'click',
+                eventType: 'hover',
                 hoverDelay: 100,
                 autoClose: true,
                 saveState: false,

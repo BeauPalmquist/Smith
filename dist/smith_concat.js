@@ -8680,7 +8680,7 @@ will produce an inaccurate conversion value. The same issue exists with the cx/c
 	};
  
 })(jQuery);
-$(document).ready(function() {
+jQuery(document).ready(function($) {
     "use strict";
     var plugin_exists = true;
 //    **----------
@@ -8974,7 +8974,7 @@ $(document).ready(function() {
     if ($.fn.navAccordion) {
         $('.list-accordion').each(function() {
             $(this).navAccordion({
-                eventType: 'hover',
+                eventType: 'click',
                 hoverDelay: 100,
                 autoClose: true,
                 saveState: false,
