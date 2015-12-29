@@ -20,7 +20,7 @@ class Root extends Component {
         defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;  
         dispatch(authActionCreators.setDefaultRoute(defaultRoutePath));
         
-        if (activeRouteName === '/login' ||  activeRouteName === '/' || activeRouteName === null) {
+        if (activeRouteName === '/login' || activeRouteName ==='/unknown' ||  activeRouteName === '/' || activeRouteName === null) {
             activeRouteName = defaultRoutePath;
         }
         

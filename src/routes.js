@@ -3,6 +3,7 @@ import { Route, IndexRoute, Redirect } from 'react-router';
 import Root from './containers/root'
 import App from './components/app';
 import Login from './components/login';
+import Unknown from './components/unknown';
 import NotFound from './components/notFound';
 
 // Recursively builds a set of react routes
@@ -69,6 +70,7 @@ export default function(routes){
     let navRoutes = (
         <Route path="/" component={Root}>
             <Route path="login" component={Login} />
+            <Route path="unknown" component={Unknown} />                
             <Route path="/" component={App}>
                 {reactRoutes}
             </Route>

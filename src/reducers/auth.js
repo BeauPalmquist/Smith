@@ -10,7 +10,7 @@
 } from '../actions/auth';
 
 const initialState = {
-    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, loginErrorMessage: '', pendingLogin: false
+    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, userUnknown: true, loginErrorMessage: '', pendingLogin: false
 }
 
 export default function auth(state = initialState, action){
@@ -24,6 +24,7 @@ export default function auth(state = initialState, action){
             return {
                 ...state,
                 userProfile: {},
+                userUnknown: false,
                 userAuthenticated: false, 
                 loginErrorMessage: action.msg,
                 pendingLogin: false
@@ -31,6 +32,7 @@ export default function auth(state = initialState, action){
         case LOGIN_SUCCESS:
             return{
                 ...state,
+                userUnknown: false,
                 userAuthenticated: true,
                 redirectRoute: action.returnUrl,
                 pendingLogin: false
@@ -38,12 +40,14 @@ export default function auth(state = initialState, action){
         case SET_USER_PROFILE:
             return{
                 ...state,
+                userUnknown: false,
                 userProfile: action.profile,
                 pendingLogin: false
             };
         case SET_AUTHENTICATION_STATUS:
             return {
                 ...state,
+                userUnknown: false,
                 userAuthenticated: action.status
             }
         case SET_REDIRECT_ROUTE:

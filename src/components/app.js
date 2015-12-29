@@ -41,24 +41,36 @@ class App extends Component{
         this.checkPermission();
         let {auth, location, history, authActions, config} = this.props;
         
-        if(!auth.userAuthenticated){
-            history.replaceState(null, '/login');
-            let activeRoute = location.pathname;
-            authActions.setRedirectRoute(activeRoute);
+        if(auth.userUnknown && !auth.userAuthenticated){            
+            this.props.history.replaceState(null, 'unknown');
         }
-        else{
-            if(auth.userAuthenticated && location.pathname === '/'){
-                history.replaceState(null, auth.defaultRoute);
+        else {
+            if(!auth.userAuthenticated && !auth.userUnkown){
+                history.replaceState(null, '/login');
+                let activeRoute = location.pathname;
+                authActions.setRedirectRoute(activeRoute);
             }
-            authActions.loadUserProfile(config.appName);
+            else if(auth.userUnknown)
+            {                
+                history.replaceState(null, 'unknown');
+            }
+            else{
+                if(auth.userAuthenticated && location.pathname === '/'){
+                    history.replaceState(null, auth.defaultRoute);
+                }
+                authActions.loadUserProfile(config.appName);
+            }
         }
     }
     componentWillReceiveProps(nextProps){
         this.checkPermission();
         let {auth, location, history} = nextProps ? nextProps : this.props;
-        if(!auth || !auth.userAuthenticated){
+        if(!auth.userAuthenticated  && !auth.userUnkown){
             history.replaceState(null, '/login');
         }
+        else if(auth.userUnkown){
+            history.replaceState(null, 'unknown');
+        }        
         else if(auth.userAuthenticated && location.pathname === '/'){
             history.replaceState(null, auth.defaultRoute);
         }

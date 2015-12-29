@@ -26,9 +26,5 @@ module.exports = {
                 warnings: false
             }
         })
-    ],
-    externals: {
-        "react": "React",
-        "redux": "Redux"
-    }
+    ]
 };
