@@ -19,10 +19,11 @@ gulp.task('compress', function () {
         'src/lib/js/lib/velocity.js',
         'src/lib/js/lib/smart-resize.js',
         'src/lib/js/lib/jquery.loadmask.js',
+        'src/lib/js/lib/bootbox.js',
         'src/lib/js/apps.js'])
-        .pipe(concat('smith-libs.js'))
+        .pipe(concat('smith-concat.js'))
         .pipe(gulp.dest('dist'))
-        //.pipe(rename('smith-libs.js'))
-        //.pipe(uglify())
+        .pipe(rename('smith-libs.js'))
+        .pipe(uglify())
       .pipe(gulp.dest('dist'))
 });
