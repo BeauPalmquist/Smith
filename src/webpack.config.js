@@ -6,7 +6,7 @@ module.exports = {
         index: "./src/index"
     },
     output: {
-        filename: 'smith.js',
+        filename: 'index.js',
         path: './dist',
         libraryTarget: 'umd',
         publicPath: '/static/'
@@ -19,6 +19,10 @@ module.exports = {
                 loaders: ['babel'],
             }
         ]
+    },
+    externals: {
+        'react': 'react',
+        'react-dom': 'react-dom'
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
