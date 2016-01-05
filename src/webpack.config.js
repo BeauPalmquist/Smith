@@ -6,7 +6,7 @@ module.exports = {
         index: "./src/index"
     },
     output: {
-        filename: 'index.js',
+        filename: 'smith.js',
         path: './dist',
         libraryTarget: 'umd',
         publicPath: '/static/'
