@@ -22,7 +22,15 @@ module.exports = {
     },
     externals: {
         'react': 'react',
-        'react-dom': 'react-dom'
+        'react-dom': 'react-dom',
+        'React': 'react',
+        'redux': 'redux',
+        'Redux': 'redux',
+        'react-redux': 'react-redux',
+        'react-router': 'react-router',
+        'redux-router': 'redux-router',
+        'lodash': 'lodash',
+        'redux-devtools': 'redux-devtools'
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
