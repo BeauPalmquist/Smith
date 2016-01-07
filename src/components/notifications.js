@@ -36,18 +36,18 @@ class AppNotifications extends React.Component{
     var notificationBadge = userNotifications.notificationCount > 0 ? (<span className="noty-bubble">{userNotifications.notificationCount}</span>) : "";
 
     return (
-        <li className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
+        <li key='notificationsMenuOption' className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
             <a href="#" className="btn-notification dropdown-toggle" data-toggle="dropdown">{notificationBadge}<i className="fa fa-bell"></i></a>
             <div className="dropdown-menu notifications-tabs">
                 <div className="notification-wrap">
                     <ul>
-            {notifications}
+                        {notifications}
                     </ul>
                 </div>
             </div>
         </li>
         );
-            }
+    }
 }
 
 export default AppNotifications;

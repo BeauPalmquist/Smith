@@ -15,7 +15,7 @@ class UserDropdown extends React.Component{
         var username = user ? user.FullName : "";
         let email = user.Email ? user.Email.toLowerCase() : "Unknown Email";
         return (
-            <li className="dropdown more-dropdown topbar-logged-user" >
+            <li key='userMenuOption' className="dropdown more-dropdown topbar-logged-user" >
                 <a href="#" title={username} className="dropdown-toggle" data-toggle="dropdown"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-info"></i><i className="fa fa-user fa-stack-1x fa-inverse"></i></span></a>
                 <div className="dropdown-menu more-apps">
                     <div className="user-profile-container">
