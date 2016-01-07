@@ -1,5 +1,5 @@
 {
-  "version": "0.4.6",
+  "version": "0.4.7",
   "name": "forge-smith",
   "description": "Forge bootstrapping framework",
   "main": "dist/smith.js",
@@ -8,21 +8,21 @@
     "Jonathan Oropeza"
   ],
     "dependencies": {
-    },
-    "devDependencies": {
-        "gulp-minify-css": "^1.2.2",
-        "history": "^1.13.1",
+        "history": "^1.17.0",
         "humps": "^1.0.0",
         "lodash": "^3.10.1",
-        "react": "^0.14.5",
-        "react-dom": "^0.14.5",
+        "react": "^0.14.6",
+        "react-dom": "^0.14.6",
         "react-redux": "^4.0.6",
         "react-router": "^1.0.3",
         "redux": "^3.0.5",
         "redux-logger": "^2.0.4",
         "redux-router": "^1.0.0-beta7",
         "redux-thunk": "^1.0.0",
-        "react-document-title": "^2.0.1",
+        "react-document-title": "^2.0.1"
+    },
+    "devDependencies": {
+        "gulp-minify-css": "^1.2.2",        
         "redux-devtools": "^2.1.5",
         "babel-core": "^6.2.1",
         "babel-loader": "^6.2.0",
