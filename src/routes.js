@@ -14,11 +14,8 @@ function forgeChildRoutes(routes){
         for(let i=0; i < routes.length; i++){
             let route = routes[i];
             let component = route.component;
-            let routeKey = "Route_" + route.path + "_" + i;
-
-            
-            
-            
+            let routeKey = "Route_" + route.path + "_" + i;            
+            route.path = route.path.startsWith('/') ? route.path : '/' + route.path;            
             reactRoutes.push(<Route key={routeKey} path={route.path} component={component} />);            
 
             // Add paramRoutes for this component
@@ -27,6 +24,7 @@ function forgeChildRoutes(routes){
                 for (let j=0; j < paramRoutes.length; j++) {
                     let paramRouteKey = "ParamRoute_" + paramRoutes[j].path + "_" + j;
                     let paramRoute = paramRoutes[j];
+                    paramRoute.path = paramRoute.path.startsWith('/') ? paramRoute.path : '/' + paramRoute.path;
                     if(paramRoute){                        
                         var paramComponent = paramRoute.component ? paramRoute.component : route.component;
                         reactRoutes.push(<Route key={paramRouteKey} path={paramRoute.path} component={paramComponent} />);
@@ -40,6 +38,8 @@ function forgeChildRoutes(routes){
                 for(let j=0; j < redirects.length; j++){
                     let redirectRouteKey = "RedirectRoute_" + route.path + "_" + j;
                     let redirectRoute = redirects[j];
+                    redirectRoute.from = redirectRoute.from.startsWith('/') ? redirectRoute.from : '/' + redirectRoute.from;
+                    redirectRoute.to =redirectRoute.to.startsWith('/') ? redirectRoute.to : '/' + redirectRoute.to;
                     reactRoutes.push(<Redirect key={redirectRouteKey} from={redirectRoute.from} to={redirectRoute.to} />);
                 }
             }
@@ -69,8 +69,8 @@ export default function(routes){
 
     let navRoutes = (
         <Route path="/" component={Root}>
-            <Route path="login" component={Login} />
-            <Route path="unknown" component={Unknown} />                
+            <Route path="/login" component={Login} />
+            <Route path="/unknown" component={Unknown} />                
             <Route path="/" component={App}>
                 {reactRoutes}
             </Route>
