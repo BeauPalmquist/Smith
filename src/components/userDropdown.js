@@ -12,10 +12,10 @@ class UserDropdown extends React.Component{
         authActions.logout();
     }
     render(){
-        let { user } = this.props;
+        let { user, userBadgeColor } = this.props;
         let username;
-        let initials = "??";
-        
+
+        let initials = "??";      
         username = user.FullName;        
         let first = user.First ? user.First.charAt(0) : "";
         let last = user.Last ? user.Last.charAt(0) : "";
@@ -26,14 +26,14 @@ class UserDropdown extends React.Component{
             <li key='userMenuOption' className="dropdown more-dropdown topbar-logged-user" >
                 <a href="#" title={username} className="dropdown-toggle" data-toggle="dropdown">
                     <div title={username} className="user-header-svg">
-                        <BadgeSVG value={initials}/>
+                        <BadgeSVG value={initials} fillColor={userBadgeColor}/>
                     </div>
                 </a>
                 <div className="dropdown-menu more-apps">
                     <div className="user-profile-container">
                         <div className="user-profile clearfix">
                                 <div className="admin-user-thumb">
-                                    <BadgeSVG value={initials}/>
+                                    <BadgeSVG value={initials} fillColor={userBadgeColor}/>
                                 </div>
                                 <div className="admin-user-info">
                                     <ul>

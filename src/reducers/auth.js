@@ -6,11 +6,12 @@
     SET_AUTHENTICATION_STATUS,
     SET_REDIRECT_ROUTE,
     SET_DEFAULT_ROUTE,
+    SET_BADGE_COLOR,
     LOGOUT
 } from '../actions/auth';
 
 const initialState = {
-    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, userUnknown: true, loginErrorMessage: '', pendingLogin: false
+    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, userUnknown: true, loginErrorMessage: '', badgeColor: "", pendingLogin: false
 }
 
 export default function auth(state = initialState, action){
@@ -59,6 +60,11 @@ export default function auth(state = initialState, action){
             return {
                 ...state, 
                 defaultRoute: action.data
+            }
+        case SET_BADGE_COLOR:
+            return {
+                ...state, 
+                badgeColor: action.data
             }
         case LOGOUT:
             return {

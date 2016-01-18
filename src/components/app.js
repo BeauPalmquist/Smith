@@ -81,14 +81,14 @@ class App extends Component{
         if(auth && auth.userAuthenticated){
             return (
                 <div>
-                    <AppHeader user={auth.userProfile} userNotifications={notify} config={config} authActions={authActions} notificationActions={notificationActions} />
+                    <AppHeader userBadgeColor={auth.badgeColor} user={auth.userProfile} userNotifications={notify} config={config} authActions={authActions} notificationActions={notificationActions} />
                     <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
                    
                     <section className="main-container">
                         <div className="container-fluid">
                             <div className="row" >
                                 <div className="col-md-12 col-xs-12 col-s-12 col-lg-12">
-                                        {children && React.cloneElement(children, {user: auth.userProfile, config: config})}       
+                                        {children && React.cloneElement(children, { user: auth.userProfile, config: config})}       
                                 </div>
                             </div>
                         </div>    

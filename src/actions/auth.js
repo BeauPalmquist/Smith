@@ -5,7 +5,19 @@ export const SET_USER_PROFILE = 'SMITH/SET_USER_PROFILE';
 export const SET_AUTHENTICATION_STATUS = 'SMITH/SET_AUTHENTICATION_STATUS';
 export const SET_REDIRECT_ROUTE = 'SMITH/SET_REDIRECT_ROUTE';
 export const SET_DEFAULT_ROUTE = 'SMITH/SET_DEFAULT_ROUTE';
+export const SET_BADGE_COLOR = 'SMITH/SET_BADGE_COLOR';
 export const LOGOUT = 'SMITH/LOGOUT';
+
+function setBadgeColor(){
+    let randomFill = "#";
+    for(let i=0; i<6; i++){
+        randomFill += Math.floor(Math.random() * (9));
+    }
+    return {
+        type: SET_BADGE_COLOR,
+        data: randomFill
+    };
+}
 
 function setUserProfile(profile){
     return {
@@ -52,7 +64,10 @@ export function isAuthenticated(){
 
 export function loadUserProfile(appName){
     return function(dispatch){        
-        User.getCurrentUserProfile(appName).done(profile => dispatch(setUserProfile(profile)));
+        User.getCurrentUserProfile(appName).done(profile => {
+            dispatch(setUserProfile(profile));
+            dispatch(setBadgeColor());
+        });
     }
 }
 
@@ -72,8 +87,8 @@ export function login(username, password, returnUrl, appName){
             () => {
                 if(ClientAction !== undefined){
                     ClientAction.log("User logged in", "Authentication", { username: username });
-                }
-                dispatch(loginSuccess(returnUrl));                
+                }                
+                dispatch(loginSuccess(returnUrl));    
             },
             () => {
                 if(ClientAction !== undefined){

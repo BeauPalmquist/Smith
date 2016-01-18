@@ -12,7 +12,7 @@ class AppHeader extends React.Component{
         $(".btn-mobile-bar").hammer().on("click touchstart",function(e){e.preventDefault(),$(".topbar-right").hasClass("bar-toggle")?$(".topbar-right").removeClass("bar-toggle"):$(".topbar-right").addClass("bar-toggle")});
     }
     render(){
-        let {user, userNotifications, authActions, notificationActions, config} = this.props;
+        let {userBadgeColor, user, userNotifications, authActions, notificationActions, config} = this.props;
         var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "";
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
         var headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : "";
@@ -45,7 +45,7 @@ class AppHeader extends React.Component{
         }
         return (
             <header className="topbar clearfix">   
-                {searchBar}
+        {searchBar}
                 <div className="topbar-left pull-left">
                     <div className="clearfix">
                         <ul className="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
@@ -73,7 +73,7 @@ class AppHeader extends React.Component{
                         <ul className="pull-right top-right-icons">
         {search}
                             <AppNotifications user={user} userNotifications={userNotifications} notificationActions={notificationActions} />
-                            <UserDropdown user={user} authActions={authActions}/>
+                            <UserDropdown userBadgeColor={userBadgeColor} user={user} authActions={authActions}/>
                         </ul>
                     </div>
                 </div>
