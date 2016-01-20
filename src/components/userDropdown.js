@@ -20,14 +20,21 @@ class UserDropdown extends React.Component{
         let first = user.First ? user.First.charAt(0) : "";
         let last = user.Last ? user.Last.charAt(0) : "";
         initials = first + last;        
+        let userDisplay;
+        if(user.userImage){
+            userDisplay=(<img src={"data:image/png;base64," + user.userImage} height="45px" width="45px"/>);
+        }
+        else{
+           userDisplay=( <div title={username} className="user-header-svg">
+                        <BadgeSVG value={initials} fillColor={userBadgeColor}/>
+                    </div>);
+        }
         
         let email = user.Email ? user.Email.toLowerCase() : "Unknown Email";
         return (
             <li key='userMenuOption' className="dropdown more-dropdown topbar-logged-user" >
                 <a href="#" title={username} className="dropdown-toggle" data-toggle="dropdown">
-                    <div title={username} className="user-header-svg">
-                        <BadgeSVG value={initials} fillColor={userBadgeColor}/>
-                    </div>
+                    {userDisplay}
                 </a>
                 <div className="dropdown-menu more-apps">
                     <div className="user-profile-container">

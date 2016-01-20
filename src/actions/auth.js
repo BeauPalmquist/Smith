@@ -65,8 +65,16 @@ export function isAuthenticated(){
 export function loadUserProfile(appName){
     return function(dispatch){        
         User.getCurrentUserProfile(appName).done(profile => {
-            dispatch(setUserProfile(profile));
-            dispatch(setBadgeColor());
+            User.getUserImage().then(
+                userImage => {
+                    profile.userImage = userImage.Image;  
+                    dispatch(setUserProfile(profile));  
+                    dispatch(setBadgeColor());
+                },
+                userImage =>{                                      
+                    dispatch(setUserProfile(profile));  
+                    dispatch(setBadgeColor());
+            });
         });
     }
 }
@@ -87,7 +95,8 @@ export function login(username, password, returnUrl, appName){
             () => {
                 if(ClientAction !== undefined){
                     ClientAction.log("User logged in", "Authentication", { username: username });
-                }                
+                }            
+                
                 dispatch(loginSuccess(returnUrl));    
             },
             () => {

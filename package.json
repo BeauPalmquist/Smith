@@ -1,5 +1,5 @@
 {
-  "version": "0.4.9",
+  "version": "0.4.10",
   "name": "forge-smith",
   "description": "Forge bootstrapping framework",
   "main": "dist/smith.js",
