@@ -40,7 +40,7 @@ class UserDropdown extends React.Component{
                     <div className="user-profile-container">
                         <div className="user-profile clearfix">
                                 <div className="admin-user-thumb">
-                                    <BadgeSVG value={initials} fillColor={userBadgeColor}/>
+                                    {userDisplay}
                                 </div>
                                 <div className="admin-user-info">
                                     <ul>
