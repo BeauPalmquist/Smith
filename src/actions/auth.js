@@ -65,7 +65,7 @@ export function isAuthenticated(){
 export function loadUserProfile(appName){
     return function(dispatch){        
         User.getCurrentUserProfile(appName).done(profile => {
-            User.getUserImage().then(
+            User.getUserImage(profile.Id).then(
                 userImage => {
                     profile.userImage = userImage.Image;  
                     dispatch(setUserProfile(profile));  
