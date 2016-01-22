@@ -21,6 +21,7 @@ export default class Login extends Component{
         if(auth.userAuthenticated){
             this.props.history.replaceState(null, auth.redirectRoute);
         }
+        this.loginInput.focus();
     }
     componentWillReceiveProps(nextProps){   
         let {auth} = nextProps ? nextProps : this.props;
@@ -93,7 +94,7 @@ export default class Login extends Component{
                                     <div className='form-group'>
                                         <label className='col-md-3 control-label' htmlFor="username">Username: </label>
                                         <div className='col-md-9'>
-                                            <input id="username" type="text" className='form-control' onKeyDown={this.handleKeyPress}  onChange={this.usernameChanged} value={this.state.username} placeholder="Username" />
+                                            <input id="username" type="text" className='form-control' onKeyDown={this.handleKeyPress}  onChange={this.usernameChanged} value={this.state.username} placeholder="Username" ref={i => this.loginInput = i} />
                                         </div>
                                     </div>
                                     <div className='form-group'>

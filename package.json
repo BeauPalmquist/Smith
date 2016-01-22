@@ -1,5 +1,5 @@
 {
-  "version": "0.4.11",
+  "version": "0.4.12",
   "name": "forge-smith",
   "description": "Forge bootstrapping framework",
   "main": "dist/smith.js",
@@ -47,6 +47,7 @@
         "webpack-hot-middleware": "^2.5.0",
         "babel-eslint": "^4.1.6",
         "babel-plugin-react-transform": "^1.1.1",
-        "eslint-plugin-react": "^3.10.0"
+        "eslint-plugin-react": "^3.10.0",
+        "gulp-eslint": "^1.1.1"
     }
 }

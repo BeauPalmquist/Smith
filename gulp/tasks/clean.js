@@ -1,7 +1,6 @@
 ﻿var gulp = require("gulp"),
     rimraf = require("rimraf"),
-    config = require('../config'),
-    notify = require('gulp-notify');
+    config = require('../config');
 
 
 // Clean Tasks
