@@ -26,9 +26,9 @@ export default class unknown extends Component{
         var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "" ;
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "" ;
         return (
-            <div className="center">
+            <div className="unknown-state">
                 <p>
-                     <span className="loginFont" >
+                     <span>
                          <span className="bold" >
                             {boldTitle}
                          </span>
