@@ -1,7 +1,7 @@
 {
-  "version": "0.4.12",
+  "version": "1.0.0",
   "name": "forge-smith",
-  "description": "Forge bootstrapping framework",
+  "description": "React and Redux bootstrapping framework for use with Forge microservices",
   "main": "dist/smith.js",
   "authors": [
     "Beau Palmquist",
