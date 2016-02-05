@@ -5,7 +5,6 @@ var uglify = require('gulp-uglify');
 
 gulp.task('compress', function () {
     gulp.src([
-        'src/lib/js/lib/jquery-migrate.js',
         'src/lib/js/lib/jquery.ui.js',
         'src/lib/js/lib/jRespond.js',
         'src/lib/js/lib/nav.accordion.js',

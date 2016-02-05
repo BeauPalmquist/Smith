@@ -61,10 +61,10 @@ export default class Login extends Component{
         }
         var loginFormClass = "loginForm noLoginImage";
         if(this.props.config && this.props.config.loginImage){
-            showLoginImage =   (<div className="loginImg col-md-6">                             
+            showLoginImage =   (<div className="loginImg col-xs-6">                             
                                    <img src={this.props.config.loginImage} />
                                </div>);
-            loginFormWidth = 'col-md-6';
+            loginFormWidth = 'col-xs-6';
             loginFormClass = "loginForm";
         }
 
