@@ -4,6 +4,7 @@ class AppNotifications extends React.Component{
     constructor(props){
         super(props);
         this.loadNotifications = this.loadNotifications.bind(this);
+        this.receivedNotification = this.receivedNotification.bind(this);
     }
     componentWillMount(){
         let {notificationActions, auth} = this.props;
@@ -12,7 +13,8 @@ class AppNotifications extends React.Component{
             notificationActions.loadRecentNotifications();
         }
     }
-    receivedNotification(data){        
+    receivedNotification(data) {
+        let { notificationActions } = this.props;
         notificationActions.notificationReceived(data);
     }
     loadNotifications(){
