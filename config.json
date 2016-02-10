@@ -1,4 +1,7 @@
 ﻿{
+    "Hosting": {
+        "SpaMode": true
+    },
     "Data": {
         "Configuration": {
             "ConnectionString": "Server=prodsql.quotecenter.net;Database=HomeDepot.Platform.Configuration;User ID=Forge-User;Password=hammer!;Persist Security Info=True;"

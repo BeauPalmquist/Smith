@@ -6,8 +6,8 @@ class AppNotifications extends React.Component{
         this.loadNotifications = this.loadNotifications.bind(this);
     }
     componentWillMount(){
-        let {notificationActions, user} = this.props;
-        if(user.userAuthenticated){
+        let {notificationActions, auth} = this.props;
+        if(auth.userAuthenticated){
             Notifications.connect(this.receivedNotification);
             notificationActions.loadRecentNotifications();
         }

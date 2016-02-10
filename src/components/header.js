@@ -7,12 +7,19 @@ class AppHeader extends React.Component{
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        $(".btn-top-search").hammer().on("click touchstart",function(e){e.preventDefault(),$(".top-search-bar").hasClass("search-bar-toggle")?$(".top-search-bar").removeClass("search-bar-toggle"):$(".top-search-bar").addClass("search-bar-toggle")});
-        $(".btn-mobile-bar").hammer().on("click touchstart",function(e){e.preventDefault(),$(".topbar-right").hasClass("bar-toggle")?$(".topbar-right").removeClass("bar-toggle"):$(".topbar-right").addClass("bar-toggle")});
+    componentDidMount() {
+        let btnTopSearch = $(".btn-top-search");
+        if (btnTopSearch) {
+            btnTopSearch.hammer().on("click touchstart", function(e) { e.preventDefault(), $(".top-search-bar").hasClass("search-bar-toggle") ? $(".top-search-bar").removeClass("search-bar-toggle") : $(".top-search-bar").addClass("search-bar-toggle") });
+        }
+
+        let btnMobileBar = $(".btn-mobile-bar");
+        if (btnMobileBar) {
+            btnMobileBar.hammer().on("click touchstart",function(e){e.preventDefault(),$(".topbar-right").hasClass("bar-toggle")?$(".topbar-right").removeClass("bar-toggle"):$(".topbar-right").addClass("bar-toggle")});
+        }
     }
     render(){
-        let {userBadgeColor, user, userNotifications, authActions, notificationActions, config} = this.props;
+        let { auth, userNotifications, authActions, notificationActions, config} = this.props;
         var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "";
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
         var headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : "";
@@ -72,8 +79,8 @@ class AppHeader extends React.Component{
                         </ul>
                         <ul className="pull-right top-right-icons">
         {search}
-                            <AppNotifications user={user} userNotifications={userNotifications} notificationActions={notificationActions} />
-                            <UserDropdown userBadgeColor={userBadgeColor} user={user} authActions={authActions}/>
+                            <AppNotifications auth={auth} userNotifications={userNotifications} notificationActions={notificationActions} />
+                            <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions}/>
                         </ul>
                     </div>
                 </div>
