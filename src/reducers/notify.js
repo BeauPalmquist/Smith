@@ -21,7 +21,7 @@ export default function notify(state = initialState, action){
             }
         case NOTIFICATION_RECEIVED:
         {
-            const updatedCount = state.notificationCount++;
+            const updatedCount = state.notificationCount + 1;
             return {
                 ...state,
                 notificationCount: updatedCount
