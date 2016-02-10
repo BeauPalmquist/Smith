@@ -4,7 +4,7 @@
     LOAD_NOTIFICATIONS,
     SET_NOTIFICATIONS,
     NOTIFICATION_RECEIVED
-    } from '../actions/notifications';
+    } from "../actions/notifications";
 
 const initialState = {
     notificationCount: 0,
@@ -20,10 +20,13 @@ export default function notify(state = initialState, action){
                 notifications: action.notifications.length === 0 ? ["No Notifications"] : action.notifications
             }
         case NOTIFICATION_RECEIVED:
+        {
+            const updatedCount = state.notificationCount++;
             return {
                 ...state,
-                notificationCount: notificationCount++
+                notificationCount: updatedCount
             }
+        }
         case RESET_NOTIFICATION_COUNT:
             return {
                 ...state,
