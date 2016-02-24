@@ -74,7 +74,7 @@ export function loadUserProfile(appName){
                     dispatch(setUserProfile(profile));  
                     dispatch(setBadgeColor());
                 },
-                userImage =>{                                      
+                _ =>{                                      
                     dispatch(setUserProfile(profile));  
                     dispatch(setBadgeColor());
             });

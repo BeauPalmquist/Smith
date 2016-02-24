@@ -1,6 +1,5 @@
 ﻿var gulp = require('gulp');
 var gutil = require('gulp-util');
-var rename = require('gulp-rename');
 var download = require("gulp-download");
 
 var forgeModules = require("../../forge.json");
@@ -10,15 +9,15 @@ var forgeServicesScriptPath = "src/common/js/forge/services/";
 
 function downloadSupportScripts() {
     // Download and copy forge support scripts to app/common/js/forge/support directory
-    forgeModules.supportModules.forEach(function(supportModule) {
-        download(baseCdnPath + supportModule.path).pipe(rename(supportModule.filename + ".js")).pipe(gulp.dest(forgeSupportScriptPath));
+    forgeModules.supportModules.forEach(function (supportModule) {
+        download(baseCdnPath + supportModule).pipe(gulp.dest(forgeSupportScriptPath));
     });
 };
 
 function downloadServiceScripts() {
     // Download and copy forge support scripts to app/common/js/forge/support directory
-    forgeModules.serviceModules.forEach(function(serviceModule) {
-        download(baseCdnPath + serviceModule.path).pipe(rename(serviceModule.filename + ".js")).pipe(gulp.dest(forgeServicesScriptPath));
+    forgeModules.serviceModules.forEach(function (serviceModule) {
+        download(baseCdnPath + serviceModule).pipe(gulp.dest(forgeServicesScriptPath));
     });
 };
 
