@@ -1,6 +1,6 @@
 ﻿import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { reduxReactRouter } from 'redux-router';
-import { devTools } from 'redux-devtools';
+import { persistState } from 'redux-devtools';
 import createHistory from 'history/lib/createBrowserHistory';
 import createRoutes from '../routes';
 import createLogger from 'redux-logger';
@@ -18,7 +18,7 @@ export default function configureStore(clientReducers, includeDevTools) {
                applyMiddleware(thunkMiddleware),
                reduxReactRouter({ routes: createRoutes(config.routes), createHistory }),
                applyMiddleware(createLogger()),
-               devTools()
+               window.devToolsExtension ? window.devToolsExtension() : f => f
         )(createStore);
     }
     else{

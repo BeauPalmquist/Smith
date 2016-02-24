@@ -1,4 +1,7 @@
-﻿export const LOGIN_REQUEST = 'SMITH/LOGIN_REQUEST';
+﻿import User from "../common/js/forge/services/user";
+import ClientAction from "../common/js/forge/services/clientAction";
+
+export const LOGIN_REQUEST = 'SMITH/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'SMITH/LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'SMITH/LOGIN_FAILED';
 export const SET_USER_PROFILE = 'SMITH/SET_USER_PROFILE';

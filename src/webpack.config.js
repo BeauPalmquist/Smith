@@ -29,8 +29,7 @@ module.exports = {
         'react-redux': 'react-redux',
         'react-router': 'react-router',
         'redux-router': 'redux-router',
-        'lodash': 'lodash',
-        'redux-devtools': 'redux-devtools'
+        'lodash': 'lodash'
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({

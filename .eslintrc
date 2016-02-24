@@ -9,9 +9,6 @@
         "node": true
     },
     "globals": {
-        "User": false,
-        "ClientAction": false,
-        "Notifications":  false
     },
   "parser": "babel-eslint",
   "rules": {

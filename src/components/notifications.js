@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import Notifications from "../common/js/forge/support/notifications";
 
 class AppNotifications extends React.Component{
     constructor(props){

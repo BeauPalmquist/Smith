@@ -1,0 +1,52 @@
+﻿{
+    "localCdnPath": "c:\forgeCDN",
+    "baseCdnPath": "http://cdn-frg.hdquotecenter.com/",
+    "supportModules": [
+        {
+            "path": "supportModule_ajax.js",
+            "filename": "ajax"
+        },
+        {
+            "path": "supportModule_deferred.js",
+            "filename": "deferred"
+        },
+        {
+            "path": "supportModule_auth.js",
+            "filename": "auth"
+        },
+        {
+            "path": "supportModule_notifications.js",
+            "filename": "notifications"
+        }
+    ],
+    "serviceModules": [
+        {
+            "path": "HomeDepot_Platform_Identity_Microservice_1_0_1_build_1_user.js",
+            "filename": "user"
+        },
+        {
+            "path": "HomeDepot_Platform_Identity_Microservice_1_0_1_build_1_permission.js",
+            "filename": "permission"
+        },
+        {
+            "path": "HomeDepot_Platform_Identity_Microservice_1_0_1_build_1_role.js",
+            "filename": "role"
+        },
+        {
+            "path": "HomeDepot_Platform_Identity_Microservice_1_0_1_build_1_token.js",
+            "filename": "token"
+        },
+        {
+            "path": "HomeDepot_Platform_Identity_Microservice_1_0_1_build_1_usersession.js",
+            "filename": "userSession"
+        },
+        {
+            "path": "HomeDepot_Platform_Analytics_Microservice_1_0_1_build_1_clientaction.js",
+            "filename": "clientAction"
+        },
+        {
+            "path": "HomeDepot_Platform_Notification_Microservice_1_0_1_build_1_notification.js",
+            "filename": "notification"
+        }
+    ]
+}
