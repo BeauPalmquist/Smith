@@ -1,5 +1,5 @@
 ﻿{
-    "localCdnPath": "c:\forgeCDN",
+    "localCdnPath": "c:\\forge-cdn\\",
     "baseCdnPath": "http://cdn-frg.hdquotecenter.com/",
     "supportModules": [
         "serviceProxySupport/ajax.js",

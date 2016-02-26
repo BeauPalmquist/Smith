@@ -20,7 +20,7 @@ var frameworkPackConfig = require('../../src/webpack.config.js');
 
 var frameworkCompiler = webpack(frameworkPackConfig);
 
-gulp.task('pack_framework', ['eslint_framework', 'clean_framework_pack'], function () {
+gulp.task('pack_framework', ['eslint_framework', 'download_all_forge_scripts', 'clean_framework_pack'], function () {
     frameworkCompiler.run(function (err, stats) {
         if (err) throw new gutil.PluginError("pack_framework", err);
         gutil.log("[pack_framework]", stats.toString({

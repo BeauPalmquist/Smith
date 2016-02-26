@@ -1,6 +1,5 @@
 ﻿import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { reduxReactRouter } from 'redux-router';
-import { persistState } from 'redux-devtools';
 import createHistory from 'history/lib/createBrowserHistory';
 import createRoutes from '../routes';
 import createLogger from 'redux-logger';
