@@ -26,7 +26,7 @@ function downloadServiceScripts() {
         } else {
             var result = download(baseCdnPath + serviceModule).pipe(gulp.dest(forgeServicesScriptPath));
             if (result === "undefined.js") {
-                gutil.log("Could not resolve service proxy script for " + serviceModule);
+                gutil.log(gutil.colors.red("Could not resolve service proxy script for " + serviceModule));
             }
         }
     });
