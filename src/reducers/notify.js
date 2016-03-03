@@ -4,9 +4,10 @@
     LOAD_NOTIFICATIONS,
     SET_USER_NOTIFICATIONS,
     SET_SYSTEM_NOTIFICATIONS,
-    NOTIFICATION_RECEIVED
+    NOTIFICATION_RECEIVED,
+    UPDATE_SYSTEM_NOTIFICATION_DATA
     } from "../actions/notifications";
-
+import { cloneDeep } from 'lodash/lang';
 const initialState = {
     notificationCount: 0,
     userNotifications: ["Loading..."],
@@ -34,6 +35,18 @@ export default function notify(state = initialState, action){
                 ...state,
                 notificationCount: updatedCount
             }
+        }
+        case  UPDATE_SYSTEM_NOTIFICATION_DATA:
+        {
+            state.systemNotifications.unshift(action.notification);
+            if(state.systemNotifications.length > 10){
+                state.systemNotifications.splice(state.systemNotifications.length - 1, 1);
+            }
+
+            return  {
+                ...state,
+                systemNotifications: cloneDeep(state.systemNotifications)
+            };
         }
         case RESET_NOTIFICATION_COUNT:
             return {

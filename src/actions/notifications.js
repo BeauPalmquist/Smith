@@ -6,6 +6,7 @@ export const LOAD_NOTIFICATIONS = "SMITH/LOAD_NOTIFICATIONS";
 export const SET_USER_NOTIFICATIONS = "SMITH/SET_USER_NOTIFICATIONS";
 export const SET_SYSTEM_NOTIFICATIONS = "SMITH/SET_SYSTEM_NOTIFICATIONS";
 export const NOTIFICATION_RECEIVED = "SMITH/NOTIFICATION_RECEIVED";
+export const UPDATE_SYSTEM_NOTIFICATION_DATA = "SMITH/UPDATE_SYSTEM_NOTIFICATION_DATA";
 
 export function loadRecentNotifications(){
     return function(dispatch){
@@ -40,6 +41,23 @@ export function loadRecentNotifications(){
             });
 
     }
+}
+
+export function updateSystemNotificationData(notification){
+    return (dispatch) => {
+        dispatch({
+            type: UPDATE_SYSTEM_NOTIFICATION_DATA,
+            notification: {
+                message: notification.Message,
+                type: notification.Type,
+                sent: notification.Sent
+            }
+        });
+
+        dispatch({
+            type: NOTIFICATION_RECEIVED
+        });
+    };
 }
 
 export function resetNotificationCount(){

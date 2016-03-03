@@ -9,10 +9,24 @@ class Root extends Component {
     constructor(props){
         super(props);
     }
+
+    newNotificationReceived = (data) => {
+        const { dispatch } = this.props;
+        const parsedData = JSON.parse(data);
+        dispatch(NotificationActions.updateSystemNotificationData(parsedData));
+    };
+
     componentWillMount(){
         let {dispatch, config, auth, location} = this.props;
         let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
-        
+
+        if(auth.userAuthenticated) {
+            Notifications.connect((data) => {});
+            Notifications.subscribe("system.notification", this.newNotificationReceived);
+
+            dispatch(notificationActionCreators.loadSystemNotifications());
+        }
+
         let defaultRoutePath = _.result(_.find(config.routes, function(route){
             return route.default === 'true';
         }), 'path');
