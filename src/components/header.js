@@ -19,7 +19,7 @@ class AppHeader extends React.Component{
         }
     }
     render(){
-        let { auth, userNotifications, authActions, notificationActions, config} = this.props;
+        let { auth, notifications, authActions, notificationActions, config} = this.props;
         var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "";
         var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
         var headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : "";
@@ -79,7 +79,7 @@ class AppHeader extends React.Component{
                         </ul>
                         <ul className="pull-right top-right-icons">
         {search}
-                            <AppNotifications auth={auth} userNotifications={userNotifications} notificationActions={notificationActions} />
+                            <AppNotifications auth={auth} notifications={notifications} notificationActions={notificationActions} />
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions}/>
                         </ul>
                     </div>

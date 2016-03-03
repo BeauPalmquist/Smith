@@ -81,7 +81,7 @@ class App extends Component{
         if(auth && auth.userAuthenticated){
             return (
                 <div>
-                    <AppHeader auth={auth} userNotifications={notify} config={config} authActions={authActions} notificationActions={notificationActions} />
+                    <AppHeader auth={auth} notifications={notify} config={config} authActions={authActions} notificationActions={notificationActions} />
                     <AppNav user={auth.userProfile} currentLocation={router.location} config={config}/>
                    
                     <section className="main-container">

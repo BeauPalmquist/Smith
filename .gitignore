@@ -47,3 +47,6 @@ HomeDepot.Platform.UI.Armory/dist/
 wwwroot/src/lib/
 wwwroot/src/js/
 wwwroot/src/css/
+.idea/**
+src/common/**
+dist/**

@@ -714,7 +714,7 @@ Author: Kamarujaman Shohel
   border-radius: 0px;
   right: 0px;
   left: auto;
-  min-width: 150px;
+  width: 320px;
   padding-top: 0px;
 }
 .notifications-dropdown .dropdown-menu.notifications-tabs .nav {
@@ -785,7 +785,7 @@ Author: Kamarujaman Shohel
   border-bottom: #eee 1px solid;
 }
 .notifications-dropdown .dropdown-menu .notification-wrap {
-  min-height: 400px;
+  height: 400px;
   overflow-y: auto;
 }
 .notifications-dropdown .dropdown-menu .notification-wrap > ul {
