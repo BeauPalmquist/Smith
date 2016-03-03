@@ -12,8 +12,16 @@ class Root extends Component {
 
     newNotificationReceived = (data) => {
         const { dispatch } = this.props;
-        const parsedData = JSON.parse(data);
-        dispatch(NotificationActions.updateSystemNotificationData(parsedData));
+        const message = JSON.parse(data);
+        dispatch(NotificationActions.notificationReceived(message));
+
+        /*var n = noty({
+            text: 'NOTY - a jquery notification library!',
+            animation: {
+                open: 'animated bounceInLeft', // Animate.css class names
+                close: 'animated bounceOutLeft' // Animate.css class names
+            }
+        });*/
     };
 
     componentWillMount(){
