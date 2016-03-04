@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as authActionCreators from '../actions/auth';
 import * as notificationActionCreators from '../actions/notifications';
 import _ from 'lodash';
+//import noty from 'noty';
 
 class Root extends Component {
     constructor(props){

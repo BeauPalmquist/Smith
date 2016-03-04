@@ -12,7 +12,8 @@ class AppNotifications extends React.Component{
     componentWillMount(){
         let {notificationActions, auth} = this.props;
         if(auth.userAuthenticated){
-            Notifications.connect(this.receivedNotification);
+            Notifications.connect((data) => {});
+            Notifications.subscribe("system.notification",this.receivedNotification);
             notificationActions.loadRecentNotifications();
         }
     }
@@ -66,7 +67,7 @@ class AppNotifications extends React.Component{
                 </li>);
         });
 
-        var notificationBadge = userNotifications.notificationCount > 0 ? (<span className="noty-bubble">{notifications.notificationCount}</span>) : "";
+        var notificationBadge = notifications.notificationCount > 0 ? (<span className="noty-bubble">{ notifications.notificationCount }</span>) : "";
 
         return (
             <li key='notificationsMenuOption' className="dropdown notifications-dropdown" onClick={this.loadNotifications} >

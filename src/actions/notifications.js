@@ -50,8 +50,8 @@ export function resetNotificationCount(){
 
 export function notificationReceived(message){
     return function(dispatch){
-        let isOperationNotification = message.indexOf("operationId") !== -1;
-        if(!isOperationNotification){
+        let isOperationNotification = message.indexOf("operationId") === -1;
+        if(isOperationNotification){
             dispatch({type: NOTIFICATION_RECEIVED})
         }
     }
