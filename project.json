@@ -4,9 +4,10 @@
 
     "dependencies": {
         "HomeDepot.Platform.Web": "1.0.1-build-1"
-    },    
+    },
+
     "commands": {
-        "web": "HomeDepot.Platform.UI.Smith"
+        "web": "ui-framework-smith"
     },
 
     "frameworks": {

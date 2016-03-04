@@ -42,11 +42,9 @@ HomeDepot.Platform.TestHost/wwwroot/src/lib
 HomeDepot.Platform.UI.Armory/wwwroot/src/
 HomeDepot.Platform.UI.Smith/wwwroot/src/
 HomeDepot.Platform.UIFramework/wwwroot/src/
-HomeDepot.Platform.UI.Smith/dist/
 HomeDepot.Platform.UI.Armory/dist/
 wwwroot/src/lib/
 wwwroot/src/js/
 wwwroot/src/css/
 .idea/**
 src/common/**
-dist/**
