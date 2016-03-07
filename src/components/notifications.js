@@ -2,6 +2,7 @@
 import Notifications from "../common/js/forge/support/notifications";
 import moment from 'moment';
 import classNames from 'classnames';
+import noty from 'noty';
 
 class AppNotifications extends React.Component{
     constructor(props){
@@ -9,6 +10,47 @@ class AppNotifications extends React.Component{
         this.loadNotifications = this.loadNotifications.bind(this);
         this.receivedNotification = this.receivedNotification.bind(this);
     }
+
+    receivedNotification = (data) => {
+        const notification = JSON.parse(data);
+        let notificationType = 'success';
+
+        if(notification.Type === 'warning'){
+            notificationType = 'warning';
+        }
+        if(notification.Type === 'downtime'){
+            notificationType = 'error';
+        }
+
+        noty({
+            animation: {
+                open: 'animated rubberBand', // Animate.css class names
+                close: 'animated lightSpeedOut' // Animate.css class names
+            },
+            closeWith: ['click'],
+            dismissQueue: true,
+            force: true,
+            layout: 'topRight',
+            text: '<span className="notification-message">' + notification.Message + '<span class="message-time clearfix">' +  moment(notification.Sent).format('MMM D h:mm A') + '</span></span>',
+            theme: 'relax',
+            type: notificationType
+        });
+    };
+
+    loadNotifications = (event) =>{
+        event.preventDefault();
+
+        let {notificationActions} = this.props;
+        notificationActions.loadRecentNotifications();
+        notificationActions.resetNotificationCount();
+
+        return false;
+    };
+
+    handleClick = (event) => {
+        event.preventDefault();
+        return false;
+    };
     componentWillMount(){
         let {notificationActions, auth} = this.props;
         if(auth.userAuthenticated){
@@ -17,17 +59,7 @@ class AppNotifications extends React.Component{
             notificationActions.loadRecentNotifications();
         }
     }
-    receivedNotification(data) {
-        let { notificationActions } = this.props;
-        notificationActions.notificationReceived(data);
-    }
-    loadNotifications(event){
-        event.preventDefault();
 
-        let {notificationActions} = this.props;       
-        notificationActions.loadRecentNotifications();
-        notificationActions.resetNotificationCount();
-    }
     componentWillUnmount(){
         Notifications.disconnect(this.notificationReceived);
     }
@@ -36,7 +68,12 @@ class AppNotifications extends React.Component{
         let { notifications } = this.props;
 
         let userNotifications = notifications.userNotifications.map((item, index) => {
-            return <li key={"user-notification_" + index}><a className="clearfix">{ item.message }</a></li>;
+            return (
+                <li key={"user-notification_" + index}>
+                    <div className="notification-details">
+                        <h3 className="notification-header">{ item.message }</h3>
+                    </div>
+                </li>);
         });
 
         let systemNotifications = notifications.systemNotifications.map((item, index) => {
@@ -56,14 +93,17 @@ class AppNotifications extends React.Component{
 
             return (
                 <li key={"system-notification_" + index}>
-                    <a className="clearfix">
+                    <div className="notifications-badge">
                         <span className={ badgeColorStyle }>
                             <i className={ badgeIconStyle }></i>
                         </span>
-                        <span className="notification-message"> { item.message }
-                            <span className="notification-time clearfix">{ moment(item.sent, 'YYYY-MM-DD HH:mm Z').calendar() }</span>
-                        </span>
-                    </a>
+                    </div>
+                    <div className="notification-details">
+                        <h3 className="notification-header">{ item.message }</h3>
+                        <div className="notification-meta">
+                            <i className="fa fa-clock-o"></i>&nbsp;{ moment(item.sent).format('MMM D h:mm A') }
+                        </div>
+                    </div>
                 </li>);
         });
 
@@ -79,24 +119,24 @@ class AppNotifications extends React.Component{
                     <div>
                         <ul className="nav material-tabs nav-tabs" role="tablist">
                             <li className="active">
-                                <a href="#user" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true">User</a>
+                                <a href="#system" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true" onClick={this.handleClick} >System</a>
                             </li>
                             <li>
-                                <a href="#system" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true">System</a>
+                                <a href="#user" aria-controls="message" role="tab" data-toggle="tab" onClick={this.handleClick }>User</a>
                             </li>
                         </ul>
                         <div className="tab-content">
-                            <div role="tabpanel" className="tab-pane active" id="user">
+                            <div role="tabpanel" className="tab-pane active" id="system">
                                 <div className="notification-wrap">
-                                    <ul>
-                                        { userNotifications }
+                                    <ul className="notifications-list">
+                                        { systemNotifications }
                                     </ul>
                                 </div>
                             </div>
-                            <div role="tabpanel" className="tab-pane" id="system">
+                            <div role="tabpanel" className="tab-pane" id="user">
                                 <div className="notification-wrap">
-                                    <ul>
-                                        { systemNotifications }
+                                    <ul className="notifications-list">
+                                        { userNotifications }
                                     </ul>
                                 </div>
                             </div>

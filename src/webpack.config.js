@@ -1,4 +1,5 @@
 ﻿var webpack = require('webpack');
+var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -22,16 +23,22 @@ module.exports = {
     },
     externals: {
         'react': 'react',
-        'react-dom': 'react-dom',
-        'React': 'react',
-        'redux': 'redux',
-        'Redux': 'redux',
-        'react-redux': 'react-redux',
-        'react-router': 'react-router',
-        'redux-router': 'redux-router',
-        'lodash': 'lodash'
+            'react-dom': 'react-dom',
+            'React': 'react',
+            'redux': 'redux',
+            'Redux': 'redux',
+            'react-redux': 'react-redux',
+            'react-router': 'react-router',
+            'redux-router': 'redux-router',
+            'lodash': 'lodash'
     },
     plugins: [
+        new BowerWebpackPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jquery: 'jquery',
+            jQuery: 'jquery'
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
