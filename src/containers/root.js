@@ -5,13 +5,10 @@ import * as authActionCreators from '../actions/auth';
 import * as notificationActionCreators from '../actions/notifications';
 import _ from 'lodash';
 
-
-class Root extends Component {
+export class Root extends Component {
     constructor(props){
         super(props);
     }
-
-
 
     componentWillMount(){
         let {dispatch, config, auth, location} = this.props;

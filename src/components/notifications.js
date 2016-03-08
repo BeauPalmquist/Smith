@@ -47,10 +47,6 @@ class AppNotifications extends React.Component{
         return false;
     };
 
-    handleClick = (event) => {
-        event.preventDefault();
-        return false;
-    };
     componentWillMount(){
         let {notificationActions, auth} = this.props;
         if(auth.userAuthenticated){
@@ -119,10 +115,10 @@ class AppNotifications extends React.Component{
                     <div>
                         <ul className="nav material-tabs nav-tabs" role="tablist">
                             <li className="active">
-                                <a href="#system" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true" onClick={this.handleClick} >System</a>
+                                <a href="#system" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true" >System</a>
                             </li>
                             <li>
-                                <a href="#user" aria-controls="message" role="tab" data-toggle="tab" onClick={this.handleClick }>User</a>
+                                <a href="#user" aria-controls="message" role="tab" data-toggle="tab">User</a>
                             </li>
                         </ul>
                         <div className="tab-content">

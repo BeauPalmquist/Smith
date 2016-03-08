@@ -24,6 +24,7 @@
     "redux-thunk": "^1.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.6.5",
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.3",
@@ -34,8 +35,10 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "bower-webpack-plugin": "^0.1.9",
+    "enzyme": "^2.0.0",
     "eslint-plugin-react": "^3.10.0",
     "event-stream": "^3.3.2",
+    "expect": "^1.14.0",
     "file-exists": "^1.0.0",
     "gulp": "^3.9.0",
     "gulp-cached": "^1.1.0",
@@ -46,12 +49,20 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.5",
+    "jsdom": "^8.1.0",
     "jsx-loader": "^0.13.2",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^0.14.7",
     "react-transform-hmr": "^1.0.0",
     "require-dir": "^0.3.0",
     "rimraf": "^2.4.4",
+    "should": "^8.2.2",
+    "sinon": "^1.17.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"
+  },
+  "scripts": {
+    "test": "mocha ./src/**/*.spec.js --compilers js:babel-core/register --reporter nyan"
   }
 }
