@@ -1,11 +1,14 @@
-﻿import React, { Component } from 'react';
+import React, { Component } from 'react';
 import AppHeader from './header';
 import AppNav from './nav';
 import AppNotifications from './notifications';
+import Notifications from '../common/js/forge/support/notifications';
 
 class App extends Component {
     componentWillMount() {
         this.checkPermission();
+        this.subscribeToSystemNotifications();
+
         const { auth, location, history, authActions, config } = this.props;
 
         if (auth.userUnknown && !auth.userAuthenticated) {
@@ -24,7 +27,8 @@ class App extends Component {
                 authActions.loadUserProfile(config.appName);
                 }
             }
-        }
+    }
+
     componentWillReceiveProps(nextProps) {
         this.checkPermission();
         const { auth, location, history } = nextProps || this.props;
@@ -35,8 +39,48 @@ class App extends Component {
                 history.replaceState(null, 'unknown');
         } else if (auth.userAuthenticated && location.pathname === '/') {
                     history.replaceState(null, auth.defaultRoute);
-                }
-            }
+        }
+    }
+
+    componentWillUnmount() {
+        Notifications.unsubscribe('system.notification');
+        // Notifications.disconnect(this.receivedNotification);
+    }
+
+  /*   receivedSystemNotification = (data) => {
+        const notification = JSON.parse(data);
+        let notificationType = 'success';
+
+        if(notification.Type === 'warning'){
+            notificationType = 'warning';
+        }
+        if(notification.Type === 'downtime'){
+            notificationType = 'error';
+        }
+
+        noty({
+            animation: {
+                open: 'animated rubberBand', // Animate.css class names
+                close: 'animated lightSpeedOut' // Animate.css class names
+            },
+            closeWith: ['click'],
+            dismissQueue: true,
+            force: true,
+            layout: 'topRight',
+            text: '<span className="notification-message">' + notification.Message + '<span class="message-time clearfix">' +  moment(notification.Sent).format('MMM D h:mm A') + '</span></span>',
+            theme: 'relax',
+            type: notificationType
+        });
+    };
+*/
+    subscribeToSystemNotifications() {
+        const { auth } = this.props;
+        if (auth.userAuthenticated) {
+            Notifications.connect(() => {});
+            // Notifications.subscribe("system.notification",this.receivedSystemNotification);
+        }
+    }
+
     checkPermission() {
         const { auth, router, config, history } = this.props;
         let userHasNavPermissions = true;
@@ -45,7 +89,8 @@ class App extends Component {
             const user = auth.userProfile;
             if (!user.RoutePermissions) {
                 return;
-        }
+            }
+
             const userRoutePermissions = user.RoutePermissions;
             const clientRoutePermissions = config.routePermissions.filter((routePermission) => routePermission.routeName.toLowerCase() === currentPath.toLowerCase());
 
@@ -56,18 +101,19 @@ class App extends Component {
                     requiredPermissions.forEach((requiredPermission) => {
                         if (userRoutePermissions.includes(requiredPermission)) {
                             permissionCount++;
-    }
+                        }
                     });
 
                     userHasNavPermissions = permissionCount === requiredPermissions.length;
 
                     if (!userHasNavPermissions) {
                         history.pushState(null, '/');
-        }
-        }
+                    }
+                }
             });
         }
     }
+
     render() {
         const { children, auth, config, notify, router, authActions, notificationActions } = this.props;
 

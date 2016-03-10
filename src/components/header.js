@@ -2,6 +2,7 @@ import React from 'react';
 import UserDropdown from './userDropdown';
 
 class AppHeader extends React.Component {
+
     componentDidMount() {
         const btnTopSearch = $('.btn-top-search');
         if (btnTopSearch.length > 0) {
@@ -29,20 +30,32 @@ class AppHeader extends React.Component {
                     topBarRight.addClass('bar-toggle');
                 }
             });
-
-            $('.right-toggle-switch').hammer().on('click touchstart', (e) => {
-                e.preventDefault();
-                if ($('.rightbar').hasClass('right-aside-toggle')) {
-                    $('.rightbar').removeClass('right-aside-toggle');
-                } else {
-                    $('.rightbar').addClass('right-aside-toggle');
-                }
-                $(window).trigger('resize');
-            });
         }
+
+        $('.right-toggle-switch').hammer().on('click touchstart', (e) => {
+            e.preventDefault();
+
+            const $rightbar = $('rightbar');
+            if ($rightbar.hasClass('right-aside-toggle')) {
+                $rightbar.removeClass('right-aside-toggle');
+            } else {
+                $rightbar.addClass('right-aside-toggle');
+            }
+            $(window).trigger('resize');
+        });
+
+        const { notificationActions } = this.props;
+        notificationActions.loadRecentNotifications();
     }
+
+     handleClick = () => {
+        const { notificationActions } = this.props;
+        notificationActions.loadRecentNotifications();
+        notificationActions.resetNotificationCount();
+    };
+
     render() {
-        const { auth, authActions, notifications, config } = this.props;
+        const { auth, notifications, authActions, config } = this.props;
         const boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : '';
         const regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : '';
         const headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : '';
@@ -105,7 +118,7 @@ class AppHeader extends React.Component {
         {search}
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
                             <li>
-                                <a href="#" className="right-toggle-switch" >
+                                <a href="#" className="right-toggle-switch" onClick={ this.handleClick }>
                                     <i className="fa fa-align-left"></i>{ notificationBadge }
                                 </a>
                             </li>
