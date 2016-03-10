@@ -35,7 +35,7 @@ class AppHeader extends React.Component {
         $('.right-toggle-switch').hammer().on('click touchstart', (e) => {
             e.preventDefault();
 
-            const $rightbar = $('rightbar');
+            const $rightbar = $('.rightbar');
             if ($rightbar.hasClass('right-aside-toggle')) {
                 $rightbar.removeClass('right-aside-toggle');
             } else {
