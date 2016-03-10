@@ -1,38 +1,33 @@
 ﻿import React from 'react';
-import { Link } from "react-router";
-import BadgeSVG from "./badgeSVG";
-    
-class UserDropdown extends React.Component{
-    constructor(props){
+import BadgeSVG from './badgeSVG';
+
+class UserDropdown extends React.Component {
+    constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
     }
-    logout(){
-        let {authActions} = this.props;
+    logout() {
+        const { authActions } = this.props;
         authActions.logout();
     }
-    render(){
-        let { user, userBadgeColor } = this.props;
-        let username;
-
-        let initials = "??";      
-        username = user.FullName;        
-        let first = user.First ? user.First.charAt(0) : "";
-        let last = user.Last ? user.Last.charAt(0) : "";
-        initials = first + last;        
+    render() {
+        const { user, userBadgeColor } = this.props;
+        const username = user.FullName;
+        const first = user.First ? user.First.charAt(0) : '';
+        const last = user.Last ? user.Last.charAt(0) : '';
+        const initials = first + last;
         let userDisplay;
-        if(user.userImage){
-            userDisplay=(<img src={"data:image/png;base64," + user.userImage} height="45px" width="45px"/>);
-        }
-        else{
-           userDisplay=( <div title={username} className="user-header-svg">
-                        <BadgeSVG value={initials} fillColor={userBadgeColor}/>
+        if (user.userImage) {
+            userDisplay = (<img src={`data:image/png;base64,${user.userImage}`} height="45px" width="45px" />);
+        } else {
+           userDisplay = (<div title={username} className="user-header-svg">
+                        {BadgeSVG(initials, userBadgeColor)}
                     </div>);
         }
-        
-        let email = user.Email ? user.Email.toLowerCase() : "Unknown Email";
+
+        const email = user.Email ? user.Email.toLowerCase() : 'Unknown Email';
         return (
-            <li key='userMenuOption' className="dropdown more-dropdown topbar-logged-user" >
+            <li key="userMenuOption" className="dropdown more-dropdown topbar-logged-user" >
                 <a href="#" title={username} className="dropdown-toggle" data-toggle="dropdown">
                     {userDisplay}
                 </a>
@@ -61,5 +56,11 @@ class UserDropdown extends React.Component{
         );
     }
 }
+
+UserDropdown.propTypes = {
+    authActions: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
+    userBadgeColor: React.PropTypes.string
+};
 
 export default UserDropdown;

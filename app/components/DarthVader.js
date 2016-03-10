@@ -1,9 +1,6 @@
-﻿import React, {Component} from 'react';
+﻿import React, { Component } from 'react';
 
-export default class DarthVader extends Component{
-    constructor(props){
-        super(props);
-    }
+export default class DarthVader extends Component {
     render() {
         return (
             <div>

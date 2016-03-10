@@ -1,11 +1,8 @@
 ﻿import React, { Component } from 'react';
 
-export default class Forge extends Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        let displayId = this.props.params.id ? "Forge Id = " + this.props.params.id : "";
+export default class Forge extends Component {
+    render() {
+        const displayId = this.props.params.id ? 'Forge Id = ${this.props.params.id}' : '';
         return (
             <div className="panel panel-default">
                 <div className="panel-heading"><h2>Forge</h2></div>
@@ -17,3 +14,7 @@ export default class Forge extends Component{
         );
     }
 }
+
+Forge.propTypes = {
+    params: React.PropTypes.object
+};

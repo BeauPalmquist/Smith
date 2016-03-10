@@ -4,7 +4,7 @@
 
 
 // Clean Tasks
-gulp.task("clean_all", ["clean_lib", "clean_css", "clean_framework_pack", "clean_bundle_pack"], function () {
+gulp.task("clean_all", ["clean_lib", "clean_css", "clean_framework", "clean_client"], function () {
     
 });
 
@@ -16,10 +16,10 @@ gulp.task("clean_css", function (cb) {
     rimraf(config.paths.css, cb);    
 });
 
-gulp.task("clean_framework_pack", function (cb) {
-    rimraf(config.paths.dist + 'index.js', cb);
+gulp.task("clean_framework", function (cb) {
+    rimraf(config.paths.dist, cb);
 });
 
-gulp.task("clean_bundle_pack", function (cb) {
-    rimraf(config.paths.js + 'index.js', cb);
+gulp.task("clean_client", function (cb) {
+    rimraf(config.paths.js, cb);
 });

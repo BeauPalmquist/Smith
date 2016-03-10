@@ -1,72 +1,49 @@
-﻿import React, { Component, PropTypes } from 'react';
+﻿import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActionCreators from '../actions/auth';
 import * as notificationActionCreators from '../actions/notifications';
-import _ from 'lodash';
-//import noty from 'noty';
+import Notifications from '../common/js/forge/support/notifications';
 
 class Root extends Component {
-    constructor(props){
-        super(props);
-    }
-
-    newNotificationReceived = (data) => {
-        const { dispatch } = this.props;
-        const message = JSON.parse(data);
-        dispatch(NotificationActions.notificationReceived(message));
-
-        /*var n = noty({
-            text: 'NOTY - a jquery notification library!',
-            animation: {
-                open: 'animated bounceInLeft', // Animate.css class names
-                close: 'animated bounceOutLeft' // Animate.css class names
-            }
-        });*/
-    };
-
-    componentWillMount(){
-        let {dispatch, config, auth, location} = this.props;
+    componentWillMount() {
+        const { dispatch, config, auth, location } = this.props;
         let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
 
-        if(auth.userAuthenticated) {
-            Notifications.connect((data) => {});
-            Notifications.subscribe("system.notification", this.newNotificationReceived);
+        if (auth.userAuthenticated) {
+            Notifications.connect(() => {});
 
             dispatch(notificationActionCreators.loadSystemNotifications());
         }
 
-        let defaultRoutePath = _.result(_.find(config.routes, function(route){
-            return route.default === 'true';
-        }), 'path');
-
-        defaultRoutePath = defaultRoutePath.startsWith("/") ? defaultRoutePath : "/" + defaultRoutePath;  
+        const defaultRoute = config.routes.find((route) => route.default === 'true');
+        const defaultRoutePath = defaultRoute.path.startsWith('/') ? defaultRoute.path : `/${defaultRoute.path}`;
         dispatch(authActionCreators.setDefaultRoute(defaultRoutePath));
-        
-        if (activeRouteName === '/login' || activeRouteName ==='/unknown' ||  activeRouteName === '/' || activeRouteName === null) {
+
+        if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null) {
             activeRouteName = defaultRoutePath;
         }
-        
+
         dispatch(authActionCreators.setRedirectRoute(activeRouteName));
         dispatch(authActionCreators.isAuthenticated());
     }
-    render(){
+    render() {
         const { children, auth, router, notify, config, dispatch } = this.props;
-        let authActions = bindActionCreators(authActionCreators, dispatch);
-        let notificationActions = bindActionCreators(notificationActionCreators, dispatch);
-        
+        const authActions = bindActionCreators(authActionCreators, dispatch);
+        const notificationActions = bindActionCreators(notificationActionCreators, dispatch);
+
         return (
             <div>
-                {children && React.cloneElement(children, {auth: auth, router: router, config: config, notify: notify, authActions: authActions, notificationActions: notificationActions})}
+                {children && React.cloneElement(children, { auth: auth, router: router, config: config, notify: notify, authActions: authActions, notificationActions: notificationActions })}
             </div>
         );
     }
 }
 
-function mapStateToProps(state){    
-    var clientProp = {};
-    for(var prop in state){
-        if(prop != "smith" && prop != "router"){
+function mapStateToProps(state) {
+    let clientProp = {};
+    for (const prop in state) {
+        if (prop !== 'smith' && prop !== 'router') {
             clientProp = state[prop];
         }
     }
@@ -75,7 +52,17 @@ function mapStateToProps(state){
         notify: state.smith.notify,
         router: state.router,
         config: clientProp.config
-    }
+    };
 }
+
+Root.propTypes = {
+    auth: React.PropTypes.object.isRequired,
+    notify: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired,
+    config: React.PropTypes.object.isRequired,
+    location: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func,
+    children: React.PropTypes.object
+};
 
 export default connect(mapStateToProps)(Root);

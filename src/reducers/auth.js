@@ -1,4 +1,4 @@
-﻿import { 
+﻿import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAILED,
@@ -11,27 +11,27 @@
 } from '../actions/auth';
 
 const initialState = {
-    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, userUnknown: true, loginErrorMessage: '', badgeColor: "", pendingLogin: false
-}
+    userProfile: {}, userAuthenticated: false, redirectRoute: undefined, defaultRoute: undefined, userUnknown: true, loginErrorMessage: '', badgeColor: '', pendingLogin: false
+};
 
-export default function auth(state = initialState, action){
-    switch (action.type){
-        case LOGIN_REQUEST: 
+export default function auth(state = initialState, action) {
+    switch (action.type) {
+        case LOGIN_REQUEST:
             return {
                 ...state,
                 pendingLogin: true
             };
-        case LOGIN_FAILED: 
+        case LOGIN_FAILED:
             return {
                 ...state,
                 userProfile: {},
                 userUnknown: false,
-                userAuthenticated: false, 
+                userAuthenticated: false,
                 loginErrorMessage: action.msg,
                 pendingLogin: false
             };
         case LOGIN_SUCCESS:
-            return{
+            return {
                 ...state,
                 userUnknown: false,
                 userAuthenticated: true,
@@ -39,7 +39,7 @@ export default function auth(state = initialState, action){
                 pendingLogin: false
             };
         case SET_USER_PROFILE:
-            return{
+            return {
                 ...state,
                 userUnknown: false,
                 userProfile: action.profile,
@@ -50,22 +50,22 @@ export default function auth(state = initialState, action){
                 ...state,
                 userUnknown: false,
                 userAuthenticated: action.status
-            }
+            };
         case SET_REDIRECT_ROUTE:
             return {
-                ...state, 
+                ...state,
                 redirectRoute: action.route
-            }
+            };
         case SET_DEFAULT_ROUTE:
             return {
-                ...state, 
+                ...state,
                 defaultRoute: action.data
-            }
+            };
         case SET_BADGE_COLOR:
             return {
-                ...state, 
+                ...state,
                 badgeColor: action.data
-            }
+            };
         case LOGOUT:
             return {
                 ...state,
@@ -74,7 +74,7 @@ export default function auth(state = initialState, action){
                 redirectRoute: undefined,
                 pendingLogin: false,
                 loginErrorMessage: ''
-            }
+            };
 
         default:
             return state;

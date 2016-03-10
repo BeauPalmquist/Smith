@@ -1,49 +1,62 @@
 ﻿import React from 'react';
-import {render} from 'react-dom';
 import UserDropdown from './userDropdown';
 import AppNotifications from './notifications';
-    
-class AppHeader extends React.Component{     
-    constructor(props){
-        super(props);
-    }
+
+class AppHeader extends React.Component {
     componentDidMount() {
-        let btnTopSearch = $(".btn-top-search");
+        const btnTopSearch = $('.btn-top-search');
         if (btnTopSearch) {
-            btnTopSearch.hammer().on("click touchstart", function(e) { e.preventDefault(), $(".top-search-bar").hasClass("search-bar-toggle") ? $(".top-search-bar").removeClass("search-bar-toggle") : $(".top-search-bar").addClass("search-bar-toggle") });
+            btnTopSearch.hammer().on('click touchstart',
+            (e) => {
+                e.preventDefault();
+                const topSearchBar = $('.top-search-bar');
+                if (topSearchBar && topSearchBar.hasClass('search-bar-toggle')) {
+                    topSearchBar.removeClass('search-bar-toggle');
+                } else {
+                    topSearchBar.addClass('search-bar-toggle');
+                }
+            });
         }
 
-        let btnMobileBar = $(".btn-mobile-bar");
+        const btnMobileBar = $('.btn-mobile-bar');
         if (btnMobileBar) {
-            btnMobileBar.hammer().on("click touchstart",function(e){e.preventDefault(),$(".topbar-right").hasClass("bar-toggle")?$(".topbar-right").removeClass("bar-toggle"):$(".topbar-right").addClass("bar-toggle")});
+            btnMobileBar.hammer().on('click touchstart',
+            (e) => {
+                e.preventDefault();
+                const topBarRight = $('.topbar-right');
+                if (topBarRight && topBarRight.hasClass('bar-toggle')) {
+                    topBarRight.removeClass('bar-toggle');
+                } else {
+                    topBarRight.addClass('bar-toggle');
+                }
+            });
         }
     }
-    render(){
-        let { auth, notifications, authActions, notificationActions, config} = this.props;
-        var boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : "";
-        var regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : "";
-        var headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : "";
+    render() {
+        const { auth, notifications, authActions, notificationActions, config } = this.props;
+        const boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : '';
+        const regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : '';
+        const headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : '';
         let headerContent;
-        if(headerImage.type === "image"){            
+        if (headerImage.type === 'image') {
             headerContent = (<img className="header-image" src={headerImage.src} ></img>);
-        }
-        else{
+        } else {
             headerContent = (<i className={headerImage.src} />);
         }
 
         let searchBar;
         let search;
-        let mobileSearch;        
-        let {GlobalSearch} = config;
-        if(GlobalSearch){
-            search = (<li key='searchMenuOption'><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></li>);
-            mobileSearch = (<li><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></li>);   
-            searchBar = ( <div className="top-search-bar">
+        let mobileSearch;
+        const { GlobalSearch } = config;
+        if (GlobalSearch) {
+            search = (<li key="searchMenuOption"><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></li>);
+            mobileSearch = (<li><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></li>);
+            searchBar = (<div className="top-search-bar">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6 col-md-offset-3">
                                 <div className="search-input-addon">
-                                    <GlobalSearch {...this.props}/>
+                                    <GlobalSearch {...this.props} />
                                 </div>
                             </div>
                         </div>
@@ -51,7 +64,7 @@ class AppHeader extends React.Component{
                 </div>);
         }
         return (
-            <header className="topbar clearfix">   
+            <header className="topbar clearfix">
         {searchBar}
                 <div className="topbar-left pull-left">
                     <div className="clearfix">
@@ -80,13 +93,21 @@ class AppHeader extends React.Component{
                         <ul className="pull-right top-right-icons">
         {search}
                             <AppNotifications auth={auth} notifications={notifications} notificationActions={notificationActions} />
-                            <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions}/>
+                            <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
                         </ul>
                     </div>
                 </div>
             </header>
         );
-        }
+    }
 }
+
+AppHeader.propTypes = {
+    auth: React.PropTypes.object.isRequired,
+    notifications: React.PropTypes.object.isRequired,
+    authActions: React.PropTypes.object.isRequired,
+    notificationActions: React.PropTypes.object.isRequired,
+    config: React.PropTypes.object.isRequired
+};
 
 export default AppHeader;

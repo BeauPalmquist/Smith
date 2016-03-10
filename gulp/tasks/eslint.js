@@ -3,7 +3,7 @@
     eslint = require('gulp-eslint');
 
 gulp.task('eslint_framework', function () {
-    return gulp.src(config.paths.js_source)
+    return gulp.src(config.paths.js_framework)
         // eslint() attaches the lint output to the eslint property
         // of the file object so it can be used by other modules.
         .pipe(eslint())
@@ -15,7 +15,7 @@ gulp.task('eslint_framework', function () {
         .pipe(eslint.failOnError());
 });
 
-gulp.task('eslint_app', function () {
+gulp.task('eslint_client', function () {
     return gulp.src(config.paths.js_app)
         // eslint() attaches the lint output to the eslint property
         // of the file object so it can be used by other modules.

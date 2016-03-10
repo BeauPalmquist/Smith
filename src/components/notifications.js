@@ -1,61 +1,59 @@
 ﻿import React from 'react';
-import Notifications from "../common/js/forge/support/notifications";
+import Notifications from '../common/js/forge/support/notifications';
 import moment from 'moment';
 import classNames from 'classnames';
 
-class AppNotifications extends React.Component{
-    constructor(props){
+class AppNotifications extends React.Component {
+    constructor(props) {
         super(props);
         this.loadNotifications = this.loadNotifications.bind(this);
         this.receivedNotification = this.receivedNotification.bind(this);
     }
-    componentWillMount(){
-        let {notificationActions, auth} = this.props;
-        if(auth.userAuthenticated){
-            Notifications.connect((data) => {});
-            Notifications.subscribe("system.notification",this.receivedNotification);
+    componentWillMount() {
+        const { notificationActions, auth } = this.props;
+        if (auth.userAuthenticated) {
+            Notifications.connect(() => {});
+            Notifications.subscribe('system.notification', this.receivedNotification);
             notificationActions.loadRecentNotifications();
         }
     }
+    componentWillUnmount() {
+        Notifications.disconnect(this.notificationReceived);
+    }
     receivedNotification(data) {
-        let { notificationActions } = this.props;
+        const { notificationActions } = this.props;
         notificationActions.notificationReceived(data);
     }
-    loadNotifications(event){
+    loadNotifications(event) {
         event.preventDefault();
 
-        let {notificationActions} = this.props;       
+        const { notificationActions } = this.props;
         notificationActions.loadRecentNotifications();
         notificationActions.resetNotificationCount();
     }
-    componentWillUnmount(){
-        Notifications.disconnect(this.notificationReceived);
-    }
     render() {
 
-        let { notifications } = this.props;
+        const { notifications } = this.props;
 
-        let userNotifications = notifications.userNotifications.map((item, index) => {
-            return <li key={"user-notification_" + index}><a className="clearfix">{ item.message }</a></li>;
-        });
+        const userNotifications = notifications.userNotifications.map((item, index) => (<li key={`user-notification_${index}`}><a className="clearfix">{ item.message }</a></li>));
 
-        let systemNotifications = notifications.systemNotifications.map((item, index) => {
-            let badgeColorStyle = classNames({
-                'ni': true,
-                'w_bg_red': item.type === 'downtime',
-                'w_bg_yellow': item.type === 'warning',
-                'w_bg_green': item.type === 'restore'
+        const systemNotifications = notifications.systemNotifications.map((item, index) => {
+            const badgeColorStyle = classNames({
+                ni: true,
+                w_bg_red: item.type === 'downtime',
+                w_bg_yellow: item.type === 'warning',
+                w_bg_green: item.type === 'restore'
             });
 
-            let badgeIconStyle = classNames({
-                'fa': true,
+            const badgeIconStyle = classNames({
+                fa: true,
                 'fa-flash': item.type === 'downtime',
                 'fa-bullhorn': item.type === 'warning',
                 'fa-check': item.type === 'restore'
             });
 
             return (
-                <li key={"system-notification_" + index}>
+                <li key={`system-notification_${index}`}>
                     <a className="clearfix">
                         <span className={ badgeColorStyle }>
                             <i className={ badgeIconStyle }></i>
@@ -67,10 +65,10 @@ class AppNotifications extends React.Component{
                 </li>);
         });
 
-        var notificationBadge = notifications.notificationCount > 0 ? (<span className="noty-bubble">{ notifications.notificationCount }</span>) : "";
+        const notificationBadge = notifications.notificationCount > 0 ? (<span className="noty-bubble">{ notifications.notificationCount }</span>) : '';
 
         return (
-            <li key='notificationsMenuOption' className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
+            <li key="notificationsMenuOption" className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
                 <a href="#" className="btn-notification dropdown-toggle" data-toggle="dropdown">
                     {notificationBadge}
                     <i className="fa fa-bell"></i>
@@ -107,5 +105,11 @@ class AppNotifications extends React.Component{
         );
     }
 }
+
+AppNotifications.propTypes = {
+    notificationActions: React.PropTypes.object.isRequired,
+    auth: React.PropTypes.object.isRequired,
+    notifications: React.PropTypes.object.isRequired
+};
 
 export default AppNotifications;

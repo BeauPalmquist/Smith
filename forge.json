@@ -9,12 +9,12 @@
         "serviceProxySupport/notifications.js"
     ],
     "serviceModules": [
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-1/user.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-1/permission.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-1/role.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-1/token.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-1/userSession.js",
-        "serviceProxies/HomeDepot.Platform.Analytics.Microservice/1.0.1-build-1/clientAction.js",
-        "serviceProxies/HomeDepot.Platform.Notification.Microservice/1.0.1-build-1/notification.js"
+        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/user.js",
+        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/permission.js",
+        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/role.js",
+        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/token.js",
+        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/userSession.js",
+        "serviceProxies/HomeDepot.Platform.Analytics.Microservice/1.0.1-build-2/clientAction.js",
+        "serviceProxies/HomeDepot.Platform.Notification.Microservice/1.0.1-build-2/notification.js"
     ]
 }

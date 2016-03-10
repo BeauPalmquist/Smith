@@ -1,15 +1,10 @@
-﻿import React, {Component} from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router';
 
-export default class notFound extends Component{
-    constructor(props){
-        super(props);
-    }
-    render() {
-        return (
-            <div className="center">
-                <h1>The url you specified was not found. Return <Link to="/" className="btn btn-primary"><i className="fa fa-home fa-lg"/>&nbsp;&nbsp;Home</Link></h1>
-            </div>
-        );
-    }
+export default function NotFound() {
+    return (
+        <div className="center">
+            <h1>The url you specified was not found. Return <Link to="/" className="btn btn-primary"><i className="fa fa-home fa-lg" />&nbsp;&nbsp;Home</Link></h1>
+        </div>
+    );
 }

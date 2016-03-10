@@ -5,7 +5,7 @@ eval("var project = " + fs.readFileSync("./project.json"));
 
 var paths = {
     sass: "./sass/**/*.scss",
-    js_source: "./src/**/*.jsx",
+    js_framework: "./src/**/*.{js,jsx}",
     js_app: "./app/**/*.{js,jsx}",
     bower: "./bower_components/",
     css: "./" + project.webroot + "/src/css/",

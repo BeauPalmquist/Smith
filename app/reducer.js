@@ -1,5 +1,5 @@
 ﻿import { combineReducers } from 'redux';
-import config  from './config';
+import config from './config';
 
 // import reducer, action, actiontypes ducks here
 
