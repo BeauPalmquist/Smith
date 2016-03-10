@@ -4,3 +4,4 @@ src/webpack.config.js
 app/webpack.config.js
 src/lib/**/*
 src/common/js/**/*
+src/**/__test__/*.js

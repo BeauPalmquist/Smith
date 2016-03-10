@@ -3,18 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActionCreators from '../actions/auth';
 import * as notificationActionCreators from '../actions/notifications';
-import Notifications from '../common/js/forge/support/notifications';
 
 class Root extends Component {
     componentWillMount() {
         const { dispatch, config, auth, location } = this.props;
         let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
-
-        if (auth.userAuthenticated) {
-            Notifications.connect(() => {});
-
-            dispatch(notificationActionCreators.loadSystemNotifications());
-        }
 
         const defaultRoute = config.routes.find((route) => route.default === 'true');
         const defaultRoutePath = defaultRoute.path.startsWith('/') ? defaultRoute.path : `/${defaultRoute.path}`;

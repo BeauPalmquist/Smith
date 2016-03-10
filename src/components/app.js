@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
-import AppHeader from '../components/header';
-import AppNav from '../components/nav';
+import AppHeader from './header';
+import AppNav from './nav';
+import AppNotifications from './notifications';
 
 class App extends Component {
     componentWillMount() {
@@ -19,23 +20,23 @@ class App extends Component {
             } else {
                 if (auth.userAuthenticated && location.pathname === '/') {
                     history.replaceState(null, auth.defaultRoute);
-                }
+                        }
                 authActions.loadUserProfile(config.appName);
+                }
             }
         }
-    }
     componentWillReceiveProps(nextProps) {
         this.checkPermission();
         const { auth, location, history } = nextProps || this.props;
 
         if (!auth.userAuthenticated && !auth.userUnkown) {
-            history.replaceState(null, '/login');
+                history.replaceState(null, '/login');
         } else if (auth.userUnkown) {
-            history.replaceState(null, 'unknown');
+                history.replaceState(null, 'unknown');
         } else if (auth.userAuthenticated && location.pathname === '/') {
-            history.replaceState(null, auth.defaultRoute);
-        }
-    }
+                    history.replaceState(null, auth.defaultRoute);
+                }
+            }
     checkPermission() {
         const { auth, router, config, history } = this.props;
         let userHasNavPermissions = true;
@@ -44,7 +45,7 @@ class App extends Component {
             const user = auth.userProfile;
             if (!user.RoutePermissions) {
                 return;
-            }
+        }
             const userRoutePermissions = user.RoutePermissions;
             const clientRoutePermissions = config.routePermissions.filter((routePermission) => routePermission.routeName.toLowerCase() === currentPath.toLowerCase());
 
@@ -55,15 +56,15 @@ class App extends Component {
                     requiredPermissions.forEach((requiredPermission) => {
                         if (userRoutePermissions.includes(requiredPermission)) {
                             permissionCount++;
-                        }
+    }
                     });
 
                     userHasNavPermissions = permissionCount === requiredPermissions.length;
 
                     if (!userHasNavPermissions) {
                         history.pushState(null, '/');
-                    }
-                }
+        }
+        }
             });
         }
     }
@@ -85,6 +86,13 @@ class App extends Component {
                             </div>
                         </div>
                     </section>
+
+                    <aside className="rightbar">
+                        <div className="rightbar-container">
+                            <AppNotifications auth={auth} notifications={notify} notificationActions={notificationActions} />
+                        </div>
+                    </aside>
+
                 </div>
             );
         } else {

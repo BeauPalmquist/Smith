@@ -25,24 +25,11 @@ project.lock.json
 
 # Folders #
 ###########
-artifacts/
-publish/
 **/bin
-**/obj
-**/packages
 .vs/
 **/node_modules
 **/bower_components
 launchSettings.json
-HomeDepot.Platform.TestHost/Properties/launchSettings.json
-Forge.UI.ProjectTemplate/wwwroot/src/
-HomeDepot.Platform.TestHost/wwwroot/src/js
-HomeDepot.Platform.TestHost/wwwroot/src/css
-HomeDepot.Platform.TestHost/wwwroot/src/lib
-HomeDepot.Platform.UI.Armory/wwwroot/src/
-HomeDepot.Platform.UI.Smith/wwwroot/src/
-HomeDepot.Platform.UIFramework/wwwroot/src/
-HomeDepot.Platform.UI.Armory/dist/
 wwwroot/src/lib/
 wwwroot/src/js/
 wwwroot/src/css/

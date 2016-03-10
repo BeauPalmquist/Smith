@@ -2,40 +2,73 @@
 import Notifications from '../common/js/forge/support/notifications';
 import moment from 'moment';
 import classNames from 'classnames';
+// import noty from 'noty';
 
 class AppNotifications extends React.Component {
-    constructor(props) {
-        super(props);
-        this.loadNotifications = this.loadNotifications.bind(this);
-        this.receivedNotification = this.receivedNotification.bind(this);
-    }
     componentWillMount() {
         const { notificationActions, auth } = this.props;
         if (auth.userAuthenticated) {
             Notifications.connect(() => {});
-            Notifications.subscribe('system.notification', this.receivedNotification);
+            // Notifications.subscribe('system.notification', this.receivedNotification);
             notificationActions.loadRecentNotifications();
         }
     }
     componentWillUnmount() {
+        Notifications.unsubscribe('system.notification');
         Notifications.disconnect(this.notificationReceived);
     }
-    receivedNotification(data) {
-        const { notificationActions } = this.props;
-        notificationActions.notificationReceived(data);
-    }
-    loadNotifications(event) {
-        event.preventDefault();
+    // receivedNotification = (data) => {
+    //    const notification = JSON.parse(data);
+    //    let notificationType = 'success';
 
-        const { notificationActions } = this.props;
-        notificationActions.loadRecentNotifications();
-        notificationActions.resetNotificationCount();
-    }
+    //    if (notification.Type === 'warning') {
+    //        notificationType = 'warning';
+    //    }
+    //    if (notification.Type === 'downtime') {
+    //        notificationType = 'error';
+    //    }
+    //    const sentTime = moment(notification.Sent).format('MMM D h:mm A');
+    //     noty({
+    //        animation: {
+    //            open: 'animated rubberBand', // Animate.css class names
+    //            close: 'animated lightSpeedOut' // Animate.css class names
+    //        },
+    //        closeWith: ['click'],
+    //        dismissQueue: true,
+    //        force: true,
+    //        layout: 'topRight',
+    //        text: `<span className="notification-message">${notification.Message}<span class="message-time clearfix">${sentTime}</span></span>`,
+    //        theme: 'relax',
+    //        type: notificationType
+    //     });
+    // };
+
+        handleClick = () => {
+            const { notificationActions } = this.props;
+            notificationActions.loadRecentNotifications();
+            notificationActions.resetNotificationCount();
+        };
+
+        handleDropdownHide = (e) => {
+            const $notificationDropdown = $(document.getElementById('notifications-menu'));
+            if ($notificationDropdown.hasClass('dontClose')) {
+                e.preventDefault();
+            }
+
+            $notificationDropdown.removeClass('dontClose');
+        };
+
     render() {
 
         const { notifications } = this.props;
 
-        const userNotifications = notifications.userNotifications.map((item, index) => (<li key={`user-notification_${index}`}><a className="clearfix">{ item.message }</a></li>));
+        const userNotifications = notifications.userNotifications.map((item, index) =>
+            <li key={`user-notification_${index}`}>
+                <div className="notification-details">
+                    <h3 className="notification-header">{ item.message }</h3>
+                </div>
+            </li>
+        );
 
         const systemNotifications = notifications.systemNotifications.map((item, index) => {
             const badgeColorStyle = classNames({
@@ -54,54 +87,47 @@ class AppNotifications extends React.Component {
 
             return (
                 <li key={`system-notification_${index}`}>
-                    <a className="clearfix">
+                    <div className="notifications-badge">
                         <span className={ badgeColorStyle }>
                             <i className={ badgeIconStyle }></i>
                         </span>
-                        <span className="notification-message"> { item.message }
-                            <span className="notification-time clearfix">{ moment(item.sent, 'YYYY-MM-DD HH:mm Z').calendar() }</span>
-                        </span>
-                    </a>
+                    </div>
+                    <div className="notification-details">
+                        <h3 className="notification-header">{ item.message }</h3>
+                        <div className="notification-meta">
+                            <i className="fa fa-clock-o"></i>&nbsp;{ moment(item.sent).format('MMM D h:mm A') }
+                        </div>
+                    </div>
                 </li>);
         });
 
-        const notificationBadge = notifications.notificationCount > 0 ? (<span className="noty-bubble">{ notifications.notificationCount }</span>) : '';
-
         return (
-            <li key="notificationsMenuOption" className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
-                <a href="#" className="btn-notification dropdown-toggle" data-toggle="dropdown">
-                    {notificationBadge}
-                    <i className="fa fa-bell"></i>
-                </a>
-                <div className="dropdown-menu notifications-tabs">
                     <div>
                         <ul className="nav material-tabs nav-tabs" role="tablist">
                             <li className="active">
-                                <a href="#user" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true">User</a>
+                                <a href="#system" aria-controls="system" role="tab" data-toggle="tab" aria-expanded="true" >System</a>
                             </li>
                             <li>
-                                <a href="#system" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true">System</a>
+                                <a href="#user" aria-controls="message" role="tab" data-toggle="tab">User</a>
                             </li>
                         </ul>
                         <div className="tab-content">
-                            <div role="tabpanel" className="tab-pane active" id="user">
+                            <div role="tabpanel" className="tab-pane active" id="system">
                                 <div className="notification-wrap">
-                                    <ul>
-                                        { userNotifications }
+                                    <ul className="notifications-list">
+                                        { systemNotifications }
                                     </ul>
                                 </div>
                             </div>
-                            <div role="tabpanel" className="tab-pane" id="system">
+                            <div role="tabpanel" className="tab-pane" id="user">
                                 <div className="notification-wrap">
-                                    <ul>
-                                        { systemNotifications }
+                                    <ul className="notifications-list">
+                                        { userNotifications }
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
         );
     }
 }

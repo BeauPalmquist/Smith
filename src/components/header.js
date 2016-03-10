@@ -1,11 +1,10 @@
 ﻿import React from 'react';
 import UserDropdown from './userDropdown';
-import AppNotifications from './notifications';
 
 class AppHeader extends React.Component {
     componentDidMount() {
         const btnTopSearch = $('.btn-top-search');
-        if (btnTopSearch) {
+        if (btnTopSearch.length > 0) {
             btnTopSearch.hammer().on('click touchstart',
             (e) => {
                 e.preventDefault();
@@ -19,7 +18,7 @@ class AppHeader extends React.Component {
         }
 
         const btnMobileBar = $('.btn-mobile-bar');
-        if (btnMobileBar) {
+        if (btnMobileBar.length > 0) {
             btnMobileBar.hammer().on('click touchstart',
             (e) => {
                 e.preventDefault();
@@ -30,10 +29,20 @@ class AppHeader extends React.Component {
                     topBarRight.addClass('bar-toggle');
                 }
             });
+
+            $('.right-toggle-switch').hammer().on('click touchstart', (e) => {
+                e.preventDefault();
+                if ($('.rightbar').hasClass('right-aside-toggle')) {
+                    $('.rightbar').removeClass('right-aside-toggle');
+                } else {
+                    $('.rightbar').addClass('right-aside-toggle');
+                }
+                $(window).trigger('resize');
+            });
         }
     }
     render() {
-        const { auth, notifications, authActions, notificationActions, config } = this.props;
+        const { auth, authActions, config } = this.props;
         const boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : '';
         const regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : '';
         const headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : '';
@@ -92,14 +101,19 @@ class AppHeader extends React.Component {
                         </ul>
                         <ul className="pull-right top-right-icons">
         {search}
-                            <AppNotifications auth={auth} notifications={notifications} notificationActions={notificationActions} />
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
+                            <li>
+                                <a href="#" className="right-toggle-switch" >
+                                    <i className="fa fa-align-left"></i><span className="more-noty"></span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
             </header>
         );
-    }
+        }
 }
 
 AppHeader.propTypes = {

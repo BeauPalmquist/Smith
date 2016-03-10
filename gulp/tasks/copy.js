@@ -6,7 +6,6 @@ gulp.task("lib_copy", ['clean_lib'], function () {
     var bower = {
         "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
         "jquery": "jquery/dist/**/*.{js,map}",
-        "signalr": "signalr/jquery.signalR.min.js",
         "font-awesome": "FontAwesome/**/*.{css,otf,eot,svg,ttf,woff,woff2}"
     };
 
