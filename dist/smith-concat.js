@@ -9428,7 +9428,7 @@ $(document).ready(function() {
     });
 
     $('.notifications-dropdown').on('hide.bs.dropdown', function(e) {
-        if ($(this).hasClass('dontClose')) {
+       if ($(this).hasClass('dontClose')) {
             e.preventDefault();
         }
         $(this).removeClass('dontClose');

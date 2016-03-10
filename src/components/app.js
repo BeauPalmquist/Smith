@@ -1,7 +1,8 @@
 ﻿import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AppHeader from '../components/header';
-import AppNav from '../components/nav';
+import AppHeader from './header';
+import AppNav from './nav';
+import AppNotifications from './notifications';
 import { loadUserProfile, setRedirectRoute } from '../reducers/auth';
     
 class App extends Component{    
@@ -93,6 +94,13 @@ class App extends Component{
                             </div>
                         </div>    
                     </section>
+
+                    <aside className="rightbar">
+                        <div className="rightbar-container">
+                            <AppNotifications auth={auth} notifications={notify} notificationActions={notificationActions} />
+                        </div>
+                    </aside>
+
                 </div>
             );
         }

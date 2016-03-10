@@ -7,8 +7,6 @@ import noty from 'noty';
 class AppNotifications extends React.Component{
     constructor(props){
         super(props);
-        this.loadNotifications = this.loadNotifications.bind(this);
-        this.receivedNotification = this.receivedNotification.bind(this);
     }
 
     receivedNotification = (data) => {
@@ -37,15 +35,30 @@ class AppNotifications extends React.Component{
         });
     };
 
-    loadNotifications = (event) =>{
-        event.preventDefault();
-
+    handleClick = (event) =>{
         let {notificationActions} = this.props;
         notificationActions.loadRecentNotifications();
         notificationActions.resetNotificationCount();
-
-        return false;
     };
+
+    handleDropdownHide = (e) => {
+        const $notificationDropdown = $(document.getElementById('notifications-menu'));
+        if($notificationDropdown.hasClass('dontClose')){
+            e.preventDefault();
+        }
+
+        $notificationDropdown.removeClass('dontClose');
+    };
+    componentDidMount(){
+
+        $('.notifications-tabs').on('click touchstart', '.nav-tabs a', function(e) {
+            e.preventDefault();
+            $(this).closest('.dropdown').addClass('dontClose');
+        });
+
+        var dropdown = document.getElementById('notifications-menu');
+        dropdown.addEventListener("hide.bs.dropdown", this.handleDropdownHide);
+    }
 
     componentWillMount(){
         let {notificationActions, auth} = this.props;
@@ -57,8 +70,13 @@ class AppNotifications extends React.Component{
     }
 
     componentWillUnmount(){
+        var dropdown = document.getElementById('notifications-menu');
+        dropdown.addEventListener('hide.bs.dropdown', this.handleDropdownHide);
+
+        Notifications.unsubscribe("system.notification");
         Notifications.disconnect(this.notificationReceived);
     }
+
     render() {
 
         let { notifications } = this.props;
@@ -106,16 +124,10 @@ class AppNotifications extends React.Component{
         var notificationBadge = notifications.notificationCount > 0 ? (<span className="noty-bubble">{ notifications.notificationCount }</span>) : "";
 
         return (
-            <li key='notificationsMenuOption' className="dropdown notifications-dropdown" onClick={this.loadNotifications} >
-                <a href="#" className="btn-notification dropdown-toggle" data-toggle="dropdown">
-                    {notificationBadge}
-                    <i className="fa fa-bell"></i>
-                </a>
-                <div className="dropdown-menu notifications-tabs">
                     <div>
                         <ul className="nav material-tabs nav-tabs" role="tablist">
                             <li className="active">
-                                <a href="#system" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true" >System</a>
+                                <a href="#system" aria-controls="system" role="tab" data-toggle="tab" aria-expanded="true" >System</a>
                             </li>
                             <li>
                                 <a href="#user" aria-controls="message" role="tab" data-toggle="tab">User</a>
@@ -138,8 +150,6 @@ class AppNotifications extends React.Component{
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
         );
     }
 }
