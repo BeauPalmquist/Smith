@@ -1,7 +1,7 @@
-﻿import React from 'react';
+import React from 'react';
 import Notifications from '../common/js/forge/support/notifications';
-import moment from 'moment';
-import classNames from 'classnames';
+import SystemNotificationItem from './systemNotificationItem';
+import ClientNotificationItem from './clientNotificationItem';
 // import noty from 'noty';
 
 class AppNotifications extends React.Component {
@@ -63,43 +63,12 @@ class AppNotifications extends React.Component {
         const { notifications } = this.props;
 
         const userNotifications = notifications.userNotifications.map((item, index) =>
-            <li key={`user-notification_${index}`}>
-                <div className="notification-details">
-                    <h3 className="notification-header">{ item.message }</h3>
-                </div>
-            </li>
+            ClientNotificationItem(index, item.message)
         );
 
-        const systemNotifications = notifications.systemNotifications.map((item, index) => {
-            const badgeColorStyle = classNames({
-                ni: true,
-                w_bg_red: item.type === 'downtime',
-                w_bg_yellow: item.type === 'warning',
-                w_bg_green: item.type === 'restore'
-            });
-
-            const badgeIconStyle = classNames({
-                fa: true,
-                'fa-flash': item.type === 'downtime',
-                'fa-bullhorn': item.type === 'warning',
-                'fa-check': item.type === 'restore'
-            });
-
-            return (
-                <li key={`system-notification_${index}`}>
-                    <div className="notifications-badge">
-                        <span className={ badgeColorStyle }>
-                            <i className={ badgeIconStyle }></i>
-                        </span>
-                    </div>
-                    <div className="notification-details">
-                        <h3 className="notification-header">{ item.message }</h3>
-                        <div className="notification-meta">
-                            <i className="fa fa-clock-o"></i>&nbsp;{ moment(item.sent).format('MMM D h:mm A') }
-                        </div>
-                    </div>
-                </li>);
-        });
+        const systemNotifications = notifications.systemNotifications.map((item, index) =>
+            SystemNotificationItem(index, item)
+        );
 
         return (
                     <div>

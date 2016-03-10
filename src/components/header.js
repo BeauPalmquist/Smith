@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import UserDropdown from './userDropdown';
 
 class AppHeader extends React.Component {
@@ -42,7 +42,7 @@ class AppHeader extends React.Component {
         }
     }
     render() {
-        const { auth, authActions, config } = this.props;
+        const { auth, authActions, notifications, config } = this.props;
         const boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : '';
         const regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : '';
         const headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : '';
@@ -72,6 +72,8 @@ class AppHeader extends React.Component {
                     </div>
                 </div>);
         }
+
+        const notificationBadge = notifications.notificationCount > 0 ? (<span className="more-noty">{ notifications.notificationCount }</span>) : '';
         return (
             <header className="topbar clearfix">
         {searchBar}
@@ -104,7 +106,7 @@ class AppHeader extends React.Component {
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
                             <li>
                                 <a href="#" className="right-toggle-switch" >
-                                    <i className="fa fa-align-left"></i><span className="more-noty"></span>
+                                    <i className="fa fa-align-left"></i>{ notificationBadge }
                                 </a>
                             </li>
 
