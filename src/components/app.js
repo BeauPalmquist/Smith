@@ -50,7 +50,7 @@ class App extends Component {
     receivedSystemNotification = (data) => {
         const { notificationActions } = this.props;
 
-        notificationActions.notificationReceived(data);
+        notificationActions.systemNotificationReceived(data);
 
         /* let notificationType = 'success';
 

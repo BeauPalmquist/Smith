@@ -1,11 +1,12 @@
-﻿import Notification from '../common/js/forge/services/notification';
+import Notification from '../common/js/forge/services/notification';
 
 export const SET_NOTIFICATION_COUNT = 'SMITH/SET_NOTIFICATION_COUNT';
 export const RESET_NOTIFICATION_COUNT = 'SMITH/RESET_NOTIFICATION_COUNT';
 export const LOAD_NOTIFICATIONS = 'SMITH/LOAD_NOTIFICATIONS';
 export const SET_USER_NOTIFICATIONS = 'SMITH/SET_USER_NOTIFICATIONS';
 export const SET_SYSTEM_NOTIFICATIONS = 'SMITH/SET_SYSTEM_NOTIFICATIONS';
-export const NOTIFICATION_RECEIVED = 'SMITH/NOTIFICATION_RECEIVED';
+export const SYSTEM_NOTIFICATION_RECEIVED = 'SMITH/SYSTEM_NOTIFICATION_RECEIVED';
+export const CLIENT_NOTIFICATION_RECEIVED = 'SMITH/CLIENT_NOTIFICATION_RECEIVED';
 
 export function loadRecentNotifications() {
     return function (dispatch) {
@@ -47,11 +48,34 @@ export function resetNotificationCount() {
     };
 }
 
-export function notificationReceived(message) {
+const isOperationNotification = (message) => message.indexOf('operationId') === -1;
+
+export function systemNotificationReceived(message) {
     return function (dispatch) {
-        const isOperationNotification = message.indexOf('operationId') === -1;
-        if (isOperationNotification) {
-            dispatch({ type: NOTIFICATION_RECEIVED });
+
+        if (isOperationNotification(message)) {
+            const notification = JSON.parse(message);
+
+            dispatch({
+                type: SYSTEM_NOTIFICATION_RECEIVED,
+                notification: {
+                    message: notification.Message,
+                    type: notification.Type,
+                    sent: notification.Sent
+                }
+            });
+        }
+    };
+}
+export function clientNotificationReceived(message) {
+    return function (dispatch) {
+
+        if (isOperationNotification(message)) {
+            const notification = JSON.parse(message);
+            dispatch({
+                type: CLIENT_NOTIFICATION_RECEIVED,
+                notification: notification
+            });
         }
     };
 }

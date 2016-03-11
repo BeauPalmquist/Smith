@@ -50,7 +50,6 @@ class AppHeader extends React.Component {
 
      handleClick = () => {
         const { notificationActions } = this.props;
-        notificationActions.loadRecentNotifications();
         notificationActions.resetNotificationCount();
     };
 
@@ -86,7 +85,7 @@ class AppHeader extends React.Component {
                 </div>);
         }
 
-        const notificationBadge = notifications.notificationCount > 0 ? (<span className="more-noty"></span>) : '';
+        const notificationBadge = (notifications.userNotificationCount + notifications.systemNotificationCount) > 0 ? (<span className="more-noty"></span>) : '';
         return (
             <header className="topbar clearfix">
         {searchBar}
