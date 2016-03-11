@@ -44,12 +44,15 @@ class App extends Component {
 
     componentWillUnmount() {
         Notifications.unsubscribe('system.notification');
-        // Notifications.disconnect(this.receivedNotification);
+        Notifications.disconnect(this.receivedNotification);
     }
 
-  /*   receivedSystemNotification = (data) => {
-        const notification = JSON.parse(data);
-        let notificationType = 'success';
+    receivedSystemNotification = (data) => {
+        const { notificationActions } = this.props;
+
+        notificationActions.notificationReceived(data);
+
+        /* let notificationType = 'success';
 
         if(notification.Type === 'warning'){
             notificationType = 'warning';
@@ -58,7 +61,7 @@ class App extends Component {
             notificationType = 'error';
         }
 
-        noty({
+       noty({
             animation: {
                 open: 'animated rubberBand', // Animate.css class names
                 close: 'animated lightSpeedOut' // Animate.css class names
@@ -70,14 +73,14 @@ class App extends Component {
             text: '<span className="notification-message">' + notification.Message + '<span class="message-time clearfix">' +  moment(notification.Sent).format('MMM D h:mm A') + '</span></span>',
             theme: 'relax',
             type: notificationType
-        });
-    };
-*/
+        });*/
+    }
+
     subscribeToSystemNotifications() {
         const { auth } = this.props;
         if (auth.userAuthenticated) {
             Notifications.connect(() => {});
-            // Notifications.subscribe("system.notification",this.receivedSystemNotification);
+            Notifications.subscribe('system.notification', this.receivedSystemNotification);
         }
     }
 

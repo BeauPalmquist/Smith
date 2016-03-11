@@ -86,7 +86,7 @@ class AppHeader extends React.Component {
                 </div>);
         }
 
-        const notificationBadge = notifications.notificationCount > 0 ? (<span className="more-noty">{ notifications.notificationCount }</span>) : '';
+        const notificationBadge = notifications.notificationCount > 0 ? (<span className="more-noty"></span>) : '';
         return (
             <header className="topbar clearfix">
         {searchBar}
