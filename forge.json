@@ -1,20 +1,22 @@
 ﻿{
+    "environment": "dev-forge",
     "localCdnPath": "c:\\forge-cdn\\",
     "baseCdnPath": "http://cdn-frg.hdquotecenter.com/",
     "supportModules": [
-        "serviceProxySupport/ajax.js",
-        "serviceProxySupport/deferred.js",
-        "serviceProxySupport/auth.js",
-        "serviceProxySupport/ajaxOptions.js",
-        "serviceProxySupport/notifications.js"
+        "/serviceProxySupport/ajax.js",
+        "/serviceProxySupport/deferred.js",
+        "/serviceProxySupport/auth.js",
+        "/serviceProxySupport/ajaxOptions.js",
+        "/serviceProxySupport/notifications.js"
     ],
     "serviceModules": [
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/user.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/permission.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/role.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/token.js",
-        "serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/userSession.js",
-        "serviceProxies/HomeDepot.Platform.Analytics.Microservice/1.0.1-build-2/clientAction.js",
-        "serviceProxies/HomeDepot.Platform.Notification.Microservice/1.0.1-build-2/notification.js"
+        "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/user.js",
+        "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/permission.js",
+        "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/role.js",
+        "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/token.js",
+        "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/userSession.js",
+        "/serviceProxies/HomeDepot.Platform.Analytics.Microservice/1.0.1-build-2/clientAction.js",
+        "/serviceProxies/HomeDepot.Platform.Notification.Microservice/1.0.1-build-2/notification.js",
+        "/serviceProxies/HomeDepot.Platform.Deployment.Microservice/1.0.1-build-2/deployment.js"
     ]
 }
