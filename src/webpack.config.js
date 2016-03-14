@@ -2,7 +2,6 @@
 var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
     entry: {
         index: './src/index'
     },
@@ -23,13 +22,12 @@ module.exports = {
     },
     externals: {
         'react': 'react',
-            'react-dom': 'react-dom',
-            'React': 'react',
-            'redux': 'redux',
-            'Redux': 'redux',
-            'react-redux': 'react-redux',
-            'react-router': 'react-router',
-            'redux-router': 'redux-router',
-            'lodash': 'lodash'
+        'react-dom': 'react-dom',
+        'React': 'react',
+        'redux': 'redux',
+        'Redux': 'redux',
+        'react-redux': 'react-redux',
+        'react-router': 'react-router',
+        'redux-router': 'redux-router'
     }
 };
