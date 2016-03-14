@@ -28,8 +28,7 @@ module.exports = {
         'Redux': 'redux',
         'react-redux': 'react-redux',
         'react-router': 'react-router',
-        'redux-router': 'redux-router',
-        '$': 'jQuery',
-        'jquery': 'jQuery'
+        'redux-router': 'redux-router'
+        
     }
 };
