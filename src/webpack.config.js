@@ -3,7 +3,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
     entry: [
         'font-awesome-loader',
         'bootstrap-loader/extractStyles',

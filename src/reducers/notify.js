@@ -1,11 +1,13 @@
-﻿import {
+import {
     RESET_NOTIFICATION_COUNT,
     SET_USER_NOTIFICATIONS,
     SET_SYSTEM_NOTIFICATIONS,
-    NOTIFICATION_RECEIVED
+    CLIENT_NOTIFICATION_RECEIVED,
+    SYSTEM_NOTIFICATION_RECEIVED
     } from '../actions/notifications';
 const initialState = {
-    notificationCount: 0,
+    userNotificationCount: 0,
+    systemNotificationCount: 0,
     userNotifications: ['Loading...'],
     systemNotifications: [],
     loadingNotifications: false
@@ -24,18 +26,36 @@ export default function notify(state = initialState, action) {
                 ...state,
                 systemNotifications: action.notifications.length === 0 ? ['No Notifications'] : action.notifications
             };
-        case NOTIFICATION_RECEIVED:
+        case CLIENT_NOTIFICATION_RECEIVED:
         {
-            const updatedCount = state.notificationCount + 1;
+            const updatedCount = state.clientNotificationCount + 1;
+            state.userNotifications.unshift(action.notification);
             return {
                 ...state,
-                notificationCount: updatedCount
+                notificationCount: updatedCount,
+                userNotifications: state.userNotifications
+            };
+        }
+        case SYSTEM_NOTIFICATION_RECEIVED:
+        {
+            const updatedCount = state.systemNotificationCount + 1;
+
+            if (state.systemNotifications.length === 10) {
+                state.systemNotifications.pop();
+            }
+
+            state.systemNotifications.unshift(action.notification);
+            return {
+                ...state,
+                systemNotificationCount: updatedCount,
+                systemNotifications: state.systemNotifications
             };
         }
         case RESET_NOTIFICATION_COUNT:
             return {
                 ...state,
-                notificationCount: 0
+                clientNotificationCount: 0,
+                systemNotificationCount: 0,
             };
         default:
             return state;

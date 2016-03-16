@@ -62,12 +62,12 @@ const initialState = {
             component: Hammer
         }
     ],
-    // routePermissions: [
-    //    {
-    //        routeName: 'Rebels',
-    //        requiredPermissions: ['Forge', 'Apprentice']
-    //    }
-    // ],
+     // routePermissions: [
+     //   {
+     //       routeName: 'Rebels',
+     //       requiredPermissions: ['Forge', 'Apprentice']
+     //   }
+     // ],
     loginImage: 'src/img/forge_logo_orange.jpg'
 };
 
