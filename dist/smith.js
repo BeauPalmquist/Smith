@@ -83,10 +83,39 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _ajaxOptions2 = _interopRequireDefault(_ajaxOptions);
 
+	var _clientAction = __webpack_require__(36);
+
+	var _clientAction2 = _interopRequireDefault(_clientAction);
+
+	var _notification = __webpack_require__(38);
+
+	var _notification2 = _interopRequireDefault(_notification);
+
+	var _permission = __webpack_require__(158);
+
+	var _permission2 = _interopRequireDefault(_permission);
+
+	var _role = __webpack_require__(159);
+
+	var _role2 = _interopRequireDefault(_role);
+
+	var _token = __webpack_require__(35);
+
+	var _token2 = _interopRequireDefault(_token);
+
+	var _user = __webpack_require__(30);
+
+	var _user2 = _interopRequireDefault(_user);
+
+	var _userSession = __webpack_require__(160);
+
+	var _userSession2 = _interopRequireDefault(_userSession);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function forgeApp(clientReducers, root) {
 	    var includeDevTools = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+	    var forgeProxyBaseUri = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
 	    (0, _polyfills2.default)();
 	    var store = (0, _configureStore2.default)(clientReducers, includeDevTools);
@@ -96,6 +125,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	            window.location.reload();
 	        }
 	    });
+
+	    if (forgeProxyBaseUri) {
+
+	        var proxyOptions = { baseUri: forgeProxyBaseUri };
+
+	        _clientAction2.default.setOptions(proxyOptions);
+	        _notification2.default.setOptions(proxyOptions);
+	        _permission2.default.setOptions(proxyOptions);
+	        _role2.default.setOptions(proxyOptions);
+	        _token2.default.setOptions(proxyOptions);
+	        _user2.default.setOptions(proxyOptions);
+	        _userSession2.default.setOptions(proxyOptions);
+	    }
 
 	    (0, _reactDom.render)(_react2.default.createElement(
 	        _reactRedux.Provider,
@@ -1922,7 +1964,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3139,7 +3181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3249,7 +3291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'dev'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3448,7 +3490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -19076,6 +19118,594 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	    }
 	};
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _ajax = __webpack_require__(31);
+
+	var _ajax2 = _interopRequireDefault(_ajax);
+
+	var _deferred = __webpack_require__(33);
+
+	var _deferred2 = _interopRequireDefault(_deferred);
+
+	var _auth = __webpack_require__(32);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _token = __webpack_require__(35);
+
+	var _token2 = _interopRequireDefault(_token);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/*
+	    HomeDepot.Platform.Identity.Microservice Permission API version 1.0.1-build-2
+	    This code is auto-generated.  Any modificaions will be overwritten.
+	*/
+
+	exports.default = function () {
+	    var entityOptions = {
+	        baseUri: '/',
+	        environment: 'prod'
+	    };
+
+	    var setOptions = function setOptions(options) {
+	        entityOptions.baseUri = options.baseUri || '';
+
+	        if (entityOptions.baseUri.length && entityOptions.baseUri[entityOptions.baseUri.length - 1] != '/') entityOptions.baseUri = entityOptions.baseUri + '/';
+	    };
+
+	    var fetch = function fetch(id) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Permission/fetch';
+
+	        if (typeof id !== 'undefined' && id !== null) url += '/' + encodeURIComponent(id);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var apiPermissions = function apiPermissions() {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Permission/apiPermissions';
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var routePermissions = function routePermissions() {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Permission/routePermissions';
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    return {
+	        setOptions: setOptions,
+	        fetch: fetch,
+	        apiPermissions: apiPermissions,
+	        routePermissions: routePermissions
+	    };
+	}();
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _ajax = __webpack_require__(31);
+
+	var _ajax2 = _interopRequireDefault(_ajax);
+
+	var _deferred = __webpack_require__(33);
+
+	var _deferred2 = _interopRequireDefault(_deferred);
+
+	var _auth = __webpack_require__(32);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _token = __webpack_require__(35);
+
+	var _token2 = _interopRequireDefault(_token);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/*
+	    HomeDepot.Platform.Identity.Microservice Role API version 1.0.1-build-2
+	    This code is auto-generated.  Any modificaions will be overwritten.
+	*/
+
+	exports.default = function () {
+	    var entityOptions = {
+	        baseUri: '/',
+	        environment: 'prod'
+	    };
+
+	    var setOptions = function setOptions(options) {
+	        entityOptions.baseUri = options.baseUri || '';
+
+	        if (entityOptions.baseUri.length && entityOptions.baseUri[entityOptions.baseUri.length - 1] != '/') entityOptions.baseUri = entityOptions.baseUri + '/';
+	    };
+
+	    var addAPIPermission = function addAPIPermission(__instanceId, microservice, permission) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/addAPIPermission/' + __instanceId;
+
+	        if (typeof microservice !== 'undefined' && microservice !== null) url += '/' + encodeURIComponent(microservice);
+	        if (typeof permission !== 'undefined' && permission !== null) url += '/' + encodeURIComponent(permission);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'POST',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var add = function add(name, description) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/add';
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: { name: name === undefined ? null : name, description: description === undefined ? null : description },
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var addRoutePermission = function addRoutePermission(__instanceId, application, route) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/addRoutePermission/' + __instanceId;
+
+	        if (typeof application !== 'undefined' && application !== null) url += '/' + encodeURIComponent(application);
+	        if (typeof route !== 'undefined' && route !== null) url += '/' + encodeURIComponent(route);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'POST',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var fetch = function fetch(id) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/fetch';
+
+	        if (typeof id !== 'undefined' && id !== null) url += '/' + encodeURIComponent(id);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var getAll = function getAll() {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/getAll';
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var getByName = function getByName(name) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/getByName';
+
+	        if (typeof name !== 'undefined' && name !== null) url += '/' + encodeURIComponent(name);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var getPermissions = function getPermissions(__instanceId) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/getPermissions/' + __instanceId;
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var removeAPIPermission = function removeAPIPermission(__instanceId, microservice, permission) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/removeAPIPermission/' + __instanceId;
+
+	        if (typeof microservice !== 'undefined' && microservice !== null) url += '/' + encodeURIComponent(microservice);
+	        if (typeof permission !== 'undefined' && permission !== null) url += '/' + encodeURIComponent(permission);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'POST',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var remove = function remove(name) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/remove';
+
+	        if (typeof name !== 'undefined' && name !== null) url += '/' + encodeURIComponent(name);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'POST',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    var removeRoutePermission = function removeRoutePermission(__instanceId, application, route) {
+	        var url = entityOptions.baseUri + 'services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-2/Role/removeRoutePermission/' + __instanceId;
+
+	        if (typeof application !== 'undefined' && application !== null) url += '/' + encodeURIComponent(application);
+	        if (typeof route !== 'undefined' && route !== null) url += '/' + encodeURIComponent(route);
+
+	        return (0, _ajax2.default)({
+	            url: url,
+	            type: 'POST',
+	            contentType: 'application/json',
+	            cache: false,
+	            usePlatformAuth: true,
+	            authRetry: function authRetry(refreshToken, fn) {
+	                var deferred = new _deferred2.default();
+
+	                if (refreshToken) {
+	                    _token2.default.refresh(refreshToken).done(function () {
+	                        fn().done(function (response) {
+	                            deferred.resolve(this, response, this.statusText);
+	                        }).fail(function () {
+	                            deferred.reject(this, this.statusText);
+	                        });
+	                    }).fail(function () {
+	                        _auth2.default.setRefreshToken();
+	                    });
+	                } else {
+	                    deferred.reject(this, this.statusText);
+	                }
+
+	                return deferred.promise();
+	            }
+	        });
+	    };
+
+	    return {
+	        setOptions: setOptions,
+	        addAPIPermission: addAPIPermission,
+	        add: add,
+	        addRoutePermission: addRoutePermission,
+	        fetch: fetch,
+	        getAll: getAll,
+	        getByName: getByName,
+	        getPermissions: getPermissions,
+	        removeAPIPermission: removeAPIPermission,
+	        remove: remove,
+	        removeRoutePermission: removeRoutePermission
+	    };
+	}();
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _ajax = __webpack_require__(31);
+
+	var _ajax2 = _interopRequireDefault(_ajax);
+
+	var _deferred = __webpack_require__(33);
+
+	var _deferred2 = _interopRequireDefault(_deferred);
+
+	var _auth = __webpack_require__(32);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _token = __webpack_require__(35);
+
+	var _token2 = _interopRequireDefault(_token);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/*
+	    HomeDepot.Platform.Identity.Microservice UserSession API version 1.0.1-build-2
+	    This code is auto-generated.  Any modificaions will be overwritten.
+	*/
+
+	exports.default = function () {
+	    var entityOptions = {
+	        baseUri: '/',
+	        environment: 'prod'
+	    };
+
+	    var setOptions = function setOptions(options) {
+	        entityOptions.baseUri = options.baseUri || '';
+
+	        if (entityOptions.baseUri.length && entityOptions.baseUri[entityOptions.baseUri.length - 1] != '/') entityOptions.baseUri = entityOptions.baseUri + '/';
+	    };
+
+	    return {
+	        setOptions: setOptions
+
+	    };
+	}();
 
 /***/ }
 /******/ ])
