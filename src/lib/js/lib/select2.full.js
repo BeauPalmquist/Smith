@@ -27,17 +27,17 @@
   if (jQuery && jQuery.fn && jQuery.fn.select2 && jQuery.fn.select2.amd) {
     var S2 = jQuery.fn.select2.amd;
   }
-var S2;(function () { if (!S2 || !S2.requirejs) {
+var S2; (function () { if (!S2 || !S2.requirejs) {
 if (!S2) { S2 = {}; } else { require = S2; }
 /**
  * @license almond 0.2.9 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/jrburke/almond for details
  */
-//Going sloppy to avoid 'use strict' string cost, but strict practices should
-//be followed.
-/*jslint sloppy: true */
-/*global setTimeout: false */
+// Going sloppy to avoid 'use strict' string cost, but strict practices should
+// be followed.
+/* jslint sloppy: true */
+/* global setTimeout: false */
 
 var requirejs, require, define;
 (function (undef) {
@@ -65,21 +65,21 @@ var requirejs, require, define;
     function normalize(name, baseName) {
         var nameParts, nameSegment, mapValue, foundMap, lastIndex,
             foundI, foundStarMap, starI, i, j, part,
-            baseParts = baseName && baseName.split("/"),
+            baseParts = baseName && baseName.split('/'),
             map = config.map,
             starMap = (map && map['*']) || {};
 
-        //Adjust any relative paths.
-        if (name && name.charAt(0) === ".") {
-            //If have a base name, try to normalize against it,
-            //otherwise, assume it is a top-level require that will
-            //be relative to baseUrl in the end.
+        // Adjust any relative paths.
+        if (name && name.charAt(0) === '.') {
+            // If have a base name, try to normalize against it,
+            // otherwise, assume it is a top-level require that will
+            // be relative to baseUrl in the end.
             if (baseName) {
-                //Convert baseName to array, and lop off the last part,
-                //so that . matches that "directory" and not name of the baseName's
-                //module. For instance, baseName of "one/two/three", maps to
-                //"one/two/three.js", but we want the directory, "one/two" for
-                //this normalization.
+                // Convert baseName to array, and lop off the last part,
+                // so that . matches that "directory" and not name of the baseName's
+                // module. For instance, baseName of "one/two/three", maps to
+                // "one/two/three.js", but we want the directory, "one/two" for
+                // this normalization.
                 baseParts = baseParts.slice(0, baseParts.length - 1);
                 name = name.split('/');
                 lastIndex = name.length - 1;
@@ -91,20 +91,20 @@ var requirejs, require, define;
 
                 name = baseParts.concat(name);
 
-                //start trimDots
+                // start trimDots
                 for (i = 0; i < name.length; i += 1) {
                     part = name[i];
-                    if (part === ".") {
+                    if (part === '.') {
                         name.splice(i, 1);
                         i -= 1;
-                    } else if (part === "..") {
+                    } else if (part === '..') {
                         if (i === 1 && (name[2] === '..' || name[0] === '..')) {
-                            //End of the line. Keep at least one non-dot
-                            //path segment at the front so it can be mapped
-                            //correctly to disk. Otherwise, there is likely
-                            //no path mapping for a path starting with '..'.
-                            //This can still fail, but catches the most reasonable
-                            //uses of ..
+                            // End of the line. Keep at least one non-dot
+                            // path segment at the front so it can be mapped
+                            // correctly to disk. Otherwise, there is likely
+                            // no path mapping for a path starting with '..'.
+                            // This can still fail, but catches the most reasonable
+                            // uses of ..
                             break;
                         } else if (i > 0) {
                             name.splice(i - 1, 2);
@@ -112,9 +112,9 @@ var requirejs, require, define;
                         }
                     }
                 }
-                //end trimDots
+                // end trimDots
 
-                name = name.join("/");
+                name = name.join('/');
             } else if (name.indexOf('./') === 0) {
                 // No baseName, so this is ID is resolved relative
                 // to baseUrl, pull off the leading dot.
@@ -122,25 +122,25 @@ var requirejs, require, define;
             }
         }
 
-        //Apply map config if available.
+        // Apply map config if available.
         if ((baseParts || starMap) && map) {
             nameParts = name.split('/');
 
             for (i = nameParts.length; i > 0; i -= 1) {
-                nameSegment = nameParts.slice(0, i).join("/");
+                nameSegment = nameParts.slice(0, i).join('/');
 
                 if (baseParts) {
-                    //Find the longest baseName segment match in the config.
-                    //So, do joins on the biggest to smallest lengths of baseParts.
+                    // Find the longest baseName segment match in the config.
+                    // So, do joins on the biggest to smallest lengths of baseParts.
                     for (j = baseParts.length; j > 0; j -= 1) {
                         mapValue = map[baseParts.slice(0, j).join('/')];
 
-                        //baseName segment has  config, find if it has one for
-                        //this name.
+                        // baseName segment has  config, find if it has one for
+                        // this name.
                         if (mapValue) {
                             mapValue = mapValue[nameSegment];
                             if (mapValue) {
-                                //Match, update name to the new value.
+                                // Match, update name to the new value.
                                 foundMap = mapValue;
                                 foundI = i;
                                 break;
@@ -153,9 +153,9 @@ var requirejs, require, define;
                     break;
                 }
 
-                //Check for a star map match, but just hold on to it,
-                //if there is a shorter segment match later in a matching
-                //config, then favor over this star map.
+                // Check for a star map match, but just hold on to it,
+                // if there is a shorter segment match later in a matching
+                // config, then favor over this star map.
                 if (!foundStarMap && starMap && starMap[nameSegment]) {
                     foundStarMap = starMap[nameSegment];
                     starI = i;
@@ -178,9 +178,9 @@ var requirejs, require, define;
 
     function makeRequire(relName, forceSync) {
         return function () {
-            //A version of a require function that passes a moduleName
-            //value for items that may need to
-            //look up paths relative to the moduleName
+            // A version of a require function that passes a moduleName
+            // value for items that may need to
+            // look up paths relative to the moduleName
             return req.apply(undef, aps.call(arguments, 0).concat([relName, forceSync]));
         };
     }
@@ -211,9 +211,9 @@ var requirejs, require, define;
         return defined[name];
     }
 
-    //Turns a plugin!resource to [plugin, resource]
-    //with the plugin being undefined if the name
-    //did not have a plugin prefix.
+    // Turns a plugin!resource to [plugin, resource]
+    // with the plugin being undefined if the name
+    // did not have a plugin prefix.
     function splitPrefix(name) {
         var prefix,
             index = name ? name.indexOf('!') : -1;
@@ -241,7 +241,7 @@ var requirejs, require, define;
             plugin = callDep(prefix);
         }
 
-        //Normalize according
+        // Normalize according
         if (prefix) {
             if (plugin && plugin.normalize) {
                 name = plugin.normalize(name, makeNormalize(relName));
@@ -258,9 +258,9 @@ var requirejs, require, define;
             }
         }
 
-        //Using ridiculous property names for space reasons
+        // Using ridiculous property names for space reasons
         return {
-            f: prefix ? prefix + '!' + name : name, //fullName
+            f: prefix ? prefix + '!' + name : name, // fullName
             n: name,
             pr: prefix,
             p: plugin
@@ -301,28 +301,28 @@ var requirejs, require, define;
             callbackType = typeof callback,
             usingExports;
 
-        //Use name if no relName
+        // Use name if no relName
         relName = relName || name;
 
-        //Call the callback to define the module, if necessary.
+        // Call the callback to define the module, if necessary.
         if (callbackType === 'undefined' || callbackType === 'function') {
-            //Pull out the defined dependencies and pass the ordered
-            //values to the callback.
-            //Default to [require, exports, module] if no deps
+            // Pull out the defined dependencies and pass the ordered
+            // values to the callback.
+            // Default to [require, exports, module] if no deps
             deps = !deps.length && callback.length ? ['require', 'exports', 'module'] : deps;
             for (i = 0; i < deps.length; i += 1) {
                 map = makeMap(deps[i], relName);
                 depName = map.f;
 
-                //Fast path CommonJS standard dependencies.
-                if (depName === "require") {
+                // Fast path CommonJS standard dependencies.
+                if (depName === 'require') {
                     args[i] = handlers.require(name);
-                } else if (depName === "exports") {
-                    //CommonJS module spec 1.1
+                } else if (depName === 'exports') {
+                    // CommonJS module spec 1.1
                     args[i] = handlers.exports(name);
                     usingExports = true;
-                } else if (depName === "module") {
-                    //CommonJS module spec 1.1
+                } else if (depName === 'module') {
+                    // CommonJS module spec 1.1
                     cjsModule = args[i] = handlers.module(name);
                 } else if (hasProp(defined, depName) ||
                            hasProp(waiting, depName) ||
@@ -339,37 +339,37 @@ var requirejs, require, define;
             ret = callback ? callback.apply(defined[name], args) : undefined;
 
             if (name) {
-                //If setting exports via "module" is in play,
-                //favor that over return value and exports. After that,
-                //favor a non-undefined return value over exports use.
+                // If setting exports via "module" is in play,
+                // favor that over return value and exports. After that,
+                // favor a non-undefined return value over exports use.
                 if (cjsModule && cjsModule.exports !== undef &&
                         cjsModule.exports !== defined[name]) {
                     defined[name] = cjsModule.exports;
                 } else if (ret !== undef || !usingExports) {
-                    //Use the return value from the function.
+                    // Use the return value from the function.
                     defined[name] = ret;
                 }
             }
         } else if (name) {
-            //May just be an object definition for the module. Only
-            //worry about defining if have a module name.
+            // May just be an object definition for the module. Only
+            // worry about defining if have a module name.
             defined[name] = callback;
         }
     };
 
     requirejs = require = req = function (deps, callback, relName, forceSync, alt) {
-        if (typeof deps === "string") {
+        if (typeof deps === 'string') {
             if (handlers[deps]) {
-                //callback in this case is really relName
+                // callback in this case is really relName
                 return handlers[deps](callback);
             }
-            //Just return the module wanted. In this scenario, the
-            //deps arg is the module name, and second arg (if passed)
-            //is just the relName.
-            //Normalize module name, if it contains . or ..
+            // Just return the module wanted. In this scenario, the
+            // deps arg is the module name, and second arg (if passed)
+            // is just the relName.
+            // Normalize module name, if it contains . or ..
             return callDep(makeMap(deps, callback).f);
         } else if (!deps.splice) {
-            //deps is a config object, not an array.
+            // deps is a config object, not an array.
             config = deps;
             if (config.deps) {
                 req(config.deps, config.callback);
@@ -379,8 +379,8 @@ var requirejs, require, define;
             }
 
             if (callback.splice) {
-                //callback is an array, which means it is a dependency list.
-                //Adjust args if there are dependencies
+                // callback is an array, which means it is a dependency list.
+                // Adjust args if there are dependencies
                 deps = callback;
                 callback = relName;
                 relName = null;
@@ -389,26 +389,26 @@ var requirejs, require, define;
             }
         }
 
-        //Support require(['a'])
+        // Support require(['a'])
         callback = callback || function () {};
 
-        //If relName is a function, it is an errback handler,
-        //so remove it.
+        // If relName is a function, it is an errback handler,
+        // so remove it.
         if (typeof relName === 'function') {
             relName = forceSync;
             forceSync = alt;
         }
 
-        //Simulate async callback;
+        // Simulate async callback;
         if (forceSync) {
             main(undef, deps, callback, relName);
         } else {
-            //Using a non-zero value because of concern for what old browsers
-            //do, and latest browsers "upgrade" to 4 if lower value is used:
-            //http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dom-windowtimers-settimeout:
-            //If want a value immediately, use require('id') instead -- something
-            //that works in almond on the global level, but not guaranteed and
-            //unlikely to work in other AMD implementations.
+            // Using a non-zero value because of concern for what old browsers
+            // do, and latest browsers "upgrade" to 4 if lower value is used:
+            // http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dom-windowtimers-settimeout:
+            // If want a value immediately, use require('id') instead -- something
+            // that works in almond on the global level, but not guaranteed and
+            // unlikely to work in other AMD implementations.
             setTimeout(function () {
                 main(undef, deps, callback, relName);
             }, 4);
@@ -432,11 +432,11 @@ var requirejs, require, define;
 
     define = function (name, deps, callback) {
 
-        //This module may not have dependencies
+        // This module may not have dependencies
         if (!deps.splice) {
-            //deps is not an array, so probably means
-            //an object literal or factory function for
-            //the value. Adjust args.
+            // deps is not an array, so probably means
+            // an object literal or factory function for
+            // the value. Adjust args.
             callback = deps;
             deps = [];
         }
@@ -451,13 +451,13 @@ var requirejs, require, define;
     };
 }());
 
-S2.requirejs = requirejs;S2.require = require;S2.define = define;
+S2.requirejs = requirejs; S2.require = require; S2.define = define;
 }
 }());
-S2.define("almond", function(){});
+S2.define('almond', function () {});
 
 /* global jQuery:false, $:false */
-S2.define('jquery',[],function () {
+S2.define('jquery', [], function () {
   var _$ = jQuery || $;
 
   if (_$ == null && console && console.error) {
@@ -471,7 +471,7 @@ S2.define('jquery',[],function () {
   return _$;
 });
 
-S2.define('select2/utils',[
+S2.define('select2/utils', [
   'jquery'
 ], function ($) {
   var Utils = {};
@@ -479,7 +479,7 @@ S2.define('select2/utils',[
   Utils.Extend = function (ChildClass, SuperClass) {
     var __hasProp = {}.hasOwnProperty;
 
-    function BaseConstructor () {
+    function BaseConstructor() {
       this.constructor = ChildClass;
     }
 
@@ -496,7 +496,7 @@ S2.define('select2/utils',[
     return ChildClass;
   };
 
-  function getMethods (theClass) {
+  function getMethods(theClass) {
     var proto = theClass.prototype;
 
     var methods = [];
@@ -522,7 +522,7 @@ S2.define('select2/utils',[
     var decoratedMethods = getMethods(DecoratorClass);
     var superMethods = getMethods(SuperClass);
 
-    function DecoratedClass () {
+    function DecoratedClass() {
       var unshift = Array.prototype.unshift;
 
       var argCount = DecoratorClass.prototype.constructor.length;
@@ -540,7 +540,7 @@ S2.define('select2/utils',[
 
     DecoratorClass.displayName = SuperClass.displayName;
 
-    function ctr () {
+    function ctr() {
       this.constructor = DecoratedClass;
     }
 
@@ -679,7 +679,7 @@ S2.define('select2/utils',[
     var overflowX = el.style.overflowX;
     var overflowY = el.style.overflowY;
 
-    //Check both x and y declarations
+    // Check both x and y declarations
     if (overflowX === overflowY &&
         (overflowY === 'hidden' || overflowY === 'visible')) {
       return false;
@@ -734,11 +734,11 @@ S2.define('select2/utils',[
   return Utils;
 });
 
-S2.define('select2/results',[
+S2.define('select2/results', [
   'jquery',
   './utils'
 ], function ($, Utils) {
-  function Results ($element, options, dataAdapter) {
+  function Results($element, options, dataAdapter) {
     this.$element = $element;
     this.data = dataAdapter;
     this.options = options;
@@ -1243,7 +1243,7 @@ S2.define('select2/results',[
   return Results;
 });
 
-S2.define('select2/keys',[
+S2.define('select2/keys', [
 
 ], function () {
   var KEYS = {
@@ -1269,12 +1269,12 @@ S2.define('select2/keys',[
   return KEYS;
 });
 
-S2.define('select2/selection/base',[
+S2.define('select2/selection/base', [
   'jquery',
   '../utils',
   '../keys'
 ], function ($, Utils, KEYS) {
-  function BaseSelection ($element, options) {
+  function BaseSelection($element, options) {
     this.$element = $element;
     this.options = options;
 
@@ -1428,13 +1428,13 @@ S2.define('select2/selection/base',[
   return BaseSelection;
 });
 
-S2.define('select2/selection/single',[
+S2.define('select2/selection/single', [
   'jquery',
   './base',
   '../utils',
   '../keys'
 ], function ($, BaseSelection, Utils, KEYS) {
-  function SingleSelection () {
+  function SingleSelection() {
     SingleSelection.__super__.constructor.apply(this, arguments);
   }
 
@@ -1522,12 +1522,12 @@ S2.define('select2/selection/single',[
   return SingleSelection;
 });
 
-S2.define('select2/selection/multiple',[
+S2.define('select2/selection/multiple', [
   'jquery',
   './base',
   '../utils'
 ], function ($, BaseSelection, Utils) {
-  function MultipleSelection ($element, options) {
+  function MultipleSelection($element, options) {
     MultipleSelection.__super__.constructor.apply(this, arguments);
   }
 
@@ -1624,10 +1624,10 @@ S2.define('select2/selection/multiple',[
   return MultipleSelection;
 });
 
-S2.define('select2/selection/placeholder',[
+S2.define('select2/selection/placeholder', [
   '../utils'
 ], function (Utils) {
-  function Placeholder (decorated, $element, options) {
+  function Placeholder(decorated, $element, options) {
     this.placeholder = this.normalizePlaceholder(options.get('placeholder'));
 
     decorated.call(this, $element, options);
@@ -1674,11 +1674,11 @@ S2.define('select2/selection/placeholder',[
   return Placeholder;
 });
 
-S2.define('select2/selection/allowClear',[
+S2.define('select2/selection/allowClear', [
   'jquery',
   '../keys'
 ], function ($, KEYS) {
-  function AllowClear () { }
+  function AllowClear() { }
 
   AllowClear.prototype.bind = function (decorated, container, $container) {
     var self = this;
@@ -1772,12 +1772,12 @@ S2.define('select2/selection/allowClear',[
   return AllowClear;
 });
 
-S2.define('select2/selection/search',[
+S2.define('select2/selection/search', [
   'jquery',
   '../utils',
   '../keys'
 ], function ($, Utils, KEYS) {
-  function Search (decorated, $element, options) {
+  function Search(decorated, $element, options) {
     decorated.call(this, $element, options);
   }
 
@@ -1960,10 +1960,10 @@ S2.define('select2/selection/search',[
   return Search;
 });
 
-S2.define('select2/selection/eventRelay',[
+S2.define('select2/selection/eventRelay', [
   'jquery'
 ], function ($) {
-  function EventRelay () { }
+  function EventRelay() { }
 
   EventRelay.prototype.bind = function (decorated, container, $container) {
     var self = this;
@@ -2006,11 +2006,11 @@ S2.define('select2/selection/eventRelay',[
   return EventRelay;
 });
 
-S2.define('select2/translation',[
+S2.define('select2/translation', [
   'jquery',
   'require'
 ], function ($, require) {
-  function Translation (dict) {
+  function Translation(dict) {
     this.dict = dict || {};
   }
 
@@ -2043,7 +2043,7 @@ S2.define('select2/translation',[
   return Translation;
 });
 
-S2.define('select2/diacritics',[
+S2.define('select2/diacritics', [
 
 ], function () {
   var diacritics = {
@@ -2891,10 +2891,10 @@ S2.define('select2/diacritics',[
   return diacritics;
 });
 
-S2.define('select2/data/base',[
+S2.define('select2/data/base', [
   '../utils'
 ], function (Utils) {
-  function BaseAdapter ($element, options) {
+  function BaseAdapter($element, options) {
     BaseAdapter.__super__.constructor.call(this);
   }
 
@@ -2932,12 +2932,12 @@ S2.define('select2/data/base',[
   return BaseAdapter;
 });
 
-S2.define('select2/data/select',[
+S2.define('select2/data/select', [
   './base',
   '../utils',
   'jquery'
 ], function (BaseAdapter, Utils, $) {
-  function SelectAdapter ($element, options) {
+  function SelectAdapter($element, options) {
     this.$element = $element;
     this.options = options;
 
@@ -3218,12 +3218,12 @@ S2.define('select2/data/select',[
   return SelectAdapter;
 });
 
-S2.define('select2/data/array',[
+S2.define('select2/data/array', [
   './select',
   '../utils',
   'jquery'
 ], function (SelectAdapter, Utils, $) {
-  function ArrayAdapter ($element, options) {
+  function ArrayAdapter($element, options) {
     var data = options.get('data') || [];
 
     ArrayAdapter.__super__.constructor.call(this, $element, options);
@@ -3258,7 +3258,7 @@ S2.define('select2/data/array',[
     var $options = [];
 
     // Filter out all items except for the one passed in the argument
-    function onlyItem (item) {
+    function onlyItem(item) {
       return function () {
         return $(this).val() == item.id;
       };
@@ -3298,12 +3298,12 @@ S2.define('select2/data/array',[
   return ArrayAdapter;
 });
 
-S2.define('select2/data/ajax',[
+S2.define('select2/data/ajax', [
   './array',
   '../utils',
   'jquery'
 ], function (ArrayAdapter, Utils, $) {
-  function AjaxAdapter ($element, options) {
+  function AjaxAdapter($element, options) {
     this.ajaxOptions = this._applyDefaults(options.get('ajax'));
 
     if (this.ajaxOptions.processResults != null) {
@@ -3364,7 +3364,7 @@ S2.define('select2/data/ajax',[
       options.data = options.data(params);
     }
 
-    function request () {
+    function request() {
       var $request = options.transport(options, function (data) {
         var results = self.processResults(data, params);
 
@@ -3400,10 +3400,10 @@ S2.define('select2/data/ajax',[
   return AjaxAdapter;
 });
 
-S2.define('select2/data/tags',[
+S2.define('select2/data/tags', [
   'jquery'
 ], function ($) {
-  function Tags (decorated, $element, options) {
+  function Tags(decorated, $element, options) {
     var tags = options.get('tags');
 
     var createTag = options.get('createTag');
@@ -3436,7 +3436,7 @@ S2.define('select2/data/tags',[
       return;
     }
 
-    function wrapper (obj, child) {
+    function wrapper(obj, child) {
       var data = obj.results;
 
       for (var i = 0; i < data.length; i++) {
@@ -3520,10 +3520,10 @@ S2.define('select2/data/tags',[
   return Tags;
 });
 
-S2.define('select2/data/tokenizer',[
+S2.define('select2/data/tokenizer', [
   'jquery'
 ], function ($) {
-  function Tokenizer (decorated, $element, options) {
+  function Tokenizer(decorated, $element, options) {
     var tokenizer = options.get('tokenizer');
 
     if (tokenizer !== undefined) {
@@ -3536,14 +3536,14 @@ S2.define('select2/data/tokenizer',[
   Tokenizer.prototype.bind = function (decorated, container, $container) {
     decorated.call(this, container, $container);
 
-    this.$search =  container.dropdown.$search || container.selection.$search ||
+    this.$search = container.dropdown.$search || container.selection.$search ||
       $container.find('.select2-search__field');
   };
 
   Tokenizer.prototype.query = function (decorated, params, callback) {
     var self = this;
 
-    function select (data) {
+    function select(data) {
       self.select(data);
     }
 
@@ -3607,10 +3607,10 @@ S2.define('select2/data/tokenizer',[
   return Tokenizer;
 });
 
-S2.define('select2/data/minimumInputLength',[
+S2.define('select2/data/minimumInputLength', [
 
 ], function () {
-  function MinimumInputLength (decorated, $e, options) {
+  function MinimumInputLength(decorated, $e, options) {
     this.minimumInputLength = options.get('minimumInputLength');
 
     decorated.call(this, $e, options);
@@ -3638,10 +3638,10 @@ S2.define('select2/data/minimumInputLength',[
   return MinimumInputLength;
 });
 
-S2.define('select2/data/maximumInputLength',[
+S2.define('select2/data/maximumInputLength', [
 
 ], function () {
-  function MaximumInputLength (decorated, $e, options) {
+  function MaximumInputLength(decorated, $e, options) {
     this.maximumInputLength = options.get('maximumInputLength');
 
     decorated.call(this, $e, options);
@@ -3670,10 +3670,10 @@ S2.define('select2/data/maximumInputLength',[
   return MaximumInputLength;
 });
 
-S2.define('select2/data/maximumSelectionLength',[
+S2.define('select2/data/maximumSelectionLength', [
 
-], function (){
-  function MaximumSelectionLength (decorated, $e, options) {
+], function () {
+  function MaximumSelectionLength(decorated, $e, options) {
     this.maximumSelectionLength = options.get('maximumSelectionLength');
 
     decorated.call(this, $e, options);
@@ -3702,11 +3702,11 @@ S2.define('select2/data/maximumSelectionLength',[
   return MaximumSelectionLength;
 });
 
-S2.define('select2/dropdown',[
+S2.define('select2/dropdown', [
   'jquery',
   './utils'
 ], function ($, Utils) {
-  function Dropdown ($element, options) {
+  function Dropdown($element, options) {
     this.$element = $element;
     this.options = options;
 
@@ -3741,11 +3741,11 @@ S2.define('select2/dropdown',[
   return Dropdown;
 });
 
-S2.define('select2/dropdown/search',[
+S2.define('select2/dropdown/search', [
   'jquery',
   '../utils'
 ], function ($, Utils) {
-  function Search () { }
+  function Search() { }
 
   Search.prototype.render = function (decorated) {
     var $rendered = decorated.call(this);
@@ -3837,10 +3837,10 @@ S2.define('select2/dropdown/search',[
   return Search;
 });
 
-S2.define('select2/dropdown/hidePlaceholder',[
+S2.define('select2/dropdown/hidePlaceholder', [
 
 ], function () {
-  function HidePlaceholder (decorated, $element, options, dataAdapter) {
+  function HidePlaceholder(decorated, $element, options, dataAdapter) {
     this.placeholder = this.normalizePlaceholder(options.get('placeholder'));
 
     decorated.call(this, $element, options, dataAdapter);
@@ -3880,10 +3880,10 @@ S2.define('select2/dropdown/hidePlaceholder',[
   return HidePlaceholder;
 });
 
-S2.define('select2/dropdown/infiniteScroll',[
+S2.define('select2/dropdown/infiniteScroll', [
   'jquery'
 ], function ($) {
-  function InfiniteScroll (decorated, $element, options, dataAdapter) {
+  function InfiniteScroll(decorated, $element, options, dataAdapter) {
     this.lastParams = {};
 
     decorated.call(this, $element, options, dataAdapter);
@@ -3942,7 +3942,7 @@ S2.define('select2/dropdown/infiniteScroll',[
   InfiniteScroll.prototype.loadMore = function () {
     this.loading = true;
 
-    var params = $.extend({}, {page: 1}, this.lastParams);
+    var params = $.extend({}, { page: 1 }, this.lastParams);
 
     params.page++;
 
@@ -3968,11 +3968,11 @@ S2.define('select2/dropdown/infiniteScroll',[
   return InfiniteScroll;
 });
 
-S2.define('select2/dropdown/attachBody',[
+S2.define('select2/dropdown/attachBody', [
   'jquery',
   '../utils'
 ], function ($, Utils) {
-  function AttachBody (decorated, $element, options) {
+  function AttachBody(decorated, $element, options) {
     this.$dropdownParent = options.get('dropdownParent') || document.body;
 
     decorated.call(this, $element, options);
@@ -4171,10 +4171,10 @@ S2.define('select2/dropdown/attachBody',[
   return AttachBody;
 });
 
-S2.define('select2/dropdown/minimumResultsForSearch',[
+S2.define('select2/dropdown/minimumResultsForSearch', [
 
 ], function () {
-  function countResults (data) {
+  function countResults(data) {
     var count = 0;
 
     for (var d = 0; d < data.length; d++) {
@@ -4190,7 +4190,7 @@ S2.define('select2/dropdown/minimumResultsForSearch',[
     return count;
   }
 
-  function MinimumResultsForSearch (decorated, $element, options, dataAdapter) {
+  function MinimumResultsForSearch(decorated, $element, options, dataAdapter) {
     this.minimumResultsForSearch = options.get('minimumResultsForSearch');
 
     if (this.minimumResultsForSearch < 0) {
@@ -4211,10 +4211,10 @@ S2.define('select2/dropdown/minimumResultsForSearch',[
   return MinimumResultsForSearch;
 });
 
-S2.define('select2/dropdown/selectOnClose',[
+S2.define('select2/dropdown/selectOnClose', [
 
 ], function () {
-  function SelectOnClose () { }
+  function SelectOnClose() { }
 
   SelectOnClose.prototype.bind = function (decorated, container, $container) {
     var self = this;
@@ -4241,10 +4241,10 @@ S2.define('select2/dropdown/selectOnClose',[
   return SelectOnClose;
 });
 
-S2.define('select2/dropdown/closeOnSelect',[
+S2.define('select2/dropdown/closeOnSelect', [
 
 ], function () {
-  function CloseOnSelect () { }
+  function CloseOnSelect() { }
 
   CloseOnSelect.prototype.bind = function (decorated, container, $container) {
     var self = this;
@@ -4274,7 +4274,7 @@ S2.define('select2/dropdown/closeOnSelect',[
   return CloseOnSelect;
 });
 
-S2.define('select2/i18n/en',[],function () {
+S2.define('select2/i18n/en', [], function () {
   // English
   return {
     errorLoading: function () {
@@ -4319,7 +4319,7 @@ S2.define('select2/i18n/en',[],function () {
   };
 });
 
-S2.define('select2/defaults',[
+S2.define('select2/defaults', [
   'jquery',
   'require',
 
@@ -4371,7 +4371,7 @@ S2.define('select2/defaults',[
              AttachBody, MinimumResultsForSearch, SelectOnClose, CloseOnSelect,
 
              EnglishTranslation) {
-  function Defaults () {
+  function Defaults() {
     this.reset();
   }
 
@@ -4618,7 +4618,7 @@ S2.define('select2/defaults',[
   };
 
   Defaults.prototype.reset = function () {
-    function stripDiacritics (text) {
+    function stripDiacritics(text) {
       // Used 'uni range + named function' from http://jsperf.com/diacritics/18
       function match(a) {
         return DIACRITICS[a] || a;
@@ -4627,7 +4627,7 @@ S2.define('select2/defaults',[
       return text.replace(/[^\u0000-\u007E]/g, match);
     }
 
-    function matcher (params, data) {
+    function matcher(params, data) {
       // Always return the object if there is nothing to compare
       if ($.trim(params.term) === '') {
         return data;
@@ -4716,13 +4716,13 @@ S2.define('select2/defaults',[
   return defaults;
 });
 
-S2.define('select2/options',[
+S2.define('select2/options', [
   'require',
   'jquery',
   './defaults',
   './utils'
 ], function (require, $, Defaults, Utils) {
-  function Options (options, $element) {
+  function Options(options, $element) {
     this.options = options;
 
     if ($element != null) {
@@ -4839,7 +4839,7 @@ S2.define('select2/options',[
   return Options;
 });
 
-S2.define('select2/core',[
+S2.define('select2/core', [
   'jquery',
   './options',
   './utils',
@@ -5383,10 +5383,10 @@ S2.define('select2/core',[
   return Select2;
 });
 
-S2.define('select2/compat/utils',[
+S2.define('select2/compat/utils', [
   'jquery'
 ], function ($) {
-  function syncCssClasses ($dest, $src, adapter) {
+  function syncCssClasses($dest, $src, adapter) {
     var classes, replacements = [], adapted;
 
     classes = $.trim($dest.attr('class'));
@@ -5427,16 +5427,16 @@ S2.define('select2/compat/utils',[
   };
 });
 
-S2.define('select2/compat/containerCss',[
+S2.define('select2/compat/containerCss', [
   'jquery',
   './utils'
 ], function ($, CompatUtils) {
   // No-op CSS adapter that discards all classes by default
-  function _containerAdapter (clazz) {
+  function _containerAdapter(clazz) {
     return null;
   }
 
-  function ContainerCSS () { }
+  function ContainerCSS() { }
 
   ContainerCSS.prototype.render = function (decorated) {
     var $container = decorated.call(this);
@@ -5484,16 +5484,16 @@ S2.define('select2/compat/containerCss',[
   return ContainerCSS;
 });
 
-S2.define('select2/compat/dropdownCss',[
+S2.define('select2/compat/dropdownCss', [
   'jquery',
   './utils'
 ], function ($, CompatUtils) {
   // No-op CSS adapter that discards all classes by default
-  function _dropdownAdapter (clazz) {
+  function _dropdownAdapter(clazz) {
     return null;
   }
 
-  function DropdownCSS () { }
+  function DropdownCSS() { }
 
   DropdownCSS.prototype.render = function (decorated) {
     var $dropdown = decorated.call(this);
@@ -5541,10 +5541,10 @@ S2.define('select2/compat/dropdownCss',[
   return DropdownCSS;
 });
 
-S2.define('select2/compat/initSelection',[
+S2.define('select2/compat/initSelection', [
   'jquery'
 ], function ($) {
-  function InitSelection (decorated, $element, options) {
+  function InitSelection(decorated, $element, options) {
     if (options.get('debug') && window.console && console.warn) {
       console.warn(
         'Select2: The `initSelection` option has been deprecated in favor' +
@@ -5584,10 +5584,10 @@ S2.define('select2/compat/initSelection',[
   return InitSelection;
 });
 
-S2.define('select2/compat/inputData',[
+S2.define('select2/compat/inputData', [
   'jquery'
 ], function ($) {
-  function InputData (decorated, $element, options) {
+  function InputData(decorated, $element, options) {
     this._currentData = [];
     this._valueSeparator = options.get('valueSeparator') || ',';
 
@@ -5605,7 +5605,7 @@ S2.define('select2/compat/inputData',[
   }
 
   InputData.prototype.current = function (_, callback) {
-    function getSelected (data, selectedIds) {
+    function getSelected(data, selectedIds) {
       var selected = [];
 
       if (data.selected || $.inArray(data.id, selectedIds) !== -1) {
@@ -5712,11 +5712,11 @@ S2.define('select2/compat/inputData',[
   return InputData;
 });
 
-S2.define('select2/compat/matcher',[
+S2.define('select2/compat/matcher', [
   'jquery'
 ], function ($) {
-  function oldMatcher (matcher) {
-    function wrappedMatcher (params, data) {
+  function oldMatcher(matcher) {
+    function wrappedMatcher(params, data) {
       var match = $.extend(true, {}, data);
 
       if (params.term == null || $.trim(params.term) === '') {
@@ -5755,10 +5755,10 @@ S2.define('select2/compat/matcher',[
   return oldMatcher;
 });
 
-S2.define('select2/compat/query',[
+S2.define('select2/compat/query', [
 
 ], function () {
-  function Query (decorated, $element, options) {
+  function Query(decorated, $element, options) {
     if (options.get('debug') && window.console && console.warn) {
       console.warn(
         'Select2: The `query` option has been deprecated in favor of a ' +
@@ -5782,10 +5782,10 @@ S2.define('select2/compat/query',[
   return Query;
 });
 
-S2.define('select2/dropdown/attachContainer',[
+S2.define('select2/dropdown/attachContainer', [
 
 ], function () {
-  function AttachContainer (decorated, $element, options) {
+  function AttachContainer(decorated, $element, options) {
     decorated.call(this, $element, options);
   }
 
@@ -5801,10 +5801,10 @@ S2.define('select2/dropdown/attachContainer',[
   return AttachContainer;
 });
 
-S2.define('select2/dropdown/stopPropagation',[
+S2.define('select2/dropdown/stopPropagation', [
 
 ], function () {
-  function StopPropagation () { }
+  function StopPropagation() { }
 
   StopPropagation.prototype.bind = function (decorated, container, $container) {
     decorated.call(this, container, $container);
@@ -5840,10 +5840,10 @@ S2.define('select2/dropdown/stopPropagation',[
   return StopPropagation;
 });
 
-S2.define('select2/selection/stopPropagation',[
+S2.define('select2/selection/stopPropagation', [
 
 ], function () {
-  function StopPropagation () { }
+  function StopPropagation() { }
 
   StopPropagation.prototype.bind = function (decorated, container, $container) {
     decorated.call(this, container, $container);
@@ -5879,7 +5879,7 @@ S2.define('select2/selection/stopPropagation',[
   return StopPropagation;
 });
 
-S2.define('jquery.select2',[
+S2.define('jquery.select2', [
   'jquery',
   'require',
 
@@ -5946,9 +5946,9 @@ S2.define('jquery.select2',[
  */
 
 (function (factory) {
-    if ( typeof S2.define === 'function' && S2.define.amd ) {
+    if (typeof S2.define === 'function' && S2.define.amd) {
         // AMD. Register as an anonymous module.
-        S2.define('jquery.mousewheel',['jquery'], factory);
+        S2.define('jquery.mousewheel', ['jquery'], factory);
     } else if (typeof exports === 'object') {
         // Node/CommonJS style for Browserify
         module.exports = factory;
@@ -5958,25 +5958,25 @@ S2.define('jquery.select2',[
     }
 }(function ($) {
 
-    var toFix  = ['wheel', 'mousewheel', 'DOMMouseScroll', 'MozMousePixelScroll'],
-        toBind = ( 'onwheel' in document || document.documentMode >= 9 ) ?
+    var toFix = ['wheel', 'mousewheel', 'DOMMouseScroll', 'MozMousePixelScroll'],
+        toBind = ('onwheel' in document || document.documentMode >= 9) ?
                     ['wheel'] : ['mousewheel', 'DomMouseScroll', 'MozMousePixelScroll'],
-        slice  = Array.prototype.slice,
+        slice = Array.prototype.slice,
         nullLowestDeltaTimeout, lowestDelta;
 
-    if ( $.event.fixHooks ) {
-        for ( var i = toFix.length; i; ) {
-            $.event.fixHooks[ toFix[--i] ] = $.event.mouseHooks;
+    if ($.event.fixHooks) {
+        for (var i = toFix.length; i;) {
+            $.event.fixHooks[toFix[--i]] = $.event.mouseHooks;
         }
     }
 
     var special = $.event.special.mousewheel = {
         version: '3.1.12',
 
-        setup: function() {
-            if ( this.addEventListener ) {
-                for ( var i = toBind.length; i; ) {
-                    this.addEventListener( toBind[--i], handler, false );
+        setup: function () {
+            if (this.addEventListener) {
+                for (var i = toBind.length; i;) {
+                    this.addEventListener(toBind[--i], handler, false);
                 }
             } else {
                 this.onmousewheel = handler;
@@ -5986,10 +5986,10 @@ S2.define('jquery.select2',[
             $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
         },
 
-        teardown: function() {
-            if ( this.removeEventListener ) {
-                for ( var i = toBind.length; i; ) {
-                    this.removeEventListener( toBind[--i], handler, false );
+        teardown: function () {
+            if (this.removeEventListener) {
+                for (var i = toBind.length; i;) {
+                    this.removeEventListener(toBind[--i], handler, false);
                 }
             } else {
                 this.onmousewheel = null;
@@ -5999,7 +5999,7 @@ S2.define('jquery.select2',[
             $.removeData(this, 'mousewheel-page-height');
         },
 
-        getLineHeight: function(elem) {
+        getLineHeight: function (elem) {
             var $elem = $(elem),
                 $parent = $elem['offsetParent' in $.fn ? 'offsetParent' : 'parent']();
             if (!$parent.length) {
@@ -6008,7 +6008,7 @@ S2.define('jquery.select2',[
             return parseInt($parent.css('fontSize'), 10) || parseInt($elem.css('fontSize'), 10) || 16;
         },
 
-        getPageHeight: function(elem) {
+        getPageHeight: function (elem) {
             return $(elem).height();
         },
 
@@ -6019,36 +6019,36 @@ S2.define('jquery.select2',[
     };
 
     $.fn.extend({
-        mousewheel: function(fn) {
+        mousewheel: function (fn) {
             return fn ? this.bind('mousewheel', fn) : this.trigger('mousewheel');
         },
 
-        unmousewheel: function(fn) {
+        unmousewheel: function (fn) {
             return this.unbind('mousewheel', fn);
         }
     });
 
 
     function handler(event) {
-        var orgEvent   = event || window.event,
-            args       = slice.call(arguments, 1),
-            delta      = 0,
-            deltaX     = 0,
-            deltaY     = 0,
-            absDelta   = 0,
-            offsetX    = 0,
-            offsetY    = 0;
+        var orgEvent = event || window.event,
+            args = slice.call(arguments, 1),
+            delta = 0,
+            deltaX = 0,
+            deltaY = 0,
+            absDelta = 0,
+            offsetX = 0,
+            offsetY = 0;
         event = $.event.fix(orgEvent);
         event.type = 'mousewheel';
 
         // Old school scrollwheel delta
-        if ( 'detail'      in orgEvent ) { deltaY = orgEvent.detail * -1;      }
-        if ( 'wheelDelta'  in orgEvent ) { deltaY = orgEvent.wheelDelta;       }
-        if ( 'wheelDeltaY' in orgEvent ) { deltaY = orgEvent.wheelDeltaY;      }
-        if ( 'wheelDeltaX' in orgEvent ) { deltaX = orgEvent.wheelDeltaX * -1; }
+        if ('detail' in orgEvent) { deltaY = orgEvent.detail * -1; }
+        if ('wheelDelta' in orgEvent) { deltaY = orgEvent.wheelDelta; }
+        if ('wheelDeltaY' in orgEvent) { deltaY = orgEvent.wheelDeltaY; }
+        if ('wheelDeltaX' in orgEvent) { deltaX = orgEvent.wheelDeltaX * -1; }
 
         // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
-        if ( 'axis' in orgEvent && orgEvent.axis === orgEvent.HORIZONTAL_AXIS ) {
+        if ('axis' in orgEvent && orgEvent.axis === orgEvent.HORIZONTAL_AXIS) {
             deltaX = deltaY * -1;
             deltaY = 0;
         }
@@ -6057,62 +6057,62 @@ S2.define('jquery.select2',[
         delta = deltaY === 0 ? deltaX : deltaY;
 
         // New school wheel delta (wheel event)
-        if ( 'deltaY' in orgEvent ) {
+        if ('deltaY' in orgEvent) {
             deltaY = orgEvent.deltaY * -1;
-            delta  = deltaY;
+            delta = deltaY;
         }
-        if ( 'deltaX' in orgEvent ) {
+        if ('deltaX' in orgEvent) {
             deltaX = orgEvent.deltaX;
-            if ( deltaY === 0 ) { delta  = deltaX * -1; }
+            if (deltaY === 0) { delta = deltaX * -1; }
         }
 
         // No change actually happened, no reason to go any further
-        if ( deltaY === 0 && deltaX === 0 ) { return; }
+        if (deltaY === 0 && deltaX === 0) { return; }
 
         // Need to convert lines and pages to pixels if we aren't already in pixels
         // There are three delta modes:
         //   * deltaMode 0 is by pixels, nothing to do
         //   * deltaMode 1 is by lines
         //   * deltaMode 2 is by pages
-        if ( orgEvent.deltaMode === 1 ) {
+        if (orgEvent.deltaMode === 1) {
             var lineHeight = $.data(this, 'mousewheel-line-height');
-            delta  *= lineHeight;
+            delta *= lineHeight;
             deltaY *= lineHeight;
             deltaX *= lineHeight;
-        } else if ( orgEvent.deltaMode === 2 ) {
+        } else if (orgEvent.deltaMode === 2) {
             var pageHeight = $.data(this, 'mousewheel-page-height');
-            delta  *= pageHeight;
+            delta *= pageHeight;
             deltaY *= pageHeight;
             deltaX *= pageHeight;
         }
 
         // Store lowest absolute delta to normalize the delta values
-        absDelta = Math.max( Math.abs(deltaY), Math.abs(deltaX) );
+        absDelta = Math.max(Math.abs(deltaY), Math.abs(deltaX));
 
-        if ( !lowestDelta || absDelta < lowestDelta ) {
+        if (!lowestDelta || absDelta < lowestDelta) {
             lowestDelta = absDelta;
 
             // Adjust older deltas if necessary
-            if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
+            if (shouldAdjustOldDeltas(orgEvent, absDelta)) {
                 lowestDelta /= 40;
             }
         }
 
         // Adjust older deltas if necessary
-        if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
+        if (shouldAdjustOldDeltas(orgEvent, absDelta)) {
             // Divide all the things by 40!
-            delta  /= 40;
+            delta /= 40;
             deltaX /= 40;
             deltaY /= 40;
         }
 
         // Get a whole, normalized value for the deltas
-        delta  = Math[ delta  >= 1 ? 'floor' : 'ceil' ](delta  / lowestDelta);
-        deltaX = Math[ deltaX >= 1 ? 'floor' : 'ceil' ](deltaX / lowestDelta);
-        deltaY = Math[ deltaY >= 1 ? 'floor' : 'ceil' ](deltaY / lowestDelta);
+        delta = Math[delta >= 1 ? 'floor' : 'ceil'](delta / lowestDelta);
+        deltaX = Math[deltaX >= 1 ? 'floor' : 'ceil'](deltaX / lowestDelta);
+        deltaY = Math[deltaY >= 1 ? 'floor' : 'ceil'](deltaY / lowestDelta);
 
         // Normalise offsetX and offsetY properties
-        if ( special.settings.normalizeOffset && this.getBoundingClientRect ) {
+        if (special.settings.normalizeOffset && this.getBoundingClientRect) {
             var boundingRect = this.getBoundingClientRect();
             offsetX = event.clientX - boundingRect.left;
             offsetY = event.clientY - boundingRect.top;

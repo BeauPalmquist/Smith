@@ -1,16 +1,16 @@
 /**
  * jsPDF
  * (c) 2009 James Hall
- * 
+ *
  * Some parts based on FPDF.
  */
 
-var jsPDF = function(){
-	
+var jsPDF = function () {
+
 	// Private properties
 	var version = '20090504';
 	var buffer = '';
-	
+
 	var pdfVersion = '1.3'; // PDF Version
 	var defaultPageFormat = 'a4';
 	var pageFormats = { // Size in mm of various paper formats
@@ -35,55 +35,55 @@ var jsPDF = function(){
 	var fontSize = 16; // Default font size
 	var pageFontSize = 16;
 
-	// Initilisation 
+	// Initilisation
 	if (unit == 'pt') {
 		k = 1;
-	} else if(unit == 'mm') {
-		k = 72/25.4;
-	} else if(unit == 'cm') {
-		k = 72/2.54;
-	} else if(unit == 'in') {
+	} else if (unit == 'mm') {
+		k = 72 / 25.4;
+	} else if (unit == 'cm') {
+		k = 72 / 2.54;
+	} else if (unit == 'in') {
 		k = 72;
 	}
-	
+
 	// Private functions
-	var newObject = function() {
-		//Begin a new object
+	var newObject = function () {
+		// Begin a new object
 		objectNumber ++;
 		offsets[objectNumber] = buffer.length;
-		out(objectNumber + ' 0 obj');		
-	}
-	
-	
-	var putHeader = function() {
+		out(objectNumber + ' 0 obj');
+	};
+
+
+	var putHeader = function () {
 		out('%PDF-' + pdfVersion);
-	}
-	
-	var putPages = function() {
-		
+	};
+
+	var putPages = function () {
+
 		// TODO: Fix, hardcoded to a4 portrait
 		var wPt = pageWidth * k;
 		var hPt = pageHeight * k;
 
-		for(n=1; n <= page; n++) {
+		for (n = 1; n <= page; n++) {
 			newObject();
 			out('<</Type /Page');
-			out('/Parent 1 0 R');	
+			out('/Parent 1 0 R');
 			out('/Resources 2 0 R');
 			out('/Contents ' + (objectNumber + 1) + ' 0 R>>');
 			out('endobj');
-			
-			//Page content
+
+			// Page content
 			p = pages[n];
 			newObject();
-			out('<</Length ' + p.length  + '>>');
+			out('<</Length ' + p.length + '>>');
 			putStream(p);
-			out('endobj');					
+			out('endobj');
 		}
 		offsets[1] = buffer.length;
 		out('1 0 obj');
 		out('<</Type /Pages');
-		var kids='/Kids [';
+		var kids = '/Kids [';
 		for (i = 0; i < page; i++) {
 			kids += (3 + 2 * i) + ' 0 R ';
 		}
@@ -91,29 +91,29 @@ var jsPDF = function(){
 		out('/Count ' + page);
 		out(sprintf('/MediaBox [0 0 %.2f %.2f]', wPt, hPt));
 		out('>>');
-		out('endobj');		
-	}
-	
-	var putStream = function(str) {
+		out('endobj');
+	};
+
+	var putStream = function (str) {
 		out('stream');
 		out(str);
 		out('endstream');
-	}
-	
-	var putResources = function() {
+	};
+
+	var putResources = function () {
 		putFonts();
 		putImages();
-		
-		//Resource dictionary
+
+		// Resource dictionary
 		offsets[2] = buffer.length;
 		out('2 0 obj');
 		out('<<');
 		putResourceDictionary();
 		out('>>');
 		out('endobj');
-	}	
-	
-	var putFonts = function() {
+	};
+
+	var putFonts = function () {
 		// TODO: Only supports core font hardcoded to Helvetica
 		newObject();
 		fontNumber = objectNumber;
@@ -124,13 +124,13 @@ var jsPDF = function(){
 		out('/Encoding /WinAnsiEncoding');
 		out('>>');
 		out('endobj');
-	}
-	
-	var putImages = function() {
+	};
+
+	var putImages = function () {
 		// TODO
-	}
-	
-	var putResourceDictionary = function() {
+	};
+
+	var putResourceDictionary = function () {
 		out('/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]');
 		out('/Font <<');
 		// Do this for each font, the '1' bit is the index of the font
@@ -140,31 +140,31 @@ var jsPDF = function(){
 		out('/XObject <<');
 		putXobjectDict();
 		out('>>');
-	}
-	
-	var putXobjectDict = function() {
+	};
+
+	var putXobjectDict = function () {
 		// TODO
 		// Loop through images
-	}
-	
-	
-	var putInfo = function() {
+	};
+
+
+	var putInfo = function () {
 		out('/Producer (jsPDF ' + version + ')');
-		if(documentProperties.title != undefined) {
+		if (documentProperties.title != undefined) {
 			out('/Title (' + pdfEscape(documentProperties.title) + ')');
 		}
-		if(documentProperties.subject != undefined) {
+		if (documentProperties.subject != undefined) {
 			out('/Subject (' + pdfEscape(documentProperties.subject) + ')');
 		}
-		if(documentProperties.author != undefined) {
+		if (documentProperties.author != undefined) {
 			out('/Author (' + pdfEscape(documentProperties.author) + ')');
 		}
-		if(documentProperties.keywords != undefined) {
+		if (documentProperties.keywords != undefined) {
 			out('/Keywords (' + pdfEscape(documentProperties.keywords) + ')');
 		}
-		if(documentProperties.creator != undefined) {
+		if (documentProperties.creator != undefined) {
 			out('/Creator (' + pdfEscape(documentProperties.creator) + ')');
-		}		
+		}
 		var created = new Date();
 		var year = created.getFullYear();
 		var month = (created.getMonth() + 1);
@@ -173,51 +173,51 @@ var jsPDF = function(){
 		var minute = created.getMinutes();
 		var second = created.getSeconds();
 		out('/CreationDate (D:' + sprintf('%02d%02d%02d%02d%02d%02d', year, month, day, hour, minute, second) + ')');
-	}
-	
+	};
+
 	var putCatalog = function () {
 		out('/Type /Catalog');
 		out('/Pages 1 0 R');
 		// TODO: Add zoom and layout modes
 		out('/OpenAction [3 0 R /FitH null]');
 		out('/PageLayout /OneColumn');
-	}	
-	
+	};
+
 	function putTrailer() {
 		out('/Size ' + (objectNumber + 1));
 		out('/Root ' + objectNumber + ' 0 R');
 		out('/Info ' + (objectNumber - 1) + ' 0 R');
-	}	
-	
-	var endDocument = function() {
+	}
+
+	var endDocument = function () {
 		state = 1;
 		putHeader();
 		putPages();
-		
+
 		putResources();
-		//Info
+		// Info
 		newObject();
 		out('<<');
 		putInfo();
 		out('>>');
 		out('endobj');
-		
-		//Catalog
+
+		// Catalog
 		newObject();
 		out('<<');
 		putCatalog();
 		out('>>');
 		out('endobj');
-		
-		//Cross-ref
+
+		// Cross-ref
 		var o = buffer.length;
 		out('xref');
 		out('0 ' + (objectNumber + 1));
 		out('0000000000 65535 f ');
-		for (var i=1; i <= objectNumber; i++) {
+		for (var i = 1; i <= objectNumber; i++) {
 			out(sprintf('%010d 00000 n ', offsets[i]));
 		}
-		//Trailer
+		// Trailer
 		out('trailer');
 		out('<<');
 		putTrailer();
@@ -225,79 +225,79 @@ var jsPDF = function(){
 		out('startxref');
 		out(o);
 		out('%%EOF');
-		state = 3;		
-	}
-	
-	var beginPage = function() {
+		state = 3;
+	};
+
+	var beginPage = function () {
 		page ++;
 		// Do dimension stuff
 		state = 2;
 		pages[page] = '';
-		
+
 		// TODO: Hardcoded at A4 and portrait
 		pageHeight = pageFormats['a4'][1] / k;
 		pageWidth = pageFormats['a4'][0] / k;
-	}
-	
-	var out = function(string) {
-		if(state == 2) {
+	};
+
+	var out = function (string) {
+		if (state == 2) {
 			pages[page] += string + '\n';
 		} else {
 			buffer += string + '\n';
 		}
-	}
-	
-	var _addPage = function() {
+	};
+
+	var _addPage = function () {
 		beginPage();
 		// Set line width
 		out(sprintf('%.2f w', (lineWidth * k)));
-		
+
 		// Set font - TODO
 		// 16 is the font size
 		pageFontSize = fontSize;
-		out('BT /F1 ' + parseInt(fontSize) + '.00 Tf ET'); 		
-	}
-	
+		out('BT /F1 ' + parseInt(fontSize) + '.00 Tf ET');
+	};
+
 	// Add the first page automatically
-	_addPage();	
+	_addPage();
 
 	// Escape text
-	var pdfEscape = function(text) {
+	var pdfEscape = function (text) {
 		return text.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
-	}
-	
+	};
+
 	return {
-		addPage: function() {
+		addPage: function () {
 			_addPage();
 		},
-		text: function(x, y, text) {
+		text: function (x, y, text) {
 			// need page height
-			if(pageFontSize != fontSize) {
+			if (pageFontSize != fontSize) {
 				out('BT /F1 ' + parseInt(fontSize) + '.00 Tf ET');
 				pageFontSize = fontSize;
 			}
 			var str = sprintf('BT %.2f %.2f Td (%s) Tj ET', x * k, (pageHeight - y) * k, pdfEscape(text));
 			out(str);
 		},
-		setProperties: function(properties) {
+		setProperties: function (properties) {
 			documentProperties = properties;
 		},
-		addImage: function(imageData, format, x, y, w, h) {
-		
+		addImage: function (imageData, format, x, y, w, h) {
+
 		},
-		output: function(type, options) {
+		output: function (type, options) {
 			endDocument();
-			if(type == undefined) {
+			if (type == undefined) {
 				return buffer;
 			}
-			if(type == 'datauri') {
+			if (type == 'datauri') {
 				document.location.href = 'data:application/pdf;base64,' + Base64.encode(buffer);
 			}
 			// @TODO: Add different output options
 		},
-		setFontSize: function(size) {
+		setFontSize: function (size) {
 			fontSize = size;
 		}
-	}
+	};
 
 };

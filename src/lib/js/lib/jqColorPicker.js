@@ -1,4 +1,4 @@
-;(function($, Colors, undefined){
+(function ($, Colors, undefined) {
 	'use strict';
 
 	var $document = $(document),
@@ -9,14 +9,14 @@
 		_selector = '',
 
 		_$trigger,
-		_$UI, _$xy_slider, _$xy_cursor, _$z_cursor , _$alpha , _$alpha_cursor,
+		_$UI, _$xy_slider, _$xy_cursor, _$z_cursor, _$alpha, _$alpha_cursor,
 
 		_pointermove = 'touchmove.a mousemove.a pointermove.a',
 		_pointerdown = 'touchstart.a mousedown.a pointerdown.a',
 		_pointerup = 'touchend.a mouseup.a pointerup.a',
 		_GPU = false,
 		_animate = window.requestAnimationFrame ||
-			window.webkitRequestAnimationFrame || function(cb){cb()},
+			window.webkitRequestAnimationFrame || function (cb) {cb();},
 		_html = '<div class="cp-color-picker"><div class="cp-z-slider"><div c' +
 			'lass="cp-z-cursor"></div></div><div class="cp-xy-slider"><div cl' +
 			'ass="cp-white"></div><div class="cp-xy-cursor"></div></div><div ' +
@@ -41,7 +41,7 @@
 			'position:absolute;margin-left:-4px;height:100%;border:4px solid ' +
 			'#fff;border-color:#fff transparent;box-sizing:border-box}',
 
-		ColorPicker = function(options) {
+		ColorPicker = function (options) {
 			_color = this.color = new Colors(options);
 			_options = _color.options;
 		};
@@ -49,7 +49,7 @@
 	ColorPicker.prototype = {
 		render: preRender,
 		toggle: toggle
-	}
+	};
 
 	function extractValue(elm) {
 		return elm.value || elm.getAttribute('value') ||
@@ -85,7 +85,7 @@
 					((_$UI[0]._top = _$UI[0]._top + _$UI[0]._height -
 					($window.scrollTop() + $window.height())) + gap > 0 ?
 					_$UI[0]._top + gap : 0)
-			}).show(_options.animationSpeed, function() {
+			}).show(_options.animationSpeed, function () {
 				if (event === true) {
 					return;
 				}
@@ -97,22 +97,22 @@
 				preRender(true);
 			});
 		} else {
-			$(_$UI).hide(_options.animationSpeed, function() {
+			$(_$UI).hide(_options.animationSpeed, function () {
 				_$trigger.blur();
 				_colorPicker.$trigger = null;
 				preRender(false);
 			});
 		}
-	};
+	}
 
 	function build() {
 		$('head').append('<style type="text/css">' +
 			(_options.css || _css) + (_options.cssAddon || '') + '</style>');
 
 		return _colorPicker.$UI = _$UI =
-			$(_html).css({'margin': _options.margin}).
+			$(_html).css({ 'margin': _options.margin }).
 			appendTo('body').
-			show(0, function() {
+			show(0, function () {
 				var $this = $(this);
 
 				_GPU = _options.GPU && $this.css('perspective') !== undefined;
@@ -166,7 +166,7 @@
 		var z = resolveEventType(event).pageY - _$trigger._offset.top,
 			hsv = _color.colors.hsv;
 
-		_color.setColor({h: 360 - (z / _$xy_slider._height * 360)}, 'hsv');
+		_color.setColor({ h: 360 - (z / _$xy_slider._height * 360) }, 'hsv');
 		preRender();
 	}
 
@@ -208,7 +208,7 @@
 
 		_$xy_slider._css = {
 			backgroundColor: 'rgb(' +
-				hueRGB.r + ',' + hueRGB.g + ',' + hueRGB.b + ')'};
+				hueRGB.r + ',' + hueRGB.g + ',' + hueRGB.b + ')' };
 		_$xy_cursor._css = {
 			transform: translate3d + '(' + s + 'px, ' + v + 'px, 0)',
 			left: !_GPU ? s : '',
@@ -220,7 +220,7 @@
 			top: !_GPU ? h : '',
 			borderColor : 'transparent ' + HUEContrast
 		};
-		_$alpha._css = {backgroundColor: 'rgb(' + RGBInnerText + ')'};
+		_$alpha._css = { backgroundColor: 'rgb(' + RGBInnerText + ')' };
 		_$alpha_cursor._css = {
 			transform: translate3d + '(' + a + 'px, 0, 0)',
 			left: !_GPU ? a : '',
@@ -258,8 +258,8 @@
 		);
 	}
 
-	$.fn.colorPicker = function(options) {
-		var noop = function(){};
+	$.fn.colorPicker = function (options) {
+		var noop = function () {};
 
  		options = $.extend({
 			animationSpeed: 150,
@@ -279,7 +279,7 @@
 		}, options);
 
 		!_colorPicker && options.scrollResize && $(window).
-		on('resize scroll', function() {
+		on('resize scroll', function () {
 			if (_colorPicker.$trigger) {
 				_colorPicker.toggle.call(_colorPicker.$trigger[0], true);
 			}
@@ -290,7 +290,7 @@
 		_selector += (_selector ? ', ' : '') + this.selector;
 
  		$(options.body).off('.a').
- 		on(_pointerdown, function(e) {
+ 		on(_pointerdown, function (e) {
 			var $target = $(e.target);
 
 			if ($.inArray($target.closest(_selector)[0],
@@ -300,12 +300,12 @@
 			}
 		}).
 		on('focus.a click.a', _selector, toggle).
-		on('change.a', _selector, function() {
+		on('change.a', _selector, function () {
 			_color.setColor(this.value || '#FFF');
 			_instance.colorPicker.render(true);
 		});
 
-		return this.each(function() {
+		return this.each(function () {
 			var value = extractValue(this),
 				mode = value.split('('),
 				$elm = findElement($(this));
@@ -313,10 +313,10 @@
 			$elm.data('colorMode', mode[1] ? mode[0].substr(0, 3) : 'HEX').
 			attr('readonly', _options.preventFocus);
 			options.doRender && $elm.
-			css({'background-color': value,
-				'color': function() {
+			css({ 'background-color': value,
+				'color': function () {
 					return _color.setColor(value).
-						rgbaMixBGMixCustom.luminance > 0.22 ? '#222' : '#ddd'
+						rgbaMixBGMixCustom.luminance > 0.22 ? '#222' : '#ddd';
 				}
 			});
 		});

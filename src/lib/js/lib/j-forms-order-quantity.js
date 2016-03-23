@@ -1,29 +1,29 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    /***************************************/
+    /** *************************************/
     /* Initiallizing for the Stepper plugin */
-    /***************************************/
+    /** *************************************/
         // Nummeric stepper for the quantity
-    $("#first_field_quantity, #second_field_quantity, #third_field_quantity").stepper({
+    $('#first_field_quantity, #second_field_quantity, #third_field_quantity').stepper({
         limit: [0]
     });
-    /***************************************/
+    /** *************************************/
     /* end Initiallizing for the Stepper plugin */
-    /***************************************/
+    /** *************************************/
 
-    /***************************************/
+    /** *************************************/
     /* Initiallizing for the AutoNumerric plugin */
-    /***************************************/
+    /** *************************************/
     $('#third_field_price').autoNumeric('init');
-    /***************************************/
+    /** *************************************/
     /* end Initiallizing for the AutoNumerric plugin */
-    /***************************************/
+    /** *************************************/
 
-    /***************************************/
+    /** *************************************/
     /* Order processing */
-    /***************************************/
+    /** *************************************/
 
-    var getFruitTotal = function() {
+    var getFruitTotal = function () {
 
         // Coconut
         var $firstFieldQuantity = $('#first_field_quantity').val(),
@@ -45,15 +45,15 @@ $(document).ready(function(){
             $fruitTotals = 0,
             $fieldTotals = $('#field_totals');
 
-        $rowTotal = Math.round(($firstFieldQuantity * $firstFieldPrice)*100)/100;
+        $rowTotal = Math.round(($firstFieldQuantity * $firstFieldPrice) * 100) / 100;
         $firstFieldTotal.val('$ ' + $rowTotal);
         $fruitTotals += $rowTotal;
 
-        $rowTotal = Math.round(($secondFieldQuantity * $secondFieldPrice)*100)/100;
+        $rowTotal = Math.round(($secondFieldQuantity * $secondFieldPrice) * 100) / 100;
         $secondFieldTotal.val('$ ' + $rowTotal);
         $fruitTotals += $rowTotal;
 
-        $rowTotal = Math.round(($thirdFieldQuantity * $thirdFieldPrice)*100)/100;
+        $rowTotal = Math.round(($thirdFieldQuantity * $thirdFieldPrice) * 100) / 100;
         $thirdFieldTotal.val('$ ' + $rowTotal);
         $fruitTotals += $rowTotal;
 
@@ -61,53 +61,53 @@ $(document).ready(function(){
     };
 
     // Execute "getFruitTotal()" function when user click or change fields with values
-    $("#order-forms-quantity .fruits-calculation").on('click', function() {
+    $('#order-forms-quantity .fruits-calculation').on('click', function () {
         getFruitTotal();
     });
 
-    $('#order-forms-quantity .fruits-calculation').change(function() {
+    $('#order-forms-quantity .fruits-calculation').change(function () {
         getFruitTotal();
     });
 
     // Add event listeners for "quantity" fields
     // execute "getFruitTotal()" function when user press up and down buttons, scroll mousewheel
-    //Firefox
-    $('#order-forms-quantity .quantity-events').bind('DOMMouseScroll', function(e){
-        if(e.originalEvent.detail > 0) {
+    // Firefox
+    $('#order-forms-quantity .quantity-events').bind('DOMMouseScroll', function (e) {
+        if (e.originalEvent.detail > 0) {
             getFruitTotal();
-        }else {
-            getFruitTotal();
-        }
-        return false;
-    });
-
-    //IE, Opera, Safari
-    $('#order-forms-quantity .quantity-events').bind('mousewheel', function(e){
-        if(e.originalEvent.wheelDelta < 0) {
-            getFruitTotal();
-        }else {
+        } else {
             getFruitTotal();
         }
         return false;
     });
 
-    $('#order-forms-quantity .quantity-events').keyup(function(event){
-        if ( (event.keyCode == 38) || (event.keyCode == 40) ) {
+    // IE, Opera, Safari
+    $('#order-forms-quantity .quantity-events').bind('mousewheel', function (e) {
+        if (e.originalEvent.wheelDelta < 0) {
+            getFruitTotal();
+        } else {
+            getFruitTotal();
+        }
+        return false;
+    });
+
+    $('#order-forms-quantity .quantity-events').keyup(function (event) {
+        if ((event.keyCode == 38) || (event.keyCode == 40)) {
             getFruitTotal();
         }
     });
 
-    /***************************************/
+    /** *************************************/
     /* end Order processing */
-    /***************************************/
+    /** *************************************/
 
         // Phone masking
-    $('#phone').mask('(999) 999-9999', {placeholder:'x'});
+    $('#phone').mask('(999) 999-9999', { placeholder:'x' });
 
-    /***************************************/
+    /** *************************************/
     /* Form validation */
-    /***************************************/
-    $( '#order-forms-quantity' ).validate({
+    /** *************************************/
+    $('#order-forms-quantity').validate({
 
         /* @validation states + elements */
         errorClass: 'error-view',
@@ -115,7 +115,7 @@ $(document).ready(function(){
         errorElement: 'span',
         onkeyup: false,
         onclick: false,
-        ignore: "",
+        ignore: '',
 
         /* @validation rules */
         rules: {
@@ -173,52 +173,52 @@ $(document).ready(function(){
             }
         },
         // Add class 'error-view'
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).closest('.input').removeClass(validClass).addClass(errorClass);
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').removeClass(validClass).addClass(errorClass);
             }
         },
         // Add class 'success-view'
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).closest('.input').removeClass(errorClass).addClass(validClass);
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').removeClass(errorClass).addClass(validClass);
             }
         },
         // Error placement
-        errorPlacement: function(error, element) {
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+        errorPlacement: function (error, element) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').append(error);
             } else {
                 $(element).closest('.unit').append(error);
             }
         },
         // Submit the form
-        submitHandler:function() {
-            $( '#order-forms-quantity' ).ajaxSubmit({
+        submitHandler:function () {
+            $('#order-forms-quantity').ajaxSubmit({
 
                 // Server response placement
                 target:'#order-forms-quantity #response',
 
                 // If error occurs
-                error:function(xhr) {
+                error:function (xhr) {
                     $('#order-forms-quantity #response').html('An error occured: ' + xhr.status + ' - ' + xhr.statusText);
                 },
 
                 // Before submiting the form
-                beforeSubmit:function(){
+                beforeSubmit:function () {
                     // Add class 'processing' to the submit button
                     $('#order-forms-quantity button[type="submit"]').attr('disabled', true).addClass('processing');
                 },
 
                 // If success occurs
-                success:function(){
+                success:function () {
                     // Remove class 'processing'
                     $('#order-forms-quantity button[type="submit"]').attr('disabled', false).removeClass('processing');
 
                     // If response for the server is a 'success-message'
-                    if ( $('#order-forms-quantity .success-message').length ) {
+                    if ($('#order-forms-quantity .success-message').length) {
 
                         // Remove classes 'error-view' and 'success-view'
                         $('#order-forms-quantity .input').removeClass('success-view error-view');
@@ -230,7 +230,7 @@ $(document).ready(function(){
                         // Prevent submitting the form while success message is shown
                         $('#order-forms-quantity button[type="submit"]').attr('disabled', true);
 
-                        setTimeout(function(){
+                        setTimeout(function () {
                             // Delete success message after 5 seconds
                             $('#order-forms-quantity #response').removeClass('success-message').html('');
 
@@ -242,7 +242,7 @@ $(document).ready(function(){
             });
         }
     });
-    /***************************************/
+    /** *************************************/
     /* end form validation */
-    /***************************************/
+    /** *************************************/
 });

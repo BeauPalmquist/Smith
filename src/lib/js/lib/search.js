@@ -1,13 +1,13 @@
-(function($) {
-"use strict";
+(function ($) {
+'use strict';
 	// SEARCH
-	$(document).ready(function(){
+	$(document).ready(function () {
 		var submitIcon = $('.searchbox-icon');
 		var inputBox = $('.searchbox-input');
 		var searchBox = $('.searchbox');
 		var isOpen = false;
-			submitIcon.click(function(){
-				if(isOpen == false){
+			submitIcon.click(function () {
+				if (isOpen == false) {
 					searchBox.addClass('searchbox-open');
 					inputBox.focus();
 					isOpen = true;
@@ -16,28 +16,28 @@
 					inputBox.focusout();
 					isOpen = false;
 				}
-			});  
-			submitIcon.mouseup(function(){
+			});
+			submitIcon.mouseup(function () {
 				return false;
 			});
-			searchBox.mouseup(function(){
+			searchBox.mouseup(function () {
 				return false;
 			});
-			$(document).mouseup(function(){
-				if(isOpen == true){
-				$('.searchbox-icon').css('display','block');
+			$(document).mouseup(function () {
+				if (isOpen == true) {
+				$('.searchbox-icon').css('display', 'block');
 				submitIcon.click();
 				}
 			});
 			});
-			function buttonUp(){
+			function buttonUp() {
 				var inputVal = $('.searchbox-input').val();
 				inputVal = $.trim(inputVal).length;
-				if( inputVal !== 0){
-					$('.searchbox-icon').css('display','none');
+				if (inputVal !== 0) {
+					$('.searchbox-icon').css('display', 'none');
 				} else {
 				$('.searchbox-input').val('');
-				$('.searchbox-icon').css('display','block');
+				$('.searchbox-icon').css('display', 'block');
 			}
 	}
 })(jQuery);

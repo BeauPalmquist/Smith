@@ -27,7 +27,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 
 */
 
-(function($) {
+(function ($) {
 
 	var options = {
 		canvas: true
@@ -55,7 +55,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 
 		// Finishes rendering the canvas, including overlaid text
 
-		Canvas.prototype.render = function() {
+		Canvas.prototype.render = function () {
 
 			if (!plot.getOptions().canvas) {
 				return render.call(this);
@@ -67,7 +67,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 			// For each text layer, render elements marked as active
 
 			context.save();
-			context.textBaseline = "middle";
+			context.textBaseline = 'middle';
 
 			for (var layerKey in cache) {
 				if (hasOwnProperty.call(cache, layerKey)) {
@@ -144,7 +144,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 		//     y: Y coordinate at which to draw the text.
 		// }
 
-		Canvas.prototype.getTextInfo = function(layer, text, font, angle, width) {
+		Canvas.prototype.getTextInfo = function (layer, text, font, angle, width) {
 
 			if (!plot.getOptions().canvas) {
 				return getTextInfo.call(this, layer, text, font, angle, width);
@@ -154,12 +154,12 @@ browser, but needs to redraw with canvas text when exporting as an image.
 
 			// Cast the value to a string, in case we were given a number
 
-			text = "" + text;
+			text = '' + text;
 
 			// If the font is a font-spec object, generate a CSS definition
 
-			if (typeof font === "object") {
-				textStyle = font.style + " " + font.variant + " " + font.weight + " " + font.size + "px " + font.family;
+			if (typeof font === 'object') {
+				textStyle = font.style + ' ' + font.variant + ' ' + font.weight + ' ' + font.size + 'px ' + font.family;
 			} else {
 				textStyle = font;
 			}
@@ -187,20 +187,20 @@ browser, but needs to redraw with canvas text when exporting as an image.
 				// If the font was provided as CSS, create a div with those
 				// classes and examine it to generate a canvas font spec.
 
-				if (typeof font !== "object") {
+				if (typeof font !== 'object') {
 
-					var element = $("<div>&nbsp;</div>")
-						.css("position", "absolute")
-						.addClass(typeof font === "string" ? font : null)
+					var element = $('<div>&nbsp;</div>')
+						.css('position', 'absolute')
+						.addClass(typeof font === 'string' ? font : null)
 						.appendTo(this.getTextLayer(layer));
 
 					font = {
 						lineHeight: element.height(),
-						style: element.css("font-style"),
-						variant: element.css("font-variant"),
-						weight: element.css("font-weight"),
-						family: element.css("font-family"),
-						color: element.css("color")
+						style: element.css('font-style'),
+						variant: element.css('font-variant'),
+						weight: element.css('font-weight'),
+						family: element.css('font-family'),
+						color: element.css('color')
 					};
 
 					// Setting line-height to 1, without units, sets it equal
@@ -209,12 +209,12 @@ browser, but needs to redraw with canvas text when exporting as an image.
 					// via the element's height, working around browsers that
 					// return the literal 'smaller' value.
 
-					font.size = element.css("line-height", 1).height();
+					font.size = element.css('line-height', 1).height();
 
 					element.remove();
 				}
 
-				textStyle = font.style + " " + font.variant + " " + font.weight + " " + font.size + "px " + font.family;
+				textStyle = font.style + ' ' + font.variant + ' ' + font.weight + ' ' + font.size + 'px ' + font.family;
 
 				// Create a new info object, initializing the dimensions to
 				// zero so we can count them up line-by-line.
@@ -238,7 +238,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 				// Note that we could split directly on regexps, but IE < 9 is
 				// broken; revisit when we drop IE 7/8 support.
 
-				var lines = (text + "").replace(/<br ?\/?>|\r\n|\r/g, "\n").split("\n");
+				var lines = (text + '').replace(/<br ?\/?>|\r\n|\r/g, '\n').split('\n');
 
 				for (var i = 0; i < lines.length; ++i) {
 
@@ -263,7 +263,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 
 		// Adds a text string to the canvas text overlay.
 
-		Canvas.prototype.addText = function(layer, x, y, text, font, angle, width, halign, valign) {
+		Canvas.prototype.addText = function (layer, x, y, text, font, angle, width, halign, valign) {
 
 			if (!plot.getOptions().canvas) {
 				return addText.call(this, layer, x, y, text, font, angle, width, halign, valign);
@@ -280,9 +280,9 @@ browser, but needs to redraw with canvas text when exporting as an image.
 
 			// Tweak the initial y-position to match vertical alignment
 
-			if (valign == "middle") {
+			if (valign == 'middle') {
 				y = Math.round(y - info.height / 2);
-			} else if (valign == "bottom") {
+			} else if (valign == 'bottom') {
 				y = Math.round(y - info.height);
 			} else {
 				y = Math.round(y);
@@ -294,7 +294,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 			// Offset the y coordinate, since Opera is off pretty
 			// consistently compared to the other browsers.
 
-			if (!!(window.opera && window.opera.version().split(".")[0] < 12)) {
+			if (!!(window.opera && window.opera.version().split('.')[0] < 12)) {
 				y -= 2;
 			}
 
@@ -323,9 +323,9 @@ browser, but needs to redraw with canvas text when exporting as an image.
 			// individually for horizontal alignment.
 
 			for (var i = 0, line; line = lines[i]; i++) {
-				if (halign == "center") {
+				if (halign == 'center') {
 					position.lines.push([Math.round(x - line.width / 2), y]);
-				} else if (halign == "right") {
+				} else if (halign == 'right') {
 					position.lines.push([Math.round(x - line.width), y]);
 				} else {
 					position.lines.push([Math.round(x), y]);
@@ -338,8 +338,8 @@ browser, but needs to redraw with canvas text when exporting as an image.
 	$.plot.plugins.push({
 		init: init,
 		options: options,
-		name: "canvas",
-		version: "1.0"
+		name: 'canvas',
+		version: '1.0'
 	});
 
 })(jQuery);

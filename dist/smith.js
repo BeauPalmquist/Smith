@@ -1922,7 +1922,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3148,7 +3148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3258,7 +3258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'dev'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3457,7 +3457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -4066,6 +4066,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var search = void 0;
 	            var mobileSearch = void 0;
 	            var GlobalSearch = config.GlobalSearch;
+	            var GlobalToolbar = config.GlobalToolbar;
 
 	            if (GlobalSearch) {
 	                search = _react2.default.createElement(
@@ -4107,6 +4108,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        )
 	                    )
 	                );
+	            }
+
+	            var globalToolBar = void 0;
+	            if (GlobalToolbar) {
+	                globalToolBar = _react2.default.createElement(GlobalToolbar, this.props);
 	            }
 
 	            var notificationBadge = notifications.userNotificationCount + notifications.systemNotificationCount > 0 ? _react2.default.createElement('span', { className: 'more-noty' }) : '';
@@ -4208,7 +4214,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            )
 	                        )
 	                    )
-	                )
+	                ),
+	                globalToolBar
 	            );
 	        }
 	    }]);
@@ -4221,7 +4228,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    notifications: _react2.default.PropTypes.object.isRequired,
 	    authActions: _react2.default.PropTypes.object.isRequired,
 	    notificationActions: _react2.default.PropTypes.object.isRequired,
-	    config: _react2.default.PropTypes.object.isRequired
+	    config: _react2.default.PropTypes.shape({
+	        GlobalSearch: _react2.default.PropTypes.element,
+	        headerImage: _react2.default.PropTypes.shape({
+	            src: _react2.default.PropTypes.string.isRequired
+	        }),
+	        title: _react2.default.PropTypes.string,
+	        boldTitle: _react2.default.PropTypes.string
+	    })
 	};
 
 	exports.default = AppHeader;

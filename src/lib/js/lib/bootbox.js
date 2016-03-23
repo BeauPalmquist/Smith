@@ -8,15 +8,15 @@
 // @see https://github.com/makeusabrew/bootbox/issues/186
 (function (root, factory) {
 
-  "use strict";
-  if (typeof define === "function" && define.amd) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(["jquery"], factory);
-  } else if (typeof exports === "object") {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
-    module.exports = factory(require("jquery"));
+    module.exports = factory(require('jquery'));
   } else {
     // Browser globals (root is window)
     root.bootbox = factory(root.jQuery);
@@ -24,7 +24,7 @@
 
 }(this, function init($, undefined) {
 
-  "use strict";
+  'use strict';
 
   // the base DOM structure needed to create a modal
   var templates = {
@@ -33,13 +33,13 @@
         "<div class='modal-dialog'>" +
           "<div class='modal-content'>" +
             "<div class='modal-body'><div class='bootbox-body'></div></div>" +
-          "</div>" +
-        "</div>" +
-      "</div>",
+          '</div>' +
+        '</div>' +
+      '</div>',
     header:
       "<div class='modal-header'>" +
         "<h4 class='modal-title'></h4>" +
-      "</div>",
+      '</div>',
     footer:
       "<div class='modal-footer'></div>",
     closeButton:
@@ -70,9 +70,9 @@
 
   var defaults = {
     // default language
-    locale: "en",
+    locale: 'en',
     // show backdrop or not. Default to static so user has to interact with dialog
-    backdrop: "static",
+    backdrop: 'static',
     // animate the modal in/out
     animate: true,
     // additional class string applied to the top level dialog
@@ -82,7 +82,7 @@
     // show the dialog immediately by default
     show: true,
     // dialog container
-    container: "body"
+    container: 'body'
   };
 
   // our public object; augmented after our private API
@@ -109,7 +109,7 @@
 
     // ... otherwise we'll bin it
     if (!preserveDialog) {
-      dialog.modal("hide");
+      dialog.modal('hide');
     }
   }
 
@@ -124,7 +124,7 @@
 
   function each(collection, iterator) {
     var index = 0;
-    $.each(collection, function(key, value) {
+    $.each(collection, function (key, value) {
       iterator(key, value, index++);
     });
   }
@@ -133,12 +133,12 @@
     var buttons;
     var total;
 
-    if (typeof options !== "object") {
-      throw new Error("Please supply an object of options");
+    if (typeof options !== 'object') {
+      throw new Error('Please supply an object of options');
     }
 
     if (!options.message) {
-      throw new Error("Please specify a message");
+      throw new Error('Please specify a message');
     }
 
     // make sure any supplied options take precedence over defaults
@@ -152,7 +152,7 @@
 
     total = getKeyLength(buttons);
 
-    each(buttons, function(key, button, index) {
+    each(buttons, function (key, button, index) {
 
       if ($.isFunction(button)) {
         // short form, assume value is our callback. Since button
@@ -163,8 +163,8 @@
       }
 
       // before any further checks make sure by now button is the correct type
-      if ($.type(button) !== "object") {
-        throw new Error("button with key " + key + " must be an object");
+      if ($.type(button) !== 'object') {
+        throw new Error('button with key ' + key + ' must be an object');
       }
 
       if (!button.label) {
@@ -173,11 +173,11 @@
       }
 
       if (!button.className) {
-        if (total <= 2 && index === total-1) {
+        if (total <= 2 && index === total - 1) {
           // always add a primary to the main option in a two-button dialog
-          button.className = "btn-primary";
+          button.className = 'btn-primary';
         } else {
-          button.className = "btn-default";
+          button.className = 'btn-default';
         }
       }
     });
@@ -199,10 +199,10 @@
     var options = {};
 
     if (argn < 1 || argn > 2) {
-      throw new Error("Invalid argument length");
+      throw new Error('Invalid argument length');
     }
 
-    if (argn === 2 || typeof args[0] === "string") {
+    if (argn === 2 || typeof args[0] === 'string') {
       options[properties[0]] = args[0];
       options[properties[1]] = args[1];
     } else {
@@ -239,7 +239,7 @@
   function mergeDialogOptions(className, labels, properties, args) {
     //  build up a base set of dialog properties
     var baseOptions = {
-      className: "bootbox-" + className,
+      className: 'bootbox-' + className,
       buttons: createLabels.apply(null, labels)
     };
 
@@ -280,32 +280,32 @@
 
   function validateButtons(options, buttons) {
     var allowedButtons = {};
-    each(buttons, function(key, value) {
+    each(buttons, function (key, value) {
       allowedButtons[value] = true;
     });
 
-    each(options.buttons, function(key) {
+    each(options.buttons, function (key) {
       if (allowedButtons[key] === undefined) {
-        throw new Error("button key " + key + " is not allowed (options are " + buttons.join("\n") + ")");
+        throw new Error('button key ' + key + ' is not allowed (options are ' + buttons.join('\n') + ')');
       }
     });
 
     return options;
   }
 
-  exports.alert = function() {
+  exports.alert = function () {
     var options;
 
-    options = mergeDialogOptions("alert", ["ok"], ["message", "callback"], arguments);
+    options = mergeDialogOptions('alert', ['ok'], ['message', 'callback'], arguments);
 
     if (options.callback && !$.isFunction(options.callback)) {
-      throw new Error("alert requires callback property to be a function when provided");
+      throw new Error('alert requires callback property to be a function when provided');
     }
 
     /**
      * overrides
      */
-    options.buttons.ok.callback = options.onEscape = function() {
+    options.buttons.ok.callback = options.onEscape = function () {
       if ($.isFunction(options.callback)) {
         return options.callback.call(this);
       }
@@ -315,31 +315,31 @@
     return exports.dialog(options);
   };
 
-  exports.confirm = function() {
+  exports.confirm = function () {
     var options;
 
-    options = mergeDialogOptions("confirm", ["cancel", "confirm"], ["message", "callback"], arguments);
+    options = mergeDialogOptions('confirm', ['cancel', 'confirm'], ['message', 'callback'], arguments);
 
     /**
      * overrides; undo anything the user tried to set they shouldn't have
      */
-    options.buttons.cancel.callback = options.onEscape = function() {
+    options.buttons.cancel.callback = options.onEscape = function () {
       return options.callback.call(this, false);
     };
 
-    options.buttons.confirm.callback = function() {
+    options.buttons.confirm.callback = function () {
       return options.callback.call(this, true);
     };
 
     // confirm specific validation
     if (!$.isFunction(options.callback)) {
-      throw new Error("confirm requires a callback");
+      throw new Error('confirm requires a callback');
     }
 
     return exports.dialog(options);
   };
 
-  exports.prompt = function() {
+  exports.prompt = function () {
     var options;
     var defaults;
     var dialog;
@@ -360,15 +360,15 @@
     // lifting which mergeDialogOptions can *almost* support already
     // just because of 'value' and 'inputType' - can we refactor?
     defaults = {
-      className: "bootbox-prompt",
-      buttons: createLabels("cancel", "confirm"),
-      value: "",
-      inputType: "text"
+      className: 'bootbox-prompt',
+      buttons: createLabels('cancel', 'confirm'),
+      value: '',
+      inputType: 'text'
     };
 
     options = validateButtons(
-      mergeArguments(defaults, arguments, ["title", "callback"]),
-      ["cancel", "confirm"]
+      mergeArguments(defaults, arguments, ['title', 'callback']),
+      ['cancel', 'confirm']
     );
 
     // capture the user's show value; we always set this to false before
@@ -381,33 +381,33 @@
      */
     options.message = form;
 
-    options.buttons.cancel.callback = options.onEscape = function() {
+    options.buttons.cancel.callback = options.onEscape = function () {
       return options.callback.call(this, null);
     };
 
-    options.buttons.confirm.callback = function() {
+    options.buttons.confirm.callback = function () {
       var value;
 
       switch (options.inputType) {
-        case "text":
-        case "textarea":
-        case "email":
-        case "select":
-        case "date":
-        case "time":
-        case "number":
-        case "password":
+        case 'text':
+        case 'textarea':
+        case 'email':
+        case 'select':
+        case 'date':
+        case 'time':
+        case 'number':
+        case 'password':
           value = input.val();
           break;
 
-        case "checkbox":
-          var checkedItems = input.find("input:checked");
+        case 'checkbox':
+          var checkedItems = input.find('input:checked');
 
           // we assume that checkboxes are always multiple,
           // hence we default to an empty array
           value = [];
 
-          each(checkedItems, function(_, item) {
+          each(checkedItems, function (_, item) {
             value.push($(item).val());
           });
           break;
@@ -420,50 +420,50 @@
 
     // prompt specific validation
     if (!options.title) {
-      throw new Error("prompt requires a title");
+      throw new Error('prompt requires a title');
     }
 
     if (!$.isFunction(options.callback)) {
-      throw new Error("prompt requires a callback");
+      throw new Error('prompt requires a callback');
     }
 
     if (!templates.inputs[options.inputType]) {
-      throw new Error("invalid prompt type");
+      throw new Error('invalid prompt type');
     }
 
     // create the input based on the supplied type
     input = $(templates.inputs[options.inputType]);
 
     switch (options.inputType) {
-      case "text":
-      case "textarea":
-      case "email":
-      case "date":
-      case "time":
-      case "number":
-      case "password":
+      case 'text':
+      case 'textarea':
+      case 'email':
+      case 'date':
+      case 'time':
+      case 'number':
+      case 'password':
         input.val(options.value);
         break;
 
-      case "select":
+      case 'select':
         var groups = {};
         inputOptions = options.inputOptions || [];
 
         if (!$.isArray(inputOptions)) {
-          throw new Error("Please pass an array of input options");
+          throw new Error('Please pass an array of input options');
         }
 
         if (!inputOptions.length) {
-          throw new Error("prompt with select requires options");
+          throw new Error('prompt with select requires options');
         }
 
-        each(inputOptions, function(_, option) {
+        each(inputOptions, function (_, option) {
 
           // assume the element to attach to is the input...
           var elem = input;
 
           if (option.value === undefined || option.text === undefined) {
-            throw new Error("given options in wrong format");
+            throw new Error('given options in wrong format');
           }
 
           // ... but override that element if this option sits in a group
@@ -471,16 +471,16 @@
           if (option.group) {
             // initialise group if necessary
             if (!groups[option.group]) {
-              groups[option.group] = $("<optgroup/>").attr("label", option.group);
+              groups[option.group] = $('<optgroup/>').attr('label', option.group);
             }
 
             elem = groups[option.group];
           }
 
-          elem.append("<option value='" + option.value + "'>" + option.text + "</option>");
+          elem.append("<option value='" + option.value + "'>" + option.text + '</option>');
         });
 
-        each(groups, function(_, group) {
+        each(groups, function (_, group) {
           input.append(group);
         });
 
@@ -488,33 +488,33 @@
         input.val(options.value);
         break;
 
-      case "checkbox":
-        var values   = $.isArray(options.value) ? options.value : [options.value];
+      case 'checkbox':
+        var values = $.isArray(options.value) ? options.value : [options.value];
         inputOptions = options.inputOptions || [];
 
         if (!inputOptions.length) {
-          throw new Error("prompt with checkbox requires options");
+          throw new Error('prompt with checkbox requires options');
         }
 
         if (!inputOptions[0].value || !inputOptions[0].text) {
-          throw new Error("given options in wrong format");
+          throw new Error('given options in wrong format');
         }
 
         // checkboxes have to nest within a containing element, so
         // they break the rules a bit and we end up re-assigning
         // our 'input' element to this container instead
-        input = $("<div/>");
+        input = $('<div/>');
 
-        each(inputOptions, function(_, option) {
+        each(inputOptions, function (_, option) {
           var checkbox = $(templates.inputs[options.inputType]);
 
-          checkbox.find("input").attr("value", option.value);
-          checkbox.find("label").append(option.text);
+          checkbox.find('input').attr('value', option.value);
+          checkbox.find('label').append(option.text);
 
           // we've ensured values is an array so we can always iterate over it
-          each(values, function(_, value) {
+          each(values, function (_, value) {
             if (value === option.value) {
-              checkbox.find("input").prop("checked", true);
+              checkbox.find('input').prop('checked', true);
             }
           });
 
@@ -526,91 +526,91 @@
     // @TODO provide an attributes option instead
     // and simply map that as keys: vals
     if (options.placeholder) {
-      input.attr("placeholder", options.placeholder);
+      input.attr('placeholder', options.placeholder);
     }
 
     if (options.pattern) {
-      input.attr("pattern", options.pattern);
+      input.attr('pattern', options.pattern);
     }
 
     if (options.maxlength) {
-      input.attr("maxlength", options.maxlength);
+      input.attr('maxlength', options.maxlength);
     }
 
     // now place it in our form
     form.append(input);
 
-    form.on("submit", function(e) {
+    form.on('submit', function (e) {
       e.preventDefault();
       // Fix for SammyJS (or similar JS routing library) hijacking the form post.
       e.stopPropagation();
       // @TODO can we actually click *the* button object instead?
       // e.g. buttons.confirm.click() or similar
-      dialog.find(".btn-primary").click();
+      dialog.find('.btn-primary').click();
     });
 
     dialog = exports.dialog(options);
 
     // clear the existing handler focusing the submit button...
-    dialog.off("shown.bs.modal");
+    dialog.off('shown.bs.modal');
 
     // ...and replace it with one focusing our input, if possible
-    dialog.on("shown.bs.modal", function() {
+    dialog.on('shown.bs.modal', function () {
       // need the closure here since input isn't
       // an object otherwise
       input.focus();
     });
 
     if (shouldShow === true) {
-      dialog.modal("show");
+      dialog.modal('show');
     }
 
     return dialog;
   };
 
-  exports.dialog = function(options) {
+  exports.dialog = function (options) {
     options = sanitize(options);
 
     var dialog = $(templates.dialog);
-    var innerDialog = dialog.find(".modal-dialog");
-    var body = dialog.find(".modal-body");
+    var innerDialog = dialog.find('.modal-dialog');
+    var body = dialog.find('.modal-body');
     var buttons = options.buttons;
-    var buttonStr = "";
+    var buttonStr = '';
     var callbacks = {
       onEscape: options.onEscape
     };
 
     if ($.fn.modal === undefined) {
       throw new Error(
-        "$.fn.modal is not defined; please double check you have included " +
-        "the Bootstrap JavaScript library. See http://getbootstrap.com/javascript/ " +
-        "for more details."
+        '$.fn.modal is not defined; please double check you have included ' +
+        'the Bootstrap JavaScript library. See http://getbootstrap.com/javascript/ ' +
+        'for more details.'
       );
     }
 
-    each(buttons, function(key, button) {
+    each(buttons, function (key, button) {
 
       // @TODO I don't like this string appending to itself; bit dirty. Needs reworking
       // can we just build up button elements instead? slower but neater. Then button
       // can just become a template too
-      buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
+      buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + '</button>';
       callbacks[key] = button.callback;
     });
 
-    body.find(".bootbox-body").html(options.message);
+    body.find('.bootbox-body').html(options.message);
 
     if (options.animate === true) {
-      dialog.addClass("fade");
+      dialog.addClass('fade');
     }
 
     if (options.className) {
       dialog.addClass(options.className);
     }
 
-    if (options.size === "large") {
-      innerDialog.addClass("modal-lg");
-    } else if (options.size === "small") {
-      innerDialog.addClass("modal-sm");
+    if (options.size === 'large') {
+      innerDialog.addClass('modal-lg');
+    } else if (options.size === 'small') {
+      innerDialog.addClass('modal-sm');
     }
 
     if (options.title) {
@@ -621,19 +621,19 @@
       var closeButton = $(templates.closeButton);
 
       if (options.title) {
-        dialog.find(".modal-header").prepend(closeButton);
+        dialog.find('.modal-header').prepend(closeButton);
       } else {
-        closeButton.css("margin-top", "-10px").prependTo(body);
+        closeButton.css('margin-top', '-10px').prependTo(body);
       }
     }
 
     if (options.title) {
-      dialog.find(".modal-title").html(options.title);
+      dialog.find('.modal-title').html(options.title);
     }
 
     if (buttonStr.length) {
       body.after(templates.footer);
-      dialog.find(".modal-footer").html(buttonStr);
+      dialog.find('.modal-footer').html(buttonStr);
     }
 
 
@@ -643,7 +643,7 @@
      * modal has performed certain actions
      */
 
-    dialog.on("hidden.bs.modal", function(e) {
+    dialog.on('hidden.bs.modal', function (e) {
       // ensure we don't accidentally intercept hidden events triggered
       // by children of the current dialog. We shouldn't anymore now BS
       // namespaces its events; but still worth doing
@@ -663,8 +663,8 @@
     });
     */
 
-    dialog.on("shown.bs.modal", function() {
-      dialog.find(".btn-primary:first").focus();
+    dialog.on('shown.bs.modal', function () {
+      dialog.find('.btn-primary:first').focus();
     });
 
     /**
@@ -673,7 +673,7 @@
      * respective triggers
      */
 
-    if (options.backdrop !== "static") {
+    if (options.backdrop !== 'static') {
       // A boolean true/false according to the Bootstrap docs
       // should show a dialog the user can dismiss by clicking on
       // the background.
@@ -682,22 +682,22 @@
       // this event (the .modal-backdrop swallows it)
       // However, we still want to sort of respect true
       // and invoke the escape mechanism instead
-      dialog.on("click.dismiss.bs.modal", function(e) {
+      dialog.on('click.dismiss.bs.modal', function (e) {
         // @NOTE: the target varies in >= 3.3.x releases since the modal backdrop
         // moved *inside* the outer dialog rather than *alongside* it
-        if (dialog.children(".modal-backdrop").length) {
-          e.currentTarget = dialog.children(".modal-backdrop").get(0);
+        if (dialog.children('.modal-backdrop').length) {
+          e.currentTarget = dialog.children('.modal-backdrop').get(0);
         }
 
         if (e.target !== e.currentTarget) {
           return;
         }
 
-        dialog.trigger("escape.close.bb");
+        dialog.trigger('escape.close.bb');
       });
     }
 
-    dialog.on("escape.close.bb", function(e) {
+    dialog.on('escape.close.bb', function (e) {
       if (callbacks.onEscape) {
         processCallback(e, dialog, callbacks.onEscape);
       }
@@ -708,22 +708,22 @@
      * interaction with our dialog
      */
 
-    dialog.on("click", ".modal-footer button", function(e) {
-      var callbackKey = $(this).data("bb-handler");
+    dialog.on('click', '.modal-footer button', function (e) {
+      var callbackKey = $(this).data('bb-handler');
 
       processCallback(e, dialog, callbacks[callbackKey]);
     });
 
-    dialog.on("click", ".bootbox-close-button", function(e) {
+    dialog.on('click', '.bootbox-close-button', function (e) {
       // onEscape might be falsy but that's fine; the fact is
       // if the user has managed to click the close button we
       // have to close the dialog, callback or not
       processCallback(e, dialog, callbacks.onEscape);
     });
 
-    dialog.on("keyup", function(e) {
+    dialog.on('keyup', function (e) {
       if (e.which === 27) {
-        dialog.trigger("escape.close.bb");
+        dialog.trigger('escape.close.bb');
       }
     });
 
@@ -735,13 +735,13 @@
     $(options.container).append(dialog);
 
     dialog.modal({
-      backdrop: options.backdrop ? "static": false,
+      backdrop: options.backdrop ? 'static' : false,
       keyboard: false,
       show: false
     });
 
     if (options.show) {
-      dialog.modal("show");
+      dialog.modal('show');
     }
 
     // @TODO should we return the raw element here or should
@@ -767,7 +767,7 @@
 
   };
 
-  exports.setDefaults = function() {
+  exports.setDefaults = function () {
     var values = {};
 
     if (arguments.length === 2) {
@@ -781,8 +781,8 @@
     $.extend(defaults, values);
   };
 
-  exports.hideAll = function() {
-    $(".bootbox").modal("hide");
+  exports.hideAll = function () {
+    $('.bootbox').modal('hide');
 
     return exports;
   };
@@ -794,169 +794,169 @@
    */
   var locales = {
     ar : {
-      OK      : "موافق",
-      CANCEL  : "الغاء",
-      CONFIRM : "تأكيد"
+      OK      : 'موافق',
+      CANCEL  : 'الغاء',
+      CONFIRM : 'تأكيد'
     },
     bg_BG : {
-      OK      : "Ок",
-      CANCEL  : "Отказ",
-      CONFIRM : "Потвърждавам"
+      OK      : 'Ок',
+      CANCEL  : 'Отказ',
+      CONFIRM : 'Потвърждавам'
     },
     br : {
-      OK      : "OK",
-      CANCEL  : "Cancelar",
-      CONFIRM : "Sim"
+      OK      : 'OK',
+      CANCEL  : 'Cancelar',
+      CONFIRM : 'Sim'
     },
     cs : {
-      OK      : "OK",
-      CANCEL  : "Zrušit",
-      CONFIRM : "Potvrdit"
+      OK      : 'OK',
+      CANCEL  : 'Zrušit',
+      CONFIRM : 'Potvrdit'
     },
     da : {
-      OK      : "OK",
-      CANCEL  : "Annuller",
-      CONFIRM : "Accepter"
+      OK      : 'OK',
+      CANCEL  : 'Annuller',
+      CONFIRM : 'Accepter'
     },
     de : {
-      OK      : "OK",
-      CANCEL  : "Abbrechen",
-      CONFIRM : "Akzeptieren"
+      OK      : 'OK',
+      CANCEL  : 'Abbrechen',
+      CONFIRM : 'Akzeptieren'
     },
     el : {
-      OK      : "Εντάξει",
-      CANCEL  : "Ακύρωση",
-      CONFIRM : "Επιβεβαίωση"
+      OK      : 'Εντάξει',
+      CANCEL  : 'Ακύρωση',
+      CONFIRM : 'Επιβεβαίωση'
     },
     en : {
-      OK      : "OK",
-      CANCEL  : "Cancel",
-      CONFIRM : "OK"
+      OK      : 'OK',
+      CANCEL  : 'Cancel',
+      CONFIRM : 'OK'
     },
     es : {
-      OK      : "OK",
-      CANCEL  : "Cancelar",
-      CONFIRM : "Aceptar"
+      OK      : 'OK',
+      CANCEL  : 'Cancelar',
+      CONFIRM : 'Aceptar'
     },
     et : {
-      OK      : "OK",
-      CANCEL  : "Katkesta",
-      CONFIRM : "OK"
+      OK      : 'OK',
+      CANCEL  : 'Katkesta',
+      CONFIRM : 'OK'
     },
     fa : {
-      OK      : "قبول",
-      CANCEL  : "لغو",
-      CONFIRM : "تایید"
+      OK      : 'قبول',
+      CANCEL  : 'لغو',
+      CONFIRM : 'تایید'
     },
     fi : {
-      OK      : "OK",
-      CANCEL  : "Peruuta",
-      CONFIRM : "OK"
+      OK      : 'OK',
+      CANCEL  : 'Peruuta',
+      CONFIRM : 'OK'
     },
     fr : {
-      OK      : "OK",
-      CANCEL  : "Annuler",
+      OK      : 'OK',
+      CANCEL  : 'Annuler',
       CONFIRM : "D'accord"
     },
     he : {
-      OK      : "אישור",
-      CANCEL  : "ביטול",
-      CONFIRM : "אישור"
+      OK      : 'אישור',
+      CANCEL  : 'ביטול',
+      CONFIRM : 'אישור'
     },
     hu : {
-      OK      : "OK",
-      CANCEL  : "Mégsem",
-      CONFIRM : "Megerősít"
+      OK      : 'OK',
+      CANCEL  : 'Mégsem',
+      CONFIRM : 'Megerősít'
     },
     hr : {
-      OK      : "OK",
-      CANCEL  : "Odustani",
-      CONFIRM : "Potvrdi"
+      OK      : 'OK',
+      CANCEL  : 'Odustani',
+      CONFIRM : 'Potvrdi'
     },
     id : {
-      OK      : "OK",
-      CANCEL  : "Batal",
-      CONFIRM : "OK"
+      OK      : 'OK',
+      CANCEL  : 'Batal',
+      CONFIRM : 'OK'
     },
     it : {
-      OK      : "OK",
-      CANCEL  : "Annulla",
-      CONFIRM : "Conferma"
+      OK      : 'OK',
+      CANCEL  : 'Annulla',
+      CONFIRM : 'Conferma'
     },
     ja : {
-      OK      : "OK",
-      CANCEL  : "キャンセル",
-      CONFIRM : "確認"
+      OK      : 'OK',
+      CANCEL  : 'キャンセル',
+      CONFIRM : '確認'
     },
     lt : {
-      OK      : "Gerai",
-      CANCEL  : "Atšaukti",
-      CONFIRM : "Patvirtinti"
+      OK      : 'Gerai',
+      CANCEL  : 'Atšaukti',
+      CONFIRM : 'Patvirtinti'
     },
     lv : {
-      OK      : "Labi",
-      CANCEL  : "Atcelt",
-      CONFIRM : "Apstiprināt"
+      OK      : 'Labi',
+      CANCEL  : 'Atcelt',
+      CONFIRM : 'Apstiprināt'
     },
     nl : {
-      OK      : "OK",
-      CANCEL  : "Annuleren",
-      CONFIRM : "Accepteren"
+      OK      : 'OK',
+      CANCEL  : 'Annuleren',
+      CONFIRM : 'Accepteren'
     },
     no : {
-      OK      : "OK",
-      CANCEL  : "Avbryt",
-      CONFIRM : "OK"
+      OK      : 'OK',
+      CANCEL  : 'Avbryt',
+      CONFIRM : 'OK'
     },
     pl : {
-      OK      : "OK",
-      CANCEL  : "Anuluj",
-      CONFIRM : "Potwierdź"
+      OK      : 'OK',
+      CANCEL  : 'Anuluj',
+      CONFIRM : 'Potwierdź'
     },
     pt : {
-      OK      : "OK",
-      CANCEL  : "Cancelar",
-      CONFIRM : "Confirmar"
+      OK      : 'OK',
+      CANCEL  : 'Cancelar',
+      CONFIRM : 'Confirmar'
     },
     ru : {
-      OK      : "OK",
-      CANCEL  : "Отмена",
-      CONFIRM : "Применить"
+      OK      : 'OK',
+      CANCEL  : 'Отмена',
+      CONFIRM : 'Применить'
     },
     sq : {
-      OK : "OK",
-      CANCEL : "Anulo",
-      CONFIRM : "Prano"
+      OK : 'OK',
+      CANCEL : 'Anulo',
+      CONFIRM : 'Prano'
     },
     sv : {
-      OK      : "OK",
-      CANCEL  : "Avbryt",
-      CONFIRM : "OK"
+      OK      : 'OK',
+      CANCEL  : 'Avbryt',
+      CONFIRM : 'OK'
     },
     th : {
-      OK      : "ตกลง",
-      CANCEL  : "ยกเลิก",
-      CONFIRM : "ยืนยัน"
+      OK      : 'ตกลง',
+      CANCEL  : 'ยกเลิก',
+      CONFIRM : 'ยืนยัน'
     },
     tr : {
-      OK      : "Tamam",
-      CANCEL  : "İptal",
-      CONFIRM : "Onayla"
+      OK      : 'Tamam',
+      CANCEL  : 'İptal',
+      CONFIRM : 'Onayla'
     },
     zh_CN : {
-      OK      : "OK",
-      CANCEL  : "取消",
-      CONFIRM : "确认"
+      OK      : 'OK',
+      CANCEL  : '取消',
+      CONFIRM : '确认'
     },
     zh_TW : {
-      OK      : "OK",
-      CANCEL  : "取消",
-      CONFIRM : "確認"
+      OK      : 'OK',
+      CANCEL  : '取消',
+      CONFIRM : '確認'
     }
   };
 
-  exports.addLocale = function(name, values) {
-    $.each(["OK", "CANCEL", "CONFIRM"], function(_, v) {
+  exports.addLocale = function (name, values) {
+    $.each(['OK', 'CANCEL', 'CONFIRM'], function (_, v) {
       if (!values[v]) {
         throw new Error("Please supply a translation for '" + v + "'");
       }
@@ -971,17 +971,17 @@
     return exports;
   };
 
-  exports.removeLocale = function(name) {
+  exports.removeLocale = function (name) {
     delete locales[name];
 
     return exports;
   };
 
-  exports.setLocale = function(name) {
-    return exports.setDefaults("locale", name);
+  exports.setLocale = function (name) {
+    return exports.setDefaults('locale', name);
   };
 
-  exports.init = function(_$) {
+  exports.init = function (_$) {
     return init(_$ || $);
   };
 

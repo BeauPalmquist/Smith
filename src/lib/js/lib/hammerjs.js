@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2014 Jorik Tangelder;
  * Licensed under the MIT license */
-(function(window, document, exportName, undefined) {
+(function (window, document, exportName, undefined) {
     'use strict';
 
     var VENDOR_PREFIXES = ['', 'webkit', 'moz', 'MS', 'ms', 'o'];
@@ -164,7 +164,7 @@
      * @param {Function} handler
      */
     function addEventListeners(target, types, handler) {
-        each(splitStr(types), function(type) {
+        each(splitStr(types), function (type) {
             target.addEventListener(type, handler, false);
         });
     }
@@ -176,7 +176,7 @@
      * @param {Function} handler
      */
     function removeEventListeners(target, types, handler) {
-        each(splitStr(types), function(type) {
+        each(splitStr(types), function (type) {
             target.removeEventListener(type, handler, false);
         });
     }
@@ -371,7 +371,7 @@
 
         // smaller wrapper around the handler, for the scope and the enabled state of the manager,
         // so when disabled the input events are completely bypassed.
-        this.domHandler = function(ev) {
+        this.domHandler = function (ev) {
             if (boolOrFn(manager.options.enable, [manager])) {
                 self.handler(ev);
             }
@@ -386,12 +386,12 @@
          * should handle the inputEvent data and trigger the callback
          * @virtual
          */
-        handler: function() { },
+        handler: function () { },
 
         /**
          * bind the events
          */
-        init: function() {
+        init: function () {
             this.evEl && addEventListeners(this.element, this.evEl, this.domHandler);
             this.evTarget && addEventListeners(this.target, this.evTarget, this.domHandler);
             this.evWin && addEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
@@ -400,7 +400,7 @@
         /**
          * unbind the events
          */
-        destroy: function() {
+        destroy: function () {
             this.evEl && removeEventListeners(this.element, this.evEl, this.domHandler);
             this.evTarget && removeEventListeners(this.target, this.evTarget, this.domHandler);
             this.evWin && removeEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
@@ -989,7 +989,7 @@
             target = this.target;
 
         // get target touches from touches
-        targetTouches = allTouches.filter(function(touch) {
+        targetTouches = allTouches.filter(function (touch) {
             return hasParent(touch.target, target);
         });
 
@@ -1108,7 +1108,7 @@
          * set the touchAction value on the element or enable the polyfill
          * @param {String} value
          */
-        set: function(value) {
+        set: function (value) {
             // find out the touch-action by the event handlers
             if (value == TOUCH_ACTION_COMPUTE) {
                 value = this.compute();
@@ -1123,7 +1123,7 @@
         /**
          * just re-set the touchAction value
          */
-        update: function() {
+        update: function () {
             this.set(this.manager.options.touchAction);
         },
 
@@ -1131,9 +1131,9 @@
          * compute the value for the touchAction property based on the recognizer's settings
          * @returns {String} value
          */
-        compute: function() {
+        compute: function () {
             var actions = [];
-            each(this.manager.recognizers, function(recognizer) {
+            each(this.manager.recognizers, function (recognizer) {
                 if (boolOrFn(recognizer.options.enable, [recognizer])) {
                     actions = actions.concat(recognizer.getTouchAction());
                 }
@@ -1145,7 +1145,7 @@
          * this method is called on each input cycle and provides the preventing of the browser behavior
          * @param {Object} input
          */
-        preventDefaults: function(input) {
+        preventDefaults: function (input) {
             // not needed with native support for the touchAction property
             if (NATIVE_TOUCH_ACTION) {
                 return;
@@ -1176,7 +1176,7 @@
          * call preventDefault to prevent the browser's default behavior (scrolling in most cases)
          * @param {Object} srcEvent
          */
-        preventSrc: function(srcEvent) {
+        preventSrc: function (srcEvent) {
             this.manager.session.prevented = true;
             srcEvent.preventDefault();
         }
@@ -1282,7 +1282,7 @@
          * @param {Object} options
          * @return {Recognizer}
          */
-        set: function(options) {
+        set: function (options) {
             extend(this.options, options);
 
             // also update the touchAction, in case something changed about the directions/enabled state
@@ -1295,7 +1295,7 @@
          * @param {Recognizer} otherRecognizer
          * @returns {Recognizer} this
          */
-        recognizeWith: function(otherRecognizer) {
+        recognizeWith: function (otherRecognizer) {
             if (invokeArrayArg(otherRecognizer, 'recognizeWith', this)) {
                 return this;
             }
@@ -1314,7 +1314,7 @@
          * @param {Recognizer} otherRecognizer
          * @returns {Recognizer} this
          */
-        dropRecognizeWith: function(otherRecognizer) {
+        dropRecognizeWith: function (otherRecognizer) {
             if (invokeArrayArg(otherRecognizer, 'dropRecognizeWith', this)) {
                 return this;
             }
@@ -1329,7 +1329,7 @@
          * @param {Recognizer} otherRecognizer
          * @returns {Recognizer} this
          */
-        requireFailure: function(otherRecognizer) {
+        requireFailure: function (otherRecognizer) {
             if (invokeArrayArg(otherRecognizer, 'requireFailure', this)) {
                 return this;
             }
@@ -1348,7 +1348,7 @@
          * @param {Recognizer} otherRecognizer
          * @returns {Recognizer} this
          */
-        dropRequireFailure: function(otherRecognizer) {
+        dropRequireFailure: function (otherRecognizer) {
             if (invokeArrayArg(otherRecognizer, 'dropRequireFailure', this)) {
                 return this;
             }
@@ -1365,7 +1365,7 @@
          * has require failures boolean
          * @returns {boolean}
          */
-        hasRequireFailures: function() {
+        hasRequireFailures: function () {
             return this.requireFail.length > 0;
         },
 
@@ -1374,7 +1374,7 @@
          * @param {Recognizer} otherRecognizer
          * @returns {Boolean}
          */
-        canRecognizeWith: function(otherRecognizer) {
+        canRecognizeWith: function (otherRecognizer) {
             return !!this.simultaneous[otherRecognizer.id];
         },
 
@@ -1383,7 +1383,7 @@
          * that all the needed recognizers has failed before emitting.
          * @param {Object} input
          */
-        emit: function(input) {
+        emit: function (input) {
             var self = this;
             var state = this.state;
 
@@ -1410,7 +1410,7 @@
          * otherwise, setup the state to FAILED.
          * @param {Object} input
          */
-        tryEmit: function(input) {
+        tryEmit: function (input) {
             if (this.canEmit()) {
                 return this.emit(input);
             }
@@ -1422,7 +1422,7 @@
          * can we emit?
          * @returns {boolean}
          */
-        canEmit: function() {
+        canEmit: function () {
             var i = 0;
             while (i < this.requireFail.length) {
                 if (!(this.requireFail[i].state & (STATE_FAILED | STATE_POSSIBLE))) {
@@ -1437,7 +1437,7 @@
          * update the recognizer
          * @param {Object} inputData
          */
-        recognize: function(inputData) {
+        recognize: function (inputData) {
             // make a new copy of the inputData
             // so we can change the inputData without messing up the other recognizers
             var inputDataClone = extend({}, inputData);
@@ -1470,21 +1470,21 @@
          * @param {Object} inputData
          * @returns {Const} STATE
          */
-        process: function(inputData) { }, // jshint ignore:line
+        process: function (inputData) { }, // jshint ignore:line
 
         /**
          * return the preferred touch-action
          * @virtual
          * @returns {Array}
          */
-        getTouchAction: function() { },
+        getTouchAction: function () { },
 
         /**
          * called when the gesture isn't allowed to recognize
          * like when another is being recognized or it is disabled
          * @virtual
          */
-        reset: function() { }
+        reset: function () { }
     };
 
     /**
@@ -1565,7 +1565,7 @@
          * @param {Object} input
          * @returns {Boolean} recognized
          */
-        attrTest: function(input) {
+        attrTest: function (input) {
             var optionPointers = this.options.pointers;
             return optionPointers === 0 || input.pointers.length === optionPointers;
         },
@@ -1576,7 +1576,7 @@
          * @param {Object} input
          * @returns {*} State
          */
-        process: function(input) {
+        process: function (input) {
             var state = this.state;
             var eventType = input.eventType;
 
@@ -1623,7 +1623,7 @@
             direction: DIRECTION_ALL
         },
 
-        getTouchAction: function() {
+        getTouchAction: function () {
             var direction = this.options.direction;
             var actions = [];
             if (direction & DIRECTION_HORIZONTAL) {
@@ -1635,7 +1635,7 @@
             return actions;
         },
 
-        directionTest: function(input) {
+        directionTest: function (input) {
             var options = this.options;
             var hasMoved = true;
             var distance = input.distance;
@@ -1659,12 +1659,12 @@
             return hasMoved && distance > options.threshold && direction & options.direction;
         },
 
-        attrTest: function(input) {
+        attrTest: function (input) {
             return AttrRecognizer.prototype.attrTest.call(this, input) &&
                 (this.state & STATE_BEGAN || (!(this.state & STATE_BEGAN) && this.directionTest(input)));
         },
 
-        emit: function(input) {
+        emit: function (input) {
             this.pX = input.deltaX;
             this.pY = input.deltaY;
 
@@ -1698,16 +1698,16 @@
             pointers: 2
         },
 
-        getTouchAction: function() {
+        getTouchAction: function () {
             return [TOUCH_ACTION_NONE];
         },
 
-        attrTest: function(input) {
+        attrTest: function (input) {
             return this._super.attrTest.call(this, input) &&
                 (Math.abs(input.scale - 1) > this.options.threshold || this.state & STATE_BEGAN);
         },
 
-        emit: function(input) {
+        emit: function (input) {
             this._super.emit.call(this, input);
             if (input.scale !== 1) {
                 var inOut = input.scale < 1 ? 'in' : 'out';
@@ -1741,11 +1741,11 @@
             threshold: 5 // a minimal movement is ok, but keep it low
         },
 
-        getTouchAction: function() {
+        getTouchAction: function () {
             return [TOUCH_ACTION_AUTO];
         },
 
-        process: function(input) {
+        process: function (input) {
             var options = this.options;
             var validPointers = input.pointers.length === options.pointers;
             var validMovement = input.distance < options.threshold;
@@ -1759,7 +1759,7 @@
                 this.reset();
             } else if (input.eventType & INPUT_START) {
                 this.reset();
-                this._timer = setTimeoutContext(function() {
+                this._timer = setTimeoutContext(function () {
                     this.state = STATE_RECOGNIZED;
                     this.tryEmit();
                 }, options.time, this);
@@ -1769,11 +1769,11 @@
             return STATE_FAILED;
         },
 
-        reset: function() {
+        reset: function () {
             clearTimeout(this._timer);
         },
 
-        emit: function(input) {
+        emit: function (input) {
             if (this.state !== STATE_RECOGNIZED) {
                 return;
             }
@@ -1808,11 +1808,11 @@
             pointers: 2
         },
 
-        getTouchAction: function() {
+        getTouchAction: function () {
             return [TOUCH_ACTION_NONE];
         },
 
-        attrTest: function(input) {
+        attrTest: function (input) {
             return this._super.attrTest.call(this, input) &&
                 (Math.abs(input.rotation) > this.options.threshold || this.state & STATE_BEGAN);
         }
@@ -1841,11 +1841,11 @@
             pointers: 1
         },
 
-        getTouchAction: function() {
+        getTouchAction: function () {
             return PanRecognizer.prototype.getTouchAction.call(this);
         },
 
-        attrTest: function(input) {
+        attrTest: function (input) {
             var direction = this.options.direction;
             var velocity;
 
@@ -1863,7 +1863,7 @@
                 abs(velocity) > this.options.velocity && input.eventType & INPUT_END;
         },
 
-        emit: function(input) {
+        emit: function (input) {
             var direction = directionStr(input.direction);
             if (direction) {
                 this.manager.emit(this.options.event + direction, input);
@@ -1911,11 +1911,11 @@
             posThreshold: 10 // a multi-tap can be a bit off the initial position
         },
 
-        getTouchAction: function() {
+        getTouchAction: function () {
             return [TOUCH_ACTION_MANIPULATION];
         },
 
-        process: function(input) {
+        process: function (input) {
             var options = this.options;
 
             var validPointers = input.pointers.length === options.pointers;
@@ -1958,7 +1958,7 @@
                     if (!this.hasRequireFailures()) {
                         return STATE_RECOGNIZED;
                     } else {
-                        this._timer = setTimeoutContext(function() {
+                        this._timer = setTimeoutContext(function () {
                             this.state = STATE_RECOGNIZED;
                             this.tryEmit();
                         }, options.interval, this);
@@ -1969,19 +1969,19 @@
             return STATE_FAILED;
         },
 
-        failTimeout: function() {
-            this._timer = setTimeoutContext(function() {
+        failTimeout: function () {
+            this._timer = setTimeoutContext(function () {
                 this.state = STATE_FAILED;
             }, this.options.interval, this);
             return STATE_FAILED;
         },
 
-        reset: function() {
+        reset: function () {
             clearTimeout(this._timer);
         },
 
-        emit: function() {
-            if (this.state == STATE_RECOGNIZED ) {
+        emit: function () {
+            if (this.state == STATE_RECOGNIZED) {
                 this._input.tapCount = this.count;
                 this.manager.emit(this.options.event, this._input);
             }
@@ -2057,7 +2057,7 @@
             // RecognizerClass, options, [recognizeWith, ...], [requireFailure, ...]
             [RotateRecognizer, { enable: false }],
             [PinchRecognizer, { enable: false }, ['rotate']],
-            [SwipeRecognizer,{ direction: DIRECTION_HORIZONTAL }],
+            [SwipeRecognizer, { direction: DIRECTION_HORIZONTAL }],
             [PanRecognizer, { direction: DIRECTION_HORIZONTAL }, ['swipe']],
             [TapRecognizer],
             [TapRecognizer, { event: 'doubletap', taps: 2 }, ['tap']],
@@ -2142,7 +2142,7 @@
 
         toggleCssProps(this, true);
 
-        each(options.recognizers, function(item) {
+        each(options.recognizers, function (item) {
             var recognizer = this.add(new (item[0])(item[1]));
             item[2] && recognizer.recognizeWith(item[2]);
             item[3] && recognizer.requireFailure(item[3]);
@@ -2155,7 +2155,7 @@
          * @param {Object} options
          * @returns {Manager}
          */
-        set: function(options) {
+        set: function (options) {
             extend(this.options, options);
 
             // Options that need a little more setup
@@ -2177,7 +2177,7 @@
          * When forced, the recognizer cycle is stopped immediately.
          * @param {Boolean} [force]
          */
-        stop: function(force) {
+        stop: function (force) {
             this.session.stopped = force ? FORCED_STOP : STOP;
         },
 
@@ -2187,7 +2187,7 @@
          * it walks through all the recognizers and tries to detect the gesture that is being made
          * @param {Object} inputData
          */
-        recognize: function(inputData) {
+        recognize: function (inputData) {
             var session = this.session;
             if (session.stopped) {
                 return;
@@ -2242,7 +2242,7 @@
          * @param {Recognizer|String} recognizer
          * @returns {Recognizer|Null}
          */
-        get: function(recognizer) {
+        get: function (recognizer) {
             if (recognizer instanceof Recognizer) {
                 return recognizer;
             }
@@ -2262,7 +2262,7 @@
          * @param {Recognizer} recognizer
          * @returns {Recognizer|Manager}
          */
-        add: function(recognizer) {
+        add: function (recognizer) {
             if (invokeArrayArg(recognizer, 'add', this)) {
                 return this;
             }
@@ -2285,7 +2285,7 @@
          * @param {Recognizer|String} recognizer
          * @returns {Manager}
          */
-        remove: function(recognizer) {
+        remove: function (recognizer) {
             if (invokeArrayArg(recognizer, 'remove', this)) {
                 return this;
             }
@@ -2304,9 +2304,9 @@
          * @param {Function} handler
          * @returns {EventEmitter} this
          */
-        on: function(events, handler) {
+        on: function (events, handler) {
             var handlers = this.handlers;
-            each(splitStr(events), function(event) {
+            each(splitStr(events), function (event) {
                 handlers[event] = handlers[event] || [];
                 handlers[event].push(handler);
             });
@@ -2319,9 +2319,9 @@
          * @param {Function} [handler]
          * @returns {EventEmitter} this
          */
-        off: function(events, handler) {
+        off: function (events, handler) {
             var handlers = this.handlers;
-            each(splitStr(events), function(event) {
+            each(splitStr(events), function (event) {
                 if (!handler) {
                     delete handlers[event];
                 } else {
@@ -2336,7 +2336,7 @@
          * @param {String} event
          * @param {Object} data
          */
-        emit: function(event, data) {
+        emit: function (event, data) {
             // we also want to trigger dom events
             if (this.options.domEvents) {
                 triggerDomEvent(event, data);
@@ -2349,7 +2349,7 @@
             }
 
             data.type = event;
-            data.preventDefault = function() {
+            data.preventDefault = function () {
                 data.srcEvent.preventDefault();
             };
 
@@ -2364,7 +2364,7 @@
          * destroy the manager and unbinds all events
          * it doesn't unbind dom events, that is the user own responsibility
          */
-        destroy: function() {
+        destroy: function () {
             this.element && toggleCssProps(this, false);
 
             this.handlers = {};
@@ -2381,7 +2381,7 @@
      */
     function toggleCssProps(manager, add) {
         var element = manager.element;
-        each(manager.options.cssProps, function(value, name) {
+        each(manager.options.cssProps, function (value, name) {
             element.style[prefixed(element.style, name)] = add ? value : '';
         });
     }
@@ -2451,7 +2451,7 @@
     });
 
     if (typeof define == TYPE_FUNCTION && define.amd) {
-        define(function() {
+        define(function () {
             return Hammer;
         });
     } else if (typeof module != 'undefined' && module.exports) {

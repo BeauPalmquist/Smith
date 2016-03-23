@@ -2,6 +2,7 @@
 import Forge from './containers/forge';
 import Hammer from './containers/hammer';
 import DarthVader from './components/DarthVader';
+import GlobalToolbar from './containers/GlobalToolbar';
 
 const LOAD_CONFIG = 'CLIENT/LOAD_CONFIG';
 
@@ -12,6 +13,7 @@ const initialState = {
     headerImage: {
         src: 'fa fa-rebel fa-3x text-danger'
     },
+    GlobalToolbar: GlobalToolbar,
     routes: [
         {
             path: 'empire',
