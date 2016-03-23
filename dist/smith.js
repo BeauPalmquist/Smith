@@ -3084,21 +3084,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	exports.default = function (options) {
-	    var onRejected;
+	exports.default = function () {
+	    var _onRejected = {
+	        cb: null
+	    };
+
+	    if (window) {
+	        if (!window._onRejected) {
+	            window._onRejected = _onRejected;
+	        }
+	        _onRejected = window._onRejected;
+	    }
 
 	    var setOnRejected = function setOnRejected(cb) {
 	        if (cb) {
-	            onRejected = cb;
+	            _onRejected.cb = cb;
 	        } else {
-	            onRejected = undefined;
+	            _onRejected.cb = undefined;
 	        }
 	    };
 
 	    return {
 	        setOnRejected: setOnRejected,
 	        getOnRejected: function getOnRejected() {
-	            return onRejected;
+	            return _onRejected.cb;
 	        }
 	    };
 	}();
