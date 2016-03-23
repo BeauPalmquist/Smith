@@ -1,20 +1,20 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     // Show password
-    $("#show-pass").on("change", function(){
-        $("#show-pass").is(":checked") ? $("#password").attr("type", "text") : $("#password").attr("type", "password");
+    $('#show-pass').on('change', function () {
+        $('#show-pass').is(':checked') ? $('#password').attr('type', 'text') : $('#password').attr('type', 'password');
     });
-/////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////
 
     // Show confirm password
-    $("#show-conf-pass").on("change", function(){
-        $("#show-conf-pass").is(":checked") ? $("#confirm-password").attr("type", "text") : $("#confirm-password").attr("type", "password");
+    $('#show-conf-pass').on('change', function () {
+        $('#show-conf-pass').is(':checked') ? $('#confirm-password').attr('type', 'text') : $('#confirm-password').attr('type', 'password');
     });
-/////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////
 
     // Enabled input
-    $('#check-enable-input').on('change', function() {
-        if ( $('#check-enable-input').is(':checked') ) {
+    $('#check-enable-input').on('change', function () {
+        if ($('#check-enable-input').is(':checked')) {
             $('#enable-input').attr('disabled', false).parent().removeClass('disabled-view error-view success-view');
         } else {
             $('#enable-input').attr('disabled', true).parent().addClass('disabled-view').removeClass('success-view error-view');
@@ -22,14 +22,14 @@ $(document).ready(function() {
             // ID for error message = field ID + "-error"
             // if error message for disable field exists
             // hide error message
-            if ( $('#enable-input-error').length ) {
+            if ($('#enable-input-error').length) {
                 $('#enable-input-error').css('display', 'none');
             }
-        };
+        }
     });
-/////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////
 
-    var form = $( "#j-forms-validation" );
+    var form = $('#j-forms-validation');
 
     form.validate({
 
@@ -188,20 +188,20 @@ $(document).ready(function() {
                 required: 'Please field is required'
             }
         },
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).closest('.input').removeClass(validClass).addClass(errorClass);
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').removeClass(validClass).addClass(errorClass);
             }
         },
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).closest('.input').removeClass(errorClass).addClass(validClass);
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').removeClass(errorClass).addClass(validClass);
             }
         },
-        errorPlacement: function(error, element) {
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+        errorPlacement: function (error, element) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').append(error);
             } else {
                 $(element).closest('.unit').append(error);

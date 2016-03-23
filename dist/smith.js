@@ -4172,7 +4172,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'topbar-right pull-right' },
-	                    globalToolBar,
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'clearfix' },
@@ -4206,7 +4205,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            )
 	                        )
 	                    )
-	                )
+	                ),
+	                globalToolBar
 	            );
 	        }
 	    }]);
@@ -4221,7 +4221,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    notificationActions: _react2.default.PropTypes.object.isRequired,
 	    config: _react2.default.PropTypes.shape({
 	        GlobalSearch: _react2.default.PropTypes.element,
-	        GlobalToolbar: _react2.default.PropTypes.element,
 	        headerImage: _react2.default.PropTypes.shape({
 	            src: _react2.default.PropTypes.string.isRequired
 	        }),

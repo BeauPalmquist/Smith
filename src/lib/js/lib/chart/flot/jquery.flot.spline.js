@@ -38,8 +38,8 @@
  *
  */
 
-(function($) {
-	'use strict'
+(function ($) {
+	'use strict';
 
 	/**
 	 * @param {Number} x0, y0, x1, y1: coordinates of the end (knot) points of the segment
@@ -77,7 +77,7 @@
 	function drawLine(points, ctx, height, fill, seriesColor) {
 		var c = $.color.parse(seriesColor);
 
-		c.a = typeof fill == "number" ? fill : .3;
+		c.a = typeof fill == 'number' ? fill : .3;
 		c.normalize();
 		c = c.toString();
 
@@ -97,7 +97,7 @@
 		ctx.lineTo(points[0][0], height);
 
 		ctx.closePath();
-		
+
 		if (fill !== false) {
 			ctx.fillStyle = c;
 			ctx.fill();
@@ -119,7 +119,7 @@
 		type = type + 'CurveTo';
 
 		if (line.length == 0) line.push([points[0], points[1], cpoints.concat(points.slice(2)), type]);
-		else if (type == "quadraticCurveTo" && points.length == 2) {
+		else if (type == 'quadraticCurveTo' && points.length == 2) {
 			cpoints = cpoints.slice(0, 2).concat(points);
 
 			line.push([points[0], points[1], cpoints, type]);
@@ -193,7 +193,7 @@
 	}
 
 	$.plot.plugins.push({
-		init: function(plot) {
+		init: function (plot) {
 			plot.hooks.drawSeries.push(drawSpline);
 		},
 		options: {

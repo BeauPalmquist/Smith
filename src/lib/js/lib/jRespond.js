@@ -1,26 +1,26 @@
 /*! jRespond.js v 0.10 | Author: Jeremy Fields [jeremy.fields@viget.com], 2013 | License: MIT */
 
 // Universal Module Definition
-;(function (window, name, fn) {
+(function (window, name, fn) {
 	// Node module pattern
-    if (typeof module === "object" && module && typeof module.exports === "object") {
+    if (typeof module === 'object' && module && typeof module.exports === 'object') {
         module.exports = fn;
     } else {
 		// browser
         window[name] = fn;
 
         // AMD definition
-        if (typeof define === "function" && define.amd) {
+        if (typeof define === 'function' && define.amd) {
             define(name, [], function (module) {
                 return fn;
             });
         }
     }
-}(this, 'jRespond', function(win,doc,undefined) {
+}(this, 'jRespond', function (win, doc, undefined) {
 
 	'use strict';
 
-	return function(breakpoints) {
+	return function (breakpoints) {
 
 		// array for registered functions
 		var mediaListeners = [];
@@ -45,12 +45,12 @@
 		var resizeTmrSpd = resizeTmrSlow;
 
 		// cross browser window width
-		var winWidth = function() {
+		var winWidth = function () {
 
 			var w = 0;
 
 			// IE
-			if (typeof( window.innerWidth ) != 'number') {
+			if (typeof(window.innerWidth) != 'number') {
 
 				if (!(document.documentElement.clientWidth === 0)) {
 
@@ -71,7 +71,7 @@
 		};
 
 		// determine input type
-		var addFunction = function(elm) {
+		var addFunction = function (elm) {
 			if (elm.length === undefined) {
 				addToStack(elm);
 			} else {
@@ -82,7 +82,7 @@
 		};
 
 		// send media to the mediaListeners array
-		var addToStack = function(elm) {
+		var addToStack = function (elm) {
 			var brkpt = elm['breakpoint'];
 			var entr = elm['enter'] || undefined;
 
@@ -94,14 +94,14 @@
 
 			if (testForCurr(brkpt)) {
 				if (entr !== undefined) {
-					entr.call(null, {entering : curr, exiting : prev});
+					entr.call(null, { entering : curr, exiting : prev });
 				}
 				mediaInit[(mediaListeners.length - 1)] = true;
 			}
 		};
 
 		// loops through all registered functions and determines what should be fired
-		var cycleThrough = function() {
+		var cycleThrough = function () {
 
 			var enterArray = [];
 			var exitArray = [];
@@ -148,7 +148,7 @@
 		};
 
 		// checks for the correct breakpoint against the mediaBreakpoints list
-		var returnBreakpoint = function(width) {
+		var returnBreakpoint = function (width) {
 
 			var foundBrkpt = false;
 
@@ -182,7 +182,7 @@
 		};
 
 		// takes the breakpoint/s arguement from an object and tests it against the current state
-		var testForCurr = function(elm) {
+		var testForCurr = function (elm) {
 
 			// if there's an array of breakpoints
 			if (typeof elm === 'object') {
@@ -203,7 +203,7 @@
 		};
 
 		// self-calling function that checks the browser width and delegates if it detects a change
-		var checkResize = function() {
+		var checkResize = function () {
 
 			// get current width
 			var w = winWidth();
@@ -228,10 +228,10 @@
 
 		// return
 		return {
-			addFunc: function(elm) { addFunction(elm); },
-			getBreakpoint: function() { return curr; }
+			addFunc: function (elm) { addFunction(elm); },
+			getBreakpoint: function () { return curr; }
 		};
 
 	};
 
-}(this,this.document)));
+}(this, this.document)));

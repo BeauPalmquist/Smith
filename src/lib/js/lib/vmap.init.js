@@ -60,7 +60,7 @@
             5200,
             4200,
             2800
-        ]
+        ];
 
     map = new jvm.Map({
         container: $('#regional-visitors'),
@@ -72,16 +72,16 @@
         markerStyle: {
             initial: {
                 fill: '#4DAC26',
-                "stroke-width": 2
+                'stroke-width': 2
             },
             hover: {
                 fill: 'rgba(255,255,255,0.6',
                 stroke: '#0097a7',
-                "stroke-width": 3
+                'stroke-width': 3
             },
             selected: {
                 fill: 'rgba(255,255,255,0.1)',
-                "stroke-width": 4
+                'stroke-width': 4
             }
         },
         regionStyle: {
@@ -100,7 +100,7 @@
             }]
         },
         backgroundColor: '#fff',
-        onRegionSelected: function() {
+        onRegionSelected: function () {
             if (window.localStorage) {
                 window.localStorage.setItem(
                     'jvectormap-selected-regions',
@@ -108,7 +108,7 @@
                 );
             }
         },
-        onMarkerSelected: function() {
+        onMarkerSelected: function () {
             if (window.localStorage) {
                 window.localStorage.setItem(
                     'jvectormap-selected-markers',

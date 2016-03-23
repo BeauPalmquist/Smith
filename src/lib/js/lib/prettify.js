@@ -53,7 +53,7 @@
  */
 
 // JSLint declarations
-/*global console, document, navigator, setTimeout, window */
+/* global console, document, navigator, setTimeout, window */
 
 /**
  * Split {@code prettyPrint} into multiple timeouts so as not to interfere with
@@ -102,41 +102,41 @@ window['_pr_isIE6'] = function () {
 (function () {
   // Keyword lists for various languages.
   var FLOW_CONTROL_KEYWORDS =
-      "break continue do else for if return while ";
-  var C_KEYWORDS = FLOW_CONTROL_KEYWORDS + "auto case char const default " +
-      "double enum extern float goto int long register short signed sizeof " +
-      "static struct switch typedef union unsigned void volatile ";
-  var COMMON_KEYWORDS = C_KEYWORDS + "catch class delete false import " +
-      "new operator private protected public this throw true try typeof ";
-  var CPP_KEYWORDS = COMMON_KEYWORDS + "alignof align_union asm axiom bool " +
-      "concept concept_map const_cast constexpr decltype " +
-      "dynamic_cast explicit export friend inline late_check " +
-      "mutable namespace nullptr reinterpret_cast static_assert static_cast " +
-      "template typeid typename using virtual wchar_t where ";
+      'break continue do else for if return while ';
+  var C_KEYWORDS = FLOW_CONTROL_KEYWORDS + 'auto case char const default ' +
+      'double enum extern float goto int long register short signed sizeof ' +
+      'static struct switch typedef union unsigned void volatile ';
+  var COMMON_KEYWORDS = C_KEYWORDS + 'catch class delete false import ' +
+      'new operator private protected public this throw true try typeof ';
+  var CPP_KEYWORDS = COMMON_KEYWORDS + 'alignof align_union asm axiom bool ' +
+      'concept concept_map const_cast constexpr decltype ' +
+      'dynamic_cast explicit export friend inline late_check ' +
+      'mutable namespace nullptr reinterpret_cast static_assert static_cast ' +
+      'template typeid typename using virtual wchar_t where ';
   var JAVA_KEYWORDS = COMMON_KEYWORDS +
-      "abstract boolean byte extends final finally implements import " +
-      "instanceof null native package strictfp super synchronized throws " +
-      "transient ";
+      'abstract boolean byte extends final finally implements import ' +
+      'instanceof null native package strictfp super synchronized throws ' +
+      'transient ';
   var CSHARP_KEYWORDS = JAVA_KEYWORDS +
-      "as base by checked decimal delegate descending event " +
-      "fixed foreach from group implicit in interface internal into is lock " +
-      "object out override orderby params partial readonly ref sbyte sealed " +
-      "stackalloc string select uint ulong unchecked unsafe ushort var ";
+      'as base by checked decimal delegate descending event ' +
+      'fixed foreach from group implicit in interface internal into is lock ' +
+      'object out override orderby params partial readonly ref sbyte sealed ' +
+      'stackalloc string select uint ulong unchecked unsafe ushort var ';
   var JSCRIPT_KEYWORDS = COMMON_KEYWORDS +
-      "debugger eval export function get null set undefined var with " +
-      "Infinity NaN ";
-  var PERL_KEYWORDS = "caller delete die do dump elsif eval exit foreach for " +
-      "goto if import last local my next no our print package redo require " +
-      "sub undef unless until use wantarray while BEGIN END ";
-  var PYTHON_KEYWORDS = FLOW_CONTROL_KEYWORDS + "and as assert class def del " +
-      "elif except exec finally from global import in is lambda " +
-      "nonlocal not or pass print raise try with yield " +
-      "False True None ";
-  var RUBY_KEYWORDS = FLOW_CONTROL_KEYWORDS + "alias and begin case class def" +
-      " defined elsif end ensure false in module next nil not or redo rescue " +
-      "retry self super then true undef unless until when yield BEGIN END ";
-  var SH_KEYWORDS = FLOW_CONTROL_KEYWORDS + "case done elif esac eval fi " +
-      "function in local set then until ";
+      'debugger eval export function get null set undefined var with ' +
+      'Infinity NaN ';
+  var PERL_KEYWORDS = 'caller delete die do dump elsif eval exit foreach for ' +
+      'goto if import last local my next no our print package redo require ' +
+      'sub undef unless until use wantarray while BEGIN END ';
+  var PYTHON_KEYWORDS = FLOW_CONTROL_KEYWORDS + 'and as assert class def del ' +
+      'elif except exec finally from global import in is lambda ' +
+      'nonlocal not or pass print raise try with yield ' +
+      'False True None ';
+  var RUBY_KEYWORDS = FLOW_CONTROL_KEYWORDS + 'alias and begin case class def' +
+      ' defined elsif end ensure false in module next nil not or redo rescue ' +
+      'retry self super then true undef unless until when yield BEGIN END ';
+  var SH_KEYWORDS = FLOW_CONTROL_KEYWORDS + 'case done elif esac eval fi ' +
+      'function in local set then until ';
   var ALL_KEYWORDS = (
       CPP_KEYWORDS + CSHARP_KEYWORDS + JSCRIPT_KEYWORDS + PERL_KEYWORDS +
       PYTHON_KEYWORDS + RUBY_KEYWORDS + SH_KEYWORDS);
@@ -193,16 +193,16 @@ window['_pr_isIE6'] = function () {
     */
   var REGEXP_PRECEDER_PATTERN = function () {
       var preceders = [
-          "!", "!=", "!==", "#", "%", "%=", "&", "&&", "&&=",
-          "&=", "(", "*", "*=", /* "+", */ "+=", ",", /* "-", */ "-=",
-          "->", /*".", "..", "...", handled below */ "/", "/=", ":", "::", ";",
-          "<", "<<", "<<=", "<=", "=", "==", "===", ">",
-          ">=", ">>", ">>=", ">>>", ">>>=", "?", "@", "[",
-          "^", "^=", "^^", "^^=", "{", "|", "|=", "||",
-          "||=", "~" /* handles =~ and !~ */,
-          "break", "case", "continue", "delete",
-          "do", "else", "finally", "instanceof",
-          "return", "throw", "try", "typeof"
+          '!', '!=', '!==', '#', '%', '%=', '&', '&&', '&&=',
+          '&=', '(', '*', '*=', /* "+", */ '+=', ',', /* "-", */ '-=',
+          '->', /* ".", "..", "...", handled below */ '/', '/=', ':', '::', ';',
+          '<', '<<', '<<=', '<=', '=', '==', '===', '>',
+          '>=', '>>', '>>=', '>>>', '>>>=', '?', '@', '[',
+          '^', '^=', '^^', '^^=', '{', '|', '|=', '||',
+          '||=', '~' /* handles =~ and !~ */,
+          'break', 'case', 'continue', 'delete',
+          'do', 'else', 'finally', 'instanceof',
+          'return', 'throw', 'try', 'typeof'
           ];
       var pattern = '(?:^^|[+-]';
       for (var i = 0; i < preceders.length; ++i) {
@@ -444,7 +444,7 @@ window['_pr_isIE6'] = function () {
 
       // [[1, 10], [3, 4], [8, 12], [14, 14], [16, 16], [17, 17]]
       // -> [[1, 12], [14, 14], [16, 17]]
-      ranges.sort(function (a, b) { return (a[0] - b[0]) || (b[1]  - a[1]); });
+      ranges.sort(function (a, b) { return (a[0] - b[0]) || (b[1] - a[1]); });
       var consolidatedRanges = [];
       var lastRange = [NaN, NaN];
       for (var i = 0; i < ranges.length; ++i) {
@@ -956,12 +956,12 @@ window['_pr_isIE6'] = function () {
     if (options['tripleQuotedStrings']) {
       // '''multi-line-string''', 'single-line-string', and double-quoted
       shortcutStylePatterns.push(
-          [PR_STRING,  /^(?:\'\'\'(?:[^\'\\]|\\[\s\S]|\'{1,2}(?=[^\']))*(?:\'\'\'|$)|\"\"\"(?:[^\"\\]|\\[\s\S]|\"{1,2}(?=[^\"]))*(?:\"\"\"|$)|\'(?:[^\\\']|\\[\s\S])*(?:\'|$)|\"(?:[^\\\"]|\\[\s\S])*(?:\"|$))/,
+          [PR_STRING, /^(?:\'\'\'(?:[^\'\\]|\\[\s\S]|\'{1,2}(?=[^\']))*(?:\'\'\'|$)|\"\"\"(?:[^\"\\]|\\[\s\S]|\"{1,2}(?=[^\"]))*(?:\"\"\"|$)|\'(?:[^\\\']|\\[\s\S])*(?:\'|$)|\"(?:[^\\\"]|\\[\s\S])*(?:\"|$))/,
            null, '\'"']);
     } else if (options['multiLineStrings']) {
       // 'multi-line-string', "multi-line-string"
       shortcutStylePatterns.push(
-          [PR_STRING,  /^(?:\'(?:[^\\\']|\\[\s\S])*(?:\'|$)|\"(?:[^\\\"]|\\[\s\S])*(?:\"|$)|\`(?:[^\\\`]|\\[\s\S])*(?:\`|$))/,
+          [PR_STRING, /^(?:\'(?:[^\\\']|\\[\s\S])*(?:\'|$)|\"(?:[^\\\"]|\\[\s\S])*(?:\"|$)|\`(?:[^\\\`]|\\[\s\S])*(?:\`|$))/,
            null, '\'"`']);
     } else {
       // 'single-line-string', "single-line-string"
@@ -1003,9 +1003,9 @@ window['_pr_isIE6'] = function () {
           // and then contains any number of raw characters,
           + '(?:[^/\\x5B\\x5C]'
           // escape sequences (\x5C),
-          +    '|\\x5C[\\s\\S]'
+          + '|\\x5C[\\s\\S]'
           // or non-nesting character sets (\x5B\x5D);
-          +    '|\\x5B(?:[^\\x5C\\x5D]|\\x5C[\\s\\S])*(?:\\x5D|$))+'
+          + '|\\x5B(?:[^\\x5C\\x5D]|\\x5C[\\s\\S])*(?:\\x5D|$))+'
           // finally closed by a /.
           + '/');
       fallthroughStylePatterns.push(
@@ -1021,12 +1021,12 @@ window['_pr_isIE6'] = function () {
            new RegExp('^(?:' + keywords.replace(/\s+/g, '|') + ')\\b'), null]);
     }
 
-    shortcutStylePatterns.push([PR_PLAIN,       /^\s+/, null, ' \r\n\t\xA0']);
+    shortcutStylePatterns.push([PR_PLAIN, /^\s+/, null, ' \r\n\t\xA0']);
     fallthroughStylePatterns.push(
         // TODO(mikesamuel): recognize non-latin letters and numerals in idents
-        [PR_LITERAL,     /^@[a-z_$][a-z_$@0-9]*/i, null],
-        [PR_TYPE,        /^@?[A-Z]+[a-z][A-Za-z_$@0-9]*/, null],
-        [PR_PLAIN,       /^[a-z_$][a-z_$@0-9]*/i, null],
+        [PR_LITERAL, /^@[a-z_$][a-z_$@0-9]*/i, null],
+        [PR_TYPE, /^@?[A-Z]+[a-z][A-Za-z_$@0-9]*/, null],
+        [PR_PLAIN, /^[a-z_$][a-z_$@0-9]*/i, null],
         [PR_LITERAL,
          new RegExp(
              '^(?:'
@@ -1113,7 +1113,7 @@ window['_pr_isIE6'] = function () {
       for (var i = 0; i < 10; ++i) {
         lineBreaks[i] = lineBreakHtml + '</li><li class="L' + i + '">';
       }
-      var lineNum = numberLines[1] && numberLines[1].length 
+      var lineNum = numberLines[1] && numberLines[1].length
           ? numberLines[1] - 1 : 0;  // Lines are 1-indexed
       html.push('<ol class="linenums"><li class="L', (lineNum) % 10, '"');
       if (lineNum) {
@@ -1249,38 +1249,38 @@ window['_pr_isIE6'] = function () {
       createSimpleLexer(
           [],
           [
-           [PR_PLAIN,       /^[^<?]+/],
+           [PR_PLAIN, /^[^<?]+/],
            [PR_DECLARATION, /^<!\w[^>]*(?:>|$)/],
-           [PR_COMMENT,     /^<\!--[\s\S]*?(?:-\->|$)/],
+           [PR_COMMENT, /^<\!--[\s\S]*?(?:-\->|$)/],
            // Unescaped content in an unknown language
-           ['lang-',        /^<\?([\s\S]+?)(?:\?>|$)/],
-           ['lang-',        /^<%([\s\S]+?)(?:%>|$)/],
+           ['lang-', /^<\?([\s\S]+?)(?:\?>|$)/],
+           ['lang-', /^<%([\s\S]+?)(?:%>|$)/],
            [PR_PUNCTUATION, /^(?:<[%?]|[%?]>)/],
-           ['lang-',        /^<xmp\b[^>]*>([\s\S]+?)<\/xmp\b[^>]*>/i],
+           ['lang-', /^<xmp\b[^>]*>([\s\S]+?)<\/xmp\b[^>]*>/i],
            // Unescaped content in javascript.  (Or possibly vbscript).
-           ['lang-js',      /^<script\b[^>]*>([\s\S]*?)(<\/script\b[^>]*>)/i],
+           ['lang-js', /^<script\b[^>]*>([\s\S]*?)(<\/script\b[^>]*>)/i],
            // Contains unescaped stylesheet content
-           ['lang-css',     /^<style\b[^>]*>([\s\S]*?)(<\/style\b[^>]*>)/i],
-           ['lang-in.tag',  /^(<\/?[a-z][^<>]*>)/i]
+           ['lang-css', /^<style\b[^>]*>([\s\S]*?)(<\/style\b[^>]*>)/i],
+           ['lang-in.tag', /^(<\/?[a-z][^<>]*>)/i]
           ]),
       ['default-markup', 'htm', 'html', 'mxml', 'xhtml', 'xml', 'xsl']);
   registerLangHandler(
       createSimpleLexer(
           [
-           [PR_PLAIN,        /^[\s]+/, null, ' \t\r\n'],
+           [PR_PLAIN, /^[\s]+/, null, ' \t\r\n'],
            [PR_ATTRIB_VALUE, /^(?:\"[^\"]*\"?|\'[^\']*\'?)/, null, '\"\'']
            ],
           [
-           [PR_TAG,          /^^<\/?[a-z](?:[\w.:-]*\w)?|\/?>$/i],
-           [PR_ATTRIB_NAME,  /^(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],
-           ['lang-uq.val',   /^=\s*([^>\'\"\s]*(?:[^>\'\"\s\/]|\/(?=\s)))/],
-           [PR_PUNCTUATION,  /^[=<>\/]+/],
-           ['lang-js',       /^on\w+\s*=\s*\"([^\"]+)\"/i],
-           ['lang-js',       /^on\w+\s*=\s*\'([^\']+)\'/i],
-           ['lang-js',       /^on\w+\s*=\s*([^\"\'>\s]+)/i],
-           ['lang-css',      /^style\s*=\s*\"([^\"]+)\"/i],
-           ['lang-css',      /^style\s*=\s*\'([^\']+)\'/i],
-           ['lang-css',      /^style\s*=\s*([^\"\'>\s]+)/i]
+           [PR_TAG, /^^<\/?[a-z](?:[\w.:-]*\w)?|\/?>$/i],
+           [PR_ATTRIB_NAME, /^(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],
+           ['lang-uq.val', /^=\s*([^>\'\"\s]*(?:[^>\'\"\s\/]|\/(?=\s)))/],
+           [PR_PUNCTUATION, /^[=<>\/]+/],
+           ['lang-js', /^on\w+\s*=\s*\"([^\"]+)\"/i],
+           ['lang-js', /^on\w+\s*=\s*\'([^\']+)\'/i],
+           ['lang-js', /^on\w+\s*=\s*([^\"\'>\s]+)/i],
+           ['lang-css', /^style\s*=\s*\"([^\"]+)\"/i],
+           ['lang-css', /^style\s*=\s*\'([^\']+)\'/i],
+           ['lang-css', /^style\s*=\s*([^\"\'>\s]+)/i]
            ]),
       ['in.tag']);
   registerLangHandler(
@@ -1412,7 +1412,7 @@ window['_pr_isIE6'] = function () {
           // passed to PR_registerLangHandler.
           var langExtension = cs.className.match(/\blang-(\w+)\b/);
           if (langExtension) { langExtension = langExtension[1]; }
-          
+
           // make sure this is not nested in an already prettified element
           var nested = false;
           for (var p = cs.parentNode; p; p = p.parentNode) {
@@ -1425,10 +1425,10 @@ window['_pr_isIE6'] = function () {
           }
 
           // make sure we haven't already prettified this element
-          if ( cs.className && cs.className.indexOf('prettyprint-has') >= 0 ) {
+          if (cs.className && cs.className.indexOf('prettyprint-has') >= 0) {
             nested = true;
           }
-          
+
 		  // handle
           if (!nested) {
             // fetch the content as a snippet of properly escaped HTML.
@@ -1460,7 +1460,7 @@ window['_pr_isIE6'] = function () {
       var newContent = prettyPrintingJob.prettyPrintedHtml;
       if (!newContent) { return; }
       var cs = prettyPrintingJob.sourceNode;
-      
+
       // push the prettified html back into the tag.
       if (!isRawContent(cs)) {
         // just replace the old html with the new

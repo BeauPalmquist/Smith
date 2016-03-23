@@ -114,13 +114,11 @@ class AppHeader extends React.Component {
                     </div>
                 </div>
                 <div className="topbar-right pull-right">
-                    { globalToolBar }
                     <div className="clearfix">
                         <ul className="left-bar-switch pull-left">
                             <li><span className="left-toggle-switch"><i className="fa fa-bars"></i></span></li>
                         </ul>
                         <ul className="pull-right top-right-icons">
-
                             {search}
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
                             <li>
@@ -132,6 +130,7 @@ class AppHeader extends React.Component {
                         </ul>
                     </div>
                 </div>
+                { globalToolBar }
             </header>
         );
         }
@@ -144,7 +143,6 @@ AppHeader.propTypes = {
     notificationActions: React.PropTypes.object.isRequired,
     config: React.PropTypes.shape({
         GlobalSearch: React.PropTypes.element,
-        GlobalToolbar: React.PropTypes.element,
         headerImage: React.PropTypes.shape({
             src: React.PropTypes.string.isRequired
         }),

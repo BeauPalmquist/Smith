@@ -1,22 +1,22 @@
-;(function(window, undefined){
-	"use strict"
+(function (window, undefined) {
+	'use strict';
 
 	var _valueRanges = {
-			rgb:   {r: [0, 255], g: [0, 255], b: [0, 255]},
-			hsv:   {h: [0, 360], s: [0, 100], v: [0, 100]},
-			hsl:   {h: [0, 360], s: [0, 100], l: [0, 100]},
-			alpha: {alpha: [0, 1]},
-			HEX:   {HEX: [0, 16777215]} // maybe we don't need this
+			rgb:   { r: [0, 255], g: [0, 255], b: [0, 255] },
+			hsv:   { h: [0, 360], s: [0, 100], v: [0, 100] },
+			hsl:   { h: [0, 360], s: [0, 100], l: [0, 100] },
+			alpha: { alpha: [0, 1] },
+			HEX:   { HEX: [0, 16777215] } // maybe we don't need this
 		},
 
 		_instance = {},
 		_colors = {},
 
-		grey = {r: 0.298954, g: 0.586434, b: 0.114612}, // CIE-XYZ 1931
-		luminance = {r: 0.2126, g: 0.7152, b: 0.0722}, // W3C 2.0
+		grey = { r: 0.298954, g: 0.586434, b: 0.114612 }, // CIE-XYZ 1931
+		luminance = { r: 0.2126, g: 0.7152, b: 0.0722 }, // W3C 2.0
 
-		Colors = window.Colors = function(options) {
-			this.colors = {RND: {}};
+		Colors = window.Colors = function (options) {
+			this.colors = { RND: {} };
 			this.options = {
 				color: 'rgba(204, 82, 37, 0.8)', // init value(s)...
 				grey: grey,
@@ -28,7 +28,7 @@
 			};
 			initInstance(this, options || {});
 		},
-		initInstance = function(THIS, options) {
+		initInstance = function (THIS, options) {
 			var importColor,
 				_options = THIS.options,
 				customBG;
@@ -39,16 +39,16 @@
 			}
 			customBG = _options.customBG;
 			_options.customBG = (typeof customBG === 'string') ? ColorConverter.txt2color(customBG).rgb : customBG;
-			_colors = setColor(THIS.colors, _options.color, undefined, true); // THIS.colors = _colors = 
+			_colors = setColor(THIS.colors, _options.color, undefined, true); // THIS.colors = _colors =
 		},
-		focusInstance = function(THIS) {
+		focusInstance = function (THIS) {
 			if (_instance !== THIS) {
 				_instance = THIS;
 				_colors = THIS.colors;
 			}
 		};
 
-	Colors.prototype.setColor = function(newCol, type, alpha) {
+	Colors.prototype.setColor = function (newCol, type, alpha) {
 		focusInstance(this);
 		if (newCol) {
 			return setColor(this.colors, newCol, type, undefined, alpha);
@@ -60,14 +60,14 @@
 		}
 	};
 
-	Colors.prototype.setCustomBackground = function(col) { // wild gues,... check again...
+	Colors.prototype.setCustomBackground = function (col) { // wild gues,... check again...
 		focusInstance(this); // needed???
 		this.options.customBG = (typeof col === 'string') ? ColorConverter.txt2color(col).rgb : col;
 		// return setColor(this.colors, this.options.customBG, 'rgb', true); // !!!!RGB
 		return setColor(this.colors, undefined, 'rgb'); // just recalculate existing
 	};
 
-	Colors.prototype.saveAsBackground = function() { // alpha
+	Colors.prototype.saveAsBackground = function () { // alpha
 		focusInstance(this); // needed???
 		// return setColor(this.colors, this.colors.RND.rgb, 'rgb', true);
 		return setColor(this.colors, undefined, 'rgb', true);
@@ -85,7 +85,7 @@
 			alpha = alpha !== undefined ? alpha : color.alpha;
 		} else if (color) {
 			for (var n in color) {
-				colors[type][n] = limitValue(color[n] / _valueRanges[type][n][1], 0 , 1);
+				colors[type][n] = limitValue(color[n] / _valueRanges[type][n][1], 0, 1);
 			}
 		}
 		if (alpha !== undefined) {
@@ -98,14 +98,14 @@
 		var grey = _instance.options.grey,
 			color = {};
 
-		color.RGB = {r: RGB.r, g: RGB.g, b: RGB.b};
-		color.rgb = {r: rgb.r, g: rgb.g, b: rgb.b};
+		color.RGB = { r: RGB.r, g: RGB.g, b: RGB.b };
+		color.rgb = { r: rgb.r, g: rgb.g, b: rgb.b };
 		color.alpha = alpha;
 		// color.RGBLuminance = getLuminance(RGB);
 		color.equivalentGrey = Math.round(grey.r * RGB.r + grey.g * RGB.g + grey.b * RGB.b);
 
-		color.rgbaMixBlack = mixColors(rgb, {r: 0, g: 0, b: 0}, alpha, 1);
-		color.rgbaMixWhite = mixColors(rgb, {r: 1, g: 1, b: 1}, alpha, 1);
+		color.rgbaMixBlack = mixColors(rgb, { r: 0, g: 0, b: 0 }, alpha, 1);
+		color.rgbaMixWhite = mixColors(rgb, { r: 1, g: 1, b: 1 }, alpha, 1);
 		color.rgbaMixBlack.luminance = getLuminance(color.rgbaMixBlack, true);
 		color.rgbaMixWhite.luminance = getLuminance(color.rgbaMixWhite, true);
 
@@ -127,7 +127,7 @@
 			RND = colors.RND,
 			// type = colorType, // || _mode.type,
 			modes, mode = '', from = '', // value = '',
-			exceptions = {hsl: 'hsv', rgb: type},
+			exceptions = { hsl: 'hsv', rgb: type },
 			RGB = RND.rgb, SAVE, SMART;
 
 		if (type !== 'alpha') {
@@ -140,7 +140,7 @@
 
 					if (!RND[typ]) RND[typ] = {};
 					modes = colors[typ];
-					for(mode in modes) {
+					for (mode in modes) {
 						RND[typ][mode] = Math.round(modes[mode] * ranges[typ][mode][1]);
 					}
 				}
@@ -157,8 +157,8 @@
 			colors.webSmart = SMART = getClosestWebColor(RGB, 17);
 			// colors.webSmart.HEX = convert.RGB2HEX(colors.webSmart);
 			colors.saveColor =
-				RGB.r === SAVE.r && RGB.g === SAVE.g && RGB.b === SAVE.b  ? 'web save' :
-				RGB.r === SMART.r && RGB.g === SMART.g && RGB.b === SMART.b  ? 'web smart' : '';
+				RGB.r === SAVE.r && RGB.g === SAVE.g && RGB.b === SAVE.b ? 'web save' :
+				RGB.r === SMART.r && RGB.g === SMART.g && RGB.b === SMART.b ? 'web smart' : '';
 			colors.hueRGB = ColorConverter.hue2RGB(colors.hsv.h);
 
 			if (colorObj) {
@@ -170,14 +170,14 @@
 			alpha = colors.alpha,
 			luminance = 'luminance',
 			background = colors.background,
-			rgbaMixBlack, rgbaMixWhite, rgbaMixCustom, 
+			rgbaMixBlack, rgbaMixWhite, rgbaMixCustom,
 			rgbaMixBG, rgbaMixBGMixBlack, rgbaMixBGMixWhite, rgbaMixBGMixCustom;
 
-		rgbaMixBlack = mixColors(rgb, {r: 0, g: 0, b: 0}, alpha, 1);
+		rgbaMixBlack = mixColors(rgb, { r: 0, g: 0, b: 0 }, alpha, 1);
 		rgbaMixBlack[luminance] = getLuminance(rgbaMixBlack, true);
 		colors.rgbaMixBlack = rgbaMixBlack;
 
-		rgbaMixWhite = mixColors(rgb, {r: 1, g: 1, b: 1}, alpha, 1);
+		rgbaMixWhite = mixColors(rgb, { r: 1, g: 1, b: 1 }, alpha, 1);
 		rgbaMixWhite[luminance] = getLuminance(rgbaMixWhite, true);
 		colors.rgbaMixWhite = rgbaMixWhite;
 
@@ -199,7 +199,7 @@
 
 		// renderVars.readyToRender = true;
 		if (options.convertCallback) {
-			options.convertCallback(colors, type); //, convert); //, _mode);
+			options.convertCallback(colors, type); // , convert); //, _mode);
 		}
 
 		// console.timeEnd('convertColors')
@@ -213,7 +213,7 @@
 	// -------------------------------------------------------//
 
 	var ColorConverter = {
-		txt2color: function(txt) {
+		txt2color: function (txt) {
 			var color = {},
 				parts = txt.replace(/(?:#|\)|%)/g, '').split('('),
 				values = (parts[1] || '').split(/,\s*/),
@@ -223,7 +223,7 @@
 			color.type = type;
 			color[type] = {};
 			if (parts[1]) {
-				for (var n = 3; n--; ) {
+				for (var n = 3; n--;) {
 					m = type[n] || type.charAt(n); // IE7
 					color[type][m] = +values[n] / _valueRanges[type][m][1];
 				}
@@ -236,7 +236,7 @@
 			return color;
 		},
 
-		RGB2HEX: function(RGB) {
+		RGB2HEX: function (RGB) {
 			return (
 				(RGB.r < 16 ? '0' : '') + RGB.r.toString(16) +
 				(RGB.g < 16 ? '0' : '') + RGB.g.toString(16) +
@@ -244,7 +244,7 @@
 			).toUpperCase();
 		},
 
-		HEX2rgb: function(HEX) {
+		HEX2rgb: function (HEX) {
 			HEX = HEX.split(''); // IE7
 			return {
 				r: parseInt(HEX[0] + HEX[HEX[3] ? 1 : 0], 16) / 255,
@@ -253,7 +253,7 @@
 			};
 		},
 
-		hue2RGB: function(hue) {
+		hue2RGB: function (hue) {
 			var h = hue * 6,
 				mod = ~~h % 6, // Math.floor(h) -> faster in most browsers
 				i = h === 6 ? 0 : (h - mod);
@@ -267,7 +267,7 @@
 
 		// ------------------------ HSV ------------------------ //
 
-		rgb2hsv: function(rgb) { // faster
+		rgb2hsv: function (rgb) { // faster
 			var r = rgb.r,
 				g = rgb.g,
 				b = rgb.b,
@@ -293,7 +293,7 @@
 			};
 		},
 
-		hsv2rgb: function(hsv) {
+		hsv2rgb: function (hsv) {
 			var h = hsv.h * 6,
 				s = hsv.s,
 				v = hsv.v,
@@ -313,7 +313,7 @@
 
 		// ------------------------ HSL ------------------------ //
 
-		hsv2hsl: function(hsv) {
+		hsv2hsl: function (hsv) {
 			var l = (2 - hsv.s) * hsv.v,
 				s = hsv.s * hsv.v;
 
@@ -326,13 +326,13 @@
 			};
 		},
 
-		rgb2hsl: function(rgb, dependent) { // not used in Color
+		rgb2hsl: function (rgb, dependent) { // not used in Color
 			var hsv = ColorConverter.rgb2hsv(rgb);
 
 			return ColorConverter.hsv2hsl(dependent ? hsv : (_colors.hsv = hsv));
 		},
 
-		hsl2rgb: function(hsl) {
+		hsl2rgb: function (hsl) {
 			var h = hsl.h * 6,
 				s = hsl.s,
 				l = hsl.l,
@@ -381,7 +381,7 @@
 			RGB = [rgb.r / div, rgb.g / div, rgb.b / div],
 			luminance = _instance.options.luminance;
 
-		for (var i = RGB.length; i--; ) {
+		for (var i = RGB.length; i--;) {
 			RGB[i] = RGB[i] <= 0.03928 ? RGB[i] / 12.92 : Math.pow(((RGB[i] + 0.055) / 1.055), 2.4);
 		}
 		return ((luminance.r * RGB[0]) + (luminance.g * RGB[1]) + (luminance.b * RGB[2]));
@@ -393,7 +393,7 @@
 			alphaBottom = (bottomAlpha !== undefined ? bottomAlpha : 1),
 			alpha = alphaTop + alphaBottom * (1 - alphaTop); // 1 - (1 - alphaTop) * (1 - alphaBottom);
 
-		for(var n in topColor) {
+		for (var n in topColor) {
 			newColor[n] = (topColor[n] * alphaTop + bottomColor[n] * alphaBottom * (1 - alphaTop)) / alpha;
 		}
 		newColor.a = alpha;
