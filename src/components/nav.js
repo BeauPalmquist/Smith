@@ -51,7 +51,7 @@ class AppNav extends React.Component {
                     userHasNavPermissions = false;
                 }
 
-                const displayNav = (!route.displayInNav || route.displayInNav === true);
+                const displayNav = (route.displayInNav === undefined || route.displayInNav === null || route.displayInNav === true);
 
                 if ((displayNav) && (route.navTitle && route.navTitle !== '') && userHasNavPermissions === true) {
                     const navKey = `nav_${keyCount + 1}`;
