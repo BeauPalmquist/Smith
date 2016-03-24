@@ -1,5 +1,6 @@
 ﻿import User from '../common/js/forge/services/user';
 import ClientAction from '../common/js/forge/services/clientAction';
+import AjaxOptions from '../common/js/forge/support/ajaxOptions';
 
 export const LOGIN_REQUEST = 'SMITH/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'SMITH/LOGIN_SUCCESS';
@@ -61,6 +62,15 @@ export function isAuthenticated() {
     return function (dispatch) {
         return User.isLoggedIn().done(result => {
             dispatch(setAuthenticationStatus(result));
+
+            if (result) {
+                // Set the reload logic for the case where an authenticated user's token session is over (24 hours)
+                AjaxOptions.setOnRejected(xhr => {
+                    if (xhr.status === 401) {
+                        window.location.reload();
+                    }
+                });
+            }
         });
     };
 }
