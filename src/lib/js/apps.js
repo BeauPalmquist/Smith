@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    "use strict";
+$(document).ready(function () {
+    'use strict';
     var plugin_exists = true;
 //    **----------
 //    Google Fonts
@@ -12,7 +12,7 @@ $(document).ready(function() {
                 ]
             }
         };
-        (function() {
+        (function () {
             var wf = document.createElement('script');
             wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
                 '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
@@ -29,15 +29,15 @@ $(document).ready(function() {
         var wh = $(window).outerHeight(),
             TopBarHeight = $('.topbar').height(),
             calc_wh = wh - TopBarHeight;
-        $(".leftbar").css({
-            "height": calc_wh + "px"
+        $('.leftbar').css({
+            'height': calc_wh + 'px'
         });
-        $(".rightbar").css({
-            "height": calc_wh + "px"
+        $('.rightbar').css({
+            'height': calc_wh + 'px'
         });
         $('.left-aside-container').slimscroll({
             height: calc_wh,
-            width: "250px",
+            width: '250px',
             size: '4px',
             color: 'rgba(255,255,255,.5)',
             distance: '1px',
@@ -58,11 +58,11 @@ $(document).ready(function() {
 
     function ChatHeight() {
 
-        var RightBarTabHeight = $(".rightbar-tab").outerHeight(),
-            ChatToolbarHeight = $(".chat-user-toolbar").outerHeight(),
+        var RightBarTabHeight = $('.rightbar-tab').outerHeight(),
+            ChatToolbarHeight = $('.chat-user-toolbar').outerHeight(),
             TopSectionHeight = RightBarTabHeight + ChatToolbarHeight,
-            ConvToolbarHeight = $(".coversation-toolbar").outerHeight(),
-            ChatTextInput = $(".chat-text-input").outerHeight(),
+            ConvToolbarHeight = $('.coversation-toolbar').outerHeight(),
+            ChatTextInput = $('.chat-text-input').outerHeight(),
             ConvSectionHeight = ConvToolbarHeight + ChatTextInput;
 
 
@@ -74,13 +74,13 @@ $(document).ready(function() {
             ConvContainerHeight = calc_wh - ConvSectionHeight;
 
 
-        $(".chat-user-container").css({
-            "height": ChatContainerHeight + "px"
+        $('.chat-user-container').css({
+            'height': ChatContainerHeight + 'px'
         });
 
-        $(".chat-user-container").slimscroll({
+        $('.chat-user-container').slimscroll({
             height: ChatContainerHeight,
-            width: "300px",
+            width: '300px',
             size: '4px',
             color: 'rgba(000,000,000,.5)',
             distance: '1px',
@@ -96,12 +96,12 @@ $(document).ready(function() {
         // **------------------------
         // Activities Timeline Height
         // **------------------------
-        $(".activities-timeline, .rightbar .message-list-container, .rightbar .notification-wrap").css({
-            "height": tabCon_h + "px"
+        $('.activities-timeline, .rightbar .message-list-container, .rightbar .notification-wrap').css({
+            'height': tabCon_h + 'px'
         });
-        $(".activities-timeline").slimscroll({
+        $('.activities-timeline').slimscroll({
             height: tabCon_h,
-            width: "300px",
+            width: '300px',
             size: '4px',
             color: 'rgba(000,000,000,.5)',
             distance: '1px',
@@ -113,9 +113,9 @@ $(document).ready(function() {
             railBorderRadius: '0px',
             allowPageScroll: false
         });
-        $(".rightbar .message-list-container, .rightbar .notification-wrap").slimscroll({
+        $('.rightbar .message-list-container, .rightbar .notification-wrap').slimscroll({
             height: tabCon_h,
-            width: "300px",
+            width: '300px',
             size: '4px',
             color: 'rgba(000,000,000,.5)',
             distance: '1px',
@@ -127,9 +127,9 @@ $(document).ready(function() {
             railBorderRadius: '0px',
             allowPageScroll: false
         });
-        $(".conversation-container").slimscroll({
+        $('.conversation-container').slimscroll({
             height: ConvContainerHeight,
-            width: "300px",
+            width: '300px',
             size: '4px',
             color: 'rgba(000,000,000,.5)',
             distance: '1px',
@@ -153,22 +153,22 @@ $(document).ready(function() {
     // Chat Popover
     // **----------
     $('[data-toggle="popover"]').popover();
-    $(".chat-user-list > li > div").popover({
+    $('.chat-user-list > li > div').popover({
         html: true,
-        container: ".rightbar",
+        container: '.rightbar',
         delay: {
-            "show": 100,
-            "hide": 100
+            'show': 100,
+            'hide': 100
         }
     });
 
     // **------------------
     // Popover Hide onClick
     // **------------------
-    $('body').on('click', function(e) {
-        $('.chat-user-list > li > a').each(function() {
-            //the 'is' for buttons that trigger popups
-            //the 'has' for icons within a button that triggers a popup
+    $('body').on('click', function (e) {
+        $('.chat-user-list > li > a').each(function () {
+            // the 'is' for buttons that trigger popups
+            // the 'has' for icons within a button that triggers a popup
             if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                 $(this).popover('hide');
             }
@@ -182,8 +182,8 @@ $(document).ready(function() {
     // **----------------
     try {
         $('.slidePanel').velocity({
-            translateX: "-100%"
-        }, 300, "swing");
+            translateX: '-100%'
+        }, 300, 'swing');
 
     } catch (err) {
         console.log('velocity is not found');
@@ -192,93 +192,93 @@ $(document).ready(function() {
     // **------------
     // Leftbar Toggle
     // **------------
-    $(".left-toggle-switch").hammer().on("click touchstart", function(e) {
+    $('.left-toggle-switch').hammer().on('click touchstart', function (e) {
         e.preventDefault();
-        if ($("body").hasClass("left-aside-toggle")) {
-            $("body").removeClass("left-aside-toggle");
+        if ($('body').hasClass('left-aside-toggle')) {
+            $('body').removeClass('left-aside-toggle');
         } else {
-            $("body").addClass("left-aside-toggle");
+            $('body').addClass('left-aside-toggle');
         }
     });
 
     // **-------------
     // Rightbar Toggle
     // **-------------
-    $(".right-toggle-switch").hammer().on("click touchstart", function(e) {
+    $('.right-toggle-switch').hammer().on('click touchstart', function (e) {
         e.preventDefault();
-        if ($(".rightbar").hasClass("right-aside-toggle")) {
-            $(".rightbar").removeClass("right-aside-toggle");
+        if ($('.rightbar').hasClass('right-aside-toggle')) {
+            $('.rightbar').removeClass('right-aside-toggle');
         } else {
-            $(".rightbar").addClass("right-aside-toggle");
+            $('.rightbar').addClass('right-aside-toggle');
         }
-        $(window).trigger("resize");
+        $(window).trigger('resize');
     });
 
     // **-----------
     // Mobile Topbar
     // **-----------
-    $(".btn-mobile-bar").hammer().on("click touchstart", function(e) {
+    $('.btn-mobile-bar').hammer().on('click touchstart', function (e) {
         e.preventDefault();
-        if ($(".topbar-right").hasClass("bar-toggle")) {
-            $(".topbar-right").removeClass("bar-toggle");
+        if ($('.topbar-right').hasClass('bar-toggle')) {
+            $('.topbar-right').removeClass('bar-toggle');
         } else {
-            $(".topbar-right").addClass("bar-toggle");
+            $('.topbar-right').addClass('bar-toggle');
         }
     });
 
     // **--------
     // Search Bar
     // **--------
-    $(".btn-top-search").hammer().on("click touchstart", function(e) {
+    $('.btn-top-search').hammer().on('click touchstart', function (e) {
         e.preventDefault();
-        if ($(".top-search-bar").hasClass("search-bar-toggle")) {
-            $(".top-search-bar").removeClass("search-bar-toggle");
+        if ($('.top-search-bar').hasClass('search-bar-toggle')) {
+            $('.top-search-bar').removeClass('search-bar-toggle');
         } else {
-            $(".top-search-bar").addClass("search-bar-toggle");
+            $('.top-search-bar').addClass('search-bar-toggle');
         }
     });
 
     // **------------------
     // Individual Chat Open
     // **------------------
-    $(".chat-user-list > li > div, .chat-back").hammer().on("click touchstart", function(e) {
+    $('.chat-user-list > li > div, .chat-back').hammer().on('click touchstart', function (e) {
         e.preventDefault();
-        if ($(".aside-chat-box").hasClass("right-chat-toggle")) {
-            $(".aside-chat-box").removeClass("right-chat-toggle");
+        if ($('.aside-chat-box').hasClass('right-chat-toggle')) {
+            $('.aside-chat-box').removeClass('right-chat-toggle');
         } else {
-            $(".aside-chat-box").addClass("right-chat-toggle");
+            $('.aside-chat-box').addClass('right-chat-toggle');
         }
     });
 
     // **-------------------------
     // Hide Elements On Body Click
     // **-------------------------
-    $(document).on('click touchstart', function(e) {
-        if ($(e.target).closest(".right-aside-toggle").length === 0 && $(e.target).closest(".right-toggle-switch").length === 0) {
-            $(".rightbar").removeClass("right-aside-toggle");
+    $(document).on('click touchstart', function (e) {
+        if ($(e.target).closest('.right-aside-toggle').length === 0 && $(e.target).closest('.right-toggle-switch').length === 0) {
+            $('.rightbar').removeClass('right-aside-toggle');
         }
-        if ($("body").hasClass("overlay-leftbar")) {
-            if ($(e.target).closest(".leftbar").length === 0 && $(e.target).closest(".left-toggle-switch").length === 0) {
-                $("body").removeClass("left-aside-toggle");
+        if ($('body').hasClass('overlay-leftbar')) {
+            if ($(e.target).closest('.leftbar').length === 0 && $(e.target).closest('.left-toggle-switch').length === 0) {
+                $('body').removeClass('left-aside-toggle');
             }
         }
-        if ($(e.target).closest(".topbar-right").length === 0 && $(e.target).closest(".btn-mobile-bar").length === 0) {
-            $(".topbar-right").removeClass("bar-toggle");
+        if ($(e.target).closest('.topbar-right').length === 0 && $(e.target).closest('.btn-mobile-bar').length === 0) {
+            $('.topbar-right').removeClass('bar-toggle');
         }
-        if ($(e.target).closest(".top-search-bar").length === 0 && $(e.target).closest(".btn-top-search").length === 0) {
-            $(".top-search-bar").removeClass("search-bar-toggle");
+        if ($(e.target).closest('.top-search-bar').length === 0 && $(e.target).closest('.btn-top-search').length === 0) {
+            $('.top-search-bar').removeClass('search-bar-toggle');
         }
     });
 
     // **-----------------------------------------------
     // Notification Dropdpown Tab Will Not Close onClick
     // **-----------------------------------------------
-    $('.notifications-tabs').on('click touchstart', '.nav-tabs a', function(e) {
+    $('.notifications-tabs').on('click touchstart', '.nav-tabs a', function (e) {
         e.preventDefault();
         $(this).closest('.dropdown').addClass('dontClose');
     });
 
-    $('.notifications-dropdown').on('hide.bs.dropdown', function(e) {
+    $('.notifications-dropdown').on('hide.bs.dropdown', function (e) {
         if ($(this).hasClass('dontClose')) {
             e.preventDefault();
         }
@@ -290,7 +290,7 @@ $(document).ready(function() {
     // **---------------
 
     if ($.fn.navAccordion) {
-        $('.list-accordion').each(function() {
+        $('.list-accordion').each(function () {
             $(this).navAccordion({
                 eventType: 'hover',
                 hoverDelay: 100,
@@ -304,16 +304,16 @@ $(document).ready(function() {
             });
         });
     }
-    $(document).on("mouseleave", ".iconic-leftbar", function() {
-        $(".list-accordion .dcjq-parent").removeClass('active');
-        $(".list-accordion .acc-parent-li .acc-parent").removeClass('active');
-        $(".list-accordion ul").hide();
+    $(document).on('mouseleave', '.iconic-leftbar', function () {
+        $('.list-accordion .dcjq-parent').removeClass('active');
+        $('.list-accordion .acc-parent-li .acc-parent').removeClass('active');
+        $('.list-accordion ul').hide();
     });
 
     // **--------
     // Scroll Top
     // **--------
-    if($.fn.scrollUp){
+    if ($.fn.scrollUp) {
         $.scrollUp({
             scrollName: 'scrollTop', // Element ID
             topDistance: '300', // Distance from top before showing element (px)
@@ -344,7 +344,7 @@ $(document).ready(function() {
     // **-----------
     // Window Resize
     // **-----------
-    $(window).smartresize(function() {
+    $(window).smartresize(function () {
         AsideHeight();
         ChatHeight();
     });
@@ -371,22 +371,22 @@ $(document).ready(function() {
 
     jRes.addFunc({
         breakpoint: 'handheld',
-        enter: function() {
-            $(".dropdown").removeClass("open");
-            $(".rightbar").removeClass("right-aside-toggle");
-            $("body").addClass("isMobile");
-            $(document).on('click touchstart', function(e) {
-                if ($("body").hasClass("overlay-leftbar") || $("body").hasClass("isMobile")) {
-                    if ($(e.target).closest(".leftbar").length === 0 && $(e.target).closest(".left-toggle-switch").length === 0) {
-                        $("body").removeClass("left-aside-toggle");
+        enter: function () {
+            $('.dropdown').removeClass('open');
+            $('.rightbar').removeClass('right-aside-toggle');
+            $('body').addClass('isMobile');
+            $(document).on('click touchstart', function (e) {
+                if ($('body').hasClass('overlay-leftbar') || $('body').hasClass('isMobile')) {
+                    if ($(e.target).closest('.leftbar').length === 0 && $(e.target).closest('.left-toggle-switch').length === 0) {
+                        $('body').removeClass('left-aside-toggle');
                     }
                 }
             });
         },
-        exit: function() {
-            $(".isMobile").removeClass("left-aside-toggle");
-            $(".rightbar").removeClass("right-aside-toggle");
-            $("body").removeClass("isMobile");
+        exit: function () {
+            $('.isMobile').removeClass('left-aside-toggle');
+            $('.rightbar').removeClass('right-aside-toggle');
+            $('body').removeClass('isMobile');
         }
     });
 
@@ -399,9 +399,9 @@ $(document).ready(function() {
      * tagsinput.css
      * */
     if ($.fn.tagsInput) {
-        $('.tags-input').each(function() {
-            var tagsType = $(this).data('type')
-            var highlightColor = $(this).data('highlight-color')
+        $('.tags-input').each(function () {
+            var tagsType = $(this).data('type');
+            var highlightColor = $(this).data('highlight-color');
             if (tagsType === 'tags') {
                 $(this).tagsInput({
                     width: 'auto'
@@ -410,9 +410,9 @@ $(document).ready(function() {
             if (tagsType === 'highlighted-tags') {
                 $(this).tagsInput({
                     width: 'auto',
-                    onChange: function(elem, elem_tags) {
+                    onChange: function (elem, elem_tags) {
                         var languages = ['php', 'ruby', 'javascript'];
-                        $('.tag', elem_tags).each(function() {
+                        $('.tag', elem_tags).each(function () {
                             if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0) $(this).css('background-color', highlightColor);
                         });
                     }
@@ -427,44 +427,44 @@ $(document).ready(function() {
      *  */
     if ($.fn.mask) {
         $('.date-mask').mask('11/11/1111', {
-            placeholder: "__/__/____"
+            placeholder: '__/__/____'
         });
         $('.time-mask').mask('00:00:00', {
-            placeholder: "00:00:00"
+            placeholder: '00:00:00'
         });
         $('.date_time-mask').mask('00/00/0000 00:00:00', {
-            placeholder: "00/00/0000 00:00:00"
+            placeholder: '00/00/0000 00:00:00'
         });
         $('.cep-mask').mask('00000-000', {
-            placeholder: "00000-000"
+            placeholder: '00000-000'
         });
         $('.phone-mask').mask('0000-0000', {
-            placeholder: "0000-0000"
+            placeholder: '0000-0000'
         });
         $('.phone_with_ddd-mask').mask('(00) 0000-0000', {
-            placeholder: "(00) 0000-0000"
+            placeholder: '(00) 0000-0000'
         });
         $('.phone_us-mask').mask('(000) 000-0000', {
-            placeholder: "(000) 000-0000"
+            placeholder: '(000) 000-0000'
         });
         $('.mixed-mask').mask('AAA 000-S0S', {
-            placeholder: "AAA 000-S0S"
+            placeholder: 'AAA 000-S0S'
         });
         $('.cpf-mask').mask('000.000.000-00', {
             reverse: true,
-            placeholder: "000.000.000-00"
+            placeholder: '000.000.000-00'
         });
         $('.money-mask').mask('000.000.000.000.000,00', {
             reverse: true,
-            placeholder: "000.000.000.000.000,00"
+            placeholder: '000.000.000.000.000,00'
         });
-        $('.money2-mask').mask("#.##0,00", {
+        $('.money2-mask').mask('#.##0,00', {
             reverse: true,
             maxlength: false,
-            placeholder: "#.##0,00"
+            placeholder: '#.##0,00'
         });
         $('.ip_address-mask').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
-            placeholder: "0ZZ.0ZZ.0ZZ.0ZZ",
+            placeholder: '0ZZ.0ZZ.0ZZ.0ZZ',
             translation: {
                 'Z': {
                     pattern: /[0-9]/,
@@ -473,18 +473,18 @@ $(document).ready(function() {
             }
         });
         $('.ip_address-mask').mask('099.099.099.099', {
-            placeholder: "099.099.099.099"
+            placeholder: '099.099.099.099'
         });
         $('.percent-mask').mask('##0,00%', {
             reverse: true,
-            placeholder: "###,##%"
+            placeholder: '###,##%'
         });
-        $('.clear-if-not-match-mask').mask("00/00/0000", {
+        $('.clear-if-not-match-mask').mask('00/00/0000', {
             clearIfNotMatch: true,
-            placeholder: "__/__/____"
+            placeholder: '__/__/____'
         });
-        $('.placeholder-mask').mask("00/00/0000", {
-            placeholder: "__/__/____"
+        $('.placeholder-mask').mask('00/00/0000', {
+            placeholder: '__/__/____'
         });
     }
 
@@ -494,12 +494,12 @@ $(document).ready(function() {
      * spinner.css
      *  */
     if ($.fn.TouchSpin) {
-        $(".vertical-spin").TouchSpin({
+        $('.vertical-spin').TouchSpin({
             verticalbuttons: true,
             verticalupclass: 'glyphicon glyphicon-plus',
             verticaldownclass: 'glyphicon glyphicon-minus'
         });
-        var vspinTrue = $(".vertical-spin").TouchSpin({
+        var vspinTrue = $('.vertical-spin').TouchSpin({
             verticalbuttons: true
         });
         if (vspinTrue) {
@@ -531,8 +531,8 @@ $(document).ready(function() {
         });
 
         $("input[name='demo5']").TouchSpin({
-            prefix: "pre",
-            postfix: "post"
+            prefix: 'pre',
+            postfix: 'post'
         });
         $("input[name='demo0']").TouchSpin({});
     }
@@ -565,14 +565,14 @@ $(document).ready(function() {
     function TaskDone() {
         var TaskCheckbox = $('input.task-i-check');
 
-        TaskCheckbox.each(function() {
+        TaskCheckbox.each(function () {
             if ($(this).parents('.task-action').parents('.task-entry').hasClass('task-done')) {
 
                 $(this).iCheck('check');
             }
         });
 
-        TaskCheckbox.on('ifChecked ifUnchecked', function(event) {
+        TaskCheckbox.on('ifChecked ifUnchecked', function (event) {
             if (event.type == 'ifChecked') {
                 $(this).iCheck('check');
                 $(this).parents('.task-action').parents('.task-entry').addClass('task-done');
@@ -581,7 +581,7 @@ $(document).ready(function() {
                 $(this).parents('.task-action').parents('.task-entry').removeClass('task-done');
             }
         });
-    };
+    }
     TaskDone();
 
     /**
@@ -589,7 +589,7 @@ $(document).ready(function() {
      * select2-bootstrap.css
      *  */
     if ($.fn.select2) {
-        var placeholder = "Select a State";
+        var placeholder = 'Select a State';
         $('.select2, .select2-multiple').select2({
             placeholder: placeholder
         });
@@ -598,12 +598,12 @@ $(document).ready(function() {
             allowClear: true,
             placeholder: placeholder
         });
-        $('button[data-select2-open]').click(function() {
+        $('button[data-select2-open]').click(function () {
             $('#' + $(this).data('select2-open')).select2('open');
         });
-        var select2OpenEventName = "select2-open";
-        $(':checkbox').on("click", function() {
-            $(this).parent().nextAll('select').select2("enable", this.checked);
+        var select2OpenEventName = 'select2-open';
+        $(':checkbox').on('click', function () {
+            $(this).parent().nextAll('select').select2('enable', this.checked);
         });
 
         var repo = function formatRepo(repo) {
@@ -627,25 +627,25 @@ $(document).ready(function() {
             markup += '</div></div>';
 
             return markup;
-        }
+        };
 
         var repoSelect = function formatRepoSelection(repo) {
             return repo.full_name || repo.text;
-        }
+        };
 
 
-        $(".ajax-data").select2({
+        $('.ajax-data').select2({
             ajax: {
-                url: "https://api.github.com/search/repositories",
+                url: 'https://api.github.com/search/repositories',
                 dataType: 'json',
                 delay: 250,
-                data: function(params) {
+                data: function (params) {
                     return {
                         q: params.term, // search term
                         page: params.page
                     };
                 },
-                processResults: function(data, page) {
+                processResults: function (data, page) {
                     // parse the results into the format expected by Select2.
                     // since we are using custom formatting functions we do not need to
                     // alter the remote JSON data
@@ -655,7 +655,7 @@ $(document).ready(function() {
                 },
                 cache: true
             },
-            escapeMarkup: function(markup) {
+            escapeMarkup: function (markup) {
                 return markup;
             }, // let our custom formatter work
             minimumInputLength: 1,
@@ -673,38 +673,38 @@ $(document).ready(function() {
 
     if ($.fn.DatePicker) {
         $('.input-date-picker').DatePicker({
-            orientation: "bottom",
-            daysOfWeekDisabled: "6",
+            orientation: 'bottom',
+            daysOfWeekDisabled: '6',
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true
         });
         $('.cal-date-picker').DatePicker({
-            orientation: "bottom",
-            daysOfWeekDisabled: "6",
+            orientation: 'bottom',
+            daysOfWeekDisabled: '6',
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true
         });
 
         $('.addon-datepicker').DatePicker({
-            orientation: "bottom",
-            daysOfWeekDisabled: "1",
+            orientation: 'bottom',
+            daysOfWeekDisabled: '1',
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true
         });
 
         $('.inline-date-picker').DatePicker({
-            daysOfWeekDisabled: "1",
+            daysOfWeekDisabled: '1',
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true
         });
 
         $('.input-daterange').DatePicker({
-            orientation: "top",
-            daysOfWeekDisabled: "1",
+            orientation: 'top',
+            daysOfWeekDisabled: '1',
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true
@@ -776,7 +776,7 @@ $(document).ready(function() {
                 monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 firstDay: 1
             }
-        }, function(start, end, label) {
+        }, function (start, end, label) {
             console.log(start.toISOString(), end.toISOString(), label);
             $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         });
@@ -821,13 +821,13 @@ $(document).ready(function() {
         $('.foo-data-table').footable({
             phone: 767,
             tablet: 1024
-        })
+        });
 
 
         $('.foo-data-table-filterable').footable({
             phone: 767,
             tablet: 1024
-        }).bind('footable_filtering', function(e) {
+        }).bind('footable_filtering', function (e) {
                 var selected = $('.filter-status').find(':selected').text();
                 if (selected && selected.length > 0) {
                     e.filter += (e.filter && e.filter.length > 0) ? ' ' + selected : selected;
@@ -838,13 +838,13 @@ $(document).ready(function() {
 
 
 
-        $('.clear-filter').click(function(e) {
+        $('.clear-filter').click(function (e) {
             e.preventDefault();
             $('.filter-status').val('');
             $('table.foo-data-table-filterable').trigger('footable_clear_filter');
         });
 
-        $('.filter-status').change(function(e) {
+        $('.filter-status').change(function (e) {
             e.preventDefault();
             $('table.foo-data-table-filterable').trigger('footable_filter', {
                 filter: $('#filter').val()
@@ -854,19 +854,19 @@ $(document).ready(function() {
 
 
 
-        $('.foo-data-table-filterable').footable().on('click', '.row-delete', function(e) {
+        $('.foo-data-table-filterable').footable().on('click', '.row-delete', function (e) {
             e.preventDefault();
-            //get the footable object
+            // get the footable object
             var footable = $('.foo-data-table-filterable').data('footable');
 
-            //get the row we are wanting to delete
+            // get the row we are wanting to delete
             var row = $(this).parents('tr:first');
 
-            //delete the row
+            // delete the row
             footable.removeRow(row);
         });
 
-        $('#change-page-size').change(function(e) {
+        $('#change-page-size').change(function (e) {
             e.preventDefault();
             var pageSize = $(this).val();
             $('.foo-data-table-filterable').data('page-size', pageSize);
@@ -876,8 +876,8 @@ $(document).ready(function() {
 
 
     if ($.fn.sparkline) {
-        var sparkLine = function() {
-            $('.sparkline').each(function() {
+        var sparkLine = function () {
+            $('.sparkline').each(function () {
                 var data = $(this).data();
                 data.valueSpots = {
                     '0:': data.spotColor
@@ -887,10 +887,10 @@ $(document).ready(function() {
                 var composite = data.compositedata;
 
                 if (composite) {
-                    var stlColor = $(this).attr("data-stack-line-color"),
-                        stfColor = $(this).attr("data-stack-fill-color"),
-                        sptColor = $(this).attr("data-stack-spot-color"),
-                        sptRadius = $(this).attr("data-stack-spot-radius");
+                    var stlColor = $(this).attr('data-stack-line-color'),
+                        stfColor = $(this).attr('data-stack-fill-color'),
+                        sptColor = $(this).attr('data-stack-spot-color'),
+                        sptRadius = $(this).attr('data-stack-spot-radius');
 
                     $(this).sparkline(composite, {
                             composite: true,
@@ -905,15 +905,15 @@ $(document).ready(function() {
                         }
 
                     );
-                };
+                }
             });
         };
 
         var sparkResize;
-        $(window).smartresize(function(e) {
+        $(window).smartresize(function (e) {
             clearTimeout(sparkResize);
-            sparkResize = setTimeout(function() {
-                sparkLine(true)
+            sparkResize = setTimeout(function () {
+                sparkLine(true);
             }, 100);
         });
         sparkLine(false);
@@ -922,8 +922,8 @@ $(document).ready(function() {
     // **----------
     // Progress Bar
     // **----------
-    $('.progress-bar').each(function() {
-        var PbarWidth = $(this).data("progress");
+    $('.progress-bar').each(function () {
+        var PbarWidth = $(this).data('progress');
         if (PbarWidth) {
             $(this).css('width', PbarWidth + '%');
             $(this).parents('.progress').parents('.progress-wrap').children('.progress-meta').children('.progress-percent').text(PbarWidth + '%');
@@ -977,7 +977,7 @@ $(document).ready(function() {
 
         var DataWidgetDailyChart = [{
             data: dt3,
-            label: "Earnings",
+            label: 'Earnings',
             lines: {
                 show: false,
                 fill: 0,
@@ -1021,9 +1021,9 @@ $(document).ready(function() {
                     show: true,
                     lineWidth: 1.5,
                     radius: 2.5,
-                    symbol: "circle",
+                    symbol: 'circle',
                     fill: true,
-                    fillColor: "#ffffff"
+                    fillColor: '#ffffff'
 
                 }
             },
@@ -1037,12 +1037,12 @@ $(document).ready(function() {
                 tickLength: 0,
                 ticks: false
             },
-            colors: ["#fff"]
-        }
+            colors: ['#fff']
+        };
 
         var DataWidgetMonthlyChart = [{
             data: dt4,
-            label: "Earnings",
+            label: 'Earnings',
             bars: {
                 show: true,
                 fill: .6,
@@ -1087,13 +1087,13 @@ $(document).ready(function() {
                 tickLength: 0,
                 ticks: false
             },
-            colors: ["#fff"]
-        }
+            colors: ['#fff']
+        };
 
 
         var DataWidgetAlltimeChart = [{
             data: dt5,
-            label: "Earnings",
+            label: 'Earnings',
             lines: {
                 show: false,
                 fill: 0.2,
@@ -1137,9 +1137,9 @@ $(document).ready(function() {
                     show: true,
                     lineWidth: 1.5,
                     radius: 2.5,
-                    symbol: "circle",
+                    symbol: 'circle',
                     fill: true,
-                    fillColor: "#ffffff"
+                    fillColor: '#ffffff'
 
                 }
             },
@@ -1152,16 +1152,16 @@ $(document).ready(function() {
                 tickLength: 0,
                 ticks: false
             },
-            colors: ["#fff"]
-        }
+            colors: ['#fff']
+        };
 
 
-        var statschart = $.plot($("#widget-stats-chart"), DataWidgetDailyChart, DataWidgetDailyChartOptions);
-        var monthlychart = $.plot($("#widget-monthly-chart"), DataWidgetMonthlyChart, DataWidgetMonthlyChartOptions);
-        var alltimechart = $.plot($("#widget-alltime-chart"), DataWidgetAlltimeChart, DataWidgetAlltimeChartOptions);
+        var statschart = $.plot($('#widget-stats-chart'), DataWidgetDailyChart, DataWidgetDailyChartOptions);
+        var monthlychart = $.plot($('#widget-monthly-chart'), DataWidgetMonthlyChart, DataWidgetMonthlyChartOptions);
+        var alltimechart = $.plot($('#widget-alltime-chart'), DataWidgetAlltimeChart, DataWidgetAlltimeChartOptions);
 
 
-        //Dashboard Main Chart
+        // Dashboard Main Chart
         var maindata1 = [
             [1, 400],
             [2, 200],
@@ -1207,7 +1207,7 @@ $(document).ready(function() {
 
         var maindataSet = [{
             data: maindata1,
-            label: "Mobile",
+            label: 'Mobile',
             lines: {
                 show: true,
                 fill: .4,
@@ -1217,14 +1217,14 @@ $(document).ready(function() {
                 show: false,
                 lineWidth: 1.5,
                 radius: 2,
-                symbol: "circle",
+                symbol: 'circle',
                 fill: true,
-                fillColor: "#ffffff"
+                fillColor: '#ffffff'
 
             }
         }, {
             data: maindata2,
-            label: "Tablet",
+            label: 'Tablet',
             lines: {
                 show: true,
                 fill: .3,
@@ -1234,16 +1234,16 @@ $(document).ready(function() {
                 show: false,
                 lineWidth: 1.5,
                 radius: 2,
-                symbol: "circle",
+                symbol: 'circle',
                 fill: true,
-                fillColor: "#ffffff"
+                fillColor: '#ffffff'
 
             }
 
 
         }, {
             data: maindata3,
-            label: "Desktop",
+            label: 'Desktop',
             lines: {
                 show: true,
                 fill: .3,
@@ -1253,17 +1253,17 @@ $(document).ready(function() {
                 show: false,
                 lineWidth: 1.5,
                 radius: 2,
-                symbol: "circle",
+                symbol: 'circle',
                 fill: true,
-                fillColor: "#ffffff"
+                fillColor: '#ffffff'
 
             }
         }];
         var maindataOptions = {
             legend: {
-                position: "nw",
+                position: 'nw',
                 noColumns: 3,
-                container: $("#main-chart-legend")
+                container: $('#main-chart-legend')
             },
             grid: {
                 hoverable: true,
@@ -1274,7 +1274,7 @@ $(document).ready(function() {
                     left: 1
                 },
                 clickable: true,
-                borderColor: "#f5f5f5",
+                borderColor: '#f5f5f5',
                 margin: {
                     top: 0,
                     right: 0,
@@ -1285,7 +1285,7 @@ $(document).ready(function() {
                 labelMargin: 20,
                 mouseActiveRadius: 30,
                 backgroundColor: {
-                    colors: ["#fff", "#fff"]
+                    colors: ['#fff', '#fff']
                 }
             },
             series: {
@@ -1309,13 +1309,13 @@ $(document).ready(function() {
             },
             tooltip: {
                 show: true,
-                cssClass: "MainFlotTip",
-                content: "<strong>" + "%s" + ": </strong>" + "%y"
+                cssClass: 'MainFlotTip',
+                content: '<strong>' + '%s' + ': </strong>' + '%y'
             },
-            colors: ["#26a69a", "#8c9eff", "#e65100"]
-        }
+            colors: ['#26a69a', '#8c9eff', '#e65100']
+        };
 
-        var MainChart = $.plot($("#main-chart"), maindataSet, maindataOptions);
+        var MainChart = $.plot($('#main-chart'), maindataSet, maindataOptions);
 
     } catch (e) {
         plugin_exists = false;
@@ -1325,28 +1325,28 @@ $(document).ready(function() {
     // Recent Users Widgets
     // **------------------
 
-    $(".user-details-toggle").each(function() {
-        var $user = $(this).parents(".user-intro").next(".users-details");
-        var $ui = $(this).children("i");
+    $('.user-details-toggle').each(function () {
+        var $user = $(this).parents('.user-intro').next('.users-details');
+        var $ui = $(this).children('i');
         if ($user.is(':visible')) {
-            $ui.removeClass("zmdi-plus");
-            $ui.addClass("zmdi-minus");
+            $ui.removeClass('zmdi-plus');
+            $ui.addClass('zmdi-minus');
         } else {
-            $ui.removeClass("zmdi-minus");
-            $ui.addClass("zmdi-plus");
+            $ui.removeClass('zmdi-minus');
+            $ui.addClass('zmdi-plus');
         }
     });
 
-    $(".user-details-toggle").on("click", function() {
-        var $user = $(this).parents(".user-intro").next(".users-details");
-        var $ui = $(this).children("i");
+    $('.user-details-toggle').on('click', function () {
+        var $user = $(this).parents('.user-intro').next('.users-details');
+        var $ui = $(this).children('i');
         if ($user.is(':visible')) {
-            $ui.removeClass("zmdi-minus");
-            $ui.addClass("zmdi-plus");
+            $ui.removeClass('zmdi-minus');
+            $ui.addClass('zmdi-plus');
             $user.slideUp();
         } else {
-            $ui.removeClass("zmdi-plus");
-            $ui.addClass("zmdi-minus");
+            $ui.removeClass('zmdi-plus');
+            $ui.addClass('zmdi-minus');
             $user.slideDown();
         }
     });
@@ -1356,8 +1356,8 @@ $(document).ready(function() {
     // **----------
     // Task Widgets
     // **----------
-    $(".task-title").on("click", function() {
-        var $task = $(this).parents(".task-intro").next(".task-details");
+    $('.task-title').on('click', function () {
+        var $task = $(this).parents('.task-intro').next('.task-details');
         if ($task.is(':visible')) {
             $task.slideUp();
         } else {
@@ -1368,62 +1368,62 @@ $(document).ready(function() {
     // **------------
     // Widgets Toggle
     // **------------
-    $(".widget-toggle").on("click", function(e) {
+    $('.widget-toggle').on('click', function (e) {
         e.preventDefault();
-        var $welem = $(this).parentsUntil(".widget-action-bar").parentsUntil(".w-action").parents(".widget-header").next(".widget-container");
+        var $welem = $(this).parentsUntil('.widget-action-bar').parentsUntil('.w-action').parents('.widget-header').next('.widget-container');
         if ($welem.is(':visible')) {
             $welem.slideUp();
-            $(this).children("a").children("i").removeClass("zmdi-chevron-down");
-            $(this).children("a").children("i").addClass("zmdi-chevron-up");
+            $(this).children('a').children('i').removeClass('zmdi-chevron-down');
+            $(this).children('a').children('i').addClass('zmdi-chevron-up');
         } else {
             $welem.slideDown();
-            $(this).children("a").children("i").removeClass("zmdi-chevron-up");
-            $(this).children("a").children("i").addClass("zmdi-chevron-down");
+            $(this).children('a').children('i').removeClass('zmdi-chevron-up');
+            $(this).children('a').children('i').addClass('zmdi-chevron-down');
         }
     });
 
     // **----------------
     // Widgets Fullscreen
     // **----------------
-    $(".widget-fullscreen").on("click", function(e) {
+    $('.widget-fullscreen').on('click', function (e) {
         e.preventDefault();
-        var $welem = $(this).parentsUntil(".widget-action-bar").parentsUntil(".w-action").parents(".widget-header").parents(".widget-wrap");
-        if ($welem.hasClass("w-fullscreen")) {
-            $welem.removeClass("w-fullscreen");
+        var $welem = $(this).parentsUntil('.widget-action-bar').parentsUntil('.w-action').parents('.widget-header').parents('.widget-wrap');
+        if ($welem.hasClass('w-fullscreen')) {
+            $welem.removeClass('w-fullscreen');
         } else {
-            $welem.addClass("w-fullscreen");
+            $welem.addClass('w-fullscreen');
         }
     });
     // **-----------
     // Widgets Close
     // **-----------
-    $(".widget-exit").on("click", function(e) {
+    $('.widget-exit').on('click', function (e) {
         e.preventDefault();
-        var $welem = $(this).parentsUntil(".widget-action-bar").parentsUntil(".w-action").parents(".widget-header").parents(".widget-wrap").parent("div");
+        var $welem = $(this).parentsUntil('.widget-action-bar').parentsUntil('.w-action').parents('.widget-header').parents('.widget-wrap').parent('div');
         $welem.remove();
     });
 
 
     // **---------------
-    // Widgets Re Loader 
+    // Widgets Re Loader
     // **---------------
 
     var ThisLoad;
 
-    $(".widget-reload").on("click", function(e) {
+    $('.widget-reload').on('click', function (e) {
         e.preventDefault();
         ThisLoad = $(this);
-        $(this).parentsUntil(".widget-action-bar").parentsUntil(".w-action").parents(".widget-header").parents(".widget-wrap").mask("Loading");
+        $(this).parentsUntil('.widget-action-bar').parentsUntil('.w-action').parents('.widget-header').parents('.widget-wrap').mask('Loading');
         setTimeout(UnMask, 1500);
     });
 
 
     function UnMask() {
-        ThisLoad.parentsUntil(".widget-action-bar").parentsUntil(".w-action").parents(".widget-header").parents(".widget-wrap").unmask();
+        ThisLoad.parentsUntil('.widget-action-bar').parentsUntil('.w-action').parents('.widget-header').parents('.widget-wrap').unmask();
     }
 
 
-    /**--Tables
+    /** --Tables
      css/tables.css
      js/jquery.dataTables.js
      js/dataTables.responsive.js
@@ -1435,9 +1435,9 @@ $(document).ready(function() {
     if ($.fn.dataTable) {
         $('.data-tbl').DataTable({
             responsive: true,
-                        "columnDefs": [ { "targets": [1, 2], "orderable": false }],
-            "oLanguage": {
-                "sLengthMenu": '<select class="tbl-data-select">' +
+                        'columnDefs': [{ 'targets': [1, 2], 'orderable': false }],
+            'oLanguage': {
+                'sLengthMenu': '<select class="tbl-data-select">' +
                     '<option value="10">10</option>' +
                     '<option value="20">20</option>' +
                     '<option value="30">30</option>' +
@@ -1446,7 +1446,7 @@ $(document).ready(function() {
                     '<option value="-1">All</option>' +
                     '</select>' + '<span class="r-label">Entries</span>'
             },
-            "dom": '<"row" <"col-md-6"l><"col-md-6"f>><"row" <"col-md-12"<"td-content"rt>>><"row" <"col-md-6"i><"col-md-6"p>>'
+            'dom': '<"row" <"col-md-6"l><"col-md-6"f>><"row" <"col-md-12"<"td-content"rt>>><"row" <"col-md-6"i><"col-md-6"p>>'
         });
 
 
@@ -1471,10 +1471,10 @@ $(document).ready(function() {
                 var composite = data.compositedata;
 
                 if (composite) {
-                    var stlColor = $(this).attr("data-stack-line-color"),
-                        stfColor = $(this).attr("data-stack-fill-color"),
-                        sptColor = $(this).attr("data-stack-spot-color"),
-                        sptRadius = $(this).attr("data-stack-spot-radius");
+                    var stlColor = $(this).attr('data-stack-line-color'),
+                        stfColor = $(this).attr('data-stack-fill-color'),
+                        sptColor = $(this).attr('data-stack-spot-color'),
+                        sptRadius = $(this).attr('data-stack-spot-radius');
 
                     $(this).sparkline(composite, {
                             composite: true,
@@ -1489,7 +1489,7 @@ $(document).ready(function() {
                         }
 
                     );
-                };
+                }
             });
         };
 
@@ -1497,18 +1497,18 @@ $(document).ready(function() {
         $(window).smartresize(function (e) {
             clearTimeout(sparkResize);
             sparkResize = setTimeout(function () {
-                sparkLine(true)
+                sparkLine(true);
             }, 100);
         });
         sparkLine(false);
     }
 
-$(".spark-pie-chart").each(function(){
-    var SparkType = $(this).data("spark-type"),
-        sparkData = $(this).data("spark-data").split(','),
-        SparkWidth = $(this).data("spark-width"),
-        SparkHeight = $(this).data("spark-height"),
-        SparkSlice = $(this).data("spark-slicecolors").split(',');
+$('.spark-pie-chart').each(function () {
+    var SparkType = $(this).data('spark-type'),
+        sparkData = $(this).data('spark-data').split(','),
+        SparkWidth = $(this).data('spark-width'),
+        SparkHeight = $(this).data('spark-height'),
+        SparkSlice = $(this).data('spark-slicecolors').split(',');
     $(this).sparkline(sparkData, {
         type: SparkType,
         width: SparkWidth,
@@ -1516,11 +1516,11 @@ $(".spark-pie-chart").each(function(){
         sliceColors:SparkSlice
     });
 
-})
+});
 
 
 
-    /*--jQuery Noty
+    /* --jQuery Noty
      * jquery.noty.js
      --*/
     // notification body's can be any html string or just string
@@ -1565,9 +1565,9 @@ $(".spark-pie-chart").each(function(){
             });
                     setTimeout(function () {
                         n.close();
-                    },5000);
+                    }, 5000);
 
-        }
+        };
 
 
         var nGenAll = function nGenAll() {
@@ -1576,7 +1576,7 @@ $(".spark-pie-chart").each(function(){
             nGen('information', n_dom[2], 'topRight');
             nGen('success', n_dom[3], 'topRight');
             nGen('alert', n_dom[4], 'topRight');
-        }
+        };
 
                 setTimeout(function () {
                     nGenAll();
@@ -1605,12 +1605,12 @@ $(".spark-pie-chart").each(function(){
                 n.close();
             }, 5000);
 
-        }
+        };
 
 
         $('.ex-noty').on('click', function () {
-            var Dtype = $(this).data("type"),
-                Dlayout = $(this).data("layout");
+            var Dtype = $(this).data('type'),
+                Dlayout = $(this).data('layout');
             PreviewGen(Dtype, n_dom[5], Dlayout);
         });
 
@@ -1632,7 +1632,7 @@ $(".spark-pie-chart").each(function(){
 
         that.show = function (text) {
             clearTimeout(hideHandler);
-            elem.find("span").html(text);
+            elem.find('span').html(text);
             elem.delay(200).fadeIn().delay(3000).fadeOut();
         };
 
@@ -1640,14 +1640,14 @@ $(".spark-pie-chart").each(function(){
     }());
 
     DemoCallBack.init({
-        "selector": ".bb-alert"
+        'selector': '.bb-alert'
     });
 
     var bb_demos = {};
 
-    $(document).on("click", "a[data-bb]", function (e) {
+    $(document).on('click', 'a[data-bb]', function (e) {
         e.preventDefault();
-        var type = $(this).data("bb");
+        var type = $(this).data('bb');
 
         if (typeof bb_demos[type] === 'function') {
             bb_demos[type]();
@@ -1657,75 +1657,75 @@ $(".spark-pie-chart").each(function(){
     // Alert
 
     bb_demos.alert = function () {
-        bootbox.alert("Hello world!", function () {
-            DemoCallBack.show("Hello world callback");
+        bootbox.alert('Hello world!', function () {
+            DemoCallBack.show('Hello world callback');
         });
     };
 
     // Confirm
     bb_demos.confirm = function () {
-        bootbox.confirm("Are you sure?", function (result) {
-            DemoCallBack.show("Confirm result: " + result);
+        bootbox.confirm('Are you sure?', function (result) {
+            DemoCallBack.show('Confirm result: ' + result);
         });
     };
 
     // Prompt
     bb_demos.prompt = function () {
         bootbox.prompt({
-            title: "What is your real name?",
-            value: "Kamrujaman Shohel",
+            title: 'What is your real name?',
+            value: 'Kamrujaman Shohel',
             callback: function (result) {
                 if (result === null) {
-                    DemoCallBack.show("Prompt dismissed");
+                    DemoCallBack.show('Prompt dismissed');
                 } else {
-                    DemoCallBack.show("Hi <b>" + result + "</b>");
+                    DemoCallBack.show('Hi <b>' + result + '</b>');
                 }
             }
         });
-    }
+    };
 
     // Dialog
     bb_demos.dialog = function () {
         bootbox.dialog({
-            message: "I am a custom dialog",
-            title: "Custom title",
+            message: 'I am a custom dialog',
+            title: 'Custom title',
             buttons: {
                 success: {
-                    label: "Success!",
-                    className: "btn-success",
+                    label: 'Success!',
+                    className: 'btn-success',
                     callback: function () {
-                        DemoCallBack.show("great success");
+                        DemoCallBack.show('great success');
                     }
                 },
                 danger: {
-                    label: "Danger!",
-                    className: "btn-danger",
+                    label: 'Danger!',
+                    className: 'btn-danger',
                     callback: function () {
-                        DemoCallBack.show("uh oh, look out!");
+                        DemoCallBack.show('uh oh, look out!');
                     }
                 },
                 main: {
-                    label: "Click ME!",
-                    className: "btn-primary",
+                    label: 'Click ME!',
+                    className: 'btn-primary',
                     callback: function () {
-                        DemoCallBack.show("Primary button");
+                        DemoCallBack.show('Primary button');
                     }
                 }
             }
         });
-    }
+    };
     // Custom Html Contents
     bb_demos.custom_html = function () {
         bootbox.dialog({
-            title: "That html",
+            title: 'That html',
             message: '<img src="images/avatar/jaman_01.jpg" alt="image"/><br/> You can also use <b>html</b>'
         });
-    }
+    };
 
     // Custom Html Forms
     bb_demos.html_forms = function () {
         bootbox.dialog({
-            title: "This is a form in a modal.",
+            title: 'This is a form in a modal.',
             message: '<div class="row">  ' +
                 '<div class="col-md-12"> ' +
                 '<form class="form-horizontal"> ' +
@@ -1747,17 +1747,17 @@ $(".spark-pie-chart").each(function(){
                 '</form> </div>  </div>',
             buttons: {
                 success: {
-                    label: "Save",
-                    className: "btn-success",
+                    label: 'Save',
+                    className: 'btn-success',
                     callback: function () {
                         var name = $('#name').val();
-                        var answer = $("input[name='awesomeness']:checked").val()
-                        DemoCallBack.show("Hello " + name + ". You've chosen <b>" + answer + "</b>");
+                        var answer = $("input[name='awesomeness']:checked").val();
+                        DemoCallBack.show('Hello ' + name + ". You've chosen <b>" + answer + '</b>');
                     }
                 }
             }
         });
-    }
+    };
 
 
     /*
@@ -1769,57 +1769,57 @@ $(".spark-pie-chart").each(function(){
     $('.simple-alert').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            confirmButtonColor: "#DD6B55"
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this imaginary file!',
+            confirmButtonColor: '#DD6B55'
         });
     });
 
     $('.success-alert').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "success",
-            confirmButtonColor: "#4caf50"
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this imaginary file!',
+            type: 'success',
+            confirmButtonColor: '#4caf50'
         });
     });
 
     $('.warning-btn-ok').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this imaginary file!',
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Yes, delete it!',
             closeOnConfirm: false
         }, function () {
             swal({
-                title: "Your imaginary file has been deleted.",
-                type: "success",
-                confirmButtonColor: "#4caf50"
+                title: 'Your imaginary file has been deleted.',
+                type: 'success',
+                confirmButtonColor: '#4caf50'
             });
         });
     });
     $('.warning-btn-cancel').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this imaginary file!',
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel plx!",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel plx!',
             closeOnConfirm: false,
             closeOnCancel: false
         }, function (isConfirm) {
             if (isConfirm) {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
             } else {
-                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                swal('Cancelled', 'Your imaginary file is safe :)', 'error');
             }
         });
     });
@@ -1827,15 +1827,15 @@ $(".spark-pie-chart").each(function(){
     $('.warning-custom-icon').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "Sweet!",
+            title: 'Sweet!',
             text: "Here's a custom image.",
-            imageUrl: "images/avatar/jaman-01.jpg"
+            imageUrl: 'images/avatar/jaman-01.jpg'
         });
     });
     $('.warning-custom-html').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "HTML <small>Title</small>!",
+            title: 'HTML <small>Title</small>!',
             text: 'A custom <span style="color:#F8BB86">html<span> message.',
             html: true
         });
@@ -1844,8 +1844,8 @@ $(".spark-pie-chart").each(function(){
     $('.warning-auto-close').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "Auto close alert!",
-            text: "I will close in 3 seconds.",
+            title: 'Auto close alert!',
+            text: 'I will close in 3 seconds.',
             timer: 3000,
             showConfirmButton: false
         });
@@ -1854,20 +1854,20 @@ $(".spark-pie-chart").each(function(){
     $('.warning-prompt').on('click', function (e) {
         e.preventDefault();
         swal({
-            title: "An input!",
-            text: "Write something interesting:",
-            type: "input",
+            title: 'An input!',
+            text: 'Write something interesting:',
+            type: 'input',
             showCancelButton: true,
             closeOnConfirm: false,
-            animation: "slide-from-top",
-            inputPlaceholder: "Write something"
+            animation: 'slide-from-top',
+            inputPlaceholder: 'Write something'
         }, function (inputValue) {
             if (inputValue === false) return false;
-            if (inputValue === "") {
-                swal.showInputError("You need to write something!");
-                return false
+            if (inputValue === '') {
+                swal.showInputError('You need to write something!');
+                return false;
             }
-            swal("Nice!", "You wrote: " + inputValue, "success");
+            swal('Nice!', 'You wrote: ' + inputValue, 'success');
         });
     });
 
@@ -1880,7 +1880,7 @@ $(".spark-pie-chart").each(function(){
      */
     if ($.fn.noUiSlider) {
 
-        $("#slider-range").noUiSlider({
+        $('#slider-range').noUiSlider({
             start: [50, 200],
             connect: true,
             format: wNumb({
@@ -1902,7 +1902,7 @@ $(".spark-pie-chart").each(function(){
 
         $('#slider-range').Link('upper').to($('#slider-snap-value-upper'));
 
-        $("#slider-range").noUiSlider_pips({
+        $('#slider-range').noUiSlider_pips({
             mode: 'range',
             density: 3,
             format: wNumb({
@@ -1920,7 +1920,7 @@ $(".spark-pie-chart").each(function(){
 
 
 
-        $("#pips-range").noUiSlider({
+        $('#pips-range').noUiSlider({
             start: [20, 80],
             connect: true,
             range: {
@@ -1928,14 +1928,14 @@ $(".spark-pie-chart").each(function(){
                 'max': 100
             }
         });
-        $("#pips-range-01").noUiSlider({
+        $('#pips-range-01').noUiSlider({
             start: [4000],
             range: {
                 'min': [2000],
                 'max': [10000]
             }
         });
-        $("#pips-range-02").noUiSlider({
+        $('#pips-range-02').noUiSlider({
             start: [0, 500],
             connect: true,
             range: {
@@ -1943,12 +1943,12 @@ $(".spark-pie-chart").each(function(){
                 'max': 1500
             }
         });
-        $("#pips-range-vertical").noUiSlider({
+        $('#pips-range-vertical').noUiSlider({
             range: range_all_sliders,
             start: 0,
             orientation: 'vertical'
         });
-        $("#pips-range-vertical-01").noUiSlider({
+        $('#pips-range-vertical-01').noUiSlider({
             start: [300, 1200],
             connect: true,
             range: {
@@ -1960,7 +1960,7 @@ $(".spark-pie-chart").each(function(){
             orientation: 'vertical'
         });
 
-        $("#pips-range-vertical-02").noUiSlider({
+        $('#pips-range-vertical-02').noUiSlider({
             start: [400, 1000],
             connect: true,
             range: {
@@ -1972,8 +1972,8 @@ $(".spark-pie-chart").each(function(){
 
         var filter500 = function filter500(value, type) {
             return value % 1000 ? 2 : 1;
-        }
-        $(".pips-range").noUiSlider_pips({
+        };
+        $('.pips-range').noUiSlider_pips({
             mode: 'range',
             density: 3,
             filter: filter500,
@@ -1987,7 +1987,7 @@ $(".spark-pie-chart").each(function(){
 
     try {
 
-        $(".switch-mini").switchButton({
+        $('.switch-mini').switchButton({
             show_labels: false,			// Should we show the on and off labels?
             on_label: 'C',
             off_label: 'F',
@@ -1998,7 +1998,7 @@ $(".spark-pie-chart").each(function(){
             button_width: 15          // Width of the sliding part in pixels
         });
 
-        $(".switch-sm").switchButton({
+        $('.switch-sm').switchButton({
             show_labels: false,			// Should we show the on and off labels?
             on_label: 'C',
             off_label: 'F',
@@ -2010,7 +2010,7 @@ $(".spark-pie-chart").each(function(){
         });
 
 
-        $(".switch-large").switchButton({
+        $('.switch-large').switchButton({
             show_labels: false,			// Should we show the on and off labels?
             on_label: 'C',
             off_label: 'F',
@@ -2021,7 +2021,7 @@ $(".spark-pie-chart").each(function(){
             button_width: 30          // Width of the sliding part in pixels
         });
 
-        $(".switch-xs").switchButton({
+        $('.switch-xs').switchButton({
             show_labels: false,			// Should we show the on and off labels?
             on_label: 'C',
             off_label: 'F',
@@ -2041,7 +2041,7 @@ $(".spark-pie-chart").each(function(){
 
 
 
-    /*--jQuery Noty
+    /* --jQuery Noty
      * switchery.css
      * switchery.js
      --*/
@@ -2132,7 +2132,7 @@ $(".spark-pie-chart").each(function(){
             selectHelper: true,
             select: function (start, end) {
                 var calMbox = bootbox.dialog({
-                    title: "Event Information",
+                    title: 'Event Information',
                     message: '<div class="row">  ' +
                         '<div class="col-md-12"> ' +
                         '<form class="form-horizontal"> ' +
@@ -2157,8 +2157,8 @@ $(".spark-pie-chart").each(function(){
                         '</form> </div>  </div>',
                     buttons: {
                         update: {
-                            label: "Save",
-                            className: "btn-success",
+                            label: 'Save',
+                            className: 'btn-success',
                             callback: function () {
                                 var evTitle = $('#event_title').val();
                                 var evDesc = $('#event_description').val();
@@ -2179,8 +2179,8 @@ $(".spark-pie-chart").each(function(){
                             }
                         },
                         cancel: {
-                            label: "Cancel",
-                            className: "btn-danger",
+                            label: 'Cancel',
+                            className: 'btn-danger',
                             callback: function () {
 
                             }
@@ -2332,13 +2332,13 @@ $(".spark-pie-chart").each(function(){
 
         $('.cal-goDate').on('click', function () {
             var GoDate = $('.cal-date-picker').val();
-            if (GoDate === "") {
+            if (GoDate === '') {
                 swal({
-                    title: "Oops! Please select a date",
-                    text: "",
-                    type: "warning",
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "ok"
+                    title: 'Oops! Please select a date',
+                    text: '',
+                    type: 'warning',
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'ok'
                 }, function (isConfirm) {
                     if (isConfirm) {
                         $('.cal-date-picker').focus();
@@ -2353,36 +2353,36 @@ $(".spark-pie-chart").each(function(){
 
     }
 
-    if($.simpleWeather){
+    if ($.simpleWeather) {
         var html = html;
         $.simpleWeather({
-            woeid: '2357536', //2357536
+            woeid: '2357536', // 2357536
             location:'',
             unit: 'f',
-            success: function(weather) {
-                html =  '<div class="weather-widget-wall w_bg_cyan">';
-                html += '<div class="weather-city">'+weather.city+','+weather.region+'</div>';
-                html += '<div class="weather-status">'+weather.currently+'</div>';
+            success: function (weather) {
+                html = '<div class="weather-widget-wall w_bg_cyan">';
+                html += '<div class="weather-city">' + weather.city + ',' + weather.region + '</div>';
+                html += '<div class="weather-status">' + weather.currently + '</div>';
                 html += '<div class="weather-temperature">';
-                html += '<div class="weather-icon"><i class="icon-'+weather.code+'"></i></div>';
+                html += '<div class="weather-icon"><i class="icon-' + weather.code + '"></i></div>';
                 html += '<div class="temperature">';
-                html += '<div class="date-time"><span class="w-date">'+weather.forecast[0].date+'</span><span class="w-day">'+weather.forecast[0].day+'</span></div>';
-                html += '<div class="w-meter"><span class="temperature-f">'+weather.temp+'&deg;'+weather.units.temp+'</span><span class="temperature-c">'+weather.alt.temp+'&deg;C</span></div>';
+                html += '<div class="date-time"><span class="w-date">' + weather.forecast[0].date + '</span><span class="w-day">' + weather.forecast[0].day + '</span></div>';
+                html += '<div class="w-meter"><span class="temperature-f">' + weather.temp + '&deg;' + weather.units.temp + '</span><span class="temperature-c">' + weather.alt.temp + '&deg;C</span></div>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="forecast">';
-                html += '<div class="sun-r-s"><span><label>Sunrise:</label> '+weather.sunrise+' </span><span><label>Sunset:</label> '+weather.sunset+' </span></div>';
+                html += '<div class="sun-r-s"><span><label>Sunrise:</label> ' + weather.sunrise + ' </span><span><label>Sunset:</label> ' + weather.sunset + ' </span></div>';
                 html += '<ul>';
-                for(var i=0;i<weather.forecast.length;i++) {
-                    html += '<li><span class="w-day">'+weather.forecast[i].day+'</span><span class="day-w-icon">' +'<i class="icon-'+weather.forecast[i].code+'"></i>'+'</span><span class="day-temperature">'+weather.forecast[i].high+'</span></li>';
+                for (var i = 0; i < weather.forecast.length; i++) {
+                    html += '<li><span class="w-day">' + weather.forecast[i].day + '</span><span class="day-w-icon">' + '<i class="icon-' + weather.forecast[i].code + '"></i>' + '</span><span class="day-temperature">' + weather.forecast[i].high + '</span></li>';
                 }
                 html += '</ul>';
                 html += '</div>';
-                $("#weather").html(html);
+                $('#weather').html(html);
             },
-            error: function(error) {
-                $("#weather").html('<p>'+error+'</p>');
+            error: function (error) {
+                $('#weather').html('<p>' + error + '</p>');
             }
         });
     }

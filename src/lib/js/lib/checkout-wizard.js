@@ -1,21 +1,21 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     // Phone masking
-    $('#phone').mask('(999) 999-9999', {placeholder:'x'});
+    $('#phone').mask('(999) 999-9999', { placeholder:'x' });
 
     // Post code masking
-    $('#post').mask('999-9999', {placeholder:'x'});
+    $('#post').mask('999-9999', { placeholder:'x' });
 
     // Credit card masking
-    $('#card_number').mask('9999-9999-9999-9999', {placeholder:'x'});
+    $('#card_number').mask('9999-9999-9999-9999', { placeholder:'x' });
 
     // CVV2 masking
-    $('#cvv2').mask('999', {placeholder:'x'});
+    $('#cvv2').mask('999', { placeholder:'x' });
 
-    /***************************************/
+    /** *************************************/
     /* Form validation */
-    /***************************************/
-    $( '#checkout-wizard' ).validate({
+    /** *************************************/
+    $('#checkout-wizard').validate({
 
         /* @validation states + elements */
         errorClass: 'error-view',
@@ -117,47 +117,47 @@ $(document).ready(function(){
             }
         },
         // Add class 'error-view'
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).closest('.input').removeClass(validClass).addClass(errorClass);
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').removeClass(validClass).addClass(errorClass);
             }
         },
         // Add class 'success-view'
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).closest('.input').removeClass(errorClass).addClass(validClass);
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').removeClass(errorClass).addClass(validClass);
             }
         },
         // Error placement
-        errorPlacement: function(error, element) {
-            if ( $(element).is(':checkbox') || $(element).is(':radio') ) {
+        errorPlacement: function (error, element) {
+            if ($(element).is(':checkbox') || $(element).is(':radio')) {
                 $(element).closest('.check').append(error);
             } else {
                 $(element).closest('.unit').append(error);
             }
         },
         // Submit the form
-        submitHandler:function() {
-            $( '#checkout-wizard' ).ajaxSubmit({
+        submitHandler:function () {
+            $('#checkout-wizard').ajaxSubmit({
 
                 // Server response placement
                 target:'#checkout-wizard #response',
 
                 // If error occurs
-                error:function(xhr) {
+                error:function (xhr) {
                     $('#checkout-wizard #response').html('An error occured: ' + xhr.status + ' - ' + xhr.statusText);
                 },
 
                 // Before submiting the form
-                beforeSubmit:function(){
+                beforeSubmit:function () {
                     // Add class 'processing' to the submit button
                     $('#checkout-wizard button[type="submit"]').attr('disabled', true).addClass('processing');
                 },
 
                 // If success occurs
-                success:function(){
+                success:function () {
                     // Remove class 'processing'
                     $('#checkout-wizard button[type="submit"]').attr('disabled', false).removeClass('processing');
 
@@ -166,7 +166,7 @@ $(document).ready(function(){
                     $('#checkout-wizard .check').removeClass('success-view error-view');
 
                     // If response from the server is a 'success-message'
-                    if ( $('#checkout-wizard .success-message').length ) {
+                    if ($('#checkout-wizard .success-message').length) {
 
                         // Reset form
                         $('#checkout-wizard').resetForm();
@@ -177,7 +177,7 @@ $(document).ready(function(){
                         // Prevent clicking on the 'prev' button
                         $('#checkout-wizard .multi-prev-btn').attr('disabled', true);
 
-                        setTimeout(function(){
+                        setTimeout(function () {
                             // Delete success message after 5 seconds
                             $('#checkout-wizard #response').removeClass('success-message').html('');
 
@@ -207,7 +207,7 @@ $(document).ready(function(){
             });
         }
     });
-    /***************************************/
+    /** *************************************/
     /* end form validation */
-    /***************************************/
+    /** *************************************/
 });

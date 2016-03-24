@@ -33,10 +33,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 (function ($) {
-    "use strict";
-    /*jslint browser: true*/
-    /*global jQuery: false*/
-    /*Cross browser routine for getting selected range/cursor position
+    'use strict';
+    /* jslint browser: true*/
+    /* global jQuery: false*/
+    /* Cross browser routine for getting selected range/cursor position
      */
 
    /**
@@ -415,7 +415,7 @@
         if (odd !== 1) {
             odd = (odd === 0 && (iv.substring(rLength + 2, iv.length) > 0)) ? 1 : 0;
         }
-        /*jslint white: true*/
+        /* jslint white: true*/
         if ((tRound > 4 && settings.mRound === 'S') || /**                      Round half up symmetric */
             (tRound > 4 && settings.mRound === 'A' && nSign === '') || /**      Round half up asymmetric positive values */
             (tRound > 5 && settings.mRound === 'A' && nSign === '-') || /**     Round half up asymmetric negative values */
@@ -428,7 +428,7 @@
             (tRound > 0 && settings.mRound === 'F' && nSign === '-') || /**     Round to floor toward negative infinite */
             (tRound > 0 && settings.mRound === 'U') || /**                      round up away from zero */
             (settings.mRound === 'CHF')) { /**                                  Round Swiss FRanc */
-            /*jslint white: false*/
+            /* jslint white: false*/
             for (i = (ivArray.length - 1); i >= 0; i -= 1) { /** Round up the last digit if required, and continue until no more 9's are found */
                 if (ivArray[i] !== '.') {
                     if (settings.mRound === 'CHF' && ivArray[i] <= 2 && onePass) {
@@ -864,7 +864,7 @@
     */
     function autoGet(obj) {
         if (typeof obj === 'string') {
-            obj = obj.replace(/\[/g, "\\[").replace(/\]/g, "\\]");
+            obj = obj.replace(/\[/g, '\\[').replace(/\]/g, '\\]');
             obj = '#' + obj.replace(/(:|\.)/g, '\\$1');
             /** obj = '#' + obj.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1'); */
             /** possible modification to replace the above 2 lines */
@@ -927,7 +927,7 @@
 
                 }
                 if ($.inArray($this.prop('tagName').toLowerCase(), settings.tagList) === -1 && $this.prop('tagName').toLowerCase() !== 'input') {
-                    $.error("The <" + $this.prop('tagName').toLowerCase() + "> is not supported by autoNumeric()");
+                    $.error('The <' + $this.prop('tagName').toLowerCase() + '> is not supported by autoNumeric()');
 
                 }
                 if (settings.runOnce === false && settings.aForm) { /** routine to format default value on page load */
@@ -955,7 +955,7 @@
                     }
                 }
                 settings.runOnce = true;
-                if ($this.is('input[type=text], input[type=hidden], input[type=tel], input:not([type])')) { /**added hidden type */
+                if ($this.is('input[type=text], input[type=hidden], input[type=tel], input:not([type])')) { /** added hidden type */
                     $this.on('keydown.autoNumeric', function (e) {
                         holder = getHolder($this);
                         if (holder.settings.aDec === holder.settings.aSep) {
@@ -1137,7 +1137,7 @@
                     value = value.replace(',', '.');
                 }
                 if (!$.isNumeric(+value)) {
-                    $.error("The value (" + value + ") being 'set' is not numeric and has caused a error to be thrown");
+                    $.error('The value (' + value + ") being 'set' is not numeric and has caused a error to be thrown");
                 }
                 value = checkValue(value, settings);
                 settings.setEvent = true;
@@ -1174,12 +1174,12 @@
             }
             var getValue = '';
             /** determine the element type then use .eq(0) selector to grab the value of the first element in selector */
-            if ($this.is('input[type=text], input[type=hidden], input[type=tel], input:not([type])')) { /**added hidden type */
+            if ($this.is('input[type=text], input[type=hidden], input[type=tel], input:not([type])')) { /** added hidden type */
                 getValue = $this.eq(0).val();
             } else if ($.inArray($this.prop('tagName').toLowerCase(), settings.tagList) !== -1) {
                 getValue = $this.eq(0).text();
             } else {
-                $.error("The <" + $this.prop('tagName').toLowerCase() + "> is not supported by autoNumeric()");
+                $.error('The <' + $this.prop('tagName').toLowerCase() + '> is not supported by autoNumeric()');
             }
             if ((getValue === '' && settings.wEmpty === 'empty') || (getValue === settings.aSign && (settings.wEmpty === 'sign' || settings.wEmpty === 'empty'))) {
                 return '';
@@ -1223,7 +1223,7 @@
                 rcheckableType = /^(?:checkbox|radio)$/i,
                 rnonAutoNumericTypes = /^(?:button|checkbox|color|date|datetime|datetime-local|email|file|image|month|number|password|radio|range|reset|search|submit|time|url|week)/i,
                 count = 0;
-            /*jslint unparam: true*/
+            /* jslint unparam: true*/
             /* index of successful elements */
             $.each(allFormElements[0], function (i, field) {
                 if (field.name !== '' && rsubmittable.test(field.localName) && !rsubmitterTypes.test(field.type) && !field.disabled && (field.checked || !rcheckableType.test(field.type))) {
@@ -1261,7 +1261,7 @@
                     }
                 }
             });
-            /*jslint unparam: false*/
+            /* jslint unparam: false*/
             if (!isAutoNumeric) {
                 $.error("You must initialize autoNumeric('init', {options}) prior to calling the 'getString' method");
             }
@@ -1287,7 +1287,7 @@
                 rcheckableType = /^(?:checkbox|radio)$/i,
                 rnonAutoNumericTypes = /^(?:button|checkbox|color|date|datetime|datetime-local|email|file|image|month|number|password|radio|range|reset|search|submit|time|url|week)/i,
                 count = 0;
-            /*jslint unparam: true*/
+            /* jslint unparam: true*/
             /* index of successful elements */
             $.each(allFormElements[0], function (i, field) {
                 if (field.name !== '' && rsubmittable.test(field.localName) && !rsubmitterTypes.test(field.type) && !field.disabled && (field.checked || !rcheckableType.test(field.type))) {
@@ -1321,9 +1321,9 @@
                     }
                 }
             });
-            /*jslint unparam: false*/
+            /* jslint unparam: false*/
             if (!isAutoNumeric) {
-                $.error("None of the successful form inputs are initialized by autoNumeric.");
+                $.error('None of the successful form inputs are initialized by autoNumeric.');
             }
             return formFields;
         },
