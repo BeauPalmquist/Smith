@@ -14,7 +14,7 @@ class GlobalToolbar extends Component {
             const val = e.target.text;
             dispatch(SetActiveToolbarLink(val));
         }
-    }
+    };
     render() {
         const { toolbar } = this.props;
         const activeLink = `Active Link: ${toolbar.activeLink}`;

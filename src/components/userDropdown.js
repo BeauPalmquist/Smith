@@ -13,8 +13,8 @@ class UserDropdown extends React.Component {
     render() {
         const { user, userBadgeColor } = this.props;
         const username = user.FullName;
-        const first = user.First ? user.First.charAt(0) : '';
-        const last = user.Last ? user.Last.charAt(0) : '';
+        const first = user.FirstName ? user.FirstName.charAt(0) : '';
+        const last = user.LastName ? user.LastName.charAt(0) : '';
         const initials = first + last;
         let userDisplay;
         if (user.userImage) {

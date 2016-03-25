@@ -74,7 +74,7 @@ class App extends Component {
             theme: 'relax',
             type: notificationType
         });*/
-    }
+    };
 
     subscribeToSystemNotifications() {
         const { auth } = this.props;
