@@ -5,7 +5,7 @@ BadgeSVG.propTypes = {
     fillColor: PropTypes.string.isRequired
 };
 
-export default function BadgeSVG({ value, fillColor }) {
+export default function BadgeSVG(value, fillColor) {
     return (
         <svg height="40" width="40">
             <circle cx="20" cy="20" r="20" fill={fillColor} />
