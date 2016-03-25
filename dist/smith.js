@@ -1922,7 +1922,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3148,7 +3148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3258,7 +3258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'dev'
 	    };
 
 	    var setOptions = function setOptions(options) {
@@ -3457,7 +3457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = function () {
 	    var entityOptions = {
 	        baseUri: '/',
-	        environment: 'dev-forge'
+	        environment: 'prod'
 	    };
 
 	    var setOptions = function setOptions(options) {
