@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { ReduxRouter } from 'redux-router';
 import configureStore from './stores/configureStore';
 import applyPolys from './polyfills';
+import AjaxOptions from './common/js/forge/support/ajaxOptions';
 
 import ClientAction from './common/js/forge/services/clientAction';
 import Notification from './common/js/forge/services/notification';
@@ -16,6 +17,12 @@ import UserSession from './common/js/forge/services/userSession';
 export default function forgeApp(clientReducers, root, includeDevTools = false, forgeProxyBaseUri = null) {
     applyPolys();
     const store = configureStore(clientReducers, includeDevTools);
+
+    AjaxOptions.setOnRejected(xhr => {
+        if (xhr.status === 401) {
+            window.location.reload();
+        }
+    });
 
     if (forgeProxyBaseUri) {
 
