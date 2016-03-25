@@ -20,6 +20,7 @@ class Root extends Component {
         dispatch(authActionCreators.setRedirectRoute(activeRouteName));
         dispatch(authActionCreators.isAuthenticated());
     }
+
     render() {
         const { children, auth, router, notify, config, dispatch } = this.props;
         const authActions = bindActionCreators(authActionCreators, dispatch);
