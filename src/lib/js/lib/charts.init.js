@@ -1,8 +1,8 @@
 // **----
 // Charts
 // **----
-jQuery(document).ready(function($) {
-    "use strict";
+jQuery(document).ready(function ($) {
+    'use strict';
 
     // Combine Flot Chart
 
@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
         [7, 900],
         [8, 1000],
         [9, 1100],
-        [10,1200]
+        [10, 1200]
     ];
     var combine_chart_data2 = [
         [1, 300],
@@ -40,12 +40,12 @@ jQuery(document).ready(function($) {
         [7, 700],
         [8, 800],
         [9, 900],
-        [10,1000]
+        [10, 1000]
     ];
 
     var combine_chart_data_set = [{
         data: combine_chart_data1,
-        label: "Mobile",
+        label: 'Mobile',
         lines: {
             show: true,
             fill:0.1,
@@ -55,14 +55,14 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "diamond",
+            symbol: 'diamond',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }, {
         data: combine_chart_data2,
-        label: "Tablet",
+        label: 'Tablet',
         bars: {
             show: true,
             fill: 0.6,
@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 
     }, {
         data: combine_chart_data3,
-        label: "Desktop",
+        label: 'Desktop',
         lines: {
             show: true,
             fill: 0.1,
@@ -83,17 +83,17 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "square",
+            symbol: 'square',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }];
     var combine_chart_data_options = {
         legend: {
-            position: "nw",
+            position: 'nw',
             noColumns: 3,
-            container: $("#combine-chart-legend")
+            container: $('#combine-chart-legend')
         },
         grid: {
             hoverable: true,
@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
                 left: 1
             },
             clickable: true,
-            borderColor: "#eee",
+            borderColor: '#eee',
             margin: {
                 top: 10,
                 right: 20,
@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
             labelMargin: 20,
             mouseActiveRadius: 30,
             backgroundColor: {
-                colors: ["#fff", "#fff"]
+                colors: ['#fff', '#fff']
             }
         },
         series: {
@@ -133,13 +133,13 @@ jQuery(document).ready(function($) {
         },
         tooltip: {
             show: true,
-            cssClass: "MainFlotTip",
-            content: "<strong>" + "%s" + ": </strong>" + "%y"
+            cssClass: 'MainFlotTip',
+            content: '<strong>' + '%s' + ': </strong>' + '%y'
         },
-        colors: ["#e57373", "#d84315", "#009688"]
-    }
+        colors: ['#e57373', '#d84315', '#009688']
+    };
 
-    var CombineChart = $.plot($("#combine-chart"), combine_chart_data_set, combine_chart_data_options);
+    var CombineChart = $.plot($('#combine-chart'), combine_chart_data_set, combine_chart_data_options);
 
 
     // Line Chart
@@ -153,12 +153,12 @@ jQuery(document).ready(function($) {
         [7, 600],
         [8, 500],
         [9, 600],
-        [10,500],
-        [11,600],
-        [12,500],
-        [13,600],
-        [14,700],
-        [15,800]
+        [10, 500],
+        [11, 600],
+        [12, 500],
+        [13, 600],
+        [14, 700],
+        [15, 800]
     ];
     var line_chart_data2 = [
         [1, 500],
@@ -170,16 +170,16 @@ jQuery(document).ready(function($) {
         [7, 500],
         [8, 400],
         [9, 500],
-        [10,400],
-        [11,500],
-        [12,400],
-        [13,500],
-        [14,600],
-        [15,700]
-    ]
+        [10, 400],
+        [11, 500],
+        [12, 400],
+        [13, 500],
+        [14, 600],
+        [15, 700]
+    ];
     var line_chart_data_set = [{
         data: line_chart_data1,
-        label: "Admin Template",
+        label: 'Admin Template',
         lines: {
             show: true,
             fill: 0,
@@ -189,15 +189,15 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "circle",
+            symbol: 'circle',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     },
         {
         data: line_chart_data2,
-        label: "WP Theme",
+        label: 'WP Theme',
         lines: {
             show: true,
             fill: 0.2,
@@ -207,17 +207,17 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "circle",
+            symbol: 'circle',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }];
     var line_chart_data_options = {
         legend: {
-            position: "nw",
+            position: 'nw',
             noColumns: 3,
-            container: $("#line-chart-legend")
+            container: $('#line-chart-legend')
         },
         grid: {
             hoverable: true,
@@ -228,7 +228,7 @@ jQuery(document).ready(function($) {
                 left: 1
             },
             clickable: true,
-            borderColor: "#eee",
+            borderColor: '#eee',
             margin: {
                 top: 10,
                 right: 20,
@@ -239,7 +239,7 @@ jQuery(document).ready(function($) {
             labelMargin: 20,
             mouseActiveRadius: 30,
             backgroundColor: {
-                colors: ["#fff", "#fff"]
+                colors: ['#fff', '#fff']
             }
         },
         series: {
@@ -258,13 +258,13 @@ jQuery(document).ready(function($) {
         },
         tooltip: {
             show: true,
-            cssClass: "MainFlotTip",
-            content: "<strong>" + "%s" + ": </strong>" + "$%y (USD)"
+            cssClass: 'MainFlotTip',
+            content: '<strong>' + '%s' + ': </strong>' + '$%y (USD)'
         },
-        colors: ["#5c6bc0", "#00838f"]
-    }
+        colors: ['#5c6bc0', '#00838f']
+    };
 
-    var LineChart = $.plot($("#line-chart"), line_chart_data_set, line_chart_data_options);
+    var LineChart = $.plot($('#line-chart'), line_chart_data_set, line_chart_data_options);
 
 
     // Spline Chart
@@ -278,7 +278,7 @@ jQuery(document).ready(function($) {
                 left: 0
             },
             clickable: true,
-            borderColor: "#f0f0f0",
+            borderColor: '#f0f0f0',
             margin: {
                 top: 10,
                 right: 10,
@@ -289,19 +289,19 @@ jQuery(document).ready(function($) {
             labelMargin: 20,
             mouseActiveRadius: 30,
             backgroundColor: {
-                colors: ["#fff", "#fff"]
+                colors: ['#fff', '#fff']
             }
         },
         legend: {
             noColumns: 0,
             show: true,
-            container: $("#spline-chart-legend"),
+            container: $('#spline-chart-legend'),
             labelFormatter: function (label, series) {
-                return "<span class=\"w_legend\">" + label + "</span>";
+                return '<span class="w_legend">' + label + '</span>';
             },
             backgroundOpacity: 0.9,
-            labelBoxBorderColor: "#000000",
-            position: "nw"
+            labelBoxBorderColor: '#000000',
+            position: 'nw'
         },
         series: {
             stack: true,
@@ -313,13 +313,13 @@ jQuery(document).ready(function($) {
             show: true,
             color: '#eee',
             ticks: [
-                [1, "Sat"],
-                [2, "Sun"],
-                [3, "Mon"],
-                [4, "Tue"],
-                [5, "Wed"],
-                [6, "Thu"],
-                [7, "Fri"]
+                [1, 'Sat'],
+                [2, 'Sun'],
+                [3, 'Mon'],
+                [4, 'Tue'],
+                [5, 'Wed'],
+                [6, 'Thu'],
+                [7, 'Fri']
             ]
 
         },
@@ -330,13 +330,13 @@ jQuery(document).ready(function($) {
         },
         tooltip: {
             show: true,
-            cssClass: "StatsFlotTip",
-            content: "$%y(USD)"
+            cssClass: 'StatsFlotTip',
+            content: '$%y(USD)'
         },
-        colors: ["#4db6ac"]
+        colors: ['#4db6ac']
     };
     var spline_chart_data = {
-        label: "Earning",
+        label: 'Earning',
         lines: {
             show: false,
             fill: true,
@@ -352,9 +352,9 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "circle",
+            symbol: 'circle',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         },
         data: [
@@ -369,7 +369,7 @@ jQuery(document).ready(function($) {
     };
 
 
-    var SpLineChart = $.plot($("#spline-chart"), [spline_chart_data], spline_chart_options);
+    var SpLineChart = $.plot($('#spline-chart'), [spline_chart_data], spline_chart_options);
 
 
 
@@ -384,7 +384,7 @@ jQuery(document).ready(function($) {
         [7, 500],
         [8, 400],
         [9, 500],
-        [10,600]
+        [10, 600]
     ];
     var multi_spline_data2 = [
         [1, 700],
@@ -396,7 +396,7 @@ jQuery(document).ready(function($) {
         [7, 700],
         [8, 600],
         [9, 700],
-        [10,800]
+        [10, 800]
     ];
     var multi_spline_data3 = [
         [1, 600],
@@ -408,12 +408,12 @@ jQuery(document).ready(function($) {
         [7, 600],
         [8, 500],
         [9, 600],
-        [10,700]
+        [10, 700]
     ];
 
     var multi_spline_data_set = [{
         data: multi_spline_data1,
-        label: "SMS",
+        label: 'SMS',
         lines: {
             show: false,
             fill: 0.2,
@@ -429,14 +429,14 @@ jQuery(document).ready(function($) {
             show: false,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "diamond",
+            symbol: 'diamond',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }, {
         data: multi_spline_data2,
-        label: "CALL",
+        label: 'CALL',
         lines: {
             show: false,
             fill: 0.2,
@@ -452,16 +452,16 @@ jQuery(document).ready(function($) {
         show: false,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "circle",
+            symbol: 'circle',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
     }
 
 
     }, {
         data: multi_spline_data3,
-        label: "EMAIL",
+        label: 'EMAIL',
         lines: {
             show: false,
             fill: 0.2,
@@ -477,17 +477,17 @@ jQuery(document).ready(function($) {
             show: false,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "square",
+            symbol: 'square',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }];
     var multi_spline_data_options = {
         legend: {
-            position: "nw",
+            position: 'nw',
             noColumns: 4,
-            container: $("#multi-spline-chart-legend")
+            container: $('#multi-spline-chart-legend')
         },
         grid: {
             hoverable: true,
@@ -498,7 +498,7 @@ jQuery(document).ready(function($) {
                 left: 1
             },
             clickable: false,
-            borderColor: "#eee",
+            borderColor: '#eee',
             margin: {
                 top: 10,
                 right: 20,
@@ -509,7 +509,7 @@ jQuery(document).ready(function($) {
             labelMargin: 20,
             mouseActiveRadius: 30,
             backgroundColor: {
-                colors: ["#fff", "#fff"]
+                colors: ['#fff', '#fff']
             }
         },
         series: {
@@ -528,13 +528,13 @@ jQuery(document).ready(function($) {
         },
         tooltip: {
             show: true,
-            cssClass: "MainFlotTip",
-            content: "%s: %y"
+            cssClass: 'MainFlotTip',
+            content: '%s: %y'
         },
-        colors: ["#5c6bc0", "#009688", "#e65100"]
-    }
+        colors: ['#5c6bc0', '#009688', '#e65100']
+    };
 
-    var MultiSpLineChart = $.plot($("#multi-spline-chart"),multi_spline_data_set, multi_spline_data_options);
+    var MultiSpLineChart = $.plot($('#multi-spline-chart'), multi_spline_data_set, multi_spline_data_options);
 
 
     // Curved Line
@@ -564,9 +564,9 @@ jQuery(document).ready(function($) {
         [7, 600],
         [8, 500],
         [9, 600],
-        [10,700],
-        [11,800],
-        [12,700]
+        [10, 700],
+        [11, 800],
+        [12, 700]
     ];
 
     var curved_line_data3 = [
@@ -579,14 +579,14 @@ jQuery(document).ready(function($) {
         [7, 400],
         [8, 500],
         [9, 400],
-        [10,500],
-        [11,600],
-        [12,700]
+        [10, 500],
+        [11, 600],
+        [12, 700]
     ];
 
     var curved_line_data_set = [{
         data: curved_line_data1,
-        label: "WP Theme",
+        label: 'WP Theme',
         lines: {
             show: true,
             fill: 1,
@@ -594,7 +594,7 @@ jQuery(document).ready(function($) {
         }
     }, {
         data: curved_line_data2,
-        label: "Admin Template",
+        label: 'Admin Template',
         lines: {
             show: true,
             fill: 0.8,
@@ -604,7 +604,7 @@ jQuery(document).ready(function($) {
 
     }, {
         data: curved_line_data3,
-        label: "Joomla",
+        label: 'Joomla',
         lines: {
             show: true,
             fill: 0.8,
@@ -613,9 +613,9 @@ jQuery(document).ready(function($) {
     }];
     var curved_line_options = {
         legend: {
-            position: "nw",
+            position: 'nw',
             noColumns: 4,
-            container: $("#curved-line-chart-legend")
+            container: $('#curved-line-chart-legend')
         },
         grid: {
             hoverable: true,
@@ -626,7 +626,7 @@ jQuery(document).ready(function($) {
                 left: 1
             },
             clickable: false,
-            borderColor: "#eee",
+            borderColor: '#eee',
             margin: {
                 top: 10,
                 right: 20,
@@ -637,7 +637,7 @@ jQuery(document).ready(function($) {
             labelMargin: 20,
             mouseActiveRadius: 30,
             backgroundColor: {
-                colors: ["#fff", "#fff"]
+                colors: ['#fff', '#fff']
             }
         },
         series: {
@@ -662,15 +662,15 @@ jQuery(document).ready(function($) {
         },
         tooltip: {
             show: true,
-            cssClass: "MainFlotTip",
-            content: '<h5>%s</h5>' + "Sold: %y"
+            cssClass: 'MainFlotTip',
+            content: '<h5>%s</h5>' + 'Sold: %y'
         },
-        colors: ["#80cbc4", "#81c784", "#ffab91"]
-    }
+        colors: ['#80cbc4', '#81c784', '#ffab91']
+    };
 
 
 
-    var CurvedLineChart = $.plot($("#curved-line-chart"),curved_line_data_set, curved_line_options);
+    var CurvedLineChart = $.plot($('#curved-line-chart'), curved_line_data_set, curved_line_options);
 
 
     // Area Chart
@@ -701,9 +701,9 @@ jQuery(document).ready(function($) {
         [7, 600],
         [8, 500],
         [9, 400],
-        [10,500],
-        [11,600],
-        [12,700]
+        [10, 500],
+        [11, 600],
+        [12, 700]
     ];
     var area_chart_data3 = [
         [1, 300],
@@ -722,7 +722,7 @@ jQuery(document).ready(function($) {
 
     var area_chart_data_set = [{
         data: area_chart_data3,
-        label: "2012",
+        label: '2012',
         lines: {
             show: true,
             fill: 0.3,
@@ -732,14 +732,14 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "diamond",
+            symbol: 'diamond',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }, {
         data: area_chart_data2,
-        label: "2013",
+        label: '2013',
         lines: {
             show: true,
             fill: 0.3,
@@ -749,16 +749,16 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "triangle",
+            symbol: 'triangle',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
 
 
     }, {
         data: area_chart_data1,
-        label: "2014",
+        label: '2014',
         lines: {
             show: true,
             fill:0.5,
@@ -768,17 +768,17 @@ jQuery(document).ready(function($) {
             show: true,
             lineWidth: 1.5,
             radius: 3,
-            symbol: "circle",
+            symbol: 'circle',
             fill: true,
-            fillColor: "#ffffff"
+            fillColor: '#ffffff'
 
         }
     }];
     var area_chart_data_options = {
         legend: {
-            position: "nw",
+            position: 'nw',
             noColumns: 3,
-            container: $("#area-chart-legend")
+            container: $('#area-chart-legend')
         },
         grid: {
             hoverable: true,
@@ -789,7 +789,7 @@ jQuery(document).ready(function($) {
                 left: 0
             },
             clickable: true,
-            borderColor: "#f5f5f5",
+            borderColor: '#f5f5f5',
             margin: {
                 top: 10,
                 right: 20,
@@ -800,7 +800,7 @@ jQuery(document).ready(function($) {
             labelMargin: 20,
             mouseActiveRadius: 30,
             backgroundColor: {
-                colors: ["#fff", "#fff"]
+                colors: ['#fff', '#fff']
             }
         },
         series: {
@@ -809,26 +809,26 @@ jQuery(document).ready(function($) {
         },
         xaxis: {
             show: true,
-            color: "#f5f5f5",
+            color: '#f5f5f5',
             tickSize:0.5
         },
         yaxis: {
             show: true,
             tickSize: 50,
-            color: "#f5f5f5"
+            color: '#f5f5f5'
         },
         tooltip: {
             show: true,
-            cssClass: "MainFlotTip",
-            content: "Year: %s,  %x %y"
+            cssClass: 'MainFlotTip',
+            content: 'Year: %s,  %x %y'
         },
-        colors: ["#26c6da", "#ef9a9a", "#80cbc4"]
-    }
+        colors: ['#26c6da', '#ef9a9a', '#80cbc4']
+    };
 
-    var AreaChart = $.plot($("#area-chart"),area_chart_data_set, area_chart_data_options);
+    var AreaChart = $.plot($('#area-chart'), area_chart_data_set, area_chart_data_options);
 
 
-    //Real Time Chart
+    // Real Time Chart
 
     function RealTimeChart() {
         var data = [];
@@ -866,7 +866,7 @@ jQuery(document).ready(function($) {
             yaxis: {
                 min: 0,
                 max: 100,
-                color: "#eee"
+                color: '#eee'
             },
             xaxis: {
                 show: false
@@ -880,7 +880,7 @@ jQuery(document).ready(function($) {
                     left: 1
                 },
                 clickable: true,
-                borderColor: "#f0f0f0",
+                borderColor: '#f0f0f0',
                 margin: {
                     top: 10,
                     right: 10,
@@ -891,14 +891,14 @@ jQuery(document).ready(function($) {
                 labelMargin: 20,
                 mouseActiveRadius: 30,
                 backgroundColor: {
-                    colors: ["#fff", "#fff"]
+                    colors: ['#fff', '#fff']
                 }
             },
             legend: {
-                labelBoxBorderColor: "#fff",
-                container: $("#reatime-chart-legend")
+                labelBoxBorderColor: '#fff',
+                container: $('#reatime-chart-legend')
             },
-            colors: ["#4db6ac"]
+            colors: ['#4db6ac']
         };
 
 
@@ -906,16 +906,16 @@ jQuery(document).ready(function($) {
         GetData();
 
         dataset = [{
-            label: "Visitors",
+            label: 'Visitors',
             data: data
         }];
 
-        $.plot($("#realtime-chart"), dataset, options);
+        $.plot($('#realtime-chart'), dataset, options);
 
         function update() {
             GetData();
 
-            $.plot($("#realtime-chart"), dataset, options)
+            $.plot($('#realtime-chart'), dataset, options);
             setTimeout(update, updateInterval);
         }
 
@@ -928,13 +928,13 @@ jQuery(document).ready(function($) {
     // Pie Chart
 
     var pie_chart_data_set = [{
-        label: "Dribbble",
+        label: 'Dribbble',
         data: 30
     }, {
-        label: "Google",
+        label: 'Google',
         data: 30
     }, {
-        label: "Envato",
+        label: 'Envato',
         data: 40
     }];
 
@@ -949,25 +949,25 @@ jQuery(document).ready(function($) {
             }
         },
         legend: {
-            position: "nw",
+            position: 'nw',
             noColumns: 3,
-            container: $("#pie-chart-legend")
+            container: $('#pie-chart-legend')
         },
         grid: {
             hoverable: true
         },
         tooltip: {
             show: true,
-            cssClass: "MainFlotTip",
-            content: "%p.0%, From: %s", //"%p.0%, %s, n=%n",
+            cssClass: 'MainFlotTip',
+            content: '%p.0%, From: %s', // "%p.0%, %s, n=%n",
             shifts: {
                 x: 20,
                 y: 0
             }
         },
-        colors: ["#EC4A89", "#2B71ED", "#7CB553"]
+        colors: ['#EC4A89', '#2B71ED', '#7CB553']
     };
 
-    var pieChart = $.plot($("#pie-chart"), pie_chart_data_set, pie_chart_data_options);
+    var pieChart = $.plot($('#pie-chart'), pie_chart_data_set, pie_chart_data_options);
 
 });

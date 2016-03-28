@@ -2,6 +2,7 @@
 var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 module.exports = {
+    devtool: 'cheap-module-eval-source-map',
     entry: {
         index: './src/index'
     },

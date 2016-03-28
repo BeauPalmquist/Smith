@@ -1,5 +1,5 @@
 
-;(function(){
+(function () {
 
 /**
  * Require the module at `name`.
@@ -32,15 +32,15 @@ require.loader = 'component';
  * Internal helper object, contains a sorting function for semantiv versioning
  */
 require.helper = {};
-require.helper.semVerSort = function(a, b) {
+require.helper.semVerSort = function (a, b) {
   var aArray = a.version.split('.');
   var bArray = b.version.split('.');
-  for (var i=0; i<aArray.length; ++i) {
+  for (var i = 0; i < aArray.length; ++i) {
     var aInt = parseInt(aArray[i], 10);
     var bInt = parseInt(bArray[i], 10);
     if (aInt === bInt) {
-      var aLex = aArray[i].substr((""+aInt).length);
-      var bLex = bArray[i].substr((""+bInt).length);
+      var aLex = aArray[i].substr(('' + aInt).length);
+      var bLex = bArray[i].substr(('' + bInt).length);
       if (aLex === '' && bLex !== '') return 1;
       if (aLex !== '' && bLex === '') return -1;
       if (aLex !== '' && bLex !== '') return aLex > bLex ? 1 : -1;
@@ -52,15 +52,15 @@ require.helper.semVerSort = function(a, b) {
     }
   }
   return 0;
-}
+};
 
 /**
  * Find and require a module which name starts with the provided name.
- * If multiple modules exists, the highest semver is used. 
+ * If multiple modules exists, the highest semver is used.
  * This function can only be used for remote dependencies.
 
  * @param {String} name - module name: `user~repo`
- * @param {Boolean} returnPath - returns the canonical require path if true, 
+ * @param {Boolean} returnPath - returns the canonical require path if true,
  *                               otherwise it returns the epxorted module
  */
 require.latest = function (name, returnPath) {
@@ -74,16 +74,16 @@ require.latest = function (name, returnPath) {
   var moduleNames = Object.keys(require.modules);
   var semVerCandidates = [];
   var otherCandidates = []; // for instance: name of the git branch
-  for (var i=0; i<moduleNames.length; i++) {
+  for (var i = 0; i < moduleNames.length; i++) {
     var moduleName = moduleNames[i];
     if (new RegExp(name + '@').test(moduleName)) {
-        var version = moduleName.substr(name.length+1);
+        var version = moduleName.substr(name.length + 1);
         var semVerMatch = versionRegexp.exec(moduleName);
         if (semVerMatch != null) {
-          semVerCandidates.push({version: version, name: moduleName});
+          semVerCandidates.push({ version: version, name: moduleName });
         } else {
-          otherCandidates.push({version: version, name: moduleName});
-        } 
+          otherCandidates.push({ version: version, name: moduleName });
+        }
     }
   }
   if (semVerCandidates.concat(otherCandidates).length === 0) {
@@ -98,12 +98,12 @@ require.latest = function (name, returnPath) {
   }
   // if the build contains more than one branch of the same module
   // you should not use this funciton
-  var module = otherCandidates.sort(function(a, b) {return a.name > b.name})[0].name;
+  var module = otherCandidates.sort(function (a, b) {return a.name > b.name;})[0].name;
   if (returnPath === true) {
     return module;
   }
   return require(module);
-}
+};
 
 /**
  * Registered modules.
@@ -138,7 +138,7 @@ require.define = function (name, exports) {
     exports: exports
   };
 };
-require.register("abpetkov~transitionize@0.0.3", function (exports, module) {
+require.register('abpetkov~transitionize@0.0.3', function (exports, module) {
 
 /**
  * Transitionize 0.0.2
@@ -182,7 +182,7 @@ function Transitionize(element, props) {
  * @api private
  */
 
-Transitionize.prototype.isSafari = function() {
+Transitionize.prototype.isSafari = function () {
   return (/Safari/).test(navigator.userAgent) && (/Apple Computer/).test(navigator.vendor);
 };
 
@@ -193,7 +193,7 @@ Transitionize.prototype.isSafari = function() {
  * @api private
  */
 
-Transitionize.prototype.init = function() {
+Transitionize.prototype.init = function () {
   var transitions = [];
 
   for (var key in this.props) {
@@ -205,7 +205,7 @@ Transitionize.prototype.init = function() {
 };
 });
 
-require.register("ftlabs~fastclick@v0.6.11", function (exports, module) {
+require.register('ftlabs~fastclick@v0.6.11', function (exports, module) {
 /**
  * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
@@ -215,8 +215,8 @@ require.register("ftlabs~fastclick@v0.6.11", function (exports, module) {
  * @license MIT License (see LICENSE.txt)
  */
 
-/*jslint browser:true, node:true*/
-/*global define, Event, Node*/
+/* jslint browser:true, node:true*/
+/* global define, Event, Node*/
 
 
 /**
@@ -298,22 +298,22 @@ function FastClick(layer) {
 	}
 
 	/** @type function() */
-	this.onClick = function() { return FastClick.prototype.onClick.apply(self, arguments); };
+	this.onClick = function () { return FastClick.prototype.onClick.apply(self, arguments); };
 
 	/** @type function() */
-	this.onMouse = function() { return FastClick.prototype.onMouse.apply(self, arguments); };
+	this.onMouse = function () { return FastClick.prototype.onMouse.apply(self, arguments); };
 
 	/** @type function() */
-	this.onTouchStart = function() { return FastClick.prototype.onTouchStart.apply(self, arguments); };
+	this.onTouchStart = function () { return FastClick.prototype.onTouchStart.apply(self, arguments); };
 
 	/** @type function() */
-	this.onTouchMove = function() { return FastClick.prototype.onTouchMove.apply(self, arguments); };
+	this.onTouchMove = function () { return FastClick.prototype.onTouchMove.apply(self, arguments); };
 
 	/** @type function() */
-	this.onTouchEnd = function() { return FastClick.prototype.onTouchEnd.apply(self, arguments); };
+	this.onTouchEnd = function () { return FastClick.prototype.onTouchEnd.apply(self, arguments); };
 
 	/** @type function() */
-	this.onTouchCancel = function() { return FastClick.prototype.onTouchCancel.apply(self, arguments); };
+	this.onTouchCancel = function () { return FastClick.prototype.onTouchCancel.apply(self, arguments); };
 
 	if (FastClick.notNeeded(layer)) {
 		return;
@@ -336,7 +336,7 @@ function FastClick(layer) {
 	// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
 	// layer when they are cancelled.
 	if (!Event.prototype.stopImmediatePropagation) {
-		layer.removeEventListener = function(type, callback, capture) {
+		layer.removeEventListener = function (type, callback, capture) {
 			var rmv = Node.prototype.removeEventListener;
 			if (type === 'click') {
 				rmv.call(layer, type, callback.hijacked || callback, capture);
@@ -345,10 +345,10 @@ function FastClick(layer) {
 			}
 		};
 
-		layer.addEventListener = function(type, callback, capture) {
+		layer.addEventListener = function (type, callback, capture) {
 			var adv = Node.prototype.addEventListener;
 			if (type === 'click') {
-				adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+				adv.call(layer, type, callback.hijacked || (callback.hijacked = function (event) {
 					if (!event.propagationStopped) {
 						callback(event);
 					}
@@ -367,7 +367,7 @@ function FastClick(layer) {
 		// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
 		// - the old one won't work if passed to addEventListener directly.
 		oldOnClick = layer.onclick;
-		layer.addEventListener('click', function(event) {
+		layer.addEventListener('click', function (event) {
 			oldOnClick(event);
 		}, false);
 		layer.onclick = null;
@@ -413,7 +413,7 @@ FastClick.prototype.deviceIsIOSWithBadTarget = FastClick.prototype.deviceIsIOS &
  * @param {EventTarget|Element} target Target DOM element
  * @returns {boolean} Returns true if the element needs a native click
  */
-FastClick.prototype.needsClick = function(target) {
+FastClick.prototype.needsClick = function (target) {
 	'use strict';
 	switch (target.nodeName.toLowerCase()) {
 
@@ -449,7 +449,7 @@ FastClick.prototype.needsClick = function(target) {
  * @param {EventTarget|Element} target Target DOM element
  * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
  */
-FastClick.prototype.needsFocus = function(target) {
+FastClick.prototype.needsFocus = function (target) {
 	'use strict';
 	switch (target.nodeName.toLowerCase()) {
 	case 'textarea':
@@ -481,7 +481,7 @@ FastClick.prototype.needsFocus = function(target) {
  * @param {EventTarget|Element} targetElement
  * @param {Event} event
  */
-FastClick.prototype.sendClick = function(targetElement, event) {
+FastClick.prototype.sendClick = function (targetElement, event) {
 	'use strict';
 	var clickEvent, touch;
 
@@ -499,10 +499,10 @@ FastClick.prototype.sendClick = function(targetElement, event) {
 	targetElement.dispatchEvent(clickEvent);
 };
 
-FastClick.prototype.determineEventType = function(targetElement) {
+FastClick.prototype.determineEventType = function (targetElement) {
 	'use strict';
 
-	//Issue #159: Android Chrome Select Box does not open with a synthetic click event
+	// Issue #159: Android Chrome Select Box does not open with a synthetic click event
 	if (this.deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
 		return 'mousedown';
 	}
@@ -514,7 +514,7 @@ FastClick.prototype.determineEventType = function(targetElement) {
 /**
  * @param {EventTarget|Element} targetElement
  */
-FastClick.prototype.focus = function(targetElement) {
+FastClick.prototype.focus = function (targetElement) {
 	'use strict';
 	var length;
 
@@ -533,7 +533,7 @@ FastClick.prototype.focus = function(targetElement) {
  *
  * @param {EventTarget|Element} targetElement
  */
-FastClick.prototype.updateScrollParent = function(targetElement) {
+FastClick.prototype.updateScrollParent = function (targetElement) {
 	'use strict';
 	var scrollParent, parentElement;
 
@@ -565,7 +565,7 @@ FastClick.prototype.updateScrollParent = function(targetElement) {
  * @param {EventTarget} targetElement
  * @returns {Element|EventTarget}
  */
-FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
+FastClick.prototype.getTargetElementFromEventTarget = function (eventTarget) {
 	'use strict';
 
 	// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
@@ -583,7 +583,7 @@ FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
  * @param {Event} event
  * @returns {boolean}
  */
-FastClick.prototype.onTouchStart = function(event) {
+FastClick.prototype.onTouchStart = function (event) {
 	'use strict';
 	var targetElement, touch, selection;
 
@@ -649,7 +649,7 @@ FastClick.prototype.onTouchStart = function(event) {
  * @param {Event} event
  * @returns {boolean}
  */
-FastClick.prototype.touchHasMoved = function(event) {
+FastClick.prototype.touchHasMoved = function (event) {
 	'use strict';
 	var touch = event.changedTouches[0], boundary = this.touchBoundary;
 
@@ -667,7 +667,7 @@ FastClick.prototype.touchHasMoved = function(event) {
  * @param {Event} event
  * @returns {boolean}
  */
-FastClick.prototype.onTouchMove = function(event) {
+FastClick.prototype.onTouchMove = function (event) {
 	'use strict';
 	if (!this.trackingClick) {
 		return true;
@@ -689,7 +689,7 @@ FastClick.prototype.onTouchMove = function(event) {
  * @param {EventTarget|HTMLLabelElement} labelElement
  * @returns {Element|null}
  */
-FastClick.prototype.findControl = function(labelElement) {
+FastClick.prototype.findControl = function (labelElement) {
 	'use strict';
 
 	// Fast path for newer browsers supporting the HTML5 control attribute
@@ -714,7 +714,7 @@ FastClick.prototype.findControl = function(labelElement) {
  * @param {Event} event
  * @returns {boolean}
  */
-FastClick.prototype.onTouchEnd = function(event) {
+FastClick.prototype.onTouchEnd = function (event) {
 	'use strict';
 	var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
 
@@ -806,7 +806,7 @@ FastClick.prototype.onTouchEnd = function(event) {
  *
  * @returns {void}
  */
-FastClick.prototype.onTouchCancel = function() {
+FastClick.prototype.onTouchCancel = function () {
 	'use strict';
 	this.trackingClick = false;
 	this.targetElement = null;
@@ -819,7 +819,7 @@ FastClick.prototype.onTouchCancel = function() {
  * @param {Event} event
  * @returns {boolean}
  */
-FastClick.prototype.onMouse = function(event) {
+FastClick.prototype.onMouse = function (event) {
 	'use strict';
 
 	// If a target element was never set (because a touch event was never fired) allow the event
@@ -870,7 +870,7 @@ FastClick.prototype.onMouse = function(event) {
  * @param {Event} event
  * @returns {boolean}
  */
-FastClick.prototype.onClick = function(event) {
+FastClick.prototype.onClick = function (event) {
 	'use strict';
 	var permitted;
 
@@ -903,7 +903,7 @@ FastClick.prototype.onClick = function(event) {
  *
  * @returns {void}
  */
-FastClick.prototype.destroy = function() {
+FastClick.prototype.destroy = function () {
 	'use strict';
 	var layer = this.layer;
 
@@ -926,7 +926,7 @@ FastClick.prototype.destroy = function() {
  *
  * @param {Element} layer The layer to listen on
  */
-FastClick.notNeeded = function(layer) {
+FastClick.notNeeded = function (layer) {
 	'use strict';
 	var metaViewport;
 	var chromeVersion;
@@ -937,13 +937,13 @@ FastClick.notNeeded = function(layer) {
 	}
 
 	// Chrome version - zero for other browsers
-	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [, 0])[1];
 
 	if (chromeVersion) {
 
 		if (FastClick.prototype.deviceIsAndroid) {
 			metaViewport = document.querySelector('meta[name=viewport]');
-			
+
 			if (metaViewport) {
 				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
 				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
@@ -975,7 +975,7 @@ FastClick.notNeeded = function(layer) {
  *
  * @param {Element} layer The layer to listen on
  */
-FastClick.attach = function(layer) {
+FastClick.attach = function (layer) {
 	'use strict';
 	return new FastClick(layer);
 };
@@ -984,7 +984,7 @@ FastClick.attach = function(layer) {
 if (typeof define !== 'undefined' && define.amd) {
 
 	// AMD. Register as an anonymous module.
-	define(function() {
+	define(function () {
 		'use strict';
 		return FastClick;
 	});
@@ -997,8 +997,8 @@ if (typeof define !== 'undefined' && define.amd) {
 
 });
 
-require.register("component~indexof@0.0.3", function (exports, module) {
-module.exports = function(arr, obj){
+require.register('component~indexof@0.0.3', function (exports, module) {
+module.exports = function (arr, obj) {
   if (arr.indexOf) return arr.indexOf(obj);
   for (var i = 0; i < arr.length; ++i) {
     if (arr[i] === obj) return i;
@@ -1007,7 +1007,7 @@ module.exports = function(arr, obj){
 };
 });
 
-require.register("component~classes@1.2.1", function (exports, module) {
+require.register('component~classes@1.2.1', function (exports, module) {
 /**
  * Module dependencies.
  */
@@ -1034,7 +1034,7 @@ var toString = Object.prototype.toString;
  * @api public
  */
 
-module.exports = function(el){
+module.exports = function (el) {
   return new ClassList(el);
 };
 
@@ -1059,7 +1059,7 @@ function ClassList(el) {
  * @api public
  */
 
-ClassList.prototype.add = function(name){
+ClassList.prototype.add = function (name) {
   // classList
   if (this.list) {
     this.list.add(name);
@@ -1084,7 +1084,7 @@ ClassList.prototype.add = function(name){
  * @api public
  */
 
-ClassList.prototype.remove = function(name){
+ClassList.prototype.remove = function (name) {
   if ('[object RegExp]' == toString.call(name)) {
     return this.removeMatching(name);
   }
@@ -1111,7 +1111,7 @@ ClassList.prototype.remove = function(name){
  * @api private
  */
 
-ClassList.prototype.removeMatching = function(re){
+ClassList.prototype.removeMatching = function (re) {
   var arr = this.array();
   for (var i = 0; i < arr.length; i++) {
     if (re.test(arr[i])) {
@@ -1133,10 +1133,10 @@ ClassList.prototype.removeMatching = function(re){
  * @api public
  */
 
-ClassList.prototype.toggle = function(name, force){
+ClassList.prototype.toggle = function (name, force) {
   // classList
   if (this.list) {
-    if ("undefined" !== typeof force) {
+    if ('undefined' !== typeof force) {
       if (force !== this.list.toggle(name, force)) {
         this.list.toggle(name); // toggle again to correct
       }
@@ -1147,7 +1147,7 @@ ClassList.prototype.toggle = function(name, force){
   }
 
   // fallback
-  if ("undefined" !== typeof force) {
+  if ('undefined' !== typeof force) {
     if (!force) {
       this.remove(name);
     } else {
@@ -1171,7 +1171,7 @@ ClassList.prototype.toggle = function(name, force){
  * @api public
  */
 
-ClassList.prototype.array = function(){
+ClassList.prototype.array = function () {
   var str = this.el.className.replace(/^\s+|\s+$/g, '');
   var arr = str.split(re);
   if ('' === arr[0]) arr.shift();
@@ -1187,7 +1187,7 @@ ClassList.prototype.array = function(){
  */
 
 ClassList.prototype.has =
-ClassList.prototype.contains = function(name){
+ClassList.prototype.contains = function (name) {
   return this.list
     ? this.list.contains(name)
     : !! ~index(this.array(), name);
@@ -1195,7 +1195,7 @@ ClassList.prototype.contains = function(name){
 
 });
 
-require.register("component~event@0.1.4", function (exports, module) {
+require.register('component~event@0.1.4', function (exports, module) {
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
     unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
     prefix = bind !== 'addEventListener' ? 'on' : '';
@@ -1211,7 +1211,7 @@ var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
  * @api public
  */
 
-exports.bind = function(el, type, fn, capture){
+exports.bind = function (el, type, fn, capture) {
   el[bind](prefix + type, fn, capture || false);
   return fn;
 };
@@ -1227,28 +1227,28 @@ exports.bind = function(el, type, fn, capture){
  * @api public
  */
 
-exports.unbind = function(el, type, fn, capture){
+exports.unbind = function (el, type, fn, capture) {
   el[unbind](prefix + type, fn, capture || false);
   return fn;
 };
 });
 
-require.register("component~query@0.0.3", function (exports, module) {
+require.register('component~query@0.0.3', function (exports, module) {
 function one(selector, el) {
   return el.querySelector(selector);
 }
 
-exports = module.exports = function(selector, el){
+exports = module.exports = function (selector, el) {
   el = el || document;
   return one(selector, el);
 };
 
-exports.all = function(selector, el){
+exports.all = function (selector, el) {
   el = el || document;
   return el.querySelectorAll(selector);
 };
 
-exports.engine = function(obj){
+exports.engine = function (obj) {
   if (!obj.one) throw new Error('.one callback required');
   if (!obj.all) throw new Error('.all callback required');
   one = obj.one;
@@ -1258,7 +1258,7 @@ exports.engine = function(obj){
 
 });
 
-require.register("component~matches-selector@0.1.5", function (exports, module) {
+require.register('component~matches-selector@0.1.5', function (exports, module) {
 /**
  * Module dependencies.
  */
@@ -1308,30 +1308,30 @@ function match(el, selector) {
 
 });
 
-require.register("component~closest@0.1.4", function (exports, module) {
-var matches = require('component~matches-selector@0.1.5')
+require.register('component~closest@0.1.4', function (exports, module) {
+var matches = require('component~matches-selector@0.1.5');
 
 module.exports = function (element, selector, checkYoSelf, root) {
-  element = checkYoSelf ? {parentNode: element} : element
+  element = checkYoSelf ? { parentNode: element } : element;
 
-  root = root || document
+  root = root || document;
 
   // Make sure `element !== document` and `element != null`
   // otherwise we get an illegal invocation
   while ((element = element.parentNode) && element !== document) {
     if (matches(element, selector))
-      return element
+      return element;
     // After `matches` on the edge case that
     // the selector matches the root
     // (when the root is not the document)
     if (element === root)
-      return
+      return;
   }
-}
+};
 
 });
 
-require.register("component~delegate@0.2.3", function (exports, module) {
+require.register('component~delegate@0.2.3', function (exports, module) {
 /**
  * Module dependencies.
  */
@@ -1353,8 +1353,8 @@ var closest = require('component~closest@0.1.4')
  * @api public
  */
 
-exports.bind = function(el, selector, type, fn, capture){
-  return event.bind(el, type, function(e){
+exports.bind = function (el, selector, type, fn, capture) {
+  return event.bind(el, type, function (e) {
     var target = e.target || e.srcElement;
     e.delegateTarget = closest(target, selector, true, el);
     if (e.delegateTarget) fn.call(el, e);
@@ -1371,13 +1371,13 @@ exports.bind = function(el, selector, type, fn, capture){
  * @api public
  */
 
-exports.unbind = function(el, type, fn, capture){
+exports.unbind = function (el, type, fn, capture) {
   event.unbind(el, type, fn, capture);
 };
 
 });
 
-require.register("component~events@1.0.9", function (exports, module) {
+require.register('component~events@1.0.9', function (exports, module) {
 
 /**
  * Module dependencies.
@@ -1415,7 +1415,7 @@ function Events(el, obj) {
  * Subscription helper.
  */
 
-Events.prototype.sub = function(event, method, cb){
+Events.prototype.sub = function (event, method, cb) {
   this._events[event] = this._events[event] || {};
   this._events[event][method] = cb;
 };
@@ -1446,7 +1446,7 @@ Events.prototype.sub = function(event, method, cb){
  * @api public
  */
 
-Events.prototype.bind = function(event, method){
+Events.prototype.bind = function (event, method) {
   var e = parse(event);
   var el = this.el;
   var obj = this.obj;
@@ -1455,7 +1455,7 @@ Events.prototype.bind = function(event, method){
   var args = [].slice.call(arguments, 2);
 
   // callback
-  function cb(){
+  function cb() {
     var a = [].slice.call(arguments).concat(args);
     obj[method].apply(obj, a);
   }
@@ -1496,7 +1496,7 @@ Events.prototype.bind = function(event, method){
  * @api public
  */
 
-Events.prototype.unbind = function(event, method){
+Events.prototype.unbind = function (event, method) {
   if (0 == arguments.length) return this.unbindAll();
   if (1 == arguments.length) return this.unbindAllOf(event);
 
@@ -1517,7 +1517,7 @@ Events.prototype.unbind = function(event, method){
  * @api private
  */
 
-Events.prototype.unbindAll = function(){
+Events.prototype.unbindAll = function () {
   for (var event in this._events) {
     this.unbindAllOf(event);
   }
@@ -1530,7 +1530,7 @@ Events.prototype.unbindAll = function(){
  * @api private
  */
 
-Events.prototype.unbindAllOf = function(event){
+Events.prototype.unbindAllOf = function (event) {
   var bindings = this._events[event];
   if (!bindings) return;
 
@@ -1552,12 +1552,12 @@ function parse(event) {
   return {
     name: parts.shift(),
     selector: parts.join(' ')
-  }
+  };
 }
 
 });
 
-require.register("switchery", function (exports, module) {
+require.register('switchery', function (exports, module) {
 /**
  * Switchery 0.8.1
  * http://abpetkov.github.io/switchery/
@@ -1634,7 +1634,7 @@ function Switchery(element, options) {
  * @api private
  */
 
-Switchery.prototype.hide = function() {
+Switchery.prototype.hide = function () {
   this.element.style.display = 'none';
 };
 
@@ -1644,7 +1644,7 @@ Switchery.prototype.hide = function() {
  * @api private
  */
 
-Switchery.prototype.show = function() {
+Switchery.prototype.show = function () {
   var switcher = this.create();
   this.insertAfter(this.element, switcher);
 };
@@ -1656,7 +1656,7 @@ Switchery.prototype.show = function() {
  * @api private
  */
 
-Switchery.prototype.create = function() {
+Switchery.prototype.create = function () {
   this.switcher = document.createElement('span');
   this.jack = document.createElement('small');
   this.switcher.appendChild(this.jack);
@@ -1674,7 +1674,7 @@ Switchery.prototype.create = function() {
  * @api private
  */
 
-Switchery.prototype.insertAfter = function(reference, target) {
+Switchery.prototype.insertAfter = function (reference, target) {
   reference.parentNode.insertBefore(target, reference.nextSibling);
 };
 
@@ -1718,7 +1718,7 @@ Switchery.prototype.setPosition = function (clicked) {
  * @api private
  */
 
-Switchery.prototype.setSpeed = function() {
+Switchery.prototype.setSpeed = function () {
   var switcherProp = {}
     , jackProp = {
         'background-color': this.options.speed
@@ -1748,20 +1748,20 @@ Switchery.prototype.setSpeed = function() {
  * @api private
  */
 
-Switchery.prototype.setSize = function() {
+Switchery.prototype.setSize = function () {
   var small = 'switchery-small'
     , normal = 'switchery-default'
     , large = 'switchery-large';
 
   switch (this.options.size) {
     case 'small':
-      classes(this.switcher).add(small)
+      classes(this.switcher).add(small);
       break;
     case 'large':
-      classes(this.switcher).add(large)
+      classes(this.switcher).add(large);
       break;
     default:
-      classes(this.switcher).add(normal)
+      classes(this.switcher).add(normal);
       break;
   }
 };
@@ -1772,7 +1772,7 @@ Switchery.prototype.setSize = function() {
  * @api private
  */
 
-Switchery.prototype.colorize = function() {
+Switchery.prototype.colorize = function () {
   var switcherHeight = this.switcher.offsetHeight / 2;
 
   this.switcher.style.backgroundColor = this.options.color;
@@ -1788,7 +1788,7 @@ Switchery.prototype.colorize = function() {
  * @api private
  */
 
-Switchery.prototype.handleOnchange = function(state) {
+Switchery.prototype.handleOnchange = function (state) {
   if (document.dispatchEvent) {
     var event = document.createEvent('HTMLEvents');
     event.initEvent('change', true, true);
@@ -1805,16 +1805,16 @@ Switchery.prototype.handleOnchange = function(state) {
  * @api private
  */
 
-Switchery.prototype.handleChange = function() {
+Switchery.prototype.handleChange = function () {
   var self = this
     , el = this.element;
 
   if (el.addEventListener) {
-    el.addEventListener('change', function() {
+    el.addEventListener('change', function () {
       self.setPosition();
     });
   } else {
-    el.attachEvent('onchange', function() {
+    el.attachEvent('onchange', function () {
       self.setPosition();
     });
   }
@@ -1826,7 +1826,7 @@ Switchery.prototype.handleChange = function() {
  * @api private
  */
 
-Switchery.prototype.handleClick = function() {
+Switchery.prototype.handleClick = function () {
   var switcher = this.switcher;
 
   fastclick(switcher);
@@ -1839,7 +1839,7 @@ Switchery.prototype.handleClick = function() {
  * @api private
  */
 
-Switchery.prototype.bindClick = function() {
+Switchery.prototype.bindClick = function () {
   var parent = this.element.parentNode.tagName.toLowerCase()
     , labelParent = (parent === 'label') ? false : true;
 
@@ -1853,7 +1853,7 @@ Switchery.prototype.bindClick = function() {
  * @api private
  */
 
-Switchery.prototype.markAsSwitched = function() {
+Switchery.prototype.markAsSwitched = function () {
   this.element.setAttribute('data-switchery', true);
 };
 
@@ -1863,7 +1863,7 @@ Switchery.prototype.markAsSwitched = function() {
  * @api private
  */
 
-Switchery.prototype.markedAsSwitched = function() {
+Switchery.prototype.markedAsSwitched = function () {
   return this.element.getAttribute('data-switchery');
 };
 
@@ -1873,7 +1873,7 @@ Switchery.prototype.markedAsSwitched = function() {
  * @api private
  */
 
-Switchery.prototype.init = function() {
+Switchery.prototype.init = function () {
   this.hide();
   this.show();
   this.setSize();
@@ -1890,7 +1890,7 @@ Switchery.prototype.init = function() {
  * @api public
  */
 
-Switchery.prototype.isChecked = function() {
+Switchery.prototype.isChecked = function () {
   return this.element.checked;
 };
 
@@ -1901,7 +1901,7 @@ Switchery.prototype.isChecked = function() {
  * @api public
  */
 
-Switchery.prototype.isDisabled = function() {
+Switchery.prototype.isDisabled = function () {
   return this.options.disabled || this.element.disabled || this.element.readOnly;
 };
 
@@ -1911,7 +1911,7 @@ Switchery.prototype.isDisabled = function() {
  * @api public
  */
 
-Switchery.prototype.destroy = function() {
+Switchery.prototype.destroy = function () {
   this.events.unbind();
 };
 
@@ -1921,7 +1921,7 @@ Switchery.prototype.destroy = function() {
  * @api public
  */
 
-Switchery.prototype.enable = function() {
+Switchery.prototype.enable = function () {
   if (this.options.disabled) this.options.disabled = false;
   if (this.element.disabled) this.element.disabled = false;
   if (this.element.readOnly) this.element.readOnly = false;
@@ -1935,7 +1935,7 @@ Switchery.prototype.enable = function() {
  * @api public
  */
 
-Switchery.prototype.disable = function() {
+Switchery.prototype.disable = function () {
   if (!this.options.disabled) this.options.disabled = true;
   if (!this.element.disabled) this.element.disabled = true;
   if (!this.element.readOnly) this.element.readOnly = true;
@@ -1945,11 +1945,11 @@ Switchery.prototype.disable = function() {
 
 });
 
-if (typeof exports == "object") {
-  module.exports = require("switchery");
-} else if (typeof define == "function" && define.amd) {
-  define("Switchery", [], function(){ return require("switchery"); });
+if (typeof exports == 'object') {
+  module.exports = require('switchery');
+} else if (typeof define == 'function' && define.amd) {
+  define('Switchery', [], function () { return require('switchery'); });
 } else {
-  (this || window)["Switchery"] = require("switchery");
+  (this || window)['Switchery'] = require('switchery');
 }
-})()
+})();

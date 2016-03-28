@@ -1,24 +1,24 @@
-"use strict";
+'use strict';
 
-d3.json("data/linePlusBarData.json",function(error,data) {
-    nv.addGraph(function() {
+d3.json('data/linePlusBarData.json', function (error, data) {
+    nv.addGraph(function () {
         var chart = nv.models.linePlusBarChart()
-                .margin({top: 30, right: 60, bottom: 50, left: 70})
-                //We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
-                .x(function(d,i) { return i })
-                .y(function(d,i) {return d[1] })
+                .margin({ top: 30, right: 60, bottom: 50, left: 70 })
+                // We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
+                .x(function (d, i) { return i; })
+                .y(function (d, i) {return d[1]; })
             ;
 
-        chart.xAxis.tickFormat(function(d) {
+        chart.xAxis.tickFormat(function (d) {
             var dx = data[0].values[d] && data[0].values[d][0] || 0;
-            return d3.time.format('%x')(new Date(dx))
+            return d3.time.format('%x')(new Date(dx));
         });
 
         chart.y1Axis
             .tickFormat(d3.format(',f'));
 
         chart.y2Axis
-            .tickFormat(function(d) { return '$' + d3.format(',f')(d) });
+            .tickFormat(function (d) { return '$' + d3.format(',f')(d); });
 
         chart.bars.forceY([0]);
 
@@ -39,16 +39,16 @@ d3.json("data/linePlusBarData.json",function(error,data) {
 var chart;
 var data;
 
-var randomizeFillOpacity = function() {
-    var rand = Math.random(0,1);
+var randomizeFillOpacity = function () {
+    var rand = Math.random(0, 1);
     for (var i = 0; i < 100; i++) { // modify sine amplitude
-        data[4].values[i].y = Math.sin(i/(5 + rand)) * .4 * rand - .25;
+        data[4].values[i].y = Math.sin(i / (5 + rand)) * .4 * rand - .25;
     }
     data[4].fillOpacity = rand;
     chart.update();
 };
 
-nv.addGraph(function() {
+nv.addGraph(function () {
     chart = nv.models.lineChart()
         .options({
             transitionDuration: 300,
@@ -58,14 +58,14 @@ nv.addGraph(function() {
 
     // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
     chart.xAxis
-        .axisLabel("Time (s)")
+        .axisLabel('Time (s)')
         .tickFormat(d3.format(',.1f'))
         .staggerLabels(true)
     ;
 
     chart.yAxis
         .axisLabel('Voltage (v)')
-        .tickFormat(function(d) {
+        .tickFormat(function (d) {
             if (d == null) {
                 return 'N/A';
             }
@@ -93,43 +93,43 @@ function sinAndCos() {
         ;
 
     for (var i = 0; i < 100; i++) {
-        sin.push({x: i, y: i % 10 == 5 ? null : Math.sin(i/10) }); //the nulls are to show how defined works
-        sin2.push({x: i, y: Math.sin(i/5) * 0.4 - 0.25});
-        cos.push({x: i, y: .5 * Math.cos(i/10)});
-        rand.push({x:i, y: Math.random() / 10});
-        rand2.push({x: i, y: Math.cos(i/10) + Math.random() / 10 })
+        sin.push({ x: i, y: i % 10 == 5 ? null : Math.sin(i / 10) }); // the nulls are to show how defined works
+        sin2.push({ x: i, y: Math.sin(i / 5) * 0.4 - 0.25 });
+        cos.push({ x: i, y: .5 * Math.cos(i / 10) });
+        rand.push({ x:i, y: Math.random() / 10 });
+        rand2.push({ x: i, y: Math.cos(i / 10) + Math.random() / 10 });
     }
 
     return [
         {
             area: true,
             values: sin,
-            key: "Sine Wave",
-            color: "#66bb6a",
+            key: 'Sine Wave',
+            color: '#66bb6a',
             strokeWidth: 2,
             classed: 'dashed'
         },
         {
             values: cos,
-            key: "Cosine Wave",
-            color: "#00acc1"
+            key: 'Cosine Wave',
+            color: '#00acc1'
         },
         {
             values: rand,
-            key: "Random Points",
-            color: "#00897b"
+            key: 'Random Points',
+            color: '#00897b'
         },
         {
             values: rand2,
-            key: "Random Cosine",
-            color: "#e57373",
+            key: 'Random Cosine',
+            color: '#e57373',
             strokeWidth: 2
         },
         {
             area: true,
             values: sin2,
-            key: "Fill opacity",
-            color: "#ab47bc",
+            key: 'Fill opacity',
+            color: '#ab47bc',
             strokeWidth: 1,
             fillOpacity: .1
         }
@@ -137,20 +137,20 @@ function sinAndCos() {
 }
 
 
-function HistoricalBar(){
+function HistoricalBar() {
 
     var chart;
-    nv.addGraph(function() {
+    nv.addGraph(function () {
         chart = nv.models.historicalBarChart();
         chart
-            .margin({left: 100, bottom: 100})
+            .margin({ left: 100, bottom: 100 })
             .useInteractiveGuideline(true)
             .duration(250)
         ;
 
         // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
         chart.xAxis
-            .axisLabel("Time (s)")
+            .axisLabel('Time (s)')
             .tickFormat(d3.format(',.1f'));
 
         chart.yAxis
@@ -165,23 +165,23 @@ function HistoricalBar(){
             .call(chart);
 
         nv.utils.windowResize(chart.update);
-        chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+        chart.dispatch.on('stateChange', function (e) { nv.log('New State:', JSON.stringify(e)); });
         return chart;
     });
 
-//Simple test data generators
+// Simple test data generators
     function sinAndCos() {
         var sin = [],
             cos = [];
 
         for (var i = 0; i < 100; i++) {
-            sin.push({x: i, y: Math.sin(i/10)});
-            cos.push({x: i, y: .5 * Math.cos(i/10)});
+            sin.push({ x: i, y: Math.sin(i / 10) });
+            cos.push({ x: i, y: .5 * Math.cos(i / 10) });
         }
 
         return [
-            {values: sin, key: "Sine Wave", color: "#ff7f0e"},
-            {values: cos, key: "Cosine Wave", color: "#2ca02c"}
+            { values: sin, key: 'Sine Wave', color: '#ff7f0e' },
+            { values: cos, key: 'Cosine Wave', color: '#2ca02c' }
         ];
     }
 
@@ -189,36 +189,36 @@ function HistoricalBar(){
         var sin = [];
 
         for (var i = 0; i < 100; i++) {
-            sin.push({x: i, y: Math.sin(i/10) * Math.random() * 100});
+            sin.push({ x: i, y: Math.sin(i / 10) * Math.random() * 100 });
         }
 
         return [{
             values: sin,
-            key: "Sine Wave",
-            color: "#26a69a"
+            key: 'Sine Wave',
+            color: '#26a69a'
         }];
     }
 }
 
 HistoricalBar();
 
-function StackNvdChart(){
-    d3.json('data/stackedAreaData.json', function(data) {
-        nv.addGraph(function() {
+function StackNvdChart() {
+    d3.json('data/stackedAreaData.json', function (data) {
+        nv.addGraph(function () {
             var chart = nv.models.stackedAreaChart()
-                .margin({right: 100})
-                .x(function(d) { return d[0] })   //We can modify the data accessor functions...
-                .y(function(d) { return d[1] })   //...in case your data is formatted differently.
-                .useInteractiveGuideline(true)    //Tooltips which show all data points. Very nice!
-                .rightAlignYAxis(true)      //Let's move the y-axis to the right side.
+                .margin({ right: 100 })
+                .x(function (d) { return d[0]; })   // We can modify the data accessor functions...
+                .y(function (d) { return d[1]; })   // ...in case your data is formatted differently.
+                .useInteractiveGuideline(true)    // Tooltips which show all data points. Very nice!
+                .rightAlignYAxis(true)      // Let's move the y-axis to the right side.
 //                .transitionDuration(500)
-                .showControls(true)       //Allow user to choose 'Stacked', 'Stream', 'Expanded' mode.
+                .showControls(true)       // Allow user to choose 'Stacked', 'Stream', 'Expanded' mode.
                 .clipEdge(true);
 
-            //Format x-axis labels with custom function.
+            // Format x-axis labels with custom function.
             chart.xAxis
-                .tickFormat(function(d) {
-                    return d3.time.format('%x')(new Date(d))
+                .tickFormat(function (d) {
+                    return d3.time.format('%x')(new Date(d));
                 });
 
             chart.yAxis
@@ -232,19 +232,19 @@ function StackNvdChart(){
 
             return chart;
         });
-    })
+    });
 }
 
 StackNvdChart();
 
-function NvdMultiBar(){
-    nv.addGraph(function() {
+function NvdMultiBar() {
+    nv.addGraph(function () {
         var chart = nv.models.multiBarChart()
 //                .transitionDuration(350)
-                .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
-                .rotateLabels(0)      //Angle to rotate x-axis labels.
-                .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-                .groupSpacing(0.1)    //Distance between each group of bars.
+                .reduceXTicks(true)   // If 'false', every single x-axis tick label will be rendered.
+                .rotateLabels(0)      // Angle to rotate x-axis labels.
+                .showControls(true)   // Allow user to switch between 'Grouped' and 'Stacked' mode.
+                .groupSpacing(0.1)    // Distance between each group of bars.
             ;
 
         chart.xAxis
@@ -262,9 +262,9 @@ function NvdMultiBar(){
         return chart;
     });
 
-//Generate some nice data.
+// Generate some nice data.
     function exampleData() {
-        return stream_layers(3,10+Math.random()*100,.1).map(function(data, i) {
+        return stream_layers(3, 10 + Math.random() * 100, .1).map(function (data, i) {
             return {
                 key: 'Stream #' + i,
                 values: data

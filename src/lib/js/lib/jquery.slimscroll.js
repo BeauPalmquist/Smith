@@ -15,11 +15,11 @@
     }
 }(function ($) {
 
-    "use strict";
+    'use strict';
 
 
   $.fn.extend({
-    slimScroll: function(options) {
+    slimScroll: function (options) {
 
       var defaults = {
 
@@ -93,7 +93,7 @@
       var o = $.extend(defaults, options);
 
       // do it for every element that matches selector
-      this.each(function(){
+      this.each(function () {
 
       var isOverPanel, isOverBar, isDragg, queueHide, touchDif,
         barHeight, percentScroll, lastScroll,
@@ -120,7 +120,7 @@
             if ($.isPlainObject(options))
             {
               // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
-              if ( 'height' in options && options.height == 'auto' ) {
+              if ('height' in options && options.height == 'auto') {
                 me.parent().css('height', 'auto');
                 me.css('height', 'auto');
                 var height = me.parent().parent().height();
@@ -230,25 +230,25 @@
         me.parent().append(rail);
 
         // make it draggable and no longer dependent on the jqueryUI
-        if (o.railDraggable){
-          bar.bind("mousedown", function(e) {
+        if (o.railDraggable) {
+          bar.bind('mousedown', function (e) {
             var $doc = $(document);
             isDragg = true;
             var t = parseFloat(bar.css('top'));
             var pageY = e.pageY;
 
-            $doc.bind("mousemove.slimscroll", function(e){
+            $doc.bind('mousemove.slimscroll', function (e) {
               var currTop = t + e.pageY - pageY;
               bar.css('top', currTop);
               scrollContent(0, bar.position().top, false);// scroll content
             });
 
-            $doc.bind("mouseup.slimscroll", function(e) {
-              isDragg = false;hideBar();
+            $doc.bind('mouseup.slimscroll', function (e) {
+              isDragg = false; hideBar();
               $doc.unbind('.slimscroll');
             });
             return false;
-          }).bind("selectstart.slimscroll", function(e){
+          }).bind('selectstart.slimscroll', function (e) {
             e.stopPropagation();
             e.preventDefault();
             return false;
@@ -256,31 +256,31 @@
         }
 
         // on rail over
-        rail.hover(function(){
+        rail.hover(function () {
           showBar();
-        }, function(){
+        }, function () {
           hideBar();
         });
 
         // on bar over
-        bar.hover(function(){
+        bar.hover(function () {
           isOverBar = true;
-        }, function(){
+        }, function () {
           isOverBar = false;
         });
 
         // show on parent mouseover
-        me.hover(function(){
+        me.hover(function () {
           isOverPanel = true;
           showBar();
           hideBar();
-        }, function(){
+        }, function () {
           isOverPanel = false;
           hideBar();
         });
 
         // support for mobile
-        me.bind('touchstart', function(e,b){
+        me.bind('touchstart', function (e, b) {
           if (e.originalEvent.touches.length)
           {
             // record where touch started
@@ -288,9 +288,9 @@
           }
         });
 
-        me.bind('touchmove', function(e){
+        me.bind('touchmove', function (e) {
           // prevent scrolling the page if necessary
-          if(!releaseScroll)
+          if (!releaseScroll)
           {
   		      e.originalEvent.preventDefault();
 		      }
@@ -334,7 +334,7 @@
           var e = e || window.event;
 
           var delta = 0;
-          if (e.wheelDelta) { delta = -e.wheelDelta/120; }
+          if (e.wheelDelta) { delta = -e.wheelDelta / 120; }
           if (e.detail) { delta = e.detail / 3; }
 
           var target = e.target || e.srcTarget || e.srcElement;
@@ -401,12 +401,12 @@
         {
           if (window.addEventListener)
           {
-            target.addEventListener('DOMMouseScroll', _onWheel, false );
-            target.addEventListener('mousewheel', _onWheel, false );
+            target.addEventListener('DOMMouseScroll', _onWheel, false);
+            target.addEventListener('mousewheel', _onWheel, false);
           }
           else
           {
-            document.attachEvent("onmousewheel", _onWheel)
+            document.attachEvent('onmousewheel', _onWheel);
           }
         }
 
@@ -430,7 +430,7 @@
           // when bar reached top or bottom
           if (percentScroll == ~~percentScroll)
           {
-            //release wheel
+            // release wheel
             releaseScroll = o.allowPageScroll;
 
             // publish approporiate event
@@ -447,13 +447,13 @@
           lastScroll = percentScroll;
 
           // show only when required
-          if(barHeight >= me.outerHeight()) {
-            //allow window scroll
+          if (barHeight >= me.outerHeight()) {
+            // allow window scroll
             releaseScroll = true;
             return;
           }
-          bar.stop(true,true).fadeIn('fast');
-          if (o.railVisible) { rail.stop(true,true).fadeIn('fast'); }
+          bar.stop(true, true).fadeIn('fast');
+          if (o.railVisible) { rail.stop(true, true).fadeIn('fast'); }
         }
 
         function hideBar()
@@ -461,7 +461,7 @@
           // only hide when options allow it
           if (!o.alwaysVisible)
           {
-            queueHide = setTimeout(function(){
+            queueHide = setTimeout(function () {
               if (!(o.disableFadeOut && isOverPanel) && !isOverBar && !isDragg)
               {
                 bar.fadeOut('slow');

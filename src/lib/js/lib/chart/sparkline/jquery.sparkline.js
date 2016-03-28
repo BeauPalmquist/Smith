@@ -200,17 +200,16 @@
 *   $('#pie').sparkline([1,1,2], { type:'pie' });
 */
 
-/*jslint regexp: true, browser: true, jquery: true, white: true, nomen: false, plusplus: false, maxerr: 500, indent: 4 */
+/* jslint regexp: true, browser: true, jquery: true, white: true, nomen: false, plusplus: false, maxerr: 500, indent: 4 */
 
-(function(document, Math, undefined) { // performance/minified-size optimization
-(function(factory) {
-    if(typeof define === 'function' && define.amd) {
+(function (document, Math, undefined) { // performance/minified-size optimization
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
     } else if (jQuery && !jQuery.fn.sparkline) {
         factory(jQuery);
     }
-}
-(function($) {
+}(function ($) {
     'use strict';
 
     var UNSET_OPTION = {},
@@ -315,7 +314,7 @@
                 rangeColors: ['#d3dafe', '#a8b6ff', '#7f94ff'],
                 base: undefined, // set this to a number to change the base start number
                 tooltipFormat: new SPFormat('{{fieldkey:fields}} - {{value}}'),
-                tooltipValueLookups: { fields: {r: 'Range', p: 'Performance', t: 'Target'} }
+                tooltipValueLookups: { fields: { r: 'Range', p: 'Performance', t: 'Target' } }
             },
             // Defaults for pie charts
             pie: {
@@ -346,7 +345,7 @@
                 tooltipFormatFieldlistKey: 'field',
                 tooltipValueLookups: { fields: { lq: 'Lower Quartile', med: 'Median',
                     uq: 'Upper Quartile', lo: 'Left Outlier', ro: 'Right Outlier',
-                    lw: 'Left Whisker', rw: 'Right Whisker'} }
+                    lw: 'Left Whisker', rw: 'Right Whisker' } }
             }
         };
     };
@@ -463,7 +462,7 @@
     });
 
     // convience method to avoid needing the new operator
-    $.spformat = function(format, fclass) {
+    $.spformat = function (format, fclass) {
         return new SPFormat(format, fclass);
     };
 
@@ -481,14 +480,14 @@
         var vl;
         if (q === 2) {
             vl = Math.floor(values.length / 2);
-            return values.length % 2 ? values[vl] : (values[vl-1] + values[vl]) / 2;
+            return values.length % 2 ? values[vl] : (values[vl - 1] + values[vl]) / 2;
         } else {
-            if (values.length % 2 ) { // odd
+            if (values.length % 2) { // odd
                 vl = (values.length * q + q) / 4;
-                return vl % 1 ? (values[Math.floor(vl)] + values[Math.floor(vl) - 1]) / 2 : values[vl-1];
-            } else { //even
+                return vl % 1 ? (values[Math.floor(vl)] + values[Math.floor(vl) - 1]) / 2 : values[vl - 1];
+            } else { // even
                 vl = (values.length * q + 2) / 4;
-                return vl % 1 ? (values[Math.floor(vl)] + values[Math.floor(vl) - 1]) / 2 :  values[vl-1];
+                return vl % 1 ? (values[Math.floor(vl)] + values[Math.floor(vl) - 1]) / 2 : values[vl - 1];
 
             }
         }
@@ -557,7 +556,7 @@
     // returns true if the array is empty
     all = function (val, arr, ignoreNull) {
         var i;
-        for (i = arr.length; i--; ) {
+        for (i = arr.length; i--;) {
             if (ignoreNull && arr[i] === null) continue;
             if (arr[i] !== val) {
                 return false;
@@ -580,9 +579,9 @@
     };
 
     // http://paulirish.com/2008/bookmarklet-inject-new-css-rules/
-    addCSS = function(css) {
+    addCSS = function (css) {
         var tag;
-        //if ('\v' == 'v') /* ie only */ {
+        // if ('\v' == 'v') /* ie only */ {
         if (document.createStyleSheet) {
             document.createStyleSheet().cssText = css;
         } else {
@@ -609,13 +608,13 @@
             var el = document.createElement('canvas');
             if (!!(el.getContext && el.getContext('2d'))) {
                 // Canvas is available
-                $.fn.sparkline.canvas = function(width, height, target, interact) {
+                $.fn.sparkline.canvas = function (width, height, target, interact) {
                     return new VCanvas_canvas(width, height, target, interact);
                 };
             } else if (document.namespaces && !document.namespaces.v) {
                 // VML is available
                 document.namespaces.add('v', 'urn:schemas-microsoft-com:vml', '#default#VML');
-                $.fn.sparkline.canvas = function(width, height, target, interact) {
+                $.fn.sparkline.canvas = function (width, height, target, interact) {
                     return new VCanvas_vml(width, height, target);
                 };
             } else {
@@ -683,7 +682,7 @@
     });
 
     // Convenience function
-    $.range_map = function(map) {
+    $.range_map = function (map) {
         return new RangeMap(map);
     };
 
@@ -934,7 +933,7 @@
         }
     });
 
-    initStyles = function() {
+    initStyles = function () {
         addCSS(defaultStyles);
     };
 
@@ -1198,7 +1197,7 @@
             this.changeHighlight(false);
         },
 
-        changeHighlight: function (highlight)  {},
+        changeHighlight: function (highlight) {},
 
         /**
          * Fetch the HTML to display as a tooltip
@@ -1551,7 +1550,7 @@
             }
             if (spotRadius) {
                 // adjust the canvas size as required so that spots will fit
-                hlSpotsEnabled = options.get('highlightSpotColor') &&  !options.get('disableInteraction');
+                hlSpotsEnabled = options.get('highlightSpotColor') && !options.get('disableInteraction');
                 if (hlSpotsEnabled || options.get('minSpotColor') || (options.get('spotColor') && yvalues[yvallast] === this.miny)) {
                     canvasHeight -= Math.ceil(spotRadius);
                 }
@@ -2314,7 +2313,7 @@
                 circle = 2 * Math.PI,
                 values = this.values,
                 total = this.total,
-                next = offset ? (2*Math.PI)*(offset/360) : 0,
+                next = offset ? (2 * Math.PI) * (offset / 360) : 0,
                 start, end, i, vlen, color;
 
             vlen = values.length;
@@ -2392,16 +2391,16 @@
                 { field: 'uq', value: this.quartiles[2] }
             ];
             if (this.loutlier !== undefined) {
-                result.push({ field: 'lo', value: this.loutlier});
+                result.push({ field: 'lo', value: this.loutlier });
             }
             if (this.routlier !== undefined) {
-                result.push({ field: 'ro', value: this.routlier});
+                result.push({ field: 'ro', value: this.routlier });
             }
             if (this.lwhisker !== undefined) {
-                result.push({ field: 'lw', value: this.lwhisker});
+                result.push({ field: 'lw', value: this.lwhisker });
             }
             if (this.rwhisker !== undefined) {
-                result.push({ field: 'rw', value: this.rwhisker});
+                result.push({ field: 'rw', value: this.rwhisker });
             }
             return result;
         },
@@ -2712,7 +2711,7 @@
             this.shapes = {};
             this.shapeseq = [];
             this.currentTargetShapeId = undefined;
-            $(this.canvas).css({width: this.pixelWidth, height: this.pixelHeight});
+            $(this.canvas).css({ width: this.pixelWidth, height: this.pixelHeight });
         },
 
         _getContext: function (lineColor, fillColor, lineWidth) {
@@ -2897,7 +2896,7 @@
             }
             $.data(target, '_jqs_vcanvas', this);
             this.canvas = document.createElement('span');
-            $(this.canvas).css({ display: 'inline-block', position: 'relative', overflow: 'hidden', width: width, height: height, margin: '0px', padding: '0px', verticalAlign: 'top'});
+            $(this.canvas).css({ display: 'inline-block', position: 'relative', overflow: 'hidden', width: width, height: height, margin: '0px', padding: '0px', verticalAlign: 'top' });
             this._insert(this.canvas, target);
             this._calculatePixelDims(width, height, this.canvas);
             this.canvas.width = this.pixelWidth;
@@ -3053,4 +3052,4 @@
         }
     });
 
-}))}(document, Math));
+}));}(document, Math));

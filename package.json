@@ -1,5 +1,5 @@
 {
-  "version": "1.1.1-build1",
+    "version": "1.1.1",
   "name": "forge-smith",
   "description": "React and Redux bootstrapping framework for use with Forge microservices",
   "main": "dist/smith.js",
@@ -47,7 +47,7 @@
     "gulp": "^3.9.0",
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
-    "gulp-download": "^0.0.1",
+        "gulp-download-stream": "^0.0.13",
     "gulp-eslint": "^2.0.0",
     "gulp-minify-css": "^1.2.2",
     "gulp-mocha": "^2.2.0",

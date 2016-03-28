@@ -1,54 +1,54 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-	/***************************************/
+	/** *************************************/
 	/* Show password */
-	/***************************************/
-	$("#show-pass").on("change", function(){
-		$("#show-pass").is(":checked") ? $("#password").attr("type", "text") : $("#password").attr("type", "password");
+	/** *************************************/
+	$('#show-pass').on('change', function () {
+		$('#show-pass').is(':checked') ? $('#password').attr('type', 'text') : $('#password').attr('type', 'password');
 	});
-	/***************************************/
+	/** *************************************/
 	/* end show password */
-	/***************************************/
+	/** *************************************/
 
-	/***************************************/
+	/** *************************************/
 	/* Enabled input */
-	/***************************************/
-	$('#check-enable-input').on('change', function() {
-		if ( $('#check-enable-input').is(':checked') ) {
+	/** *************************************/
+	$('#check-enable-input').on('change', function () {
+		if ($('#check-enable-input').is(':checked')) {
 			$('#enable-input').attr('disabled', false).parent().removeClass('disabled-view');
 		} else {
 			$('#enable-input').attr('disabled', true).parent().addClass('disabled-view');
-		};
+		}
 	});
-	/***************************************/
+	/** *************************************/
 	/* end enabled input */
-	/***************************************/
+	/** *************************************/
 
-	/***************************************/
+	/** *************************************/
 	/* Enabled button */
-	/***************************************/
-	$('#check-enable-button').on('change', function() {
-		if ( $('#check-enable-button').is(':checked') ) {
+	/** *************************************/
+	$('#check-enable-button').on('change', function () {
+		if ($('#check-enable-button').is(':checked')) {
 			$('#enable-button').attr('disabled', false).removeClass('disabled-view');
 		} else {
 			$('#enable-button').attr('disabled', true).addClass('disabled-view');
-		};
+		}
 	});
-	/***************************************/
+	/** *************************************/
 	/* end enabled button */
-	/***************************************/
+	/** *************************************/
 
-	/***************************************/
+	/** *************************************/
 	/* Select conditions */
-	/***************************************/
+	/** *************************************/
 	// Arrays
 	$models = [];
 	$colors = [];
 
 	// start select № 2
 	// Car models
-	$models['VO']  = ['V70', 'XC60', 'XC90'];
-	$models['VW']  = ['Golf', 'Polo', 'Scirocco', 'Touareg'];
+	$models['VO'] = ['V70', 'XC60', 'XC90'];
+	$models['VW'] = ['Golf', 'Polo', 'Scirocco', 'Touareg'];
 	$models['BMW'] = ['M6', 'X5', 'Z3'];
 	// end select № 2
 
@@ -71,20 +71,20 @@ $(document).ready(function() {
 	// end select № 3
 
 	// If first select is changed
-	$( "#car" ).change(function () {
+	$('#car').change(function () {
 
 		// If next selects have values
 		// Clear next selects
-		if ( $("#car-model option").length) {
-			$("#car-model option:gt(0)").remove();
+		if ($('#car-model option').length) {
+			$('#car-model option:gt(0)').remove();
 		}
-		if ( $("#car-model-color option").length) {
-			$("#car-model-color option:gt(0)").remove();
+		if ($('#car-model-color option').length) {
+			$('#car-model-color option:gt(0)').remove();
 		}
 
 		// Get the "car" value from the current select
-		$( "#car option:selected" ).each(function() {
-			$car_val = $( this ).val();
+		$('#car option:selected').each(function () {
+			$car_val = $(this).val();
 		});
 
 		// Get the "car models" values
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
 		// if "car models" exists
 		// Add values to the next select
-		if ( $car ) {
+		if ($car) {
 			for ($i = 0; $i < $car.length; $i++) {
 				$opt = '<option value="' + $car[$i] + '">' + $car[$i] + '</option>';
 				$('#car-model').append($opt);
@@ -101,17 +101,17 @@ $(document).ready(function() {
 	});
 
 	// If second select is changed
-	$( "#car-model" ).change(function () {
+	$('#car-model').change(function () {
 
 		// If next select has value
 		// Clear next select
-		if ( $("#car-model-color option").length) {
-			$("#car-model-color option:gt(0)").remove();
+		if ($('#car-model-color option').length) {
+			$('#car-model-color option:gt(0)').remove();
 		}
 
 		// Get the "car model" value from the current select
-		$( "#car-model option:selected" ).each(function() {
-			$car_model_val = $( this ).val();
+		$('#car-model option:selected').each(function () {
+			$car_model_val = $(this).val();
 		});
 
 		// Get the "car models colors" values
@@ -119,72 +119,72 @@ $(document).ready(function() {
 
 		// if "car models colors" exists
 		// Add values to the next select
-		if ( $color ) {
+		if ($color) {
 			for ($i = 0; $i < $color.length; $i++) {
 				$opt = '<option value="' + $color[$i] + '">' + $color[$i] + '</option>';
-				$("#car-model-color").append($opt);
+				$('#car-model-color').append($opt);
 			}
 		}
 	});
-	/***************************************/
+	/** *************************************/
 	/* end select conditions */
-	/***************************************/
+	/** *************************************/
 
-	/***************************************/
+	/** *************************************/
 	/* Hidden elements checkbox */
-	/***************************************/
-	$('#show-elements-checkbox').on('change', function() {
-		if ( $('#show-elements-checkbox').is(':checked') ) {
+	/** *************************************/
+	$('#show-elements-checkbox').on('change', function () {
+		if ($('#show-elements-checkbox').is(':checked')) {
 			$('.hidden-elements').removeClass('hidden');
 		} else {
 			$('.hidden-elements').addClass('hidden');
-		};
+		}
 	});
-	/***************************************/
+	/** *************************************/
 	/* end hidden elements checkbox */
-	/***************************************/
+	/** *************************************/
 
-	/***************************************/
+	/** *************************************/
 	/* Hidden elements select */
-	/***************************************/
-	$( "#show-elements-select" ).change(function () {
+	/** *************************************/
+	$('#show-elements-select').change(function () {
 
 		// Variables
 		var
-			$value 	 = "",
-			$field_1 = $("#field-1"),
-			$field_2 = $("#field-2");
+			$value 	 = '',
+			$field_1 = $('#field-1'),
+			$field_2 = $('#field-2');
 
 		// Get the value
-		$( "#show-elements-select option:selected" ).each(function() {
-			$value = $( this ).val();
+		$('#show-elements-select option:selected').each(function () {
+			$value = $(this).val();
 		});
 
 		// Display fields according to the value
-		if ( $value == 'none' ) {
-			if ( !$field_1.hasClass("hidden") ) $field_1.addClass("hidden");
-			if ( !$field_2.hasClass("hidden") ) $field_2.addClass("hidden");
-		};
-		if ( $value == 'field-1' ) {
-			if ( $field_1.hasClass("hidden") ) $field_1.removeClass("hidden");
-			if ( !$field_2.hasClass("hidden") ) $field_2.addClass("hidden");
-		};
-		if ( $value == 'field-2' ) {
-			if ( $field_2.hasClass("hidden") ) $field_2.removeClass("hidden");
-			if ( !$field_1.hasClass("hidden") ) $field_1.addClass("hidden");
-		};
-		if ( $value == 'field-1-2' ) {
-			if ( $field_1.hasClass("hidden") ) $field_1.removeClass("hidden");
-			if ( $field_2.hasClass("hidden") ) $field_2.removeClass("hidden");
-		};
+		if ($value == 'none') {
+			if (!$field_1.hasClass('hidden')) $field_1.addClass('hidden');
+			if (!$field_2.hasClass('hidden')) $field_2.addClass('hidden');
+		}
+		if ($value == 'field-1') {
+			if ($field_1.hasClass('hidden')) $field_1.removeClass('hidden');
+			if (!$field_2.hasClass('hidden')) $field_2.addClass('hidden');
+		}
+		if ($value == 'field-2') {
+			if ($field_2.hasClass('hidden')) $field_2.removeClass('hidden');
+			if (!$field_1.hasClass('hidden')) $field_1.addClass('hidden');
+		}
+		if ($value == 'field-1-2') {
+			if ($field_1.hasClass('hidden')) $field_1.removeClass('hidden');
+			if ($field_2.hasClass('hidden')) $field_2.removeClass('hidden');
+		}
 	}).change();
-	/***************************************/
+	/** *************************************/
 	/* end hidden elements select */
-	/***************************************/
-	
-	/***************************************/
+	/** *************************************/
+
+	/** *************************************/
 	/* Checkbox conditions */
-	/***************************************/
+	/** *************************************/
 	/* Subscribe checkbox condition */
 	$('#subscribe').change(function () {
 
@@ -199,8 +199,8 @@ $(document).ready(function() {
 	}).change();
 	/* end Subscribe checkbox condition */
 
-	/***************************************/
+	/** *************************************/
 	/* end Checkbox conditions */
-	/***************************************/
+	/** *************************************/
 
 });

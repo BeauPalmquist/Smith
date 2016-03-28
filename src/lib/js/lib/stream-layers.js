@@ -11,7 +11,7 @@ function stream_layers(n, m, o) {
       a[i] += x * Math.exp(-w * w);
     }
   }
-  return d3.range(n).map(function() {
+  return d3.range(n).map(function () {
       var a = [], i;
       for (i = 0; i < m; i++) a[i] = o + o * Math.random();
       for (i = 0; i < 5; i++) bump(a);
@@ -21,8 +21,8 @@ function stream_layers(n, m, o) {
 
 /* Another layer generator using gamma distributions. */
 function stream_waves(n, m) {
-  return d3.range(n).map(function(i) {
-    return d3.range(m).map(function(j) {
+  return d3.range(n).map(function (i) {
+    return d3.range(m).map(function (j) {
         var x = 20 * j / m - i / 3;
         return 2 * x * Math.exp(-.5 * x);
       }).map(stream_index);
@@ -30,6 +30,6 @@ function stream_waves(n, m) {
 }
 
 function stream_index(d, i) {
-  return {x: i, y: Math.max(0, d)};
+  return { x: i, y: Math.max(0, d) };
 }
 
