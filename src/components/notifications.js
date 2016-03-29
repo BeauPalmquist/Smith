@@ -3,7 +3,10 @@ import SystemNotificationItem from './systemNotificationItem';
 import ClientNotificationItem from './clientNotificationItem';
 
 class AppNotifications extends React.Component {
-
+    componentDidMount() {
+        const { notificationActions } = this.props;
+        notificationActions.loadRecentNotifications();
+    }
     render() {
         const { notifications } = this.props;
         const userNotifications = notifications.userNotifications.map((item, index) =>

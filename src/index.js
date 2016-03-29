@@ -5,7 +5,6 @@ import { ReduxRouter } from 'redux-router';
 import configureStore from './stores/configureStore';
 import applyPolys from './polyfills';
 import AjaxOptions from './common/js/forge/support/ajaxOptions';
-
 import ClientAction from './common/js/forge/services/clientAction';
 import Notification from './common/js/forge/services/notification';
 import Permission from './common/js/forge/services/permission';

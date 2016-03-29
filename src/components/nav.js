@@ -2,23 +2,6 @@
 import { Link } from 'react-router';
 
 class AppNav extends React.Component {
-    componentDidMount() {
-        if ($.fn.navAccordion) {
-            $('.list-accordion').each(function () {
-                $(this).navAccordion({
-                    eventType: 'hover',
-                    hoverDelay: 100,
-                    autoClose: true,
-                    saveState: false,
-                    disableLink: true,
-                    speed: 'fast',
-                    showCount: false,
-                    autoExpand: true,
-                    classExpand: 'acc-current-parent'
-                });
-            });
-        }
-    }
     render() {
     const navs = [];
     const { user, config } = this.props;

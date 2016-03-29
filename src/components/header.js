@@ -1,58 +1,37 @@
 import React from 'react';
 import UserDropdown from './userDropdown';
+import Hammer from 'react-hammerjs';
+import $ from 'jquery';
 
 class AppHeader extends React.Component {
-
-    componentDidMount() {
-        const btnTopSearch = $('.btn-top-search');
-        if (btnTopSearch.length > 0) {
-            btnTopSearch.hammer().on('click touchstart',
-            (e) => {
-                e.preventDefault();
-                const topSearchBar = $('.top-search-bar');
-                if (topSearchBar && topSearchBar.hasClass('search-bar-toggle')) {
-                    topSearchBar.removeClass('search-bar-toggle');
-                } else {
-                    topSearchBar.addClass('search-bar-toggle');
-                }
-            });
+    onMobileTap = () => {
+        const topBarRight = $('.topbar-right');
+        if (topBarRight && topBarRight.hasClass('bar-toggle')) {
+            topBarRight.removeClass('bar-toggle');
+        } else {
+            topBarRight.addClass('bar-toggle');
         }
-
-        const btnMobileBar = $('.btn-mobile-bar');
-        if (btnMobileBar.length > 0) {
-            btnMobileBar.hammer().on('click touchstart',
-            (e) => {
-                e.preventDefault();
-                const topBarRight = $('.topbar-right');
-                if (topBarRight && topBarRight.hasClass('bar-toggle')) {
-                    topBarRight.removeClass('bar-toggle');
-                } else {
-                    topBarRight.addClass('bar-toggle');
-                }
-            });
-        }
-
-        $('.right-toggle-switch').hammer().on('click touchstart', (e) => {
-            e.preventDefault();
-
-            const $rightbar = $('.rightbar');
-            if ($rightbar.hasClass('right-aside-toggle')) {
-                $rightbar.removeClass('right-aside-toggle');
-            } else {
-                $rightbar.addClass('right-aside-toggle');
-            }
-            $(window).trigger('resize');
-        });
-
-        const { notificationActions } = this.props;
-        notificationActions.loadRecentNotifications();
     }
-
-     handleClick = () => {
+    onNotificationTap = () => {
         const { notificationActions } = this.props;
         notificationActions.resetNotificationCount();
-    };
 
+        const $rightbar = $('.rightbar');
+        if ($rightbar.hasClass('right-aside-toggle')) {
+            $rightbar.removeClass('right-aside-toggle');
+        } else {
+            $rightbar.addClass('right-aside-toggle');
+        }
+        $(window).trigger('resize');
+    }
+    onSearchTap = () => {
+        const topSearchBar = $('.top-search-bar');
+        if (topSearchBar && topSearchBar.hasClass('search-bar-toggle')) {
+            topSearchBar.removeClass('search-bar-toggle');
+        } else {
+            topSearchBar.addClass('search-bar-toggle');
+        }
+    }
     render() {
         const { auth, notifications, authActions, config } = this.props;
         const boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : '';
@@ -70,8 +49,8 @@ class AppHeader extends React.Component {
         let mobileSearch;
         const { GlobalSearch, GlobalToolbar } = config;
         if (GlobalSearch) {
-            search = (<li key="searchMenuOption"><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></li>);
-            mobileSearch = (<li><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></li>);
+            search = (<li key="searchMenuOption"><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
+            mobileSearch = (<li><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
             searchBar = (<div className="top-search-bar">
                     <div className="container-fluid">
                         <div className="row">
@@ -109,7 +88,13 @@ class AppHeader extends React.Component {
                         </ul>
                         <ul className="branding-right pull-right">
                             {mobileSearch}
-                            <li><a href="#" className="btn-mobile-bar"><i className="fa fa-bars"></i></a></li>
+                            <li>
+                                <Hammer onTap={ this.onMobileTap }>
+                                    <a href="#" className="btn-mobile-bar">
+                                        <i className="fa fa-bars"></i>
+                                    </a>
+                                </Hammer>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -122,9 +107,11 @@ class AppHeader extends React.Component {
                             {search}
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
                             <li>
-                                <a href="#" className="right-toggle-switch" onClick={ this.handleClick }>
-                                    <i className="fa fa-align-left"></i>{ notificationBadge }
-                                </a>
+                                <Hammer onTap={ this.onNotificationTap }>
+                                    <a href="#" className="right-toggle-switch">
+                                        <i className="fa fa-align-left"></i>{ notificationBadge }
+                                    </a>
+                                </Hammer>
                             </li>
 
                         </ul>
@@ -133,7 +120,7 @@ class AppHeader extends React.Component {
                 { globalToolBar }
             </header>
         );
-        }
+    }
 }
 
 AppHeader.propTypes = {
@@ -142,7 +129,6 @@ AppHeader.propTypes = {
     authActions: React.PropTypes.object.isRequired,
     notificationActions: React.PropTypes.object.isRequired,
     config: React.PropTypes.shape({
-        GlobalSearch: React.PropTypes.element,
         headerImage: React.PropTypes.shape({
             src: React.PropTypes.string.isRequired
         }),

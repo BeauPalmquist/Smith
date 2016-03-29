@@ -3,6 +3,10 @@ import AppHeader from './header';
 import AppNav from './nav';
 import AppNotifications from './notifications';
 import Notifications from '../common/js/forge/support/notifications';
+import ScrollToTop from 'react-scroll-up';
+import $ from 'jquery';
+import noty from 'noty';
+import moment from 'moment';
 
 class App extends Component {
     componentWillMount() {
@@ -23,22 +27,44 @@ class App extends Component {
             } else {
                 if (auth.userAuthenticated && location.pathname === '/') {
                     history.replaceState(null, auth.defaultRoute);
-                        }
+                }
                 authActions.loadUserProfile(config.appName);
+            }
+        }
+    }
+    componentDidMount() {
+        $(document).on('click touchstart', (e) => {
+            if ($(e.target).closest('.right-aside-toggle').length === 0 && $(e.target).closest('.right-toggle-switch').length === 0) {
+                $('.rightbar').removeClass('right-aside-toggle');
+            }
+            if ($('body').hasClass('overlay-leftbar')) {
+                if ($(e.target).closest('.leftbar').length === 0 && $(e.target).closest('.left-toggle-switch').length === 0) {
+                    $('body').removeClass('left-aside-toggle');
                 }
             }
+            if ($(e.target).closest('.topbar-right').length === 0 && $(e.target).closest('.btn-mobile-bar').length === 0) {
+                $('.topbar-right').removeClass('bar-toggle');
+            }
+            if ($(e.target).closest('.top-search-bar').length === 0 && $(e.target).closest('.btn-top-search').length === 0) {
+                $('.top-search-bar').removeClass('search-bar-toggle');
+            }
+        });
+        $(document).on('mouseleave', '.iconic-leftbar', () => {
+            $('.list-accordion .dcjq-parent').removeClass('active');
+            $('.list-accordion .acc-parent-li .acc-parent').removeClass('active');
+            $('.list-accordion ul').hide();
+        });
     }
-
     componentWillReceiveProps(nextProps) {
         this.checkPermission();
         const { auth, location, history } = nextProps || this.props;
 
         if (!auth.userAuthenticated && !auth.userUnkown) {
-                history.replaceState(null, '/login');
+            history.replaceState(null, '/login');
         } else if (auth.userUnkown) {
-                history.replaceState(null, 'unknown');
+            history.replaceState(null, 'unknown');
         } else if (auth.userAuthenticated && location.pathname === '/') {
-                    history.replaceState(null, auth.defaultRoute);
+            history.replaceState(null, auth.defaultRoute);
         }
     }
 
@@ -46,22 +72,21 @@ class App extends Component {
         Notifications.unsubscribe('system.notification');
         Notifications.disconnect(this.receivedNotification);
     }
-
     receivedSystemNotification = (data) => {
         const { notificationActions } = this.props;
-
+        const notification = JSON.parse(data);
         notificationActions.systemNotificationReceived(data);
 
-        /* let notificationType = 'success';
-
-        if(notification.Type === 'warning'){
+        let notificationType = 'success';
+        if (notification.Type === 'warning') {
             notificationType = 'warning';
         }
-        if(notification.Type === 'downtime'){
+        if (notification.Type === 'downtime') {
             notificationType = 'error';
         }
 
-       noty({
+        const notyText = `<span className="notification-message">${notification.Message}<span class="message-time clearfix">${moment(notification.Sent).format('MMM D h:mm A')}</span></span>`;
+        noty({
             animation: {
                 open: 'animated rubberBand', // Animate.css class names
                 close: 'animated lightSpeedOut' // Animate.css class names
@@ -70,16 +95,17 @@ class App extends Component {
             dismissQueue: true,
             force: true,
             layout: 'topRight',
-            text: '<span className="notification-message">' + notification.Message + '<span class="message-time clearfix">' +  moment(notification.Sent).format('MMM D h:mm A') + '</span></span>',
+            text: notyText,
             theme: 'relax',
             type: notificationType
-        });*/
+        });
     };
 
     subscribeToSystemNotifications() {
         const { auth } = this.props;
         if (auth.userAuthenticated) {
-            Notifications.connect(() => {});
+            Notifications.connect(() => {
+            });
             Notifications.subscribe('system.notification', this.receivedSystemNotification);
         }
     }
@@ -128,9 +154,12 @@ class App extends Component {
 
                     <section className="main-container">
                         <div className="container-fluid">
-                            <div className="row" >
+                            <div className="row">
                                 <div className="col-md-12 col-xs-12 col-s-12 col-lg-12">
-                                        {children && React.cloneElement(children, { user: auth.userProfile, config: config })}
+                                    {children && React.cloneElement(children, {
+                                        user: auth.userProfile,
+                                        config: config
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -142,6 +171,9 @@ class App extends Component {
                         </div>
                     </aside>
 
+                    <ScrollToTop showUnder={160} >
+                        <i className="fa fa-5x fa-arrow-circle-o-up text-white" />
+                    </ScrollToTop>
                 </div>
             );
         } else {
