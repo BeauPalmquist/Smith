@@ -49,11 +49,6 @@ class App extends Component {
                 $('.top-search-bar').removeClass('search-bar-toggle');
             }
         });
-        $(document).on('mouseleave', '.iconic-leftbar', () => {
-            $('.list-accordion .dcjq-parent').removeClass('active');
-            $('.list-accordion .acc-parent-li .acc-parent').removeClass('active');
-            $('.list-accordion ul').hide();
-        });
     }
     componentWillReceiveProps(nextProps) {
         this.checkPermission();

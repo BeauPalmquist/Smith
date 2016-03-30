@@ -1580,27 +1580,16 @@ Author: Kamarujaman Shohel
   position: absolute;
   display: block;
 }
-.iconic-view .list-accordion > li:hover > a .acc-icon {
+.iconic-view .list-accordion > li:hover > ul {
   display: block;
-  width: 14px;
-  height: auto;
-  position: absolute;
-  right: 14px;
-  text-align: center;
-  top: 0px;
-}
-.iconic-view .list-accordion > li.acc-parent-li > a.active {
-  width: 250px;
-}
-.iconic-view .list-accordion > li.acc-parent-li > a.active .list-label {
+  position: relative;
+  padding-left: 0px;
   width: 190px;
   left: 60px;
-  padding: 0px 15px;
-  text-align: left;
   position: absolute;
-  display: block;
+  background-color: #363740;
 }
-.iconic-view .list-accordion > li.acc-parent-li > a.active .acc-icon {
+.iconic-view .list-accordion > li:hover > a .acc-icon {
   display: block;
   width: 14px;
   height: auto;
