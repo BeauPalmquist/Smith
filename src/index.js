@@ -38,7 +38,9 @@ export default function forgeApp(clientReducers, root, includeDevTools = false, 
         User.setOptions(proxyOptions);
         UserSession.setOptions(proxyOptions);
 
-        Notifications.setOptions(proxyOptions);
+        if (typeof Notifications.setOptions === 'function') {
+            Notifications.setOptions(proxyOptions);
+        }
     }
 
     render(
