@@ -1406,7 +1406,7 @@ Author: Kamarujaman Shohel
   top: 9px;
 }
 .acc-icon:after {
-  content: "\f105";
+  content: "\f107";
   font-family: 'FontAwesome';
   display: inline-block;
   width: 14px;
@@ -1633,6 +1633,7 @@ Author: Kamarujaman Shohel
   left: 0px;
   top: 0px;
 }
+.iconic-view .list-accordion > li:hover > a,
 .iconic-view .list-accordion > li > a:hover,
 .iconic-view .list-accordion > li > a:focus {
   background-color: #3a3b44;
