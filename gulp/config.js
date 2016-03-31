@@ -12,7 +12,8 @@ var paths = {
     js: "./" + project.webroot + "/src/js/",
     lib: "./" + project.webroot + "/src/lib/",
     npm: "./node_modules/",
-    dist: "./dist/**/*.js"
+    dist: "./dist/**/*.js",
+    tests: "./src/**/*.spec.js"
 };
 
 module.exports = {

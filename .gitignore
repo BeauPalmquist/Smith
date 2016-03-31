@@ -34,4 +34,4 @@ wwwroot/src/lib/
 wwwroot/src/js/
 wwwroot/src/css/
 .idea/**
-src/common/**
+src/common/
