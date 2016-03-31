@@ -48,8 +48,10 @@ class AppNav extends React.Component {
         const childRoutes = [];
         if (route.routes) {
             route.routes.forEach((childRoute) => {
-                const childNavKey = `ChildNavKey_${childRoute.path}`;
-                childRoutes.push(<li key={childNavKey}><Link to={childRoute.path}>{childRoute.navTitle}</Link></li>);
+                if (this.userHasFeaturePermissions(childRoute.feature, FeatureFlags) && this.userHasRoutePermissions(RoutePermissions, route.permissions)) {
+                    const childNavKey = `ChildNavKey_${childRoute.path}`;
+                    childRoutes.push(<li key={childNavKey}><Link to={childRoute.path}>{childRoute.navTitle}</Link></li>);
+                }
             });
         }
 
