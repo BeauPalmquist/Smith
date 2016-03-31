@@ -13,6 +13,8 @@ import Token from './common/js/forge/services/token';
 import User from './common/js/forge/services/user';
 import UserSession from './common/js/forge/services/userSession';
 
+import Notifications from './common/js/forge/support/notifications';
+
 export default function forgeApp(clientReducers, root, includeDevTools = false, forgeProxyBaseUri = null) {
     applyPolys();
     const store = configureStore(clientReducers, includeDevTools);
@@ -34,6 +36,10 @@ export default function forgeApp(clientReducers, root, includeDevTools = false, 
         Token.setOptions(proxyOptions);
         User.setOptions(proxyOptions);
         UserSession.setOptions(proxyOptions);
+
+        if (typeof Notifications.setOptions === 'function') {
+            Notifications.setOptions(proxyOptions);
+        }
     }
 
     render(
