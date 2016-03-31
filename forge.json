@@ -15,6 +15,7 @@
         "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-3/role.js",
         "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-3/token.js",
         "/serviceProxies/HomeDepot.Platform.Identity.Microservice/1.0.1-build-3/userSession.js",
+        "/services/HomeDepot.Platform.Identity.Microservice/1.0.1-build-3/FeatureFlag.js",
         "/serviceProxies/HomeDepot.Platform.Analytics.Microservice/1.0.1-build-3/clientAction.js",
         "/serviceProxies/HomeDepot.Platform.Notification.Microservice/1.0.1-build-3/notification.js",
         "/serviceProxies/HomeDepot.Platform.Deployment.Microservice/1.0.1-build-3/deployment.js"

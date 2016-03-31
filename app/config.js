@@ -61,15 +61,10 @@ const initialState = {
                 src: 'fa fa-rebel fa-3x text-danger'
             },
             path: 'Rebels',
-            component: Hammer
+            component: Hammer,
+            feature: 'deathStar'
         }
     ],
-     // routePermissions: [
-     //   {
-     //       routeName: 'Rebels',
-     //       requiredPermissions: ['Forge', 'Apprentice']
-     //   }
-     // ],
     loginImage: 'src/img/forge_logo_orange.jpg'
 };
 
