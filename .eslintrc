@@ -9,7 +9,6 @@
         "node": true
     },
     "globals": {
-        "$" :  false
     },
     "parser": "babel-eslint",
     "extends": "airbnb",

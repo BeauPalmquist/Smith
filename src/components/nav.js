@@ -2,23 +2,6 @@
 import { Link } from 'react-router';
 
 class AppNav extends React.Component {
-    componentDidMount() {
-        if ($.fn.navAccordion) {
-            $('.list-accordion').each(function () {
-                $(this).navAccordion({
-                    eventType: 'hover',
-                    hoverDelay: 100,
-                    autoClose: true,
-                    saveState: false,
-                    disableLink: true,
-                    speed: 'fast',
-                    showCount: false,
-                    autoExpand: true,
-                    classExpand: 'acc-current-parent'
-                });
-            });
-        }
-    }
 
     configureNavbar(){
         const { user, config } = this.props;
@@ -97,13 +80,13 @@ class AppNav extends React.Component {
                         const menuNavKey = `menu_nav_${keyCount + 1}`;
                         if (route.image.type === 'image') {
                             if (childRoutes.length > 0) {
-                                navs.push(<li key={menuNavKey}><a href="#"><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></a><ul>{childRoutes}</ul></li>);
+                            navs.push(<li key={menuNavKey}><a href="#"><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span><span className="acc-icon"></span></a><ul>{childRoutes}</ul></li>);
                             } else {
                                 navs.push(<li key={menuNavKey}><Link to={route.path}><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link>{childRoutes}</li>);
                             }
                         } else {
                             if (childRoutes.length > 0) {
-                                navs.push(<li key={menuNavKey}><a href="#"><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></a><ul>{childRoutes}</ul></li>);
+                            navs.push(<li key={menuNavKey}><a href="#"><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span><span className="acc-icon"></span></a><ul>{childRoutes}</ul></li>);
                             } else {
                                 navs.push(<li key={menuNavKey}><Link to={route.path}><i className={route.image.src}></i><span className="list-label">{route.navTitle}</span></Link>{childRoutes}</li>);
                             }

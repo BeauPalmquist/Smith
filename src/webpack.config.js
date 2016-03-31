@@ -1,26 +1,57 @@
 ﻿var webpack = require('webpack');
-var BowerWebpackPlugin = require('bower-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
-    entry: {
-        index: './src/index'
-    },
+    entry: [
+        'font-awesome-loader',
+        'bootstrap-loader/extractStyles',
+        './src/index'
+    ],
     output: {
         filename: 'smith.js',
         path: './dist',
         libraryTarget: 'umd',
         publicPath: '/static/'
     },
+    plugins: [
+        new ExtractTextPlugin("smith.css", { allChunks: true }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
+    ],
     module: {
         loaders: [
             {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style', 'css!postcss')
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
+            },
+            {
+                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+                loader: 'file'
+            },
+            {
+                test: /bootstrap-sass\/assets\/javascripts\//,
+                loader: 'imports?jQuery=jquery'
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ['babel'],
+                loader: 'babel',
             }
         ]
     },
+    postcss: [ autoprefixer ],
     externals: {
         'react': 'react',
         'react-dom': 'react-dom',
