@@ -4,6 +4,7 @@ import Hammer from './containers/hammer';
 import DarthVader from './components/DarthVader';
 import GlobalToolbar from './containers/GlobalToolbar';
 import GlobalSearch from './containers/GlobalSearch';
+import Yoda from './containers/Yoda';
 
 const LOAD_CONFIG = 'CLIENT/LOAD_CONFIG';
 
@@ -65,6 +66,15 @@ const initialState = {
             path: 'Rebels',
             component: Hammer,
             feature: 'deathStar'
+        },
+        {
+            navTitle: 'Jedi',
+            image: {
+                type: 'class',
+                src: 'fa fa-bolt'
+            },
+            path: 'Jedi',
+            component: Yoda
         }
     ],
     loginImage: 'src/img/forge_logo_orange.jpg'
