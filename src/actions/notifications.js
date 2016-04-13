@@ -21,8 +21,7 @@ export function loadRecentNotifications() {
                     notifications: userNotifications
                 });
                 Notification.loadSystemNotifications(0, 10)
-                    .done((response) => {
-
+                    .then((response) => {
                         const systemNotifications = response.map((item) => {
                             const notification = JSON.parse(item.message);
                             return {

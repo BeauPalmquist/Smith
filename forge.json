@@ -4,7 +4,6 @@
     "baseCdnPath": "http://cdn-frg.hdquotecenter.com/",
     "supportModules": [
         "/serviceProxySupport/ajax.js",
-        "/serviceProxySupport/deferred.js",
         "/serviceProxySupport/auth.js",
         "/serviceProxySupport/ajaxOptions.js",
         "/serviceProxySupport/notifications.js"

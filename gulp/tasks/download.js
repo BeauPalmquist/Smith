@@ -10,10 +10,27 @@ forgeSupportScriptPath = "src/common/js/forge/support/",
 forgeServicesScriptPath = "src/common/js/forge/services/";
 
 function downloadSupportScripts() {
+    var localPaths = [];
+    var downloadUrls = [];
+
     // Download and copy forge support scripts to app/common/js/forge/support directory
-    var downloadUrls = forgeModules.supportModules.map(function (supportModule) {
-        return baseCdnPath + environment + supportModule;
+    forgeModules.supportModules.forEach(function (supportModule) {
+        var index = supportModule.lastIndexOf('/');
+        var fileName = supportModule.substr(index + 1);
+
+        var modulePath = environment + supportModule;
+        var localPath = localCdnPath + modulePath;
+
+        if (fileExists(localPath)) {
+            gutil.log(gutil.colors.green("Downloading local: ") + gutil.colors.cyan(localPath));
+            localPaths.push(localPath);
+        } else {
+            downloadUrls.push(baseCdnPath + modulePath);
+        }
     });
+
+    gulp.src(localPaths)
+        .pipe(gulp.dest(forgeSupportScriptPath));
 
     var stream = download(downloadUrls)
         .pipe(gulp.dest(forgeSupportScriptPath));

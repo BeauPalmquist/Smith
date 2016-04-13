@@ -59,7 +59,7 @@ function logoutComplete() {
 // Auth Actions
 export function isAuthenticated() {
     return function (dispatch) {
-        return User.isLoggedIn().done(result => {
+        return User.isLoggedIn().then(result => {
             dispatch(setAuthenticationStatus(result));
         });
     };
@@ -67,7 +67,7 @@ export function isAuthenticated() {
 
 export function loadUserProfile(appName) {
     return function (dispatch) {
-        User.getCurrentUserProfile(appName).done(profile => {
+        User.getCurrentUserProfile(appName).then(profile => {
             const profileWithImage = profile;
             User.getUserImage(profile.Id).then(
                 userImage => {
@@ -114,7 +114,7 @@ export function login(username, password, returnUrl) {
 
 export function logout() {
     return function (dispatch) {
-        User.logOut().done(() => {
+        User.logOut().then(() => {
             dispatch(logoutComplete());
         });
     };
