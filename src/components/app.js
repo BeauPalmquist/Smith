@@ -7,6 +7,7 @@ import ScrollToTop from 'react-scroll-up';
 import $ from 'jquery';
 import noty from 'noty';
 import moment from 'moment';
+import ScrollUp from './ScrollUp';
 
 class App extends Component {
     componentWillMount() {
@@ -32,6 +33,7 @@ class App extends Component {
             }
         }
     }
+
     componentDidMount() {
         $(document).on('click touchstart', (e) => {
             if ($(e.target).closest('.right-aside-toggle').length === 0 && $(e.target).closest('.right-toggle-switch').length === 0) {
@@ -50,6 +52,7 @@ class App extends Component {
             }
         });
     }
+
     componentWillReceiveProps(nextProps) {
         this.checkPermission();
         const { auth, location, history } = nextProps || this.props;
@@ -67,6 +70,7 @@ class App extends Component {
         Notifications.unsubscribe('system.notification');
         Notifications.disconnect(this.receivedNotification);
     }
+
     receivedSystemNotification = (data) => {
         const { notificationActions } = this.props;
         const notification = JSON.parse(data);
@@ -166,8 +170,8 @@ class App extends Component {
                         </div>
                     </aside>
 
-                    <ScrollToTop showUnder={160} >
-                        <i className="fa fa-5x fa-arrow-circle-o-up text-white" />
+                    <ScrollToTop showUnder={ 160 } style={ { position: 'fixed', bottom: 10, right: 10, cursor: 'pointer', transitionDuration: '0.2s', transitionTimingFunction: 'linear', transitionDelay: '0s' } }>
+                        <ScrollUp />
                     </ScrollToTop>
                 </div>
             );

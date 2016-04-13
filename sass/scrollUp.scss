@@ -1,0 +1,27 @@
+@import 'colors';
+
+.scroll-up {
+  opacity: 0.45;
+  border-color: $mewtwo;
+  background-color: $haunter;
+  color: $mewtwo;
+  cursor: hand;
+}
+
+.scroll-up:hover {
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+
+  -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  -ms-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+
+  background-color: $gengar;
+  color: $mewtwo;
+  opacity: 1.0;
+}

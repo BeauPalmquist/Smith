@@ -29918,3 +29918,27 @@ a:focus {
   animation-name: slideOutUp;
 }
 
+.scroll-up {
+  opacity: 0.45;
+  border-color: WhiteSmoke;
+  background-color: #4b4b4b;
+  color: WhiteSmoke;
+  cursor: hand;
+}
+
+.scroll-up:hover {
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  -ms-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  background-color: #282828;
+  color: WhiteSmoke;
+  opacity: 1.0;
+}
+
