@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActionCreators from '../actions/auth';
 import * as notificationActionCreators from '../actions/notifications';
-import AjaxOptions from '../common/js/forge/support/ajaxOptions';
 
 class Root extends Component {
     componentWillMount() {
@@ -18,13 +17,6 @@ class Root extends Component {
             activeRouteName = defaultRoutePath;
         }
 
-        if (auth.userAuthenticated) {
-            AjaxOptions.setOnRejected(xhr => {
-                if (xhr.status === 401) {
-                    window.location.reload();
-                }
-            });
-        }
         dispatch(authActionCreators.setRedirectRoute(activeRouteName));
         dispatch(authActionCreators.isAuthenticated());
     }

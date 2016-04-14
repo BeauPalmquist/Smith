@@ -1,5 +1,6 @@
 ﻿import User from '../common/js/forge/services/user';
 import ClientAction from '../common/js/forge/services/clientAction';
+import AjaxOptions from '../common/js/forge/support/ajaxOptions';
 
 export const LOGIN_REQUEST = 'SMITH/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'SMITH/LOGIN_SUCCESS';
@@ -23,6 +24,11 @@ function setBadgeColor() {
 }
 
 function setUserProfile(profile) {
+    AjaxOptions.setOnRejected(xhr => {
+        if (xhr.status === 401) {
+            window.location.reload();
+        }
+    });
     return {
         type: SET_USER_PROFILE,
         profile
@@ -51,6 +57,8 @@ function setRedirect(route) {
 }
 
 function logoutComplete() {
+    // clear the
+    AjaxOptions.setOnRejected(() => {});
     return {
         type: LOGOUT
     };
