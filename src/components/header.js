@@ -11,7 +11,7 @@ class AppHeader extends React.Component {
         } else {
             topBarRight.addClass('bar-toggle');
         }
-    }
+    };
     onNotificationTap = () => {
         const { notificationActions } = this.props;
         notificationActions.resetNotificationCount();
@@ -23,7 +23,7 @@ class AppHeader extends React.Component {
             $rightbar.addClass('right-aside-toggle');
         }
         $(window).trigger('resize');
-    }
+    };
     onSearchTap = () => {
         const topSearchBar = $('.top-search-bar');
         if (topSearchBar && topSearchBar.hasClass('search-bar-toggle')) {
@@ -31,7 +31,7 @@ class AppHeader extends React.Component {
         } else {
             topSearchBar.addClass('search-bar-toggle');
         }
-    }
+    };
     render() {
         const { auth, notifications, authActions, config } = this.props;
         const boldTitle = (this.props.config && this.props.config.boldTitle) ? this.props.config.boldTitle : '';
