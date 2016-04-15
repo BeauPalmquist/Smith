@@ -143,7 +143,7 @@ class App extends Component {
     }
 
     render() {
-        const { children, auth, config, notify, router, authActions, notificationActions } = this.props;
+        const { children, auth, config, notify, router, authActions, notificationActions, history } = this.props;
 
         if (auth && auth.userAuthenticated) {
             return (
@@ -157,7 +157,8 @@ class App extends Component {
                                 <div className="col-md-12 col-xs-12 col-s-12 col-lg-12">
                                     {children && React.cloneElement(children, {
                                         user: auth.userProfile,
-                                        config: config
+                                        config: config,
+                                        history: history
                                     })}
                                 </div>
                             </div>
