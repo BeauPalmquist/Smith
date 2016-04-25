@@ -27,7 +27,7 @@ class Root extends Component {
         const notificationActions = bindActionCreators(notificationActionCreators, dispatch);
 
         return (
-            <div>
+            <div ref="root">
                 {children && React.cloneElement(children, { auth: auth, router: router, config: config, notify: notify, authActions: authActions, notificationActions: notificationActions })}
             </div>
         );
