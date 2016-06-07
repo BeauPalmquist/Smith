@@ -2,7 +2,7 @@
     config = require('../config');
 
 gulp.task("watch_client", function () {
-    gulp.watch(config.paths.js_app, ['eslint_client']);
+    gulp.watch(config.paths.js_app, []);
 });
 
 gulp.task("watch_smith_framework", function() {

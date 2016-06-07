@@ -5,6 +5,7 @@ import DarthVader from './components/DarthVader';
 import GlobalToolbar from './containers/GlobalToolbar';
 import GlobalSearch from './containers/GlobalSearch';
 import Yoda from './containers/Yoda';
+import CustomTitle from './components/CustomTitle';
 
 const LOAD_CONFIG = 'CLIENT/LOAD_CONFIG';
 
@@ -17,6 +18,7 @@ const initialState = {
     },
     GlobalSearch: GlobalSearch,
     GlobalToolbar: GlobalToolbar,
+    CustomTitle: CustomTitle,
     routes: [
         {
             path: 'empire',

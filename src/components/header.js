@@ -39,15 +39,15 @@ class AppHeader extends React.Component {
         const headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : '';
         let headerContent;
         if (headerImage.type === 'image') {
-            headerContent = (<img className="header-image" src={headerImage.src} ></img>);
+            headerContent = (<a href="/"><img className="header-image" src={headerImage.src} ></img></a>);
         } else {
-            headerContent = (<i className={headerImage.src} />);
+            headerContent = (<a href="/"><i className={headerImage.src} /></a>);
         }
 
         let searchBar;
         let search;
         let mobileSearch;
-        const { GlobalSearch, GlobalToolbar } = config;
+        const { GlobalSearch, GlobalToolbar, CustomTitle } = config;
         if (GlobalSearch) {
             search = (<li key="searchMenuOption"><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
             mobileSearch = (<li><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
@@ -69,6 +69,15 @@ class AppHeader extends React.Component {
             globalToolBar = <GlobalToolbar {...this.props} />;
         }
 
+        let headerTitle = (
+            <span className="brand-text">
+                <span><strong>{boldTitle}</strong>{regTitle}</span>
+            </span>
+        );
+        if (CustomTitle) {
+            headerTitle = <CustomTitle {...this.props} />;
+        }
+
         const notificationBadge = (notifications.userNotificationCount + notifications.systemNotificationCount) > 0 ? (<span className="more-noty"></span>) : '';
         return (
             <header className="topbar clearfix">
@@ -80,9 +89,7 @@ class AppHeader extends React.Component {
                             <li>
                                 <div className="logo">
                                     {headerContent}
-                                    <span className="brand-text">
-                                        <span><strong>{boldTitle}</strong>{regTitle}</span>
-                                    </span>
+                                    {headerTitle}
                                 </div>
                             </li>
                         </ul>
