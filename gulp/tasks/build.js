@@ -18,7 +18,7 @@ gulp.task('pack_smith_framework', ['eslint_framework', 'download_all_forge_scrip
 var bundlePackConfig = require('../../app/webpack.config.js');
 var bundleCompiler = webpack(bundlePackConfig);
 
-gulp.task('pack_client', ['clean_client', 'lib_copy'], function () {
+gulp.task('pack_client', ['eslint-client', 'clean_client', 'lib_copy'], function () {
     bundleCompiler.run(function (err, stats) {
         if (err) throw new gutil.PluginError("pack_client", err);
         gutil.log("[pack_client]", stats.toString({
