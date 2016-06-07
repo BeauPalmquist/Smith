@@ -47,7 +47,7 @@ class AppHeader extends React.Component {
         let searchBar;
         let search;
         let mobileSearch;
-        const { GlobalSearch, GlobalToolbar } = config;
+        const { GlobalSearch, GlobalToolbar, CustomTitle } = config;
         if (GlobalSearch) {
             search = (<li key="searchMenuOption"><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
             mobileSearch = (<li><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
@@ -69,6 +69,15 @@ class AppHeader extends React.Component {
             globalToolBar = <GlobalToolbar {...this.props} />;
         }
 
+        let headerTitle = (
+            <span className="brand-text">
+                <span><strong>{boldTitle}</strong>{regTitle}</span>
+            </span>
+        );
+        if (CustomTitle) {
+            headerTitle = <CustomTitle {...this.props} />;
+        }
+
         const notificationBadge = (notifications.userNotificationCount + notifications.systemNotificationCount) > 0 ? (<span className="more-noty"></span>) : '';
         return (
             <header className="topbar clearfix">
@@ -79,10 +88,8 @@ class AppHeader extends React.Component {
                             <li><span className="left-toggle-switch"><i className="fa fa-bars"></i></span></li>
                             <li>
                                 <div className="logo">
-                                    {headerContent}
-                                    <span className="brand-text">
-                                        <span><strong>{boldTitle}</strong>{regTitle}</span>
-                                    </span>
+                                    <a href="/">{headerContent}</a>
+                                    {headerTitle}
                                 </div>
                             </li>
                         </ul>
