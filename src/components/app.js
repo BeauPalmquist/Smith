@@ -148,8 +148,8 @@ class App extends Component {
         if (auth && auth.userAuthenticated) {
             return (
                 <div>
-                    <AppHeader auth={auth} notifications={notify} router={router} config={config} authActions={authActions} notificationActions={notificationActions} />
-                    <AppNav user={auth.userProfile} currentLocation={router.location} config={config} />
+                    <AppHeader auth={auth} notifications={notify} history={history} config={config} authActions={authActions} notificationActions={notificationActions} />
+                    <AppNav user={auth.userProfile} history={history} currentLocation={router.location} config={config} />
 
                     <section className="main-container">
                         <div className="container-fluid">
@@ -167,7 +167,7 @@ class App extends Component {
 
                     <aside className="rightbar">
                         <div className="rightbar-container">
-                            <AppNotifications auth={auth} notifications={notify} notificationActions={notificationActions} />
+                            <AppNotifications auth={auth} history={history} notifications={notify} notificationActions={notificationActions} />
                         </div>
                     </aside>
 
