@@ -39,9 +39,9 @@ class AppHeader extends React.Component {
         const headerImage = (this.props.config && this.props.config.headerImage) ? this.props.config.headerImage : '';
         let headerContent;
         if (headerImage.type === 'image') {
-            headerContent = (<a href="/"><img className="header-image" src={headerImage.src} ></img></a>);
+            headerContent = (<img className="header-image" src={headerImage.src} ></img>);
         } else {
-            headerContent = (<a href="/"><i className={headerImage.src} /></a>);
+            headerContent = (<i className={headerImage.src} />);
         }
 
         let searchBar;
@@ -88,7 +88,7 @@ class AppHeader extends React.Component {
                             <li><span className="left-toggle-switch"><i className="fa fa-bars"></i></span></li>
                             <li>
                                 <div className="logo">
-                                    {headerContent}
+                                    <a href="/">{headerContent}</a>
                                     {headerTitle}
                                 </div>
                             </li>
