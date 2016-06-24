@@ -1,5 +1,5 @@
 {
-    "version": "1.2.0",
+    "version": "1.2.1-build1",
     "name": "forge-smith",
     "description": "React and Redux bootstrapping framework for use with Forge microservices",
     "main": "dist/smith.js",
