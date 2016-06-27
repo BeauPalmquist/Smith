@@ -14,9 +14,15 @@ import UserSession from './common/js/forge/services/userSession';
 
 import Notifications from './common/js/forge/support/notifications';
 
-export default function forgeApp(clientReducers, root, includeDevTools = false, forgeProxyBaseUri = null) {
+export default function forgeApp(
+    clientReducers,
+    root,
+    includeDevTools = false,
+    forgeProxyBaseUri = null,
+    clientMiddlewares = []
+) {
     applyPolys();
-    const store = configureStore(clientReducers, includeDevTools);
+    const store = configureStore(clientReducers, includeDevTools, clientMiddlewares);
 
     if (forgeProxyBaseUri) {
 
