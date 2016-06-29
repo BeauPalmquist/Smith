@@ -3,7 +3,7 @@
     config = require('../config'),
     gutil = require('gulp-util');
 
-var frameworkPackConfig = require('../../src/webpack.config.js');
+var frameworkPackConfig = require('../../src/webpack.prod.config.js');
 var frameworkCompiler = webpack(frameworkPackConfig);
 
 gulp.task('pack_smith_framework', ['eslint_framework', 'download_all_forge_scripts', 'clean_framework'], function () {

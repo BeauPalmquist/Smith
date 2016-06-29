@@ -1,7 +1,8 @@
 ﻿
 src/polyfills.js
-src/webpack.config.js
+src/webpack.dev.config.js
 app/webpack.config.js
+src/webpack.prod.config.js
 src/lib/**/*
 src/common/js/**/*
 src/common/utils/**/*

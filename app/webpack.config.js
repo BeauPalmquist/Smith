@@ -1,7 +1,6 @@
 ﻿var webpack = require('webpack');
 
 module.exports = {
-    devtool: 'eval-source-map',
     entry: {
         'smith': './app/index'
     },
@@ -9,6 +8,13 @@ module.exports = {
         filename: 'index.js',
         path: './wwwroot/src/js'
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        })
+    ],
     module: {
         loaders: [
             {
