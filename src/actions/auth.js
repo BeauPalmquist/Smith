@@ -76,17 +76,17 @@ export function isAuthenticated() {
 export function loadUserProfile(appName) {
     return function (dispatch) {
         User.getCurrentUserProfile(appName).then(profile => {
+
+            // set profile without image first
+            dispatch(setUserProfile(profile));
+            dispatch(setBadgeColor());
+
             const profileWithImage = profile;
             User.getUserImage(profile.Id).then(
                 userImage => {
                     profileWithImage.userImage = userImage.Image;
                     dispatch(setUserProfile(profileWithImage));
-                    dispatch(setBadgeColor());
-                },
-                () => {
-                    dispatch(setUserProfile(profile));
-                    dispatch(setBadgeColor());
-            });
+                });
         });
     };
 }

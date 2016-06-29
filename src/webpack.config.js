@@ -3,7 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: 'eval-source-map',
     entry: [
         'font-awesome-loader',
         'bootstrap-loader/extractStyles',
@@ -16,7 +16,7 @@ module.exports = {
         publicPath: '/static/'
     },
     plugins: [
-        new ExtractTextPlugin("smith.css", { allChunks: true }),
+        new ExtractTextPlugin("smith.min.css", { allChunks: true }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
@@ -25,20 +25,14 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            },
-            sourceMap: false,
-            mangle: false
+            }
         })
     ],
     module: {
         loaders: [
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css!postcss')
-            },
-            {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
+                loader: ExtractTextPlugin.extract('style', 'css-loader?sourceMap?minimize!postcss-loader!sass-loader')
             },
             {
                 test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
