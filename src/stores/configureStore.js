@@ -1,11 +1,7 @@
 ﻿import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { reduxReactRouter } from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
-import createRoutes from '../routes';
 import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import smithReducers from '../reducers/reducer';
-import { routerStateReducer as router } from 'redux-router';
 
 export default function configureStore(clientReducers, includeDevTools, clientMiddlewares) {
     if (!clientMiddlewares instanceof Array) {
@@ -19,7 +15,6 @@ export default function configureStore(clientReducers, includeDevTools, clientMi
     if (includeDevTools) {
         createStoreWithMiddleware = compose(
                applyMiddleware(thunkMiddleware),
-               reduxReactRouter({ routes: createRoutes(config.routes), createHistory }),
                applyMiddleware(createLogger()),
                applyMiddleware(...clientMiddlewares),
                window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -27,12 +22,11 @@ export default function configureStore(clientReducers, includeDevTools, clientMi
     } else {
         createStoreWithMiddleware = compose(
                applyMiddleware(thunkMiddleware),
-               reduxReactRouter({ routes: createRoutes(config.routes), createHistory }),
                applyMiddleware(...clientMiddlewares)
         )(createStore);
     }
 
-    const reducers = { smith: smithReducers, router };
+    const reducers = { smith: smithReducers };
     reducers[config.appName] = clientReducers;
     const allReducers = combineReducers(reducers);
 

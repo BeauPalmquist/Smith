@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { ReduxRouter } from 'redux-router';
 import configureStore from './stores/configureStore';
 import applyPolys from './polyfills';
 import ClientAction from './common/js/forge/services/clientAction';
@@ -11,8 +10,9 @@ import Role from './common/js/forge/services/role';
 import Token from './common/js/forge/services/token';
 import User from './common/js/forge/services/user';
 import UserSession from './common/js/forge/services/userSession';
-
 import Notifications from './common/js/forge/support/notifications';
+import { Router, browserHistory } from 'react-router';
+import createRoutes from './routes';
 
 export default function forgeApp(
     clientReducers,
@@ -41,9 +41,15 @@ export default function forgeApp(
         }
     }
 
+    const configReducer = clientReducers(undefined, 'CLIENT/LOAD_CONFIG');
+    const config = configReducer.config;
+    const routes = createRoutes(config.routes);
+
     render(
         (<Provider store={store}>
-            <ReduxRouter />
+            <Router history={browserHistory}>
+                {routes}
+            </Router>
         </Provider>),
         document.getElementById(root)
     );

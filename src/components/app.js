@@ -8,26 +8,36 @@ import $ from 'jquery';
 import noty from 'noty';
 import moment from 'moment';
 import ScrollUp from './ScrollUp';
+import { withRouter } from 'react-router';
 
 class App extends Component {
+    static propTypes = {
+        auth: React.PropTypes.object,
+        config: React.PropTypes.object,
+        notify: React.PropTypes.object,
+        authActions: React.PropTypes.object,
+        notificationActions: React.PropTypes.object,
+        children: React.PropTypes.object,
+        router: React.PropTypes.object
+    };
     componentWillMount() {
         this.checkPermission();
         this.subscribeToSystemNotifications();
 
-        const { auth, location, history, authActions, config } = this.props;
+        const { auth, authActions, config, router } = this.props;
 
         if (auth.userUnknown && !auth.userAuthenticated) {
-            this.props.history.replaceState(null, 'unknown');
+            router.replace('/unknown');
         } else {
             if (!auth.userAuthenticated && !auth.userUnkown) {
-                history.replaceState(null, '/login');
+                router.replace('/login');
                 const activeRoute = location.pathname;
                 authActions.setRedirectRoute(activeRoute);
             } else if (auth.userUnknown) {
-                history.replaceState(null, 'unknown');
+                router.replace('/unknown');
             } else {
                 if (auth.userAuthenticated && location.pathname === '/') {
-                    history.replaceState(null, auth.defaultRoute);
+                    router.replace(auth.defaultRoute);
                 }
                 authActions.loadUserProfile(config.appName);
             }
@@ -55,14 +65,14 @@ class App extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.checkPermission();
-        const { auth, location, history } = nextProps || this.props;
+        const { auth, router } = nextProps || this.props;
 
         if (!auth.userAuthenticated && !auth.userUnkown) {
-            history.replaceState(null, '/login');
+            router.replace('/login');
         } else if (auth.userUnkown) {
-            history.replaceState(null, 'unknown');
+            router.replace('/unknown');
         } else if (auth.userAuthenticated && location.pathname === '/') {
-            history.replaceState(null, auth.defaultRoute);
+            router.replace(auth.defaultRoute);
         }
     }
 
@@ -110,9 +120,9 @@ class App extends Component {
     }
 
     checkPermission() {
-        const { auth, router, config, history } = this.props;
+        const { auth, config, router } = this.props;
         let userHasNavPermissions = true;
-        const currentPath = router.location.pathname.startsWith('/') ? router.location.pathname.replace('/', '') : router.location.pathname;
+        const currentPath = location.pathname.startsWith('/') ? location.pathname.replace('/', '') : location.pathname;
         if (auth && auth.userProfile && config.routePermissions) {
             const user = auth.userProfile;
             if (!user.RoutePermissions) {
@@ -135,7 +145,7 @@ class App extends Component {
                     userHasNavPermissions = permissionCount === requiredPermissions.length;
 
                     if (!userHasNavPermissions) {
-                        history.pushState(null, '/');
+                        router.push('/');
                     }
                 }
             });
@@ -143,13 +153,13 @@ class App extends Component {
     }
 
     render() {
-        const { children, auth, config, notify, router, authActions, notificationActions, history } = this.props;
+        const { children, auth, config, notify, authActions, notificationActions } = this.props;
 
         if (auth && auth.userAuthenticated) {
             return (
                 <div>
-                    <AppHeader auth={auth} notifications={notify} history={history} config={config} authActions={authActions} notificationActions={notificationActions} />
-                    <AppNav user={auth.userProfile} history={history} currentLocation={router.location} config={config} />
+                    <AppHeader auth={auth} notifications={notify} config={config} authActions={authActions} notificationActions={notificationActions} />
+                    <AppNav user={auth.userProfile} currentLocation={location.pathname} config={config} />
 
                     <section className="main-container">
                         <div className="container-fluid">
@@ -157,8 +167,7 @@ class App extends Component {
                                 <div className="col-md-12 col-xs-12 col-s-12 col-lg-12">
                                     {children && React.cloneElement(children, {
                                         user: auth.userProfile,
-                                        config: config,
-                                        history: history
+                                        config: config
                                     })}
                                 </div>
                             </div>
@@ -167,7 +176,7 @@ class App extends Component {
 
                     <aside className="rightbar">
                         <div className="rightbar-container">
-                            <AppNotifications auth={auth} history={history} notifications={notify} notificationActions={notificationActions} />
+                            <AppNotifications auth={auth} notifications={notify} notificationActions={notificationActions} />
                         </div>
                     </aside>
 
@@ -184,16 +193,4 @@ class App extends Component {
     }
 }
 
-App.propTypes = {
-    auth: React.PropTypes.object,
-    config: React.PropTypes.object,
-    notify: React.PropTypes.object,
-    router: React.PropTypes.object,
-    authActions: React.PropTypes.object,
-    location: React.PropTypes.object,
-    history: React.PropTypes.object,
-    notificationActions: React.PropTypes.object,
-    children: React.PropTypes.object
-};
-
-export default App;
+export default withRouter(App);

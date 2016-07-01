@@ -1,48 +1,49 @@
 ﻿import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
-export default class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { username: '', password: '', pendingLogin: false };
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.login = this.login.bind(this);
-        this.passwordChanged = this.passwordChanged.bind(this);
-        this.usernameChanged = this.usernameChanged.bind(this);
-    }
+class Login extends Component {
+    static propTypes = {
+        auth: React.PropTypes.object,
+        authActions: React.PropTypes.object,
+        config: React.PropTypes.object,
+        router: React.PropTypes.object.isRequired
+    };
+    state = {
+        username: '',
+        password: '',
+        pendingLogin: false
+    };
     componentDidMount() {
-        const { auth } = this.props;
+        const { auth, router } = this.props;
         if (auth.userAuthenticated) {
-            this.props.history.replaceState(null, auth.redirectRoute);
+            router.replace(auth.redirectRoute || auth.defaultRoute);
         }
         this.loginInput.focus();
     }
     componentWillReceiveProps(nextProps) {
-        const { auth } = nextProps || this.props;
+        const { auth, router } = nextProps || this.props;
         if (auth.userAuthenticated) {
-            this.props.history.replaceState(null, auth.redirectRoute);
+            router.replace(auth.redirectRoute || auth.defaultRoute);
         }
     }
-    handleKeyPress(e) {
+    handleKeyPress = (e) => {
         const ENTER = 13;
         const { auth } = this.props;
         if (e.keyCode === ENTER && !auth.pendingLogin) {
             this.login();
         }
-    }
-    usernameChanged(event) {
-        this.setState({ username: event.target.value });
-    }
-    passwordChanged(event) {
-        this.setState({ password: event.target.value });
-    }
-    login() {
+    };
+    usernameChanged = (e) => this.setState({ username: e.target.value });
+    passwordChanged = (e) => this.setState({ password: e.target.value });
+
+    login = () => {
         const { auth, authActions, config } = this.props;
         if (this.state.username && this.state.username !== '' && this.state.password && this.state.password !== '') {
 
             const activeRouteName = auth.redirectRoute;
             authActions.login(this.state.username, this.state.password, activeRouteName, config.appName);
         }
-    }
+    };
     render() {
         const { auth } = this.props;
 
@@ -118,9 +119,4 @@ export default class Login extends Component {
     }
 }
 
-Login.propTypes = {
-    auth: React.PropTypes.object,
-    authActions: React.PropTypes.object,
-    config: React.PropTypes.object,
-    history: React.PropTypes.object.isRequired
-};
+export default withRouter(Login);

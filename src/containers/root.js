@@ -6,7 +6,7 @@ import * as notificationActionCreators from '../actions/notifications';
 
 class Root extends Component {
     componentWillMount() {
-        const { dispatch, config, auth, location } = this.props;
+        const { dispatch, config, auth } = this.props;
         let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
 
         const defaultRoute = config.routes.find((route) => route.default === 'true');
@@ -22,13 +22,13 @@ class Root extends Component {
     }
 
     render() {
-        const { children, auth, router, notify, config, dispatch } = this.props;
+        const { children, auth, notify, config, dispatch } = this.props;
         const authActions = bindActionCreators(authActionCreators, dispatch);
         const notificationActions = bindActionCreators(notificationActionCreators, dispatch);
 
         return (
             <div ref="root">
-                {children && React.cloneElement(children, { auth: auth, router: router, config: config, notify: notify, authActions: authActions, notificationActions: notificationActions })}
+                {children && React.cloneElement(children, { auth: auth, config: config, notify: notify, authActions: authActions, notificationActions: notificationActions })}
             </div>
         );
     }
@@ -44,7 +44,6 @@ function mapStateToProps(state) {
     return {
         auth: state.smith.auth,
         notify: state.smith.notify,
-        router: state.router,
         config: clientProp.config
     };
 }
@@ -52,9 +51,7 @@ function mapStateToProps(state) {
 Root.propTypes = {
     auth: React.PropTypes.object.isRequired,
     notify: React.PropTypes.object.isRequired,
-    router: React.PropTypes.object.isRequired,
     config: React.PropTypes.object.isRequired,
-    location: React.PropTypes.object.isRequired,
     dispatch: React.PropTypes.func,
     children: React.PropTypes.object
 };

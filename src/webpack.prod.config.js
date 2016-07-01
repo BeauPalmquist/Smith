@@ -60,7 +60,6 @@ module.exports = {
         'redux': 'redux',
         'Redux': 'redux',
         'react-redux': 'react-redux',
-        'react-router': 'react-router',
-        'redux-router': 'redux-router'
+        'react-router': 'react-router'
     }
 };

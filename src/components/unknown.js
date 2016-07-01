@@ -1,20 +1,26 @@
 ﻿import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
-export default class Unknown extends Component {
+class Unknown extends Component {
+    static propTypes = {
+        auth: React.PropTypes.object,
+        router: React.PropTypes.object,
+        config: React.PropTypes.object
+    };
     componentDidMount() {
-        const { auth } = this.props;
+        const { auth, router } = this.props;
         if (!auth.userUnknown && auth.userAuthenticated) {
-            this.props.history.replaceState(null, auth.redirectRoute);
+            router.replace(auth.redirectRoute);
         } else if (!auth.userAuthenticated && !auth.userUnknown) {
-            this.props.history.replaceState(null, 'login');
+            router.replace('/login');
         }
     }
     componentWillReceiveProps(nextProps) {
-        const { auth } = nextProps || this.props;
+        const { auth, router } = nextProps || this.props;
         if (!auth.userUnknown && auth.userAuthenticated) {
-            this.props.history.replaceState(null, auth.redirectRoute);
+            router.replace(auth.redirectRoute);
         } else if (!auth.userAuthenticated && !auth.userUnknown) {
-            this.props.history.replaceState(null, 'login');
+            router.replace('/login');
         }
     }
     render() {
@@ -39,8 +45,4 @@ export default class Unknown extends Component {
     }
 }
 
-Unknown.propTypes = {
-    auth: React.PropTypes.object,
-    history: React.PropTypes.object.isRequired,
-    config: React.PropTypes.object
-};
+export default withRouter(Unknown);

@@ -66,15 +66,14 @@ function logoutComplete() {
 
 // Auth Actions
 export function isAuthenticated() {
-    return function (dispatch) {
-        return User.isLoggedIn().then(result => {
-            dispatch(setAuthenticationStatus(result));
-        });
-    };
+    return (dispatch) => (User.isLoggedIn().then(result =>
+        dispatch(setAuthenticationStatus(result))
+    ));
 }
 
+
 export function loadUserProfile(appName) {
-    return function (dispatch) {
+    return (dispatch) => {
         User.getCurrentUserProfile(appName).then(profile => {
 
             // set profile without image first
@@ -98,30 +97,23 @@ export function setRedirectRoute(route) {
 }
 
 export function login(username, password, returnUrl) {
-    if (ClientAction !== undefined) {
-        ClientAction.log('User attempting to login', 'Authentication', { username: username });
-    }
-    return function (dispatch) {
+    ClientAction.log('User attempting to login', 'Authentication', { username: username });
+    return (dispatch) => {
         dispatch({ type: LOGIN_REQUEST });
         return User.login(username, password).then(
             () => {
-                if (ClientAction !== undefined) {
-                    ClientAction.log('User logged in', 'Authentication', { username: username });
-                }
-
+                ClientAction.log('User logged in', 'Authentication', { username: username });
                 dispatch(loginSuccess(returnUrl));
             },
             () => {
-                if (ClientAction !== undefined) {
-                    ClientAction.log('User login failed', 'Authentication', { username: username });
-                }
+                ClientAction.log('User login failed', 'Authentication', { username: username });
                 dispatch({ type: LOGIN_FAILED, msg: 'The username or password you entered is incorrect.' });
             });
     };
 }
 
 export function logout() {
-    return function (dispatch) {
+    return (dispatch) => {
         User.logOut().then(() => {
             dispatch(logoutComplete());
         });
@@ -129,7 +121,7 @@ export function logout() {
 }
 
 export function setDefaultRoute(route) {
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch({ type: SET_DEFAULT_ROUTE, data: route });
     };
 }
