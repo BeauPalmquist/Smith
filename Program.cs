@@ -4,7 +4,7 @@ namespace HomeDepot.Platform.UI.Smith
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void _Main(string[] args)
         {
             PlatformWebServices.StartWebHost(args);
         }

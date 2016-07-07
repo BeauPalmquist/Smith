@@ -10,6 +10,12 @@
         "net451": { }
     },
 
+    // To test the app, change emitEntryPoint to true and _Main to Main in Program.cs
+    "buildOptions": {
+        "emitEntryPoint": false,
+        "preserveCompilationContext": true
+    },
+
     "publishOptions": {
         "include": [
             "wwwroot",
