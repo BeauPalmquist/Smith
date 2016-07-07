@@ -11,7 +11,7 @@
     "serviceModules": [
         {
             "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Analytics.Microservice",
-            "Version": "1.0.1-build-5",
+            "Version": "1.0.1-build-8",
             "Entities": [
                 {
                     "Name": "clientAction.js"
@@ -19,7 +19,7 @@
             ]
         }, {
             "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Deployment.Microservice",
-            "Version": "1.0.1-build-5",
+            "Version": "1.0.1-build-8",
             "Entities": [
                 {
                     "Name": "deployment.js"
@@ -27,7 +27,7 @@
             ]
         }, {
             "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Identity.Microservice",
-            "Version": "1.0.1-build-5",
+            "Version": "1.0.1-build-8",
             "Entities": [
                 {
                     "Name": "token.js"
@@ -45,7 +45,7 @@
             ]
         }, {
             "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Notification.Microservice",
-            "Version": "1.0.1-build-5",
+            "Version": "1.0.1-build-8",
             "Entities": [
                 {
                     "Name": "notification.js"
