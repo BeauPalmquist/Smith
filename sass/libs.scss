@@ -1410,6 +1410,227 @@ Author: Kamarujaman Shohel
   color: #868686;
 }
 
+/*--------------------
+3.0 Widgets
+----------------------*/
+.padding-top-2 {
+  padding-top: 2px;
+}
+.padding-top-4 {
+  padding-top: 4px;
+}
+.padding-top-6 {
+  padding-top: 6px;
+}
+.padding-top-10 {
+  padding-top: 10px;
+}
+.padding-bottom-30 {
+  padding-bottom: 30px;
+}
+.margin-bottom-10 {
+  padding-bottom: 10px;
+}
+.components-container {
+  margin-top: 30px;
+}
+.components-container a {
+  margin-bottom: 8px;
+}
+.btn-ex-container a {
+  margin-bottom: 8px;
+  display: block;
+}
+.btn-ex-container a.btn.disabled {
+  height: 38px;
+}
+.ex-container {
+  margin-top: 30px;
+}
+.border-right {
+  border-right: #eee 1px solid;
+}
+.widget-wrap {
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 30px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.widget-wrap .widget-header h1,
+.widget-wrap .widget-header h2,
+.widget-wrap .widget-header h3,
+.widget-wrap .widget-header h4,
+.widget-wrap .widget-header h5,
+.widget-wrap .widget-header h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.widget-wrap .widget-header p {
+  margin-top: 6px;
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+.widget-wrap .widget-container {
+  margin-top: 30px;
+}
+.widget-wrap.w-fullscreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1400;
+  overflow-y: auto;
+}
+.section-header {
+  margin-bottom: 20px;
+  border-bottom: #eee 1px solid;
+}
+.section-header h1,
+.section-header h2,
+.section-header h3,
+.section-header h4,
+.section-header h5,
+.section-header h6 {
+  margin-top: 0px;
+  font-size: 24px;
+  font-weight: 300;
+}
+.widget-header {
+  margin-bottom: 30px;
+}
+.widget-header.block-header {
+  border-bottom: #eee 1px solid;
+  padding-bottom: 30px;
+  margin-left: -30px;
+  margin-right: -30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.widget-header .widget-action-bar {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  text-align: right;
+}
+.widget-header .widget-action-bar > li {
+  display: inline-block;
+}
+.widget-header .widget-action-bar > li > .dropdown-menu {
+  min-width: 174px !important;
+  right: 47px;
+  left: auto;
+  top: -4px;
+  display: block;
+  visibility: hidden;
+  -webkit-transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  transform-origin: right top;
+  -webkit-transform-origin: right top;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 0px !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #fff;
+  margin-top: 3px;
+  border: #eee 1px solid;
+}
+.widget-header .widget-action-bar > li > .dropdown-menu > li {
+  display: inline-block;
+  float: left;
+}
+.widget-header .widget-action-bar > li > .dropdown-menu > li > a {
+  padding: 0px;
+  width: 43px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  border-right: #eee 1px solid;
+}
+.widget-header .widget-action-bar > li > .dropdown-menu > li > a i {
+  font-size: 16px;
+}
+.widget-header .widget-action-bar > li > .dropdown-menu > li:last-child a {
+  border-right: 0px;
+}
+.widget-header .widget-action-bar > li.open .dropdown-menu {
+  visibility: visible;
+  -webkit-transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+  transform: scale(1);
+  -webkit-transform: scale(1);
+}
+.widget-header .widget-action-bar > li > a {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 47px;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #868686;
+  background-color: #f5f5f5;
+  border: #eee 1px solid;
+}
+.widget-header .widget-action-bar > li > a:hover,
+.widget-header .widget-action-bar > li > a:focus {
+  color: #17bab8;
+}
+.widget-header .widget-action-bar > li > a i {
+  font-size: 20px;
+}
+.widget-header.single-line-h {
+  position: relative;
+}
+.widget-header.single-line-h h1,
+.widget-header.single-line-h h2,
+.widget-header.single-line-h h3,
+.widget-header.single-line-h h4,
+.widget-header.single-line-h h5,
+.widget-header.single-line-h h6 {
+  margin-top: 15px;
+}
+.w-section-header {
+  margin-bottom: 20px;
+  border-bottom: #eee 1px solid;
+}
+.w-section-header h1,
+.w-section-header h2,
+.w-section-header h3,
+.w-section-header h4,
+.w-section-header h5,
+.w-section-header h6 {
+  margin-top: 0px;
+  font-weight: 300;
+  font-size: 20px;
+}
+.margin-top-0 {
+  margin-top: 0px !important;
+}
+.margin-bottom-0 {
+  margin-bottom: 0px !important;
+}
+.td-center {
+  text-align: center;
+}
+.td-center .btn-toolbar .btn-group {
+  float: none;
+}
+.widget-content table {
+  margin-bottom: 0px;
+}
+
 /*---------------------
 6.0 Bootstrap Extended
 -----------------------*/
