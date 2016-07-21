@@ -18,7 +18,7 @@ class Root extends Component {
         }
 
         dispatch(authActionCreators.setRedirectRoute(activeRouteName));
-        dispatch(authActionCreators.isAuthenticated());
+        dispatch(authActionCreators.isAuthenticated(config.beforeLoginRedirectPromise));
     }
 
     render() {
