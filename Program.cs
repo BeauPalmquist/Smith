@@ -1,12 +1,23 @@
 ﻿using HomeDepot.Platform.Web;
+using Microsoft.Extensions.PlatformAbstractions;
+using System;
 
 namespace HomeDepot.Platform.UI.Smith
 {
     public class Program
     {
-        public static void _Main(string[] args)
+        public Program(IServiceProvider serviceProvider, IApplicationEnvironment environment)
         {
-            PlatformWebServices.StartWebHost(args);
+            this.serviceProvider = serviceProvider;
+            this.environment = environment;
         }
+
+        public void Main(string[] args)
+        {
+            PlatformWebServices.StartWebHost(serviceProvider, environment, args);
+        }
+
+        private IServiceProvider serviceProvider;
+        private IApplicationEnvironment environment;
     }
 }

@@ -57,10 +57,11 @@ class AppNav extends React.Component {
 
         const menuNavKey = `menu_nav_${index + 1}`;
         if (route.image.type === 'image') {
+            const routeClass = location.pathname.toLowerCase().startsWith(route.path.toLowerCase()) ? 'nav-image active' : 'nav-image';
             if (childRoutes.length > 0) {
-                navbarItems.push(<li key={menuNavKey}><a href="#"><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span><span className="acc-icon"></span></a><ul>{childRoutes}</ul></li>);
+                navbarItems.push(<li key={menuNavKey}><a href="#"><img className={routeClass} src={route.image.src}></img><span className="list-label">{route.navTitle}</span><span className="acc-icon"></span></a><ul>{childRoutes}</ul></li>);
             } else {
-                navbarItems.push(<li key={menuNavKey}><Link to={route.path}><img className="nav-image" src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link></li>);
+                navbarItems.push(<li key={menuNavKey}><Link to={route.path}><img className={routeClass} src={route.image.src}></img><span className="list-label">{route.navTitle}</span></Link></li>);
             }
         } else {
             if (childRoutes.length > 0) {

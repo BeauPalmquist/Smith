@@ -1,25 +1,23 @@
 {
     "webroot": "wwwroot",
     "version": "1.0.0-*",
-
-    "dependencies": {
-        "HomeDepot.Platform.Web": "1.0.1"
-    },
-
     "frameworks": {
-        "net451": { }
+        "dnx451": { }
     },
-
-    // To test the app, change emitEntryPoint to true and _Main to Main in Program.cs
     "buildOptions": {
         "emitEntryPoint": false,
         "preserveCompilationContext": true
     },
-
+    "commands": {
+        "web": "ui-framework-smith"
+    },
     "publishOptions": {
         "include": [
             "wwwroot",
             "config.json"
         ]
+    },
+    "dependencies": {
+        "HomeDepot.Platform.Web": "1.0.1-build-9"
     }
 }
