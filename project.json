@@ -3,7 +3,7 @@
     "version": "1.0.0-*",
 
     "dependencies": {
-        "HomeDepot.Platform.Web": "1.0.1-build-8"
+        "HomeDepot.Platform.Web": "1.0.1-build-9"
     },
 
     "commands": {

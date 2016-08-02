@@ -25,6 +25,7 @@ project.lock.json
 
 # Folders #
 ###########
+**/obj
 **/bin
 .vs/
 **/node_modules
