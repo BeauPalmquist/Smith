@@ -65,10 +65,34 @@ function logoutComplete() {
 }
 
 // Auth Actions
-export function isAuthenticated() {
-    return (dispatch) => (User.isLoggedIn().then(result =>
-        dispatch(setAuthenticationStatus(result))
-    ));
+export function isAuthenticated(beforeLoginRedirectPromise) {
+    return function (dispatch) {
+        return User.isLoggedIn().then(result => {
+            if (!result && typeof beforeLoginRedirectPromise === 'function') {
+                return Promise.resolve(beforeLoginRedirectPromise())
+                    .then((newResult) => {
+                        if (typeof newResult !== 'undefined') {
+                            // If the beforeLoginRedirectPromise resolved with a value
+                            // then dispatch with the provided value
+                            dispatch(setAuthenticationStatus(newResult));
+                        } else {
+                            // If no value was resolved, then fall back to dispatching
+                            // with the original result
+                            dispatch(setAuthenticationStatus(result));
+                        }
+                    })
+                    .catch(() => {
+                        // If the beforeLoginRedirectPromise rejected, then fall
+                        // back to dispatching with the original result
+                        dispatch(setAuthenticationStatus(result));
+                    });
+            } else {
+                // If there isn't any beforeLoginRedirectPromise provided, then
+                // simply dispatch the result without doing anything else
+                return dispatch(setAuthenticationStatus(result));
+            }
+        });
+    };
 }
 
 

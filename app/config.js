@@ -24,8 +24,8 @@ const initialState = {
             path: 'empire',
             default: 'true',
             image: {
-                src: 'fa fa-empire',
-                type: 'class'
+                src: 'wwwroot/src/img/chat.png',
+                type: 'image'
             },
             navTitle: 'Empire',
             component: Forge,
@@ -63,7 +63,8 @@ const initialState = {
         {
             navTitle: 'Rebels',
             image: {
-                src: 'fa fa-rebel fa-3x text-danger'
+                src: 'fa fa-rebel fa-3x text-danger',
+                type: 'image'
             },
             path: 'Rebels',
             component: Hammer,
@@ -72,8 +73,8 @@ const initialState = {
         {
             navTitle: 'Jedi',
             image: {
-                type: 'class',
-                src: 'fa fa-bolt'
+                type: 'image',
+                src: 'wwwroot/src/img/document_alt4.png'
             },
             path: 'Jedi',
             component: Yoda

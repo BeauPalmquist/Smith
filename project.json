@@ -1,31 +1,23 @@
 {
     "webroot": "wwwroot",
     "version": "1.0.0-*",
-
-    "dependencies": {
-        "HomeDepot.Platform.Web": "1.0.1-build-9"
-    },
-
-    "commands": {
-        "web": "ui-framework-smith"
-    },
-
     "frameworks": {
         "dnx451": { }
     },
-
-    "publishExclude": [
-        "node_modules",
-        "bower_components",
-        "lib",
-        "**.xproj",
-        "**.user",
-        "**.vspscc"
-    ],
-    "exclude": [
-        "wwwroot",
-        "node_modules",
-        "lib",
-        "bower_components"
-    ]
+    "buildOptions": {
+        "emitEntryPoint": false,
+        "preserveCompilationContext": true
+    },
+    "commands": {
+        "web": "ui-framework-smith"
+    },
+    "publishOptions": {
+        "include": [
+            "wwwroot",
+            "config.json"
+        ]
+    },
+    "dependencies": {
+        "HomeDepot.Platform.Web": "1.0.1-build-9"
+    }
 }

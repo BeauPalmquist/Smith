@@ -83,13 +83,31 @@ body {
 ul>li>a.pageButton{
     @include cursorPointer;
 }
+
+@mixin nav-highlight($opacity) {
+  opacity: $opacity;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
 .nav-image{
     height: 45px;
     width: 45px;
     top: 7px;
     left: 5px;
     position: absolute;
+    opacity: 0.4;
+    &.active{
+      @include nav-highlight(1.0);
+    }
+    &:hover{
+      @include nav-highlight(1.0);
+    }
 }
+
 .header-image{
     height: 45px;
     width: 45px;

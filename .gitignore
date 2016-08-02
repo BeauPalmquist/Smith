@@ -36,3 +36,5 @@ wwwroot/src/js/
 wwwroot/src/css/
 .idea/**
 src/common/
+obj/
+*.user

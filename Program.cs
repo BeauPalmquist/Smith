@@ -1,6 +1,6 @@
-﻿using System;
-using HomeDepot.Platform.Web;
+﻿using HomeDepot.Platform.Web;
 using Microsoft.Extensions.PlatformAbstractions;
+using System;
 
 namespace HomeDepot.Platform.UI.Smith
 {
