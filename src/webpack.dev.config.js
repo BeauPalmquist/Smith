@@ -1,6 +1,6 @@
-﻿var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var autoprefixer = require('autoprefixer');
+﻿const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -10,10 +10,13 @@ module.exports = {
         './src/index'
     ],
     output: {
-        filename: 'smith.js',
+        filename: 'smith-dev.js',
         path: './dist',
         libraryTarget: 'umd',
         publicPath: '/static/'
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx', '.scss', '.less', '.css', '.json']
     },
     plugins: [
         new ExtractTextPlugin("smith.min.css", { allChunks: true }),
@@ -50,6 +53,9 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel',
+                query: {
+                    presets: ['es2015', 'react', 'stage-0']
+                }
             }
         ]
     },
