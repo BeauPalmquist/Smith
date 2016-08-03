@@ -1,10 +1,8 @@
-const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-    context: __dirname,
     entry: [
         'font-awesome-loader',
         'bootstrap-loader/extractStyles',
@@ -12,15 +10,12 @@ module.exports = {
     ],
     output: {
         filename: 'smith.js',
-        path: path.join(__dirname, '../dist'),
-        publicPath: '/'
+        path: './dist',
+        libraryTarget: 'umd',
+        publicPath: '/static/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.scss', '.less', '.css', '.json'],
-        modulesDirectories: [
-            'node_modules',
-            path.resolve(__dirname, '../node_modules')
-        ]
+        extensions: ['', '.js', '.jsx', '.scss', '.less', '.css', '.json']
     },
     plugins: [
         new ExtractTextPlugin("smith.min.css", { allChunks: true }),

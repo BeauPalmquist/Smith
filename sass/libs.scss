@@ -2750,6 +2750,273 @@ Author: Kamarujaman Shohel
   margin-bottom: 0px;
 }
 
+.activities-list {
+  position: relative;
+  list-style: none;
+  padding: 15px 15px 0px 0px;
+  margin: 0px 0px 0px 15px;
+}
+.activities-list:after {
+  content: "";
+  height: 100%;
+  width: 1px;
+  background-color: #e5e5e5;
+  position: absolute;
+  left: 20px;
+  top: 0px;
+}
+.activities-list > li {
+  display: table;
+  padding: 10px 0px;
+  width: 100%;
+}
+.activities-list > li > div {
+  display: table-cell;
+  vertical-align: top;
+}
+.activities-list > li > div.activities-badge {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-right: 10px;
+}
+.activities-list > li > div.activities-badge span {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  position: relative;
+  z-index: 100;
+}
+.activities-list > li > div.activities-badge span i {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  line-height: 38px;
+  position: relative;
+  top: 1px;
+  font-size: 18px;
+  color: #fff;
+}
+.activities-list > li > div.activities-details {
+  padding: 4px 5px;
+  position: relative;
+}
+.activities-list > li > div.activities-details .activities-post {
+  border-top: #eee 1px solid;
+  padding-top: 6px;
+  margin-top: 6px;
+}
+.activities-list > li > div.activities-details .activities-post ul {
+  padding: 0px;
+  margin: 0px;
+}
+.activities-list > li > div.activities-details .activities-post ul li {
+  list-style: none;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a.more-list {
+  background-color: #eee;
+  position: relative;
+  top: 3px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  text-align: center;
+  color: #666;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a.more-list i {
+  font-size: 16px;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 1px;
+  display: inline-block;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a.more-list:hover,
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a.more-list:focus {
+  background-color: #17bab8;
+  color: #fff;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a:hover,
+.activities-list > li > div.activities-details .activities-post .new-user-lists li a:focus {
+  text-decoration: none;
+}
+.activities-list > li > div.activities-details .activities-post .new-user-lists li img {
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a.more-list {
+  background-color: #eee;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  position: relative;
+  top: 3px;
+  text-align: center;
+  color: #666;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a.more-list i {
+  font-size: 16px;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a.more-list:hover,
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a.more-list:focus {
+  background-color: #17bab8;
+  color: #fff;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a:hover,
+.activities-list > li > div.activities-details .activities-post .new-image-lists li a:focus {
+  text-decoration: none;
+}
+.activities-list > li > div.activities-details .activities-post .new-image-lists li img {
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.activities-list > li > div.activities-details .activities-post .new-file-lists {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.activities-list > li > div.activities-details .activities-post .new-file-lists li a {
+  font-size: 12px;
+  color: #666;
+  display: block;
+}
+.activities-list > li > div.activities-details .activities-post .new-file-lists li a i {
+  padding-right: 6px;
+}
+.activities-list > li > div.activities-details .activities-post .new-file-lists li a:hover,
+.activities-list > li > div.activities-details .activities-post .new-file-lists li a:focus {
+  text-decoration: none;
+  color: #17bab8;
+}
+.activities-list > li > div.activities-details .activities-post .new-post-lists {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.activities-list > li > div.activities-details .activities-post .new-post-lists li a {
+  font-size: 12px;
+  color: #666;
+  display: block;
+  font-weight: 500;
+}
+.activities-list > li > div.activities-details .activities-post .new-post-lists li a i {
+  padding-right: 6px;
+}
+.activities-list > li > div.activities-details .activities-post .new-post-lists li a:hover,
+.activities-list > li > div.activities-details .activities-post .new-post-lists li a:focus {
+  text-decoration: none;
+  color: #17bab8;
+}
+.activities-list > li > div.activities-details .activities-post .new-comments-lists {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.activities-list > li > div.activities-details .activities-post .new-comments-lists li {
+  line-height: normal;
+  margin-bottom: 10px;
+}
+.activities-list > li > div.activities-details .activities-post .new-comments-lists li a {
+  color: #666;
+  font-size: 12px;
+  display: block;
+  border-left: #eee 3px solid;
+  padding-left: 15px;
+}
+.activities-list > li > div.activities-details .activities-post .new-comments-lists li a i {
+  padding-right: 6px;
+}
+.activities-list > li > div.activities-details .activities-post .new-comments-lists li a:hover,
+.activities-list > li > div.activities-details .activities-post .new-comments-lists li a:focus {
+  text-decoration: none;
+  color: #17bab8;
+}
+.activities-list > li > div.activities-details .activities-header {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.activities-list > li > div.activities-details .activities-header a {
+  color: #444;
+}
+.activities-list > li > div.activities-details .activities-header a:hover,
+.activities-list > li > div.activities-details .activities-header a:focus {
+  text-decoration: none;
+  color: #17bab8;
+}
+.activities-list > li > div.activities-details .activities-meta {
+  margin-bottom: 0px;
+  color: #888;
+  font-size: 12px;
+}
+.activities-list > li > div.activities-details p {
+  margin-bottom: 0px;
+  color: #666;
+  font-size: 12px;
+}
+.activities-load {
+  border-top: #eee 1px solid;
+}
+.activities-load a {
+  padding: 20px 30px;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  color: #444;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #f9f9f9;
+}
+.activities-load a:hover,
+.activities-load a:focus {
+  text-decoration: none;
+  color: #17bab8;
+}
+
 /*---------------------
 6.0 Bootstrap Extended
 -----------------------*/
