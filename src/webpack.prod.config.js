@@ -24,11 +24,8 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
     ],
     module: {
         loaders: [

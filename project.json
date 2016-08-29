@@ -1,23 +1,33 @@
 {
     "webroot": "wwwroot",
     "version": "1.0.0-*",
-    "frameworks": {
-        "dnx451": { }
+    "dependencies": {
+        "HomeDepot.Platform.Web": "1.0.1"
     },
     "buildOptions": {
-        "emitEntryPoint": false,
-        "preserveCompilationContext": true
+        "emitEntryPoint": true,
+        "preserveCompilationContext": true,
+        "copyToOutput": [
+            "config.json",
+            "NLog.config"
+        ]
     },
-    "commands": {
-        "web": "ui-framework-smith"
+
+    "frameworks": {
+        "net451": {}
     },
+
+    "runtimeOptions": {
+        "configProperties": {
+            "System.GC.Server": true
+        }
+    },
+
     "publishOptions": {
         "include": [
             "wwwroot",
-            "config.json"
+            "config.json",
+            "NLog.config"
         ]
-    },
-    "dependencies": {
-        "HomeDepot.Platform.Web": "1.0.1-build-9"
     }
 }

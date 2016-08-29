@@ -40,7 +40,7 @@ class Login extends Component {
         const { auth, authActions, config } = this.props;
         if (this.state.username && this.state.username !== '' && this.state.password && this.state.password !== '') {
 
-            const activeRouteName = auth.redirectRoute;
+            const activeRouteName = auth.redirectRoute || auth.defaultRoute;
             authActions.login(this.state.username, this.state.password, activeRouteName, config.appName);
         }
     };

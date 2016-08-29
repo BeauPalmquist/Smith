@@ -120,7 +120,7 @@ export function setRedirectRoute(route) {
     };
 }
 
-export function login(username, password, returnUrl) {
+export function login(username, password, returnUrl, appName) {
     ClientAction.log('User attempting to login', 'Authentication', { username: username });
     return (dispatch) => {
         dispatch({ type: LOGIN_REQUEST });
@@ -128,6 +128,19 @@ export function login(username, password, returnUrl) {
             () => {
                 ClientAction.log('User logged in', 'Authentication', { username: username });
                 dispatch(loginSuccess(returnUrl));
+                User.getCurrentUserProfile(appName).then(profile => {
+
+                    // set profile without image first
+                    dispatch(setUserProfile(profile));
+                    dispatch(setBadgeColor());
+
+                    const profileWithImage = profile;
+                    User.getUserImage(profile.Id).then(
+                        userImage => {
+                            profileWithImage.userImage = userImage.Image;
+                            dispatch(setUserProfile(profileWithImage));
+                        });
+                });
             },
             () => {
                 ClientAction.log('User login failed', 'Authentication', { username: username });

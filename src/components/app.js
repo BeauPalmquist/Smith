@@ -24,12 +24,12 @@ class App extends Component {
         this.checkPermission();
         this.subscribeToSystemNotifications();
 
-        const { auth, authActions, config, router } = this.props;
+        const { auth, authActions, router } = this.props;
 
         if (auth.userUnknown && !auth.userAuthenticated) {
             router.replace('/unknown');
         } else {
-            if (!auth.userAuthenticated && !auth.userUnkown) {
+            if (!auth.userAuthenticated && auth.userUnkown) {
                 router.replace('/login');
                 const activeRoute = location.pathname;
                 authActions.setRedirectRoute(activeRoute);
@@ -39,7 +39,6 @@ class App extends Component {
                 if (auth.userAuthenticated && location.pathname === '/') {
                     router.replace(auth.defaultRoute);
                 }
-                authActions.loadUserProfile(config.appName);
             }
         }
     }
@@ -67,9 +66,9 @@ class App extends Component {
         this.checkPermission();
         const { auth, router } = nextProps || this.props;
 
-        if (!auth.userAuthenticated && !auth.userUnkown) {
+        if (!auth.userAuthenticated && auth.userUnknown) {
             router.replace('/login');
-        } else if (auth.userUnkown) {
+        } else if (auth.userUnknown) {
             router.replace('/unknown');
         } else if (auth.userAuthenticated && location.pathname === '/') {
             router.replace(auth.defaultRoute);

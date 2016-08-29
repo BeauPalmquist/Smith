@@ -5,22 +5,27 @@ class Unknown extends Component {
     static propTypes = {
         auth: React.PropTypes.object,
         router: React.PropTypes.object,
-        config: React.PropTypes.object
+        config: React.PropTypes.object,
+        authActions: React.PropTypes.object
     };
     componentDidMount() {
-        const { auth, router } = this.props;
-        if (!auth.userUnknown && auth.userAuthenticated) {
+        const { auth, authActions, router, config } = this.props;
+        if (!auth.userUnknown) {
             router.replace(auth.redirectRoute);
-        } else if (!auth.userAuthenticated && !auth.userUnknown) {
+        } else if (!auth.userAuthenticated && auth.userUnknown) {
             router.replace('/login');
+        } else if (auth.userAuthenticated && auth.userUnknown) {
+            authActions.loadUserProfile(config.appName);
         }
     }
     componentWillReceiveProps(nextProps) {
-        const { auth, router } = nextProps || this.props;
-        if (!auth.userUnknown && auth.userAuthenticated) {
+        const { auth, authActions, router, config } = nextProps;
+        if (!auth.userUnknown) {
             router.replace(auth.redirectRoute);
-        } else if (!auth.userAuthenticated && !auth.userUnknown) {
+        } else if (!auth.userAuthenticated && auth.userUnknown) {
             router.replace('/login');
+        } else if (auth.userAuthenticated && auth.userUnknown) {
+            authActions.loadUserProfile(config.appName);
         }
     }
     render() {

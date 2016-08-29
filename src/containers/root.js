@@ -7,18 +7,38 @@ import * as notificationActionCreators from '../actions/notifications';
 class Root extends Component {
     componentWillMount() {
         const { dispatch, config, auth } = this.props;
-        let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
+        if (!auth.redirectRoute) {
+            let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
 
-        const defaultRoute = config.routes.find((route) => route.default === 'true');
-        const defaultRoutePath = defaultRoute.path.startsWith('/') ? defaultRoute.path : `/${defaultRoute.path}`;
-        dispatch(authActionCreators.setDefaultRoute(defaultRoutePath));
+            const defaultRoute = config.routes.find((route) => route.default === 'true');
+            const defaultRoutePath = defaultRoute.path.startsWith('/') ? defaultRoute.path : `/${defaultRoute.path}`;
+            dispatch(authActionCreators.setDefaultRoute(defaultRoutePath));
 
-        if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null) {
-            activeRouteName = defaultRoutePath;
+            if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null) {
+                activeRouteName = defaultRoutePath;
+            }
+
+            dispatch(authActionCreators.setRedirectRoute(activeRouteName));
+            dispatch(authActionCreators.isAuthenticated(config.beforeLoginRedirectPromise));
         }
+    }
 
-        dispatch(authActionCreators.setRedirectRoute(activeRouteName));
-        dispatch(authActionCreators.isAuthenticated(config.beforeLoginRedirectPromise));
+    componentWillReceiveProps(nextProps) {
+        const { dispatch, config, auth } = nextProps;
+        if (!auth.redirectRoute) {
+            let activeRouteName = (auth.redirectRoute) ? auth.redirectRoute : location.pathname;
+
+            const defaultRoute = config.routes.find((route) => route.default === 'true');
+            const defaultRoutePath = defaultRoute.path.startsWith('/') ? defaultRoute.path : `/${defaultRoute.path}`;
+            dispatch(authActionCreators.setDefaultRoute(defaultRoutePath));
+
+            if (activeRouteName === '/login' || activeRouteName === '/unknown' || activeRouteName === '/' || activeRouteName === null) {
+                activeRouteName = defaultRoutePath;
+            }
+
+            dispatch(authActionCreators.setRedirectRoute(activeRouteName));
+            dispatch(authActionCreators.isAuthenticated(config.beforeLoginRedirectPromise));
+        }
     }
 
     render() {

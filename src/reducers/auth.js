@@ -33,7 +33,6 @@ export default function auth(state = initialState, action) {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                userUnknown: false,
                 userAuthenticated: true,
                 redirectRoute: action.returnUrl,
                 pendingLogin: false
@@ -48,7 +47,6 @@ export default function auth(state = initialState, action) {
         case SET_AUTHENTICATION_STATUS:
             return {
                 ...state,
-                userUnknown: false,
                 userAuthenticated: action.status
             };
         case SET_REDIRECT_ROUTE:
@@ -71,6 +69,8 @@ export default function auth(state = initialState, action) {
                 ...state,
                 userProfile: {},
                 userAuthenticated: false,
+                userUnknown: true,
+                defaultRoute: undefined,
                 redirectRoute: undefined,
                 pendingLogin: false,
                 loginErrorMessage: ''
