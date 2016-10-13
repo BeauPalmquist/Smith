@@ -1,23 +1,17 @@
 ﻿using HomeDepot.Platform.Web;
 using Microsoft.Extensions.PlatformAbstractions;
 using System;
+using HomeDepot.Platform.Core.Hosting;
 
 namespace HomeDepot.Platform.UI.Smith
 {
     public class Program
     {
-        public Program(IServiceProvider serviceProvider, IApplicationEnvironment environment)
+        public static void Main(string[] args)
         {
-            this.serviceProvider = serviceProvider;
-            this.environment = environment;
+            new ForgeHostBuilder(args)
+                .UseMicroserviceRouting()
+                .Run();
         }
-
-        public void Main(string[] args)
-        {
-            PlatformWebServices.StartWebHost(serviceProvider, environment, args);
-        }
-
-        private IServiceProvider serviceProvider;
-        private IApplicationEnvironment environment;
     }
 }

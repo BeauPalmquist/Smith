@@ -120,11 +120,11 @@ export function setRedirectRoute(route) {
     };
 }
 
-export function login(username, password, returnUrl) {
+export function login(username, password, returnUrl, extraParams) {
     ClientAction.log('User attempting to login', 'Authentication', { username: username });
     return (dispatch) => {
         dispatch({ type: LOGIN_REQUEST });
-        return User.login(username, password).then(
+        return User.login(username, password, extraParams).then(
             () => {
                 ClientAction.log('User logged in', 'Authentication', { username: username });
                 dispatch(loginSuccess(returnUrl));

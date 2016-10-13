@@ -11,8 +11,10 @@ class Login extends Component {
     state = {
         username: '',
         password: '',
-        pendingLogin: false
+        pendingLogin: false,
+        additionalParams: {}
     };
+
     componentDidMount() {
         const { auth, router } = this.props;
         if (auth.userAuthenticated) {
@@ -20,32 +22,41 @@ class Login extends Component {
         }
         this.loginInput.focus();
     }
+
     componentWillReceiveProps(nextProps) {
         const { auth, router } = nextProps || this.props;
         if (auth.userAuthenticated) {
             router.replace(auth.redirectRoute || auth.defaultRoute);
         }
     }
-    handleKeyPress = (e) => {
-        const ENTER = 13;
-        const { auth } = this.props;
-        if (e.keyCode === ENTER && !auth.pendingLogin) {
-            this.login();
-        }
-    };
-    usernameChanged = (e) => this.setState({ username: e.target.value });
-    passwordChanged = (e) => this.setState({ password: e.target.value });
 
-    login = () => {
-        const { auth, authActions, config } = this.props;
+    setAdditionalLoginParams = params => {
+        this.setState({ additionalParams: params });
+    };
+
+    login = e => {
+        if (e) {
+            e.preventDefault();
+        }
+        const { auth, authActions } = this.props;
         if (this.state.username && this.state.username !== '' && this.state.password && this.state.password !== '') {
 
             const activeRouteName = auth.redirectRoute;
-            authActions.login(this.state.username, this.state.password, activeRouteName, config.appName);
+            authActions.login(this.state.username, this.state.password, activeRouteName, this.state.additionalParams);
         }
     };
+
+    passwordChanged = e => this.setState({ password: e.target.value });
+    usernameChanged = e => this.setState({ username: e.target.value });
+
     render() {
-        const { auth } = this.props;
+        const { auth, config } = this.props;
+        const { LoginFormExtension } = config;
+
+        let CustomLoginExtension;
+        if (LoginFormExtension) {
+            CustomLoginExtension = (<LoginFormExtension setAdditionalLoginParams={this.setAdditionalLoginParams} />);
+        }
 
         let showErrorMessage = 'noError';
         if (auth.loginErrorMessage !== '') {
@@ -63,8 +74,8 @@ class Login extends Component {
         let loginFormClass = 'loginForm noLoginImage';
         if (this.props.config && this.props.config.loginImage) {
             showLoginImage = (<div className="loginImg col-xs-6">
-                                   <img src={this.props.config.loginImage} />
-                               </div>);
+                <img src={this.props.config.loginImage} />
+            </div>);
             loginFormWidth = 'col-xs-6';
             loginFormClass = 'loginForm';
         }
@@ -73,46 +84,67 @@ class Login extends Component {
         const regTitle = (this.props.config && this.props.config.title) ? this.props.config.title : '';
 
         return (
-            <div className={loginFormClass} >
-                 <p className="center">
-                     <span className="loginFont" >
-                         <span className="bold" >
+            <div className={loginFormClass}>
+                <p className="center">
+                     <span className="loginFont">
+                         <span className="bold">
                  {boldTitle}
                          </span>
                          <span>
                  {regTitle}
                          </span>
                      </span>
-                 </p>
-                 <div className="well" >
-                     <div className="container-fluid">
-                         <div className="row">
+                </p>
+                <div className="well">
+                    <div className="container-fluid">
+                        <div className="row">
                             {showLoginImage}
-                             <div className={loginFormWidth}>
-                                 <h3>Sign In</h3>
-                                 <div className={showErrorMessage}>{auth.loginErrorMessage}</div>
-                                 <div className="form-horizontal">
+                            <div className={loginFormWidth}>
+                                <h3>Sign In</h3>
+                                <div className={showErrorMessage}>{auth.loginErrorMessage}</div>
+                                <form className="form-horizontal" onSubmit={this.login}>
+                                    {CustomLoginExtension}
                                     <div className="form-group">
-                                        <label className="col-md-3 control-label" htmlFor="username">Username: </label>
+                                        <label className="col-md-3 control-label">Username: </label>
                                         <div className="col-md-9">
-                                            <input id="username" type="text" className="form-control" onKeyDown={this.handleKeyPress} onChange={this.usernameChanged} value={this.state.username} placeholder="Username" ref={i => { this.loginInput = i; }} />
+                                            <input
+                                              id="username"
+                                              type="text"
+                                              className="form-control"
+                                              onChange={this.usernameChanged} value={this.state.username}
+                                              placeholder="Username"
+                                              ref={i => { this.loginInput = i; }}
+                                            />
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label className="col-md-3 control-label" htmlFor="password">Password: </label>
+                                        <label className="col-md-3 control-label">Password: </label>
                                         <div className="col-md-9">
-                                            <input id="password" type="password" className="form-control" onKeyDown={this.handleKeyPress} onChange={this.passwordChanged} value={this.state.password} placeholder="Password" />
+                                            <input
+                                              id="password"
+                                              type="password"
+                                              className="form-control"
+                                              onChange={this.passwordChanged} value={this.state.password}
+                                              placeholder="Password"
+                                            />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <div className="col-md-offset-3 col-md-9">
-                                            <button disabled={buttonDisabled} className="btn btn-primary pull-right" onClick={this.login} >{buttonText}</button>
+                                            <button
+                                              type="submit"
+                                              disabled={buttonDisabled}
+                                              className="btn btn-primary pull-right"
+                                              onClick={this.login}
+                                            >
+                                                {buttonText}
+                                            </button>
                                         </div>
                                     </div>
-                                </div>
-                             </div>
-                         </div>
-                     </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

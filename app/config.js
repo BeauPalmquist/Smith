@@ -4,6 +4,7 @@ import Hammer from './containers/hammer';
 import DarthVader from './components/DarthVader';
 import GlobalToolbar from './containers/GlobalToolbar';
 import GlobalSearch from './containers/GlobalSearch';
+import LoginFormExtension from './components/LoginFormExtension';
 import Yoda from './containers/Yoda';
 import CustomTitle from './components/CustomTitle';
 
@@ -18,6 +19,7 @@ const initialState = {
     },
     GlobalSearch: GlobalSearch,
     GlobalToolbar: GlobalToolbar,
+    LoginFormExtension: LoginFormExtension,
     CustomTitle: CustomTitle,
     routes: [
         {
