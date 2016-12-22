@@ -10,24 +10,24 @@
     ],
     "serviceModules": [
         {
-            "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Analytics.Microservice",
-            "Version": "1.0.2-build020",
+            "MicroserviceName": "/serviceProxies/Forge.Analytics.Microservice",
+            "Version": "1.0.2-build021",
             "Entities": [
                 {
                     "Name": "clientAction.js"
                 }
             ]
         }, {
-            "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Deployment.Microservice",
-            "Version": "1.0.2-build020",
+            "MicroserviceName": "/serviceProxies/Forge.Deployment.Microservice",
+            "Version": "1.0.2-build021",
             "Entities": [
                 {
                     "Name": "deployment.js"
                 }
             ]
         }, {
-            "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Identity.Microservice",
-            "Version": "1.0.2-build020",
+            "MicroserviceName": "/serviceProxies/Forge.Identity.Microservice",
+            "Version": "1.0.2-build021",
             "Entities": [
                 {
                     "Name": "token.js"
@@ -44,8 +44,8 @@
                 }
             ]
         }, {
-            "MicroserviceName": "/serviceProxies/HomeDepot.Platform.Notification.Microservice",
-            "Version": "1.0.2-build020",
+            "MicroserviceName": "/serviceProxies/Forge.Notification.Microservice",
+            "Version": "1.0.2-build021",
             "Entities": [
                 {
                     "Name": "notification.js"

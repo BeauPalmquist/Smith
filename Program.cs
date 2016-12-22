@@ -1,9 +1,7 @@
-﻿using HomeDepot.Platform.Web;
-using Microsoft.Extensions.PlatformAbstractions;
-using System;
-using HomeDepot.Platform.Core.Hosting;
+﻿using Forge.Core.Hosting;
+using Forge.Web;
 
-namespace HomeDepot.Platform.UI.Smith
+namespace Forge.Smith
 {
     public class Program
     {

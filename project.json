@@ -1,7 +1,7 @@
 {
     "webroot": "wwwroot",
     "dependencies": {
-        "HomeDepot.Platform.Web": "1.0.2-build017"
+        "Forge.Web": "1.0.2-build021"
     },
 
     "buildOptions": {
