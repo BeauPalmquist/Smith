@@ -5,8 +5,8 @@ var forgeModules = require('./forge.json');
 var baseCdnPath = forgeModules.baseCdnPath;
 var localCdnPath = forgeModules.localCdnPath;
 var environment = forgeModules.environment;
-var forgeSupportScriptPath = "./src/common/js/forge/support/";
-var forgeServicesScriptPath = "./src/common/js/forge/services/";
+var forgeSupportScriptPath = "./src/forge-proxies/support/";
+var forgeServicesScriptPath = "./src/forge-proxies/services/";
 
 function downloadSupportScripts() {
     var localPaths = [];

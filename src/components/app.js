@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AppHeader from './header';
 import AppNav from './nav';
 import AppNotifications from './notifications';
-import Notifications from '../common/js/forge/support/notifications';
+import Notifications from '../forge-proxies/support/notifications';
 import ScrollToTop from 'react-scroll-up';
 import $ from 'jquery';
 import noty from 'noty';
@@ -180,7 +180,7 @@ class App extends Component {
                         </div>
                     </aside>
 
-                    <ScrollToTop showUnder={ 160 } style={ { position: 'fixed', bottom: 10, right: 10, cursor: 'pointer', transitionDuration: '0.2s', transitionTimingFunction: 'linear', transitionDelay: '0s' } }>
+                    <ScrollToTop showUnder={160} style={{ position: 'fixed', bottom: 10, right: 10, cursor: 'pointer', transitionDuration: '0.2s', transitionTimingFunction: 'linear', transitionDelay: '0s' }}>
                         <ScrollUp />
                     </ScrollToTop>
                 </div>

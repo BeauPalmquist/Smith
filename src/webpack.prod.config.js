@@ -4,7 +4,6 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: [
-        'font-awesome-loader',
         'bootstrap-loader/extractStyles',
         './src/index'
     ],
@@ -35,14 +34,6 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract('style', 'css-loader?sourceMap?minimize!postcss-loader!sass-loader')
-            },
-            {
-                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url"
-            },
-            {
-                test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-                loader: 'file'
             },
             {
                 test: /bootstrap-sass\/assets\/javascripts\//,

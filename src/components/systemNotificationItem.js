@@ -20,14 +20,14 @@ const SystemNotificationItem = (key, item) => {
     return (
         <li key={`system-notification_${key}`}>
             <div className="notifications-badge">
-                    <span className={ badgeColorStyle }>
-                        <i className={ badgeIconStyle }></i>
+                    <span className={badgeColorStyle}>
+                        <i className={badgeIconStyle}></i>
                     </span>
             </div>
             <div className="notification-details">
-                <h3 className="notification-header">{ item.message }</h3>
+                <h3 className="notification-header">{item.message}</h3>
                 <div className="notification-meta">
-                    <i className="fa fa-clock-o"></i>&nbsp;{ moment(item.sent).format('MMM D h:mm A') }
+                    <i className="fa fa-clock-o"></i>&nbsp;{moment(item.sent).format('MMM D h:mm A')}
                 </div>
             </div>
         </li>

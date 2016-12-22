@@ -1,8 +1,6 @@
-import Notification from '../common/js/forge/services/notification';
+import Notification from '../forge-proxies/services/notification';
 
-export const SET_NOTIFICATION_COUNT = 'SMITH/SET_NOTIFICATION_COUNT';
 export const RESET_NOTIFICATION_COUNT = 'SMITH/RESET_NOTIFICATION_COUNT';
-export const LOAD_NOTIFICATIONS = 'SMITH/LOAD_NOTIFICATIONS';
 export const SET_USER_NOTIFICATIONS = 'SMITH/SET_USER_NOTIFICATIONS';
 export const SET_SYSTEM_NOTIFICATIONS = 'SMITH/SET_SYSTEM_NOTIFICATIONS';
 export const SYSTEM_NOTIFICATION_RECEIVED = 'SMITH/SYSTEM_NOTIFICATION_RECEIVED';

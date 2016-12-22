@@ -30,14 +30,14 @@ class AppNotifications extends React.Component {
                     <div role="tabpanel" className="tab-pane active" id="system">
                         <div className="notification-wrap">
                             <ul className="notifications-list">
-                                { systemNotifications }
+                                {systemNotifications}
                             </ul>
                         </div>
                     </div>
                     <div role="tabpanel" className="tab-pane" id="user">
                         <div className="notification-wrap">
                             <ul className="notifications-list">
-                                { userNotifications }
+                                {userNotifications}
                             </ul>
                         </div>
                     </div>

@@ -49,8 +49,8 @@ class AppHeader extends React.Component {
         let mobileSearch;
         const { GlobalSearch, GlobalToolbar, CustomTitle } = config;
         if (GlobalSearch) {
-            search = (<li key="searchMenuOption"><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
-            mobileSearch = (<li><Hammer onTap={ this.onSearchTap }><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
+            search = (<li key="searchMenuOption"><Hammer onTap={this.onSearchTap}><a href="#" className="btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
+            mobileSearch = (<li><Hammer onTap={this.onSearchTap}><a href="#" className="btn-mobile-search btn-top-search"><i className="fa fa-search"></i></a></Hammer></li>);
             searchBar = (<div className="top-search-bar">
                     <div className="container-fluid">
                         <div className="row">
@@ -96,7 +96,7 @@ class AppHeader extends React.Component {
                         <ul className="branding-right pull-right">
                             {mobileSearch}
                             <li>
-                                <Hammer onTap={ this.onMobileTap }>
+                                <Hammer onTap={this.onMobileTap}>
                                     <a href="#" className="btn-mobile-bar">
                                         <i className="fa fa-bars"></i>
                                     </a>
@@ -114,9 +114,9 @@ class AppHeader extends React.Component {
                             {search}
                             <UserDropdown userBadgeColor={auth.badgeColor} user={auth.userProfile} authActions={authActions} />
                             <li>
-                                <Hammer onTap={ this.onNotificationTap }>
+                                <Hammer onTap={this.onNotificationTap}>
                                     <a href="#" className="right-toggle-switch">
-                                        <i className="fa fa-align-left"></i>{ notificationBadge }
+                                        <i className="fa fa-align-left"></i>{notificationBadge}
                                     </a>
                                 </Hammer>
                             </li>
@@ -124,7 +124,7 @@ class AppHeader extends React.Component {
                         </ul>
                     </div>
                 </div>
-                { globalToolBar }
+                {globalToolBar}
             </header>
         );
     }

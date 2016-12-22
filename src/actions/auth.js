@@ -1,6 +1,6 @@
-﻿import User from '../common/js/forge/services/user';
-import ClientAction from '../common/js/forge/services/clientAction';
-import AjaxOptions from '../common/js/forge/support/ajaxOptions';
+﻿import User from '../forge-proxies/services/user';
+import ClientAction from '../forge-proxies/services/clientAction';
+import AjaxOptions from '../forge-proxies/support/ajaxOptions';
 
 export const LOGIN_REQUEST = 'SMITH/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'SMITH/LOGIN_SUCCESS';
