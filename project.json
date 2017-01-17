@@ -1,8 +1,8 @@
 {
     "webroot": "wwwroot",
     "dependencies": {
-        "Forge.Web": "1.0.2-build021",
-        "HomeDepot.QuoteCenter.ProviderPackage.HD": "1.0.2-build021"
+        "Forge.Web": "1.0.0",
+        "HomeDepot.QuoteCenter.ProviderPackage.HD": "1.0.2"
     },
 
     "buildOptions": {

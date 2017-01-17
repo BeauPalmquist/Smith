@@ -11,7 +11,7 @@
     "serviceModules": [
         {
             "MicroserviceName": "/serviceProxies/Forge.Analytics.Microservice",
-            "Version": "1.0.2-build021",
+            "Version": "1.0.0",
             "Entities": [
                 {
                     "Name": "clientAction.js"
@@ -19,7 +19,7 @@
             ]
         }, {
             "MicroserviceName": "/serviceProxies/Forge.Deployment.Microservice",
-            "Version": "1.0.2-build021",
+            "Version": "1.0.0",
             "Entities": [
                 {
                     "Name": "deployment.js"
@@ -27,7 +27,7 @@
             ]
         }, {
             "MicroserviceName": "/serviceProxies/Forge.Identity.Microservice",
-            "Version": "1.0.2-build021",
+            "Version": "1.0.0",
             "Entities": [
                 {
                     "Name": "token.js"
@@ -45,7 +45,7 @@
             ]
         }, {
             "MicroserviceName": "/serviceProxies/Forge.Notification.Microservice",
-            "Version": "1.0.2-build021",
+            "Version": "1.0.0",
             "Entities": [
                 {
                     "Name": "notification.js"
