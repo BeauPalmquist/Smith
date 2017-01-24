@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
+import { withFeatureFlag } from '../../dist/smith-dev';
 
-export default class DarthVader extends Component {
+class DarthVader extends Component {
     render() {
         return (
             <div>
@@ -9,3 +10,5 @@ export default class DarthVader extends Component {
         );
     }
 }
+
+export default withFeatureFlag(DarthVader, 'Darth Vader');

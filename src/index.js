@@ -13,6 +13,7 @@ import UserSession from './forge-proxies/services/userSession';
 import Notifications from './forge-proxies/support/notifications';
 import { Router, browserHistory } from 'react-router';
 import createRoutes from './routes';
+import withFeatureFlagImported from './higherOrderComponents/withFeatureFlag';
 
 export default function forgeApp(
     clientReducers,
@@ -54,3 +55,5 @@ export default function forgeApp(
         document.getElementById(root)
     );
 }
+
+export const withFeatureFlag = withFeatureFlagImported;
