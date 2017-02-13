@@ -38,6 +38,15 @@
     font-weight: bold;
 }
 
+@mixin nav-highlight($opacity) {
+  opacity: $opacity;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
 @media (min-width: 1200px){
         .container {
             width: 100%;
@@ -84,27 +93,22 @@ ul>li>a.pageButton{
     @include cursorPointer;
 }
 
-@mixin nav-highlight($opacity) {
-  opacity: $opacity;
-  -webkit-transition: opacity 0.2s;
-  -moz-transition: opacity 0.2s;
-  -ms-transition: opacity 0.2s;
-  -o-transition: opacity 0.2s;
-  transition: opacity 0.2s;
-}
-
-.nav-image{
-    height: 45px;
-    width: 45px;
-    top: 7px;
-    left: 5px;
-    position: absolute;
+.nav-image {    
     opacity: 0.4;
     &.active{
-      @include nav-highlight(1.0);
+    @include nav-highlight(1.0);
     }
     &:hover{
-      @include nav-highlight(1.0);
+    @include nav-highlight(1.0);
+    }
+    a {
+        img {
+            height: 45px;
+            width: 45px;
+            top: 7px;
+            left: 5px;
+            position: absolute;
+        }
     }
 }
 
