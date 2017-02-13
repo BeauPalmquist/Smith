@@ -38,3 +38,5 @@ wwwroot/src/css/
 src/forge-proxies/**/*
 obj/
 *.user
+
+.vscode
